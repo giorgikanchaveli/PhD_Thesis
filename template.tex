@@ -1,0 +1,132 @@
+%% template.tex
+%% Università Commerciale "Luigi Bocconi" — PhD thesis formatting.
+%% Edit the METADATA section below. Do not touch the layout unless
+%% your coordinator explicitly requires changes.
+
+% ============================================================
+%  PAGE GEOMETRY
+%  Requirements: A4, 2.5 cm left/right, 26-30 lines per page.
+% ============================================================
+\usepackage[
+  a4paper,
+  top=2.5cm,
+  bottom=2.5cm,
+  left=2.5cm,
+  right=2.5cm,
+  headsep=0.8cm,
+  footskip=1cm
+]{geometry}
+
+% ============================================================
+%  FONTS
+%  Bocconi template uses Times New Roman.
+% ============================================================
+\usepackage{fontspec}
+% \setmainfont{Times New Roman}  % uncomment if Times New Roman is installed
+
+% ============================================================
+%  LINE SPACING
+% ============================================================
+\usepackage{setspace}
+\setstretch{1.3}
+
+% ============================================================
+%  PAGE NUMBERING
+% ============================================================
+\usepackage{fancyhdr}
+\fancypagestyle{mainStyle}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+\pagestyle{mainStyle}
+
+% ============================================================
+%  CHAPTER / HEADING STYLE
+% ============================================================
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{16pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{40pt}{30pt}
+
+% ============================================================
+%  METADATA — fill in these fields
+% ============================================================
+
+\newcommand{\thesisTitle}{Title TBD}                % TODO: fill in thesis title
+\newcommand{\thesisAuthor}{Giorgi Kanchaveli}
+\newcommand{\thesisID}{TODO}                         % TODO: student ID number
+\newcommand{\thesisProgram}{Statistics and Computer Science}
+\newcommand{\thesisCycle}{TODO}                      % TODO: e.g. XXXVIII
+\newcommand{\thesisField}{TODO}                      % TODO: disciplinary field code
+\newcommand{\thesisAdvisor}{TODO}                    % TODO: Advisor name
+\newcommand{\thesisCoAdvisor}{}                      % leave empty if no co-advisor
+\newcommand{\thesisYear}{2026}
+
+% ============================================================
+%  FRONTPAGE — Bocconi official layout
+% ============================================================
+\newcommand{\makefrontpage}{%
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \centering
+
+    % --- Header block ---
+    \vspace*{0.5cm}
+    {\large\bfseries
+      UNIVERSIT\`A COMMERCIALE ``LUIGI BOCCONI''\par}
+    \vspace{0.3cm}
+    {\large PhD SCHOOL\par}
+
+    \vspace{1.2cm}
+
+    % --- Program info ---
+    {\normalsize
+      PhD program in \thesisProgram\par
+      \vspace{0.2cm}
+      Cycle: \thesisCycle\par
+      \vspace{0.2cm}
+    }
+
+    % --- Title block ---
+    \vfill
+
+    {\LARGE\bfseries \thesisTitle\par}
+
+    \vfill
+
+    % --- Bottom block: Advisor left, candidate right ---
+    \begin{minipage}[t]{0.48\textwidth}
+      \raggedright
+      {\normalsize
+        Advisor: \thesisAdvisor\par
+        \ifx\thesisCoAdvisor\empty\else
+          \vspace{0.4em}
+          Co-Advisor: \thesisCoAdvisor\par
+        \fi
+      }
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+      \raggedleft
+      {\normalsize
+        PhD Thesis by\par
+        \thesisAuthor\par
+        ID number: \thesisID\par
+      }
+    \end{minipage}
+
+    \vspace{1.5cm}
+
+    % --- Year ---
+    {\normalsize Year \thesisYear\par}
+    \vspace{0.5cm}
+
+  \end{titlepage}%
+  \cleardoublepage
+}

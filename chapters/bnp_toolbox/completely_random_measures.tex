@@ -1,0 +1,510 @@
+Many Bayesian nonparametric models are constructed by first defining a random measure that need not be a probability measure and then transforming it into a probability measure. Completely random measures (CRM) provide a general framework for this construction.
+
+Introduced in \cite{kingman1967completely}, completely random measures can be viewed as measure-valued analogues of L\'evy processes. In this setting, the index set is a $\sigma$-algebra of the underlying probability space, and the stochastic process takes the form of a random measure. Property of independent increments for L\'evy processes is extended to this setting as independence of evaluations of a random measure on disjoint sets. In Bayesian nonparametric applications, such random measures are typically transformed, most commonly via normalization, into probability measures, which can then be used as priors over distributions. Let us start with the definition of completely random measures.
+
+Although we assume throughout that $\X$ is a Polish space, in \cite{kingman1967completely} the space $\X$ is taken to be a general set whose $\sigma$-algebra contains all singletons. Since the Borel $\sigma$-algebra on a Polish space contains all singletons, this assumption is satisfied in our setting, and we may continue working with $\X$ Polish.
+
+We denote by $\mbx$ the space of finite, and by $\mx$ the space of locally finite measures. We endowe $\mbx$ with the topology of weak convergence. Since $\X$ is Polish, the space $\mbx$ is also Polish. We equip $\mbx$ with its Borel $\sigma$-algebra.
+
+\begin{definition}
+Let $\probspace$ be a probability space. A random measure $\tilde{\mu}$ is a map from $\Omega$ to $\mx$, such that, for all $A \in \mathcal{B}(\X)$, the maps 
+\[
+\Omega \ni \omega \mapsto \tilde{\mu}(\omega)(A)
+\]
+is measurable.
+\end{definition}
+
+From now on, we will write $\tilde{\mu}(A)$ instead of $\tilde{\mu}(\omega)(A)$
+
+\begin{definition}\label{definition:CRM}
+A completely random measure $\tilde{\mu}$ is a random measure such that for all finite collection of mutually disjoint sets $A_1,\dots, A_n \in \mathcal{B}(\X),$ the random variables $\tilde{\mu}(A_1),\dots, \tilde{\mu}(A_n)$ are independent. 
+\end{definition}
+
+\subsection{Decomposition of Completely Random Measures}
+
+A key feature of completely random measures is that, despite their general definition, they admit a decomposition into simpler components. In particular, Kingman's representation theorem shows that a completely random measure can be decomposed into a deterministic part, a part supported on fixed atoms, and a purely random atomic part.
+
+The main result in \cite{kingman1967completely} is the decomposition of a completely random measure. More precisely, let $\tilde{\mu}$ be a completely random measure satisfying the condition that there exists a countable collection $\{A_n\}$ of sets in $\mathcal{B}(\X)$ such that $\X = \cup A_n$ and, for all $n \geq 1$,
+\[
+\mathbb{P}\left( \tilde{\mu}(A_n) < \infty\right) > 0.
+\]
+Then $\tilde{\mu}$ can be represented uniquely as
+\[
+\tilde{\mu} = \mu + \sum_{x \in A}\tilde{\mu}\left(\{x\}\right)\delta_x + \sum_{i = 1}^\infty J_i \delta_{X_i},
+\]
+where $\mu$ is a deterministic non-atomic measure, $A$ is a countable subset of $\X$, and $(J_i)_{i \geq 1}$ and $(X_i)_{i \geq 1}$ are independent sequences of random variables taking values in $(0,\infty)$ and $\X$, respectively.
+
+In most of the literature, attention is restricted to the purely atomic random component of a CRM. This component can also be represented in terms of a Poisson random measure.
+
+Recall that a Poisson random measure is a completely random measure and is characterized by its L\'evy intensity $\nu$, which is a $\sigma$-finite measure on $(0,\infty)\times \X$, and for every $C \in \mathcal{B}\left((0,\infty)\times \X \right)$ such that $\nu(C)<\infty$, one has 
+\[ 
+\N(C) \sim \mathrm{Poisson}(\nu(C)).
+\]
+To avoid trivial cases, we assume that $\nu \neq 0$. Note that $\N$ is a discrete random measure. The purely atomic random component then admits the representation, for all $A \in \mathcal{B}(\X)$,
+\[
+\sum_{i=1}^\infty J_i \delta_{X_i} ( A )
+=
+\int_{(0,\infty) \times A} s \, \mathrm{d} \N(s, x).
+\]
+Moreover, the L\'evy intensity $\nu$ associated with $\N$ satisfies the integrability condition
+\[
+\int_{(0,\infty) \times \X} \min\{1, s\} \, \mathrm{d}\nu(s, x) < \infty.
+\]
+Since, under this representation, the CRM is completely characterized by the L\'evy intensity $\nu$ associated with the Poisson random measure $\N$, we write $ \tilde{\mu} \sim \mathrm{CRM}(\nu).$ From now on, whenever we refer to CRMs, we mean the component admitting a representation in terms of a Poisson random measure. Note that, by defining the completely random measure as
+\[
+\tilde{\mu}(A) = \int_{(0,\infty) \times A} s \, \mathrm{d} \N(s, x),
+\]
+for $A \in \mathcal{B}(\X)$, the fact that it takes values in $\mx$ and is measurable is guaranteed by the fact that $\N$ is a random measure.
+
+\subsection{Lévy Intensity and Laplace Functional}
+
+A completely random measure, similarly to a random probability measure as discussed in \ref{section:rpm_and_exchangeability}, can be uniquely identified by its finite-dimensional distributions, that is,
+\[
+\law\left(\tilde{\mu}(A_1), \dots, \tilde{\mu}(A_k) \right),
+\]
+for a measurable partition $A_1,\dots, A_k$ in $\mathcal{B}(\X)$. By the independence assumption, these finite-dimensional distributions are identified once we specify the law
+\[
+\law(\tilde{\mu}(A))
+\]
+for $A \in \mathcal{B}(\X)$. Equivalently, they are identified by the law of $\tilde{\mu}(f)$ for measurable $f : \X \to [0, \infty]$. For this reason, Laplace functionals play an important role.
+
+For the CRM $\tilde{\mu}$, we have the characterization that, for all measurable functions $f : \X \to [0, \infty]$, or $f$ integrable w.r.t $\tilde{\mu}$,
+\[
+\E \left[ e ^ {-\int_\X f(x) \mathrm{d}\tilde{\mu}(x)}\right] = \exp \left\{-\int_{\R_+ \times \X}\left( 1 - e^{-sf(x)}\right)\mathrm{d}\nu(s,x) \right\}.
+\]
+This result follows from Lemma J.2 in \cite{ghosal2017fundamentals}.
+
+%%%
+The integrability condition on the L\'evy intensity has consequences for the completely random measure. In particular, for $\tilde{\mu}\sim \mathrm{CRM}(\nu),$ we have
+\[
+\tilde{\mu}(\X) <\infty \quad \text{a.s.}
+\]
+Indeed, note that
+\[
+\tilde{\mu}(\X) = \int_{(0,1)\times \X} s\,\mathrm{d}\N(s,x) + \int_{(1,\infty)\times \X} s\,\mathrm{d}\N(s,x).
+\]
+
+Let us first focus on the first term. By Campbell's theorem,
+\[
+\E\left[\int_{(0,1)\times \X} s\,\mathrm{d}\N(s,x)\right] = \int_{(0,1)\times \X} s\,\mathrm{d}\nu(s,x) = \int_{(0,1)\times \X} \min\{s,1\}\,\mathrm{d}\nu(s,x) < \infty.
+\]
+Hence,
+\[
+\int_{(0,1)\times \X} s\,\mathrm{d}\N(s,x) < \infty
+\quad \text{a.s.}
+\]
+
+Next, we consider the second term. Since
+\[
+\int_{(0,\infty)\times \X} \min\{1,s\}\,\mathrm{d}\nu(s,x) < \infty,
+\]
+it follows that
+\[
+\nu\big((1,\infty)\times \X\big) < \infty.
+\]
+Therefore, since
+$
+\N\big((1,\infty)\times \X\big)
+\sim \mathrm{Poisson}\big(\nu((1,\infty)\times \X)\big)$,
+we have that $\N$ is a finite discrete measure. Consequently,
+\[
+\int_{(1,\infty)\times \X} s\,\mathrm{d}\N(s,x) < \infty \quad \text{a.s.}
+\]
+
+It is also important to note that a sufficient condition for $\tilde{\mu}(\X) > 0$ almost surely is
+\[
+\nu((0,1)\times \X) = \infty.
+\]
+Indeed, since $\nu$ is $\sigma$-finite, we can find a sequence of sets $(B_i)_{i\geq 1}$ such that
+\[
+B_i \subset B_{i+1}, \quad \nu(B_i) < \infty, \quad \bigcup_{i\geq 1} B_i = (0,\infty) \times \X.
+\]
+Then
+\[
+\mathbb{P}(\N(B_i) = 0) = e^{-\nu(B_i)}.
+\]
+Moreover, it follows that
+\[
+\mathbb{P}\left(\N((0,\infty)\times \X) = 0\right)
+\leq
+\inf_{i \geq 1}\mathbb{P}\left(\N(B_i)=0\right)
+=
+\inf_{i \geq 1} e^{-\nu(B_i)}
+= 0.
+\]
+Thus,
+\[
+\N((0,\infty)\times \X) > 0 \quad \text{a.s.},
+\]
+and we conclude that
+\[
+\tilde{\mu}(\X) > 0 \quad \text{a.s.}
+\]
+
+Since a Poisson random measure is a discrete random measure of the form
+\[
+\sum_{i = 1}\delta_{(J_i,X_i)},
+\]
+the random variables $J_i$ and $X_i$ are called jumps and atoms, respectively.
+
+The L\'evy intensity governs the law of the jumps and atoms. By the disintegration theorem, it can be decomposed into a component corresponding to the distribution of atom locations and another component describing the distribution of jump sizes at each location.
+
+In particular, let us denote by $\M_1(\nu)$ the first moment of $\nu$, defined as
+\[
+\M_1(\nu) := \int_{(0,\infty)\times \X} s \,\mathrm{d}\nu(s,x) < \infty.
+\]
+Then, for $\tilde{\mu} \sim \mathrm{CRM}(\nu)$ with finite mean, it follows from Proposition 3 in \cite{catalano2023merging} that
+\[
+\mathrm{d}\nu(s,x) = \mathrm{d}\rho_x(s)\,\mathrm{d}P_0(x),
+\]
+where $P_0$ is a probability measure on $\X$ and $\rho : \X \times \mathcal{B}((0,\infty)) \to [0,\infty]$ is a transition kernel. Whenever $\rho$ does not depend on $x$, such a CRM is referred to as a homogeneous CRM.
+
+
+
+\subsection{Normalization and Identifiability}\label{subsection:normalization_identifiability}
+Completely random measures can be transformed into random probability measures. The transformation we consider in this chapter is normalization. In particular, for $\tilde{\mu} \sim \mathrm{CRM}(\nu)$, we consider 
+\[
+\tilde{\mu} \mapsto \frac{\tilde{\mu}}{\tilde{\mu}(\X)}.
+\]
+As noted in the previous subsection, to guarantee that this transformation is well defined, we need the Lévy intensity to satisfy an integrability condition and $\nu((0,\infty)\times\X) = \infty$. However, for the identification purposes that we will explain below, together with the integrability condition, we will assume a stronger condition, namely that 
+\[
+\rho_x((0,\infty)) = \infty \quad \text{for $P_0$-almost every } x \in \X,
+\]
+where $\rho$ corresponds to the density of jumps in the decomposition of the Lévy intensity. CRMs satisfying this condition are referred to as infinitely active CRMs.
+
+A crucial point to note in normalization is that there may exist two CRMs $\tilde{\mu}^1, \tilde{\mu}^2$ such that
+\[
+\tilde{\mu}^1 \overset{d}{\neq} \tilde{\mu}^2, \qquad \text{but} \qquad \frac{\tilde{\mu}^1}{\tilde{\mu}^1(\X)} \overset{d}{=} \frac{\tilde{\mu}^2}{\tilde{\mu}^2(\X)}.
+\]
+Therefore, if we work with a distance defined at the level of CRMs, we encounter an identifiability issue: two distinct CRMs may induce the same random probability measure after normalization, yet have strictly positive distance.
+
+To overcome this issue, \cite{catalano2023merging} provides conditions under which two CRMs induce the same random probability measure. This allows one to work with a representative element from each equivalence class of CRMs that yield the same normalized measures.
+
+The representative element within each equivalence class of CRMs that induce the same random probability measure through normalization is given by the scaled CRM, defined as follows.
+\begin{definition}
+A completely random measure $\tilde{\mu}$ is called a scaled CRM if
+\[
+\E[\tilde{\mu}(\X)] = 1.
+\]
+If $\tilde{\mu}$ is a CRM with finite mean, meaning that $\M_1(\nu) < \infty$, its associated scaled CRM is defined by
+\[
+\tilde{\mu}_S = \frac{\tilde{\mu}}{\E[\tilde{\mu}(\X)]}.
+\]
+\end{definition}
+
+Then, for two infinitely active completely random measures $\tilde{\mu}^1, \tilde{\mu}^2$ with finite means and associated base measures $P_0^1, P_0^2$ that are non-Dirac, Corollary~8 in \cite{catalano2023merging} states that
+\[
+\frac{\tilde{\mu}^1}{\tilde{\mu}^1(\X)} \overset{d}{=} \frac{\tilde{\mu}^2}{\tilde{\mu}^2(\X)} \quad \Longleftrightarrow \quad \tilde{\mu}^1_S \overset{d}{=} \tilde{\mu}^2_S.
+\]
+Note that scaled CRMs are still completely random measures. Lemma~9 in \cite{catalano2023merging} provides a way to characterize the L\'evy intensity of the scaled CRM.
+
+In particular, let $\tilde{\mu} \sim \mathrm{CRM}(\nu)$ be such that
+\[
+\mathrm{d}\nu(s,x) = \rho_x(s)\,\mathrm{d}s\,\mathrm{d}P_0(x).
+\]
+Then the L\'evy intensity $\nu_S$ of the scaled CRM $\tilde{\mu}_S$ is given by
+\[
+\mathrm{d}\nu_S(s,x) = \E[\tilde{\mu}(\X)] \, \rho_x\bigl(\E[\tilde{\mu}(\X)]\, s\bigr)\,\mathrm{d}s\,\mathrm{d}P_0(x).
+\]
+
+
+
+
+
+
+
+\subsection{Posterior for Completely Random Measures}
+
+One of the main reasons for working with completely random measures is their flexibility for modelling and the tractability of the corresponding posterior distributions. We now describe the general form of the posterior distribution for CRMs, as developed in \cite{james2009posterior}. Consider the Bayesian model
+\begin{equation}\label{model:bayesian_model_crm}
+\begin{aligned}
+    \tilde{\mu} &\sim \mathrm{CRM}(\nu), \\
+    X_1,\dots, X_n \mid \tilde{\mu} &\overset{\iid}{\sim} \frac{\tilde{\mu}}{\tilde{\mu}(\X)}.
+\end{aligned}
+\end{equation}
+
+The prior distribution is updated through the posterior distribution. Formally, the posterior is a transition kernel, denoted by $\law(\tilde{\mu}\mid X_{1:n})$, which is a mapping
+\[
+\law(\tilde{\mu}\mid X_{1:n}) : \X^n \times \mathcal{B}(\mbx) \to [0,1],
+\]
+where $\mathcal{B}(\mbx)$ denotes the Borel $\sigma$-algebra on the space of finite measures on $\X$. For a fixed sequence of observations $x_1,\dots,x_n$, we denote by
+\[
+\tilde{\mu}^* \sim \law(\tilde{\mu}\mid X_{1:n} = x_{1:n})
+\]
+a posterior random measure.
+
+Before stating the main theorem, we introduce some additional notation. Given observations $x_1,\dots,x_n$, let $x_1^*,\dots,x_k^*$ denote the $k \leq n$ distinct values, and let
+\[
+n_i := \#\{j : x_j = x_i^*\}, \qquad i=1,\dots,k,
+\]
+be their corresponding multiplicities.
+
+We also introduce an auxiliary random variable $U$ with density 
+\[
+f_U(u) \propto u^{n-1} e^{-\psi(u)} \prod_{i=1}^k \tau_{n_i \mid x_i^*}(u)\,\mathbf{1}_{(0,\infty)}(u),
+\]
+where $\psi$ denotes the Laplace exponent of $\tilde{\mu}$,
+\[
+\psi(u) = \int_{(0,\infty)\times \X} \bigl(1 - e^{-us}\bigr)\,\mathrm{d}\nu(s,x),
+\]
+and
+\[
+\tau_{m \mid x}(u) = \int_{(0,\infty)} e^{-us} s^m \,\mathrm{d}\rho_x(s).
+\]
+
+We now state Theorem~11 from \cite{james2009posterior}.
+
+\begin{theorem}\label{theorem:posterior_formula_crm}
+Let $\tilde{\mu}$ be a CRM with L\'evy intensity $\mathrm{d}\nu(s,x) = \mathrm{d}\rho_x(s)\,\mathrm{d}P_0(x)$, and let $x_1,\dots,x_n$ be observations generated from model~\eqref{model:bayesian_model_crm}. Define $\tilde{\mu}^*$ such that
+\[
+\tilde{\mu}^* \mid U \overset{d}{=} \tilde{\mu}_U + \sum_{i=1}^k J_i^U \delta_{x_i^*},
+\]
+where:
+\begin{enumerate}
+    \item[(i)] $\tilde{\mu}_U$ is a CRM with L\'evy intensity
+    \[
+    \mathrm{d}\nu_U(s,x) = e^{-Us}\,\mathrm{d}\rho_x(s)\,\mathrm{d}P_0(x);
+    \]
+    \item[(ii)] for each $i=1,\dots,k$, the random variable $J_i^U$ has density
+    \[
+    f_i(s) \propto s^{n_i} e^{-Us}\,\mathrm{d}\rho_{x_i^*}(s);
+    \]
+    \item[(iii)] the random variables $(J_i^U)_{i=1}^k$ are mutually independent and independent of $\tilde{\mu}_U$.
+\end{enumerate}
+Then $\law(\tilde{\mu}^*)$ is a version of the posterior distribution of $\tilde{\mu}$ given $X_{1:n}$ under model~\eqref{model:bayesian_model_crm}.
+\end{theorem}
+
+Note that the posterior random measure is a completely random measure conditional on the random variable $U$. This observation motivates the notion of a Cox CRM, i.e., a random completely random measure.
+
+\begin{definition}\label{definition:cox_crm}
+Let $\tilde{\nu}$ be a random L\'evy intensity with law $F$, and let $\law(\tilde{\mu}_\nu)$ denote the law of a CRM with fixed L\'evy intensity $\nu$.
+
+A random measure $\tilde{\mu}$ is called a Cox CRM if, for all $A \in \mathcal{B}(\mbx)$,
+\[
+\mathbb{P}\bigl(\tilde{\mu} \in A\bigr)
+    = \int_{\M((0,\infty)\times \X)} \law(\tilde{\mu}_\nu)(A)\,\mathrm{d}F(\nu).
+\]
+\end{definition}
+
+The statistical interpretation is that there exists a random L\'evy intensity $\tilde{\nu}$ such that
+\[
+\tilde{\mu} \mid \tilde{\nu} \sim \mathrm{CRM}(\tilde{\nu}).
+\]
+
+The same identifiability issue arises for Cox CRMs as in the case of CRMs. The notion of scaling extends naturally to this setting and provides a representative element within each equivalence class of Cox CRMs that induce the same random probability measure through normalization.
+
+\begin{definition}\label{definition:scaled_cox_crm}
+Let $\tilde{\mu}$ be a Cox CRM with random L\'evy intensity $\tilde{\nu} \sim F$, and suppose that $F$ is concentrated on the set of L\'evy intensities defining infinitely active CRMs with finite means. The random measure $\tilde{\mu}_S$ is a scaled Cox CRM if, for all $A \in \mathcal{B}(\mbx)$,
+\[
+\mathbb{P}\bigl(\tilde{\mu}_S \in A\bigr)
+    = \int_{\M((0,\infty)\times \X)} \law(\tilde{\mu}_{\nu,S})(A)\,\mathrm{d}F(\nu),
+\]
+where $\tilde{\mu}_{\nu,S}$ denotes the scaled CRM associated with $\nu$.
+\end{definition}
+
+Under additional assumptions on the L\'evy intensities (see Theorem~10 in \cite{catalano2023merging}), scaled Cox CRMs serve as representative elements of equivalence classes. In particular, for two Cox CRMs $\tilde{\mu}^1, \tilde{\mu}^2$, we have
+\[
+\frac{\tilde{\mu}^1}{\tilde{\mu}^1(\X)} \overset{d}{=} \frac{\tilde{\mu}^2}{\tilde{\mu}^2(\X)} 
+\quad \Longleftrightarrow \quad
+\tilde{\mu}^1_S \overset{d}{=} \tilde{\mu}^2_S.
+\]
+We denote by $\tilde{\nu}_S$ the random L\'evy intensity associated with the scaled Cox CRM. Let us now discuss the several examples of CRMs.
+
+
+
+%%% aq gavcherdi 
+\subsection{The Gamma Process and the Dirichlet Process}
+
+We begin this subsection by describing the another derivation of Dirichlet process via completely random measures.
+
+\begin{example}[Gamma CRM]\label{example:gamma_crm}
+A completely random measure is gamma if its L\'evy intensity is
+\[
+\mathrm{d}\nu(s,x) = \alpha \frac{e^{-b s}}{s}\mathrm{d}s \mathrm{d}P_0(x),
+\]
+where $\alpha > 0$ is a total base measure, $b > 0$ is a scale parameter, and $P_0 \in \probx$ is a base probability.
+\end{example}
+
+The importance of the gamma CRM stems from the fact that its normalization yields a Dirichlet process. Indeed, define the random probability measure
+\[
+\tilde{P}=\frac{\tilde{\mu}}{\tilde{\mu}(\X)},
+\]
+where $\tilde{\mu}$ is a gamma CRM. We now show that $\tilde{P}$ is a Dirichlet process with parameters $\alpha$ and $P_0$.
+
+To this end, it is enough to verify that for any measurable partition $A_1,\dots,A_n$ of $\X$,
+\[
+\left( \tilde{P}(A_1),\dots,\tilde{P}(A_n)\right) \sim \mathrm{Dirichlet}\left(\alpha P_0(A_1),\dots,\alpha P_0(A_n) \right).
+\]
+Let $A \in \mathcal{X}$. To obtain the law of $\tilde{\mu}(A)$, we compute its Laplace transform.
+
+Define $f(x) = t \mathbf{1}_A(x)$ for $t > 0$. Then,
+\begin{align*}
+    \E \left[e^{-t\tilde{\mu}(A)} \right] &= \E \left[e^{-\int_\X f(x)\mathrm{d}\tilde{\mu}(x)} \right]\\
+    & = \exp \left\{-\int_{(0,\infty)\times \X}\left( 1 - e^{-sf(x)}\right)\mathrm{d}\nu(s,x) \right\}\\
+    & = \exp \left\{-\alpha P_0(A)\int_0^\infty \left( 1 - e^{-st}\right)\frac{e^{-bs}}{s}\mathrm{d}s \right\}\\
+    & = \exp \left\{-\alpha P_0(A)\int_0^\infty \frac{e^{-bs} - e^{-(b+t)s}}{s}\mathrm{d}s \right\}\\
+    & = \exp \left\{-\alpha P_0(A) \log \left( \frac{b+t}{b} \right)\right\}\\
+    & = \left( \frac{b}{b+t}\right)^{\alpha P_0(A)}.
+\end{align*}
+The last equality follows from the Frullani integral. Hence, this coincides with the Laplace transform of the $\mathrm{Gamma}(\alpha P_0(A), b)$ random variable. Therefore, for any measurable partition $A_1,\dots,A_n$,
+\[
+\tilde{\mu}(A_i) \sim \mathrm{Gamma}\left(\alpha P_0(A_i), b\right).
+\]
+Since these random variables are independent and $\tilde{\mu}(\X) = \sum_{i = 1}^n \tilde{\mu}(A_i)$, we obtain the desired conclusion.
+
+
+
+
+
+
+
+%%%%%%
+
+
+
+\subsection{The Pitman--Yor Process and Equivalences}
+
+Another widely used example of a random probability measure is the Pitman--Yor process. It can be defined in several ways: through exchangeable partition probability functions, stick-breaking processes, Poisson--Kingman processes, and CRMs. Here, we provide two definitions using the latter two approaches and show the equivalence between them.
+
+We start by defining the Pitman--Yor process as a special case of a Poisson--Kingman process. Denote by 
+$\Delta^\downarrow
+=
+\left\{
+(s_1,s_2,\dots) :
+1 \geq s_1 \geq s_2 \geq \cdots \geq 0,
+\quad
+\sum_{i=1}^{\infty} s_i = 1
+\right\}.$
+the space of decreasing sequences in $[0,1]$.
+\begin{definition}\label{definition:Poisson_kingman}
+Let $\N$ be a Poisson random measure on $(0,\infty)$ with L\'evy intensity $\rho$. Let $(J_i)$ be its random atoms, consider $J_{(1)} \geq J_{(2)} \geq \dots$, and let $T = \sum_{i = 1}^\infty J_i$. Then, denote by $\mathrm{PK}(\rho \mid t)$ the conditional distribution of the random vector
+\[
+\left( \frac{J_{(1)}}{T}, \frac{J_{(2)}}{T},\dots \right) \in \Delta^\downarrow
+\]
+given $T = t$, and by $\mathrm{PK}(\rho)$ the distribution of the same vector without conditioning.
+
+For a probability measure $\eta$ on $(0,\infty)$, the Poisson--Kingman distribution $\mathrm{PK}(\rho, \eta)$ is the law on $\Delta^\downarrow$ defined as
+\[
+\int_0^\infty \mathrm{PK}(\rho \mid t)\,\mathrm{d}\eta(t).
+\]
+The corresponding random probability measure on $\X$,
+\[
+\tilde{P} = \sum_{i \geq 1}\frac{J_i}{T}\delta_{X_i},
+\]
+where $\left(\frac{J_i}{T} \right)_{i \geq 1} \sim \mathrm{PK}(\rho, \eta)$ and $X_1,X_2,\dots \overset{\iid}{\sim} P_0 \in \probx$, is called a Poisson--Kingman process.
+\end{definition}
+
+\begin{definition}\label{definition:Pitman_Yor_1}
+A Pitman--Yor process is a Poisson--Kingman process $\mathrm{PK}(\rho, \eta)$, where
+\[
+\mathrm{d}\rho(s) = \frac{\sigma}{\Gamma(1-\sigma)}s^{-1-\sigma}\mathrm{d}s, \quad
+\mathrm{d}\eta(t) = \frac{\sigma\Gamma(\theta)}{\Gamma\left(\frac{\theta}{\sigma}\right)}t^{-\theta}f(t)\mathrm{d}t \quad \text{for } \sigma \in (0,1), \theta > 0,
+\]
+and $f$ is a probability density with Laplace transform $\lambda \mapsto e^{-\lambda^{\sigma}}$.
+\end{definition}
+
+The function $\rho$ with the form given in Definition~\ref{definition:Pitman_Yor_1} is referred to as the intensity function of the $\sigma$-stable process. In particular, the $\sigma$-stable process is defined as follows.
+\begin{definition}\label{definition:sigma_stable_crm}
+$\tilde{\mu}$ is a $\sigma$-stable completely random measure if the jump part of the L\'evy intensity has the form
+\[
+\mathrm{d}\rho(s) = \frac{\sigma}{\Gamma(1-\sigma)}s^{-1-\sigma}\mathrm{d}s,
+\]
+for some $\sigma \in (0,1)$.
+\end{definition}
+
+Another way to define the Pitman--Yor process is via normalization of a Cox completely random measure.
+
+\begin{definition}\label{definition:Pitman_Yor_2}
+Let $\tilde{\mu}$ be a Cox $\mathrm{CRM}(\tilde{\nu})$ with random L\'evy intensity
+\[
+\mathrm{d}\tilde{\nu}_\xi(s,x) = \frac{\xi \sigma}{\Gamma(1-\sigma)}\frac{e^{-s}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x),
+\]
+where $\xi\sim \Gamma\left( \frac{\theta}{\sigma}, 1\right)$ with density
+$
+g(\xi) = \frac{1}{\Gamma\left(\frac{\theta}{\sigma}\right)} \xi^{\frac{\theta}{\sigma}-1}e^{-\xi},
+$
+$\theta \in (0, \infty)$ and $\sigma \in (0,1)$.
+The corresponding normalized random probability measure,
+\[
+\tilde{P} = \frac{\tilde{\mu}}{\tilde{\mu}(\X)},
+\]
+is called the Pitman--Yor process.
+\end{definition}
+
+We are now ready to show that Definition~\ref{definition:Pitman_Yor_2} and Definition~\ref{definition:Pitman_Yor_1} define the same random probability measures.
+
+Since we work with homogeneous CRMs, our strategy is to show that the distribution of the normalized ranked jumps induced by the Cox completely random measure of Definition~\ref{definition:Pitman_Yor_2} is $\mathrm{PK}(\rho, \eta)$, where $\rho$ and $\eta$ are as in Definition~\ref{definition:Pitman_Yor_1}. To this end, we first reduce the Cox CRM to a simpler form. The motivation is that, for fixed $\xi$, the associated L\'evy intensity resembles the exponential tilting of a $\sigma$-stable CRM.
+
+\begin{itemize}
+    \item Step 1: Reduction of the Cox CRM.
+\end{itemize}
+
+Denote by $\tilde{\nu}_{\xi}^1$ and $\tilde{\nu}_{\xi}^2$ the random L\'evy intensities defined by
+\[
+\mathrm{d}\tilde{\nu}_{\xi}^1(s,x) = \frac{\xi \sigma}{\Gamma(1-\sigma)}\,s^{-1-\sigma}e^{-s}\,\mathrm{d}s\, \mathrm{d}P_0(x), \qquad
+\mathrm{d}\tilde{\nu}_{\xi}^2(s,x) = \frac{\sigma}{\Gamma(1-\sigma)}\,s^{-1-\sigma}e^{-\xi^{\frac{1}{\sigma}}s}\,\mathrm{d}s\, \mathrm{d}P_0(x),
+\]
+and let $\tilde{\mu}^1$ and $\tilde{\mu}^2$ denote the corresponding Cox CRMs. Similarly, define the L\'evy measures
+\[
+\mathrm{d}\rho_\xi^1(s) = \frac{\xi \sigma}{\Gamma(1-\sigma)}\,s^{-1-\sigma}e^{-s}\,\mathrm{d}s, \qquad
+\mathrm{d}\rho_\xi^2(s) = \frac{\sigma}{\Gamma(1-\sigma)}\,s^{-1-\sigma}e^{-\xi^{\frac{1}{\sigma}}s}\,\mathrm{d}s.
+\]
+For simplicity of notation, we use $\rho^i$ to denote both the density and the associated measure. Fix $\xi > 0$ and note that $\rho^2_\xi(s) = \xi^{\frac{1}{\sigma}}\rho_\xi^1(\xi^{\frac{1}{\sigma}}s)$. By Lemma SM3 in~\cite{catalano2023merging},
+\[
+\tilde{\mu}^2 \overset{d}{=} \xi^{-\frac{1}{\sigma}}\tilde{\mu}^1.
+\]
+Thus, for fixed $\xi$, both CRMs induce the same random probability measure, and consequently the two Cox CRMs also induce the same random probability measure.
+
+\begin{itemize}
+    \item Step 2: Matching the distributions of normalized ranked jumps.
+\end{itemize}
+
+Working with the reduced Cox CRM, define
+\[
+\mathrm{d}\tilde{\nu}_{\xi}(s,x) = \frac{\sigma}{\Gamma(1-\sigma)}\,s^{-1-\sigma}e^{-\xi^{\frac{1}{\sigma}}s}\,\mathrm{d}s\, \mathrm{d}P_0(x), \qquad
+\mathrm{d}\rho_\xi(s) = \frac{\sigma}{\Gamma(1-\sigma)}\,s^{-1-\sigma}e^{-\xi^{\frac{1}{\sigma}}s}\,\mathrm{d}s,
+\]
+and let $\tilde{\mu}$ denote the associated Cox CRM.
+
+Let $\tilde{\gamma}$ denote the distribution of the normalized ranked jumps from $\tilde{\mu}$. By definition, for every $A \in \mathcal{B}(\Delta^\downarrow)$,
+\[
+\tilde{\gamma}(A) = \int_0^\infty \mathrm{PK}(\rho_\xi)(A)\, g(\xi)\,\mathrm{d}\xi,
+\]
+where $g$ is the density of $\mathrm{Gamma}\!\left(\frac{\theta}{\sigma},1\right)$.
+
+Disintegrating $\mathrm{PK}(\rho_\xi)$ with respect to the distribution of the total jump sum gives
+\[
+\tilde{\gamma}(A) = \int_0^\infty \int_0^\infty \mathrm{PK}(\rho_\xi \mid t)(A)\, f_{\xi}(t)\,\mathrm{d}t\, g(\xi)\,\mathrm{d}\xi,
+\]
+where $f_{\xi}$ is the density of the total jump sum of $\mathrm{CRM}(\tilde{\nu}_{\xi})$ for fixed $\xi$, and $\mathrm{PK}(\rho_\xi \mid t)$ denotes the conditional distribution of the normalized ranked jumps given total jump sum~$t$.
+
+Since $\rho_\xi$ is the exponential tilting of the L\'evy measure of a $\sigma$-stable CRM, we have $\mathrm{PK}(\rho_\xi \mid t) = \mathrm{PK}(\rho \mid t)$ (see Example~14.46 of~\cite{ghosal2017fundamentals}). Therefore,
+\[
+\tilde{\gamma}(A) = \int_0^\infty \int_0^\infty \mathrm{PK}(\rho \mid t)(A)\, f_{\xi}(t)\,\mathrm{d}t\, g(\xi)\,\mathrm{d}\xi
+= \int_0^\infty \mathrm{PK}(\rho \mid t)(A) \left[\int_0^\infty f_{\xi}(t)\, g(\xi)\,\mathrm{d}\xi\right]\mathrm{d}t.
+\]
+
+It remains to show that
+\[
+\int_0^\infty f_{\xi}(t)\, g(\xi)\,\mathrm{d}\xi = \frac{\sigma\,\Gamma(\theta)}{\Gamma\!\left(\frac{\theta}{\sigma}\right)}\,t^{-\theta}\,f(t),
+\]
+where $f$ is the density of the total jump sum of a $\sigma$-stable CRM. The density $f$ is characterized by its Laplace transform $\lambda \mapsto e^{-\psi(\lambda)}$ with $\psi(\lambda) = \lambda^\sigma$ (see Example~14.43 in~\cite{ghosal2017fundamentals}). By Example~14.46 in~\cite{ghosal2017fundamentals},
+\[
+f_{\xi}(t) = f(t)\,e^{\,\psi\!\left(\xi^{\frac{1}{\sigma}}\right) - \xi^{\frac{1}{\sigma}}t} = f(t)\,e^{\,\xi - \xi^{\frac{1}{\sigma}}t}.
+\]
+Hence,
+\begin{align*}
+    \int_0^\infty f_{\xi}(t)\, g(\xi)\,\mathrm{d}\xi
+    &= \int_0^\infty f(t)\,e^{\,\xi - \xi^{\frac{1}{\sigma}}t}\, \frac{1}{\Gamma\!\left(\frac{\theta}{\sigma}\right)}\,\xi^{\frac{\theta}{\sigma}-1}e^{-\xi}\,\mathrm{d}\xi \\
+    &= \frac{f(t)}{\Gamma\!\left(\frac{\theta}{\sigma}\right)} \int_0^\infty \xi^{\frac{\theta}{\sigma}-1}e^{-\xi^{\frac{1}{\sigma}}t}\,\mathrm{d}\xi \\
+    &= \frac{\sigma\,\Gamma(\theta)}{\Gamma\!\left(\frac{\theta}{\sigma}\right)}\,t^{-\theta}\,f(t),
+\end{align*}
+where the last equality follows from the substitution $\tau = \xi^{\frac{1}{\sigma}}$.
+
+
+
+
+
+
+
+

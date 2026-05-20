@@ -1,0 +1,73 @@
+%% main.tex
+%% Master file. Compile with: xelatex -> biber -> xelatex -> xelatex
+
+\documentclass[
+  a4paper,
+  12pt,
+  twoside,
+  openright
+]{book}
+
+% University formatting, frontpage, and metadata
+\input{template}
+
+% Packages
+\input{packages}
+
+% Custom macros and theorem environments
+\input{commands}
+
+% ============================================================
+\begin{document}
+% ============================================================
+
+\frontmatter  % roman numerals, no chapter numbering
+
+\makefrontpage
+
+% --- Abstract -----------------------------------------------
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\input{chapters/abstract}
+
+% --- Acknowledgements ---------------------------------------
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\input{chapters/acknowledgements}
+
+% --- Table of contents --------------------------------------
+\tableofcontents
+
+% ============================================================
+\mainmatter   % arabic numerals
+% ============================================================
+
+\chapter{A Bayesian Nonparametric Toolbox}
+
+\section{Random Probability Measures and Exchangeability}\label{section:rpm_and_exchangeability}
+\input{chapters/bnp_toolbox/rpms_and_exchangeability}
+
+\section{Completely Random Measures}\label{section:completely_random_measures}
+\input{chapters/bnp_toolbox/completely_random_measures}
+
+\section{Distances Between Laws of Random Measures and RPMs}
+\input{chapters/bnp_toolbox/distances}
+
+\chapter{Merging Rate of Opinions}
+
+\section{Introduction to Merging}\label{section:merging_introduction}
+\input{chapters/merging/introduction}
+
+\section{Known Results on Merging Rates}
+\input{chapters/merging/known_results_merging}
+
+\section{Merging between the Pitman--Yor and Dirichlet Processes}
+\input{chapters/merging/PY-DP_mering}
+
+% ============================================================
+\backmatter
+% ============================================================
+
+\printbibliography[heading=bibintoc, title={Bibliography}]
+
+\end{document}

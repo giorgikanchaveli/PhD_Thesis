@@ -1,0 +1,43 @@
+
+% We then complement them with a new result concerning the merging between the Pitman--Yor process and the Dirichlet process. 
+
+In this section, we summarize known results on merging between two posterior distributions arising from the Bayesian model \ref{model:bayesian_model_crm} when different priors are used. As discussed earlier, we investigate merging independently of the data-generating mechanism. That is, for a fixed sequence of observations, we compare how the corresponding posterior distributions differ under different prior specifications.
+
+Since we work with distances between random measures, the key step is to quantify the distance between posterior distributions. To this end, we consider two priors given by completely random measures, derive the corresponding posterior distributions, and then compare them. Due to the identifiability issue discussed in Subsection \ref{subsection:identifiability}, we compute distances between scaled versions of these posterior distributions.
+
+We start with the case of merging between two Dirichlet processes. Recall that the Dirichlet process is obtained by normalizing a Gamma CRM. By Theorem 15 in \cite{catalano2023merging}, for two Gamma CRMs $\tilde{\mu}^1$ and $\tilde{\mu}^2$ with parameters $(\alpha_i, 1,  P_0^i)$, $i=1,2$, and for any sequence of observations $(x_n)_{n \geq 1}$ in $\X$, it holds that
+\[
+\ad(\nu_S^{1,*}, \nu_S^{2,*}) \asymp \frac{1}{n}, 
+\qquad
+\wbl\bigl(\law(\tilde{\mu}_S^{1,*}), \law(\tilde{\mu}_S^{2,*})\bigr) \lesssim \frac{1}{n},
+\]
+where $\tilde{\mu}_S^{k,*}$ denotes the scaled version of the posterior CRM associated with $\tilde{\mu}^k$ and $\nu_S^{k,*}$ denotes the associated L\'evy intensity for $k = 1,2$. It is important to note that the L\'evy intensities associated with scaled posterior CRMs are not random, since the posterior CRMs are no longer Cox CRMs after scaling.
+
+The result says that the posterior distributions always merge at rate $1/n$, regardless of the observed data and independently of the data-generating mechanism.
+
+This behavior admits an intuitive explanation. The posterior distribution induced by a Dirichlet process converges weakly to the corresponding predictive distribution, which in turn converges to the empirical measure. Equivalently, one can say that the posterior distribution concentrates around the empirical measure as the sample size increases. Since this limiting object does not depend on the prior, different posterior distributions merge.
+
+We now discuss another known result on merging between the Dirichlet process and the generalized Gamma CRM.
+\begin{definition}
+\label{definition:generalizd_gamma_crm}
+A completely random measure is said to be a generalized Gamma CRM if its L\'evy intensity is given by
+\[
+d\nu(s,x) = \frac{\alpha}{\Gamma(1-\sigma)}\frac{e^{-s}}{s^{1+\sigma}}\,\mathrm{d}s \,\mathrm{d}P_0(x),
+\]
+where $\alpha > 0$ is the total mass parameter, $\sigma \in (0,1)$ is the discount parameter, and $P_0 \in \probx$ is the base probability measure.
+\end{definition}
+
+By Theorem 19 in \cite{catalano2023merging}, let $\tilde{\mu}^1$ be a generalized Gamma CRM with parameters $(\alpha, \sigma, P_0)$ and let $\tilde{\mu}^2$ be a Gamma CRM with parameters $(\alpha, 1, P_0)$. Then,
+\[
+\wad\big(\law(\tilde{\nu}_S^{1,*}), \law(\tilde{\nu}_S^{2,*})\big) \asymp \max\left\{n^{-\frac{1}{1+\sigma}}, \frac{k_n}{n}\right\},
+\]
+and
+\[
+\wbl\bigl(\law(\tilde{\mu}_S^{1,*}), \law(\tilde{\mu}_S^{2,*})\bigr) \lesssim \max\left\{n^{-\frac{1}{1+\sigma}}, \frac{k_n}{n}\right\},
+\]
+where $k_n$ denotes the number of distinct observations among $x_1,\dots, x_n$.
+
+This result shows that merging occurs provided that the number of distinct observations does not grow at the same rate as the sample size. In such cases, the rate of merging depends on the parameter $\sigma$. In contrast to the Dirichlet process versus Dirichlet process case, merging may fail when $k_n \sim n$. This situation can arise, for instance, when the data are generated i.i.d. from a continuous distribution.
+
+
+

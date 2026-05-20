@@ -1,0 +1,223 @@
+
+
+
+
+
+
+%%%%%%
+
+
+In this section, we overview several ways to define distances on the laws of random probability measures and, more generally, on random measures. The distances on $\probprobx$ that are mainly used for two-sample testing are Wasserstein over Wasserstein (WoW) and the Hierarchical Integral Probability Metric (HIPM). The other distances are defined on $\mbx$ and are used to study the merging rate of opinions.
+
+\subsection{Distances on $\probprobx$}
+
+We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$; it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing} and machine learning \cite{ho2017multilevel, dukler2019wasserstein}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
+
+Only in this subsection and in the chapter on two-sample testing, we assume that the sample space $\X$ is Polish with bounded diameter. Using the distance function $d_\X$ on $\X$, one can define the Wasserstein distance on $\probx$ by
+\[
+\W_1(P^1, P^2) = \inf_{\pi \in \Gamma(P^1, P^2)} \int_{\X \times \X} d_\X(x, y) \, \pi(dx, dy), \qquad P^1, P^2 \in \probx,
+\]
+where
+\[
+\Gamma(P^1, P^2) = \left\{ \pi \in \mathcal{P}(\X^2) : \pi(A \times \X) = P^1(A), \ \pi(\X \times A) = P^2(A) \quad \forall A \in \mathcal{B}(\X) \right\}.
+\]
+Note that this is the Wasserstein distance of order $1$. Since we do not consider other Wasserstein distances, we denote it simply by $\W$ instead of $\W_1$.
+
+In general, $\W$ is a distance function on the Wasserstein space of order $1$, defined as
+$$
+\mathcal{P}_1(\X) = \left\{P \in \probx : \int_\X d_\X(x, x_0) P(dx) < \infty, \quad x_0 \in \X \right\}.
+$$
+Since we assume that $\X$ has bounded diameter, all $P \in \probx$ belong to $\mathcal{P}_1(\X)$. The assumption that $\X$ is Polish and $d_{\X}$ is bounded implies that the metric space $(\probx, \W)$ is also Polish; see Remark 7.1.7 in \cite{luigi2008gradient}. Note also that $(\probx, \W)$ has bounded diameter, since $d_{\X}$ is bounded. Therefore, instead of defining a distance function on $\mathcal{P}_1(\probx)$, we can define a distance function on $\probprobx$ using $\W$ as the ground metric.
+
+\begin{definition}[Wasserstein over Wasserstein]
+    \label{def:wow}
+    Given $Q^1, Q^2 \in \probprobx$, the Wasserstein over Wasserstein (WoW) distance between $Q^1$ and $Q^2$ is
+    $$
+    \WW(Q^1, Q^2) = \inf_{\pi \in \Gamma(Q^1, Q^2)} \int_{\probx^2} \W(P^1, P^2) \, \pi(dP^1, dP^2).
+    $$
+\end{definition}
+Here, $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\probx \times \probx$ with marginals $Q^1$ and $Q^2$. Again, Remark 7.1.7 in \cite{luigi2008gradient}, together with the fact that $\W$ has bounded diameter, implies that the metric space $(\probprobx, \WW)$ is Polish with bounded diameter.
+
+The second distance function we consider is HIPM, introduced in \cite{catalano2024hierarchical}. The primary intuition behind its definition is as follows. Let $Q^1, Q^2$ be probability measures on $\probx$, and let $\widetilde{P}^1 \sim Q^1$ and $\widetilde{P}^2 \sim Q^2$. We compute the distance between $Q^1$ and $Q^2$ by considering the distances between the random integrals $\widetilde{P}^1(f)$ and $\widetilde{P}^2(f)$, where $f$ ranges over a class of functions from $\X$ to $\R$. By considering these projections, we shift the focus from $\probprobx$ to $\mathcal{P}(\R)$, the latter being significantly easier to handle. As noted in \cite{catalano2024hierarchical}, such a projection is justified by the fact that, for a random probability measure $\widetilde{P}$, the laws of the random integrals $\widetilde{P}(f)$, where $f$ belongs to the set of continuous and bounded functions, are sufficient to characterize the law of $\widetilde{P}$. This leads to the following definition.
+
+\begin{definition}[Hierarchical integral probability metric]
+    \label{def:hipm}
+    Given $Q^1, Q^2 \in \probprobx$, the hierarchical integral probability metric between $Q^1$ and $Q^2$ is defined as
+    \[
+    d_{\F}(Q^1, Q^2) = \sup_{f \in \F} \W(\mathcal{L}(\widetilde{P}^1(f)), \mathcal{L}(\widetilde{P}^2(f))),
+    \]
+    where $\widetilde{P}^k \sim Q^k$ for $k=1,2$ and $\F$ is a class of bounded and measurable functions from $\X$ to $\R$.
+\end{definition}
+
+Alternatively, the HIPM can be expressed as
+\[
+d_{\F}(Q^1, Q^2) = \sup_{f \in \F} \W(Q^1 \circ \hat{f}^{-1}, Q^2 \circ \hat{f}^{-1}),
+\]
+where $\hat{f}$ denotes the lifting of the function $f$, i.e., $\hat{f}(P) = \int_\X f \, dP$, and $Q^k \circ \hat{f}^{-1}$ is the corresponding push-forward measure.
+
+As long as the function class $\F$ is sufficiently rich, this construction defines a valid distance on $\probprobx$. Hereafter, we set $\F = \operatorname{Lip}_1(\X, \R)$ and denote the corresponding metric $d_\F$ by $\dlip$.
+
+Both distance functions possess desirable topological properties. In particular, by Theorem 3.1 in \cite{catalano2024hierarchical}, WoW metrizes weak convergence on $\probprobx$, and HIPM does the same when $\X$ is compact.
+
+There is a relation between the two distance functions; specifically, they are special cases of an Integral Probability Metric defined on a generic Polish space.
+\begin{definition}[Integral Probability Metric]
+    \label{def:ipm}
+    Let $(\mathbb{Y},d_{\mathbb{Y}})$ be a Polish space and $\mathcal{H}$ a class of bounded and measurable functions from $\mathbb{Y}$ to $\R$. The Integral Probability Metric (IPM) between $P^1, P^2 \in \mathcal{P}\left(\mathbb{Y}\right)$ is
+    \[
+    \mathcal{I}_{\mathcal{H}}(P^1,P^2) = \sup_{f\in\mathcal{H}} \left| \int_{\mathbb{Y}} f(y) P^1(dy) - \int_{\mathbb{Y}} f(y) P^2(dy) \right|.
+    \]
+\end{definition}
+First, let us show that WoW can be written as an integral probability metric. By Remark 6.5 in \cite{villani2008optimal}, if $P^1,P^2$ belong to $\mathcal{P}_1(\X)$, the Wasserstein space of order $1$, then the Wasserstein distance can be written as
+$$
+\W(P^1,P^2) = \sup_{f\in \text{Lip}_1(\X,\R)} \left| \int_\X f(x) P^1(dx) - \int_\X f(x) P^2(dx) \right|,
+$$
+where $\text{Lip}_1(\X,\R)$ denotes the set of $1$-Lipschitz continuous functions from $\X$ to $\R$. Since $(\probprobx, \WW)$ is a Polish space with bounded diameter, we can use the above result to obtain, for all $Q^1,Q^2\in\probprobx$,
+\[
+\WW(Q^1,Q^2) = \sup_{f\in \text{Lip}_1(\probx,\R, \W)} \left| \int_{\probx} f(P) Q^1(dP) - \int_{\probx} f(P) Q^2(dP) \right|,
+\]
+where $\text{Lip}_1(\probx,\R, \W)$ denotes the set of $1$-Lipschitz continuous functions from $\probx$ to $\R$ with respect to $\W$.
+
+Similarly, we show that HIPM can be written as an integral probability metric. For $Q^1,Q^2 \in \probprobx$,
+\begin{align*}
+\dlip(Q^1,Q^2) &= \sup_{f\in \text{Lip}_1(\X,\R)} \W(Q^1\circ \hat{f}^{-1}, Q^2\circ \hat{f}^{-1}) \\
+&= \sup_{f\in \text{Lip}_1(\X,\R)}\sup_{g\in\lipR}\left| \int_{\R}g(x) (Q^1\circ\hat{f}^{-1})(dx) - \int_{\R}g(x) (Q^2\circ\hat{f}^{-1})(dx) \right| \\
+& = \sup_{f\in \text{Lip}_1(\X,\R)} \sup_{g\in\lipR}\left|\int_{\probx}g(\widehat{f}(P))Q^1(dP) - \int_{\probx}g(\widehat{f}(P))Q^2(dP) \right| \\
+& = \sup_{f\in \text{Lip}_1(\X,\R)}\sup_{g\in\lipR}\left|\int_{\probx}g(P(f))Q^1(dP) - \int_{\probx}g(P(f))Q^2(dP) \right| \\
+& = \sup_{h\in \D}\left|\int_{\probx}h(P)Q^1(dP) - \int_{\probx}h(P)Q^2(dP) \right|,
+\end{align*}
+where $\D = \{h:\probx\to \R: h(P) = g(P(f)), \ g\in \lipR, f\in \text{Lip}_1(\X,\R) \}$.
+
+By representing both distance functions as Integral Probability Metrics, we see that HIPM is upper bounded by the WoW distance. Indeed, we can show that $\D$ is a subset of $\text{Lip}_1(\probx, \R, \W)$: let $h \in \mathcal{D}$ and $P^1, P^2 \in \probx$; then
+\begin{align*}
+|h(P^1) - h(P^2)| = |g(P^1(f)) - g(P^2(f))| \leq |P^1(f) - P^2(f) | &\leq \sup_{f \in \text{Lip}_1(\X, \R)} |P^1(f) - P^2(f) | \\
+&= \W(P^1, P^2).
+\end{align*}
+
+
+
+
+
+%%%%%%
+\subsection{Distances on $\mbx$}
+
+Differently from the previous subsection, we only assume that $\X$ is a Polish space equipped with its Borel $\sigma$-algebra $\mathcal{X}$. Our motivation for defining a distance between laws of random measures stems from the study of completely random measures. Since we will be working with CRMs taking values in the space of finite measures on $\X$, we begin by introducing a distance on the space $\mbx$.
+
+Recall that the space $\mbx$ is endowed with the Borel $\sigma$-algebra generated by the topology of weak convergence. Analogously to the case of $\probx$, this $\sigma$-algebra coincides with the smallest $\sigma$-algebra that makes all maps of the form
+\[
+\mu \mapsto \mu(f), \quad f \in C_b(\X),
+\]
+measurable.
+
+Since two measures in $\mbx$ may have different total masses, the standard Wasserstein distance is not directly applicable. Instead, we consider the bounded Lipschitz distance.
+
+\begin{definition}\label{definition:bounded_lipschitz}
+Given $\mu^1, \mu^2 \in \mbx$, the bounded Lipschitz distance $\bl$ is defined as
+\[
+\bl(\mu^1, \mu^2) = \sup\left\{ \int_\X f \mathrm{d}\mu^1 - \int_\X f\mathrm{d}\mu^2 \ : \ f \text{ is } 1\text{-Lipschitz and }\sup_{x\in \X} |f(x)| \leq 1  \right\}.
+\]
+\end{definition}
+
+By lifting the distance $\bl$ to the space of laws of random measures, denoted by $\probmb$, we obtain a distance on $\probmb$.
+
+\begin{definition}
+Given $Q^1, Q^2 \in \probmb$, the distance $\wbl$ between them is defined as
+\[
+\wbl(Q^1, Q^2) = \min_{\pi \in \Gamma(Q^1, Q^2)} \int_{\mbx \times \mbx} \bl(\mu^1,\mu^2)\,\mathrm{d}\pi(\mu^1,\mu^2),
+\]
+where $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\mbx \times \mbx$ with marginals $Q^1$ and $Q^2$.
+\end{definition}
+
+\begin{remark}\label{remark:wbl_is_distance}
+As mentioned in the previous subsection, the Wasserstein distance is, in general, a metric on the space of probability measures with finite first moments. In the present setting, since $\bl$ is bounded by $2$, $\wbl$ is a well-defined distance on $\probmb$.
+\end{remark}
+
+If $\tilde{\mu}^1$ and $\tilde{\mu}^2$ are random measures with laws $Q^1$ and $Q^2$, respectively, we refer to $\wbl(\tilde{\mu}^1, \tilde{\mu}^2)$ as the distance between the random measures, with the understanding that this denotes the distance between their laws, i.e., $\wbl(Q^1, Q^2)$. For a more detailed overview of the properties of $\wbl$, see \cite{catalano2023merging}.
+
+\subsection{Distance for Completely Random Measures}
+
+In the previous subsection, we defined a distance between laws of random measures taking values in the space of finite measures. Although this framework also includes completely random measures, the resulting distance is generally not tractable in this setting. Since our goal is to work with distances that can be explicitly computed or bounded, we now introduce a distance tailored specifically to CRMs.
+
+As discussed earlier, a completely random measure is uniquely characterized by its L\'evy intensity, which is a $\sigma$-finite measure on $(0,\infty)\times \X$. For this reason, we define the distance at the level of L\'evy intensities. Note that, since L\'evy intensities have infinite total mass, we cannot use the bounded Lipschitz distance. Recall that, given a L\'evy intensity $\nu$, its disintegration can be written as
+\[
+\mathrm{d}\nu(s,x) = \mathrm{d}\rho_x(s)\mathrm{d}P_0(x),
+\]
+where $P_0$ is a probability measure on $\X$ and, for each $x \in \X$, $\rho_x$ is a measure on $(0,\infty)$. This decomposition suggests defining a discrepancy between two L\'evy intensities by coupling atoms in $\X$ and comparing the corresponding measures on $(0,\infty)$ along such a coupling. To do so, we first need a distance on the space of measures on $(0,\infty)$.
+
+Since the measures $\rho_x$ may have infinite total mass, neither the standard Wasserstein distance nor the bounded Lipschitz distance is directly applicable. We therefore use the notion introduced in \cite{figalli2010new}, which extends the Wasserstein distance to positive measures that may have infinite total mass.
+
+\begin{definition}\label{definition:extended_wasserstein}
+Let $\rho^1, \rho^2$ be two positive Borel measures on $(0,\infty)$ with finite first moments about $0$. The extended Wasserstein distance between $\rho^1$ and $\rho^2$ is defined by
+\[
+\wext(\rho^1, \rho^2) = \int_0^\infty |U_1(s)-U_2(s)|\mathrm{d}s,
+\]
+where
+\[
+U_i(s) = \rho^i((s,\infty)), \qquad s>0,
+\]
+is the tail integral of $\rho^i$.
+\end{definition}
+
+Having introduced distances on measures on $(0,\infty)$ and on the space $\X$, we can now define a discrepancy between L\'evy intensities.
+
+\begin{definition}\label{definition:adapded_extended_wasserstein}
+Let $\nu^1, \nu^2$ be two L\'evy intensities such that $\M_1(\nu^i)<\infty$, and let
+\[
+\mathrm{d}\nu^i(s,x) = \mathrm{d}\rho_x^i(s)\mathrm{d}P_0^i(x), \qquad i=1,2,
+\]
+be their canonical decompositions. The adapted extended Wasserstein discrepancy between $\nu^1$ and $\nu^2$ is defined as
+\[
+\ad(\nu^1,\nu^2)=\inf_{\pi \in \Gamma(P_0^1,P_0^2)} \int_{\X\times\X} \left[ \frac{\M_1(\nu^1)+\M_1(\nu^2)}{2} d_{\X,t}(x,y) + \wext(\rho_x^1,\rho_y^2)\right] \mathrm{d}\pi(x,y),
+\]
+where
+\[
+d_{\X,t}(x,y)=\min\{d_\X(x,y),2\}
+\]
+denotes the truncated metric on $\X$.
+\end{definition}
+
+The use of the truncated metric $d_{\X,t}$ instead of the original metric $d_\X$ is motivated by the bounds developed later. More precisely, our goal is to upper bound Wasserstein over bounded Lipschitz by the discrepancy $\ad$. One of the key ingredients in that argument is the fact that the bounded Lipschitz distance is upper bounded by the Wasserstein distance on $\probx$. Working with the truncated metric leads to sharper bounds.
+
+It is also worth noting that $\ad$ is not a distance. Indeed, the factor
+\[
+\frac{\M_1(\nu^1)+\M_1(\nu^2)}{2}
+\]
+makes the triangle inequality fail. Thus, $\ad$ should be regarded as a discrepancy rather than a distance.
+The following remark is stated in \cite{catalano2023merging} (see Remark 2 on page 10). Due to its importance for the computations involved in merging, we restate it here.
+
+\begin{remark}\label{remark:adapted_extwas_homogeneous_crms}
+Consider two completely random measures with L\'evy intensities $\nu^1, \nu^2$ of the form
+\[
+\mathrm{d}\nu^1(s,x) = \mathrm{d}\rho_x^1(s)\mathrm{d}P_0^1(x),
+\qquad
+\mathrm{d}\nu^2(s,x) = \mathrm{d}\rho^2(s)\mathrm{d}P_0^2(x),
+\]
+that is, one of them is a homogeneous CRM. Then the adapted extended Wasserstein discrepancy between $\nu^1$ and $\nu^2$ decomposes as the sum of a scaled distance between the laws of the atoms and the expected distance between the laws of the jumps, i.e.,
+\[
+\ad(\nu^1, \nu^2)
+=
+\frac{M_1(\nu^1)+M_1(\nu^2)}{2}\, \W(P_0^1, P_0^2)
++
+\E_{X \sim P_0^1}\left[ \wext(\rho_X^1,\rho^2)\right].
+\]
+\end{remark}
+
+We now discuss the distance between Cox CRMs. The motivation stems from the fact that, posterior distributions are random completely random measures, namely Cox CRMs. Since Cox CRMs are characterized by random L\'evy intensities, it is natural to define a distance at the level of their laws by lifting the adapted extended Wasserstein discrepancy.
+
+More precisely, let $\tilde{\nu}^1, \tilde{\nu}^2$ be random L\'evy intensities. We define
+\[
+\wad(\law(\tilde{\nu}^1), \law(\tilde{\nu}^2)) = \inf_{\pi \in \Gamma(\law(\tilde{\nu}^1), \law(\tilde{\nu}^2))} \E_{(\nu^1,\nu^2)\sim \pi}\left[\ad(\nu^1,\nu^2)\right].
+\]
+
+Finally, since in the case of merging rates our goal is to consider CRMs (or Cox CRMs) that uniquely determine a random probability measure through normalization, we restrict attention to scaled CRMs and Cox CRMs. In this case, the first moment of the L\'evy intensity $\M_1(\nu)$ is equal to $1$. As a consequence, by Proposition~5 in \cite{catalano2023merging}, the quantity $\wad$ defines a distance on the corresponding laws.
+
+Our main tool for controlling the Wasserstein over bounded Lipschitz distance is provided by Theorem 6 in \cite{catalano2023merging}, which states that, in the case of scaled Cox CRMs $\tilde{\mu}^1, \tilde{\mu}^2$ with random L\'evy intensities $\tilde{\nu}^1, \tilde{\nu}^2$, 
+\[
+\wad(\law(\tilde{\nu}^1), \law(\tilde{\nu}^2)) = \inf_{\pi \in \Gamma(\law(\nu^1), \law(\nu^2))} \E_{(v^1,v^2)\sim\pi}\left[\ad(v^1,v^2) \right]. 
+\]
+
+
+
+
+
+
+

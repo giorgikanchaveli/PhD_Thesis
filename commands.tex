@@ -1,0 +1,72 @@
+%% commands.tex
+%% Custom macros and theorem environments for the BNP thesis.
+
+% ============================================================
+%  THEOREM ENVIRONMENTS
+%  Numbered per chapter (standard for a PhD thesis).
+% ============================================================
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{ttheorem}[theorem]{Tentative Theorem}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{cor}{Corollary}
+
+% ============================================================
+%  SAMPLE AND MEASURE SPACES
+% ============================================================
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\probx}{\mathcal{P}(\mathbb{X})}
+\newcommand{\mbx}{\mathcal{M}_B(\X)}
+\newcommand{\mx}{\mathcal{M}(\X)}
+\newcommand{\probmb}{\mathcal{P}(\mbx)}
+\newcommand{\probprobrd}{\mathcal{P}(\mathcal{P}(\R^d))}
+\newcommand{\probprobx}{\mathcal{P}(\mathcal{P}(\X))}
+\newcommand{\probspace}{\left( \Omega, \mathcal{F}, \mathbb{P} \right)}
+
+% ============================================================
+%  STANDARD SETS AND OPERATORS
+% ============================================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathcal{N}}          % Poisson random measure / calligraphic N
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\W}{\mathcal{W}}
+
+% ============================================================
+%  ANALYSIS AND PROBABILITY
+% ============================================================
+\newcommand{\law}{\mathcal{L}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\iid}{\mathrm{i.i.d}}
+\newcommand{\mustar}{\widetilde{\mu}^*}
+\newcommand{\KL}[2]{D_{\mathrm{KL}}\!\left(#1 \,\|\, #2\right)}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+
+% ============================================================
+%  BNP-SPECIFIC SHORTHAND
+% ============================================================
+\newcommand{\bl}{\mathrm{BL}}
+\newcommand{\ad}{\mathrm{AD}}
+\newcommand{\wext}{\W_*}
+\newcommand{\wbl}{\W_{\mathrm{BL}}}
+\newcommand{\wad}{\W_{\mathrm{AD}}}
+\newcommand{\wtr}{\W_{d_{\X,t}}}
+\newcommand{\ipm}{\mathcal{I}_\mathcal{F}}
+\newcommand{\dlip}{d_{\mathrm{Lip}}}
+\newcommand{\WW}{\mathcal{W}_{\mathcal{W}}}
+\newcommand{\dd}{d_{\mathcal{D}^*}}
+\newcommand{\dbl}{d_{\mathrm{BL}}}
+\newcommand{\lipR}{\mathrm{Lip}_1(\R,\R)}
