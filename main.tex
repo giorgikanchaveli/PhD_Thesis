@@ -1,5 +1,5 @@
 %% main.tex
-%% Master file. Compile with: xelatex -> biber -> xelatex -> xelatex
+%% Master file. Compile with: xelatex -> bibtex -> xelatex -> xelatex
 
 \documentclass[
   a4paper,
@@ -62,12 +62,13 @@
 \input{chapters/merging/known_results_merging}
 
 \section{Merging between the Pitman--Yor and Dirichlet Processes}
-\input{chapters/merging/PY-DP_mering}
+\input{chapters/merging/PY-DP_merging}
 
 % ============================================================
 \backmatter
 % ============================================================
 
-\printbibliography[heading=bibintoc, title={Bibliography}]
+\bibliographystyle{apalike} 
+\bibliography{references}
 
 \end{document}

@@ -4,7 +4,7 @@ Introduced in \cite{kingman1967completely}, completely random measures can be vi
 
 Although we assume throughout that $\X$ is a Polish space, in \cite{kingman1967completely} the space $\X$ is taken to be a general set whose $\sigma$-algebra contains all singletons. Since the Borel $\sigma$-algebra on a Polish space contains all singletons, this assumption is satisfied in our setting, and we may continue working with $\X$ Polish.
 
-We denote by $\mbx$ the space of finite, and by $\mx$ the space of locally finite measures. We endowe $\mbx$ with the topology of weak convergence. Since $\X$ is Polish, the space $\mbx$ is also Polish. We equip $\mbx$ with its Borel $\sigma$-algebra.
+We denote by $\mbx$ the space of finite, and by $\mx$ the space of locally finite measures. We endow $\mbx$ with the topology of weak convergence. Since $\X$ is Polish, the space $\mbx$ is also Polish. We equip $\mbx$ with its Borel $\sigma$-algebra.
 
 \begin{definition}
 Let $\probspace$ be a probability space. A random measure $\tilde{\mu}$ is a map from $\Omega$ to $\mx$, such that, for all $A \in \mathcal{B}(\X)$, the maps 
@@ -143,7 +143,7 @@ and we conclude that
 
 Since a Poisson random measure is a discrete random measure of the form
 \[
-\sum_{i = 1}\delta_{(J_i,X_i)},
+\sum_{i \geq 1}\delta_{(J_i,X_i)},
 \]
 the random variables $J_i$ and $X_i$ are called jumps and atoms, respectively.
 
@@ -315,7 +315,7 @@ We denote by $\tilde{\nu}_S$ the random L\'evy intensity associated with the sca
 %%% aq gavcherdi 
 \subsection{The Gamma Process and the Dirichlet Process}
 
-We begin this subsection by describing the another derivation of Dirichlet process via completely random measures.
+We begin this subsection by describing another derivation of Dirichlet process via completely random measures.
 
 \begin{example}[Gamma CRM]\label{example:gamma_crm}
 A completely random measure is gamma if its L\'evy intensity is
@@ -335,7 +335,7 @@ To this end, it is enough to verify that for any measurable partition $A_1,\dots
 \[
 \left( \tilde{P}(A_1),\dots,\tilde{P}(A_n)\right) \sim \mathrm{Dirichlet}\left(\alpha P_0(A_1),\dots,\alpha P_0(A_n) \right).
 \]
-Let $A \in \mathcal{X}$. To obtain the law of $\tilde{\mu}(A)$, we compute its Laplace transform.
+Let $A \in \mathcal{B}(\X)$. To obtain the law of $\tilde{\mu}(A)$, we compute its Laplace transform.
 
 Define $f(x) = t \mathbf{1}_A(x)$ for $t > 0$. Then,
 \begin{align*}

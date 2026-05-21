@@ -1,6 +1,6 @@
 %% packages.tex
 %% All packages for the thesis. University formatting lives in template.tex.
-%% Compile with: xelatex -> biber -> xelatex -> xelatex
+%% Compile with: xelatex -> bibtex -> xelatex -> xelatex
 
 % ============================================================
 %  ENCODING & LANGUAGE
@@ -31,53 +31,15 @@
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric, calc, fit}
 
 % ============================================================
-%  BIBLIOGRAPHY  (biblatex + biber, replaces natbib)
+%  BIBLIOGRAPHY
 % ============================================================
-\usepackage[
-  backend=biber,
-  style=authoryear-comp,
-  sorting=nyt,
-  giveninits=true,
-  maxbibnames=6,
-  doi=true,
-  url=false,
-  eprint=true
-]{biblatex}
-\addbibresource{references.bib}
-\let\cite\parencite          % \cite{} defaults to parenthetical (Author, Year)
+\usepackage[authoryear]{natbib}
 
 % ============================================================
 %  HYPERLINKS & PDF METADATA
 % ============================================================
-\usepackage{hyperref}
-\hypersetup{
-  colorlinks  = true,
-  linkcolor   = black,
-  citecolor   = blue!70!black,
-  urlcolor    = blue!70!black,
-  pdftitle    = {\thesisTitle},
-  pdfauthor   = {\thesisAuthor},
-}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{cleveref}
-
-% Make the entire citation (author + year) a single hyperlink,
-% not just the year.  Works for \parencite and \cite.
-\makeatletter
-\renewbibmacro*{cite:labeldate+extradate}{%
-  \printfield{labelyear}%
-  \printfield{extradate}}
-
-\renewbibmacro*{cite}{%
-  \printtext[bibhyperref]{%
-    \iffieldundef{shorthand}
-      {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
-         {\usebibmacro{cite:label}%
-          \setunit{\addspace}}
-         {\printnames{labelname}%
-          \setunit{\nameyeardelim}}%
-       \usebibmacro{cite:labeldate+extradate}}
-      {\usebibmacro{cite:shorthand}}}}
-\makeatother
 
 % ============================================================
 %  MISCELLANEOUS

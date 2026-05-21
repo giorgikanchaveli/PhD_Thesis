@@ -1,0 +1,533 @@
+
+We now present a result on merging between the Pitman--Yor and Dirichlet processes. We first recall the posterior distribution derived from the Pitman--Yor process. The strategy for establishing the merging rate is to first obtain the scaled version of the posterior distributions from each completely random measure, and then study the adapted Wasserstein discrepancy.
+
+Let $\tilde{\mu}$ be a Cox CRM with random L\'evy intensity $\tilde{\nu}$, as in Definition~\ref{definition:Pitman_Yor_2}. The random L\'evy intensity has the form
+\[
+\mathrm{d}\tilde{\nu}_\xi(s,x) = \frac{\xi \sigma}{\Gamma(1-\sigma)}\frac{e^{-s}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x),
+\]
+where $\xi \sim \Gamma\left(\frac{\theta}{\sigma}, 1 \right)$.
+
+The posterior distribution of $\tilde{\mu}$ under the Bayesian model~\ref{model:bayesian_model_crm} has the following form \cite[p.~114]{hjort2010bayesian}:
+
+Given observations $x_1,\dots, x_n$ from model~\ref{model:bayesian_model_crm}, the posterior $\mustar$ of $\tilde{\mu}$ is a Cox CRM characterized by
+\[
+\mustar \mid U \overset{d}{=} \tilde{\mu} + \sum_{i = 1}^k J_i^U \delta_{x_i^*},
+\]
+where
+\begin{itemize}
+    \item $\tilde{\mu}$ is a generalized Gamma CRM with L\'evy intensity
+    \[
+    \mathrm{d}\tilde{\nu}(s,x) = \frac{\sigma}{\Gamma(1 - \sigma)} \frac{e^{-Us}}{s^{1+\sigma}} \mathrm{d}s\,\mathrm{d}P_0(x).
+    \]
+    Note that we have omitted the subscript $U$ for brevity.
+    \item $J_i^U \sim \mathrm{Gamma}(n_i - \sigma, U)$
+    \item $f_U(u) = \frac{\sigma}{\Gamma\left(k+\frac{\theta}{\sigma}\right)} u^{\theta + k\sigma - 1}e^{-u^\sigma}\mathbf{1}_{(0,\infty)}(u)$
+\end{itemize}
+and $(x_1^*,\dots, x_k^*)$ are the distinct atoms with multiplicities $n_1,\dots, n_k$.
+
+Note that both $k$ and $U$ implicitly depend on $n$ and are thus sequences; however, since we do not need to track this dependence explicitly before deriving the merging rate, we drop the subscript $n$ for brevity.
+\begin{proposition}
+    \label{proposition:posterior_pitmanyor}
+    Let $\tilde{\mu}$ be a Cox CRM associated with the Pitman--Yor process with parameters $(\sigma, \theta, P_0)$, and let $\mustar$ denote its posterior. Then the scaled version of $\mustar$ has random L\'evy intensity
+    \[
+    \mathrm{d}\tilde{\nu}^*_{S}(s,x) =  \mathrm{d}\rho_x^*(s)\,\mathrm{d}P^*_0(x),
+    \]
+    where
+    \begin{align*}
+        & P^*_0 = \frac{\sigma U^\sigma}{C}P_0 + \frac{1}{C}\sum_{i = 1}^k (n_i - \sigma) \delta_{x_i^*},\\
+        & \mathrm{d}\rho^*_x(s) = \frac{C^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\mathbf{1}_{\X \setminus\{x_1^*,\dots, x_k^*\}}(x)\,\mathrm{d}s + C\frac{e^{-Cs}}{s}\mathbf{1}_{\{x_1^*,\dots, x_k^*\}}(x)\,\mathrm{d}s, \\
+        & C = C(\sigma, n, k, U) =  \sigma U^\sigma + n - k\sigma,
+    \end{align*}
+    and $U$ is as defined above.
+\end{proposition}
+\begin{proof}
+
+Since $\mustar \mid U$ is a sum of CRMs, we compute its L\'evy intensity.
+
+By iteratively applying Lemma~SM4 in \cite{catalano2023merging}, for a general CRM $\tilde{\mu}$ with L\'evy intensity $\nu$, independent and infinitely divisible random variables $J_1,\dots, J_k$ with L\'evy measures $\pi_i,$ and fixed atoms $y_1,\dots, y_k,$ the L\'evy intensity of $\tilde{\mu} + \sum_{i = 1}^k J_i \delta_{y_i}$ is
+\[
+\mathrm{d}\nu(s,x) + \sum_{i = 1}^k \mathrm{d}\left( \pi_i \otimes \delta_{y_i} \right)(s,x),
+\]
+where $\nu$ is the L\'evy intensity of $\tilde{\mu}$.
+
+The L\'evy measure of $J_i^U \sim \mathrm{Gamma}(n_i - \sigma, U)$ is
+\[
+\mathrm{d}\pi_i(s) = \frac{n_i - \sigma}{s} e^{-Us}\mathbf{1}_{(0,\infty)}(s)\,\mathrm{d}s.
+\]
+Then, for $(s,x) \in (0,\infty)\times\X,$
+\begin{align*}
+    \mathrm{d}\nu(s,x) + &\sum_{i = 1}^k \mathrm{d}\left( \pi_i \otimes \delta_{x_i^*} \right)(s,x)  \\
+    & = \frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Us}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x) + \sum_{i=1}^k \frac{n_i - \sigma}{s}e^{-Us}\,\mathrm{d}s\,\mathrm{d}\delta_{x_i^*}(x) \\
+    & = \frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Us}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x) + \frac{e^{-Us}}{s}\,\mathrm{d}s\sum_{i = 1}^k (n_i - \sigma)\,\mathrm{d}\delta_{x_i^*}(x) =: \mathrm{d}\tilde{\nu}^*(s,x).
+\end{align*}
+So $\mustar$ is a Cox CRM with random L\'evy intensity $\tilde{\nu}^*$. Denote
+\begin{align*}
+    & \mathrm{d}\rho^1(s) = \frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Us}}{s^{1+\sigma}}\,\mathrm{d}s,\\
+    & \mathrm{d}\rho^2(s) = \frac{e^{-Us}}{s}\,\mathrm{d}s.
+\end{align*}
+Then,
+\[
+\mathrm{d}\tilde{\nu}^*(s,x) = \mathrm{d}\rho^1(s)\,\mathrm{d}P_0(x) + \mathrm{d}\rho^2(s)\sum_{i = 1}^k (n_i - \sigma)\,\mathrm{d}\delta_{x_i^*}(x).
+\]
+The next step is to obtain the scaled version of $\mustar$. By Definition~\ref{definition:scaled_cox_crm}, we obtain the scaled version of the latent CRM for fixed $U$.
+
+As discussed in Subsection~\ref{subsection:normalization_identifiability}, if $\nu$ is the L\'evy intensity of a CRM $\tilde{\mu}$, then the L\'evy intensity of its scaled version is
+\[
+\mathrm{d}\nu_S(s,x) = \E\!\left(\tilde{\mu}(\X)\right) \rho_x\!\left( \E\!\left(\tilde{\mu}(\X)\right)s\right)\mathrm{d}P_0(x),
+\]
+by Lemma~SM3 in \cite{catalano2023merging}. By applying the same argument to 
+\[
+\mathrm{d}\tilde{\nu}^*(s,x) = \mathrm{d}\rho^1(s)\,\mathrm{d}P^1_0(x) + \mathrm{d}\rho^2(s)\,\mathrm{d}P^2_0(x),
+\] we get
+\[
+\mathrm{d}\tilde{\nu}^*_S(s,x) =  \E\!\left(\mustar(\X) \mid U\right) \rho^1_x\!\left(\E\!\left(\mustar(\X) \mid U\right)s\right)\mathrm{d}P^1_0(x) +
+                   \E\!\left(\mustar(\X) \mid U\right) \rho^2_x\!\left(\E\!\left(\mustar(\X) \mid U\right)s\right)\mathrm{d}P^2_0(x).
+\]
+We therefore first compute $\E\!\left(\mustar(\X) \mid U\right)$. By Campbell's theorem,
+\[
+\E\!\left(\mustar(\X) \mid U\right) = \int_{(0,\infty)\times\X}s\,\mathrm{d}\tilde{\nu}^*(s,x).
+\]
+So,
+\begin{align*}
+    \E\!\left(\mustar(\X) \mid U\right) & = \int_{(0,\infty)\times\X}s\frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Us}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x)
+    + \int_{(0,\infty)\times\X}s\frac{e^{-Us}}{s}\,\mathrm{d}s\sum_{i = 1}^k(n_i - \sigma)\,\mathrm{d}\delta_{x_i^*}(x) \\
+    & = \frac{\sigma}{\Gamma(1-\sigma)}\int_0^\infty s^{-\sigma} e^{-Us}\,\mathrm{d}s + (n-k\sigma)\int_0^\infty e^{-Us}\,\mathrm{d}s \\
+    & = \frac{\sigma}{\Gamma(1-\sigma)} \frac{\Gamma(1-\sigma)}{U^{1-\sigma}} + \frac{n - k\sigma}{U} \\
+    & = \frac{\sigma U^\sigma}{U} + \frac{n - k\sigma}{U} = \frac{C}{U},
+\end{align*}
+where $C = C(\sigma, n, k, U) = \sigma U^\sigma + n - k\sigma$.
+
+Plugging this into the scaling formula, we obtain the scaled L\'evy intensity of the latent CRM:
+\begin{align*}
+    \mathrm{d}\tilde{\nu}^*_{S}(s,x) &= \frac{C}{U}\,\mathrm{d}\rho^1\!\left(\frac{C}{U}s \right)\mathrm{d}P_0(x) +
+    \frac{C}{U}\,\mathrm{d}\rho^2\!\left(\frac{C}{U}s \right)\sum_{i = 1}^k(n_i-\sigma)\,\mathrm{d}\delta_{x_i^*}(x) \\
+    & = \frac{C}{U}\frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{C^{1+\sigma}s^{1+\sigma}}U^{1+\sigma}\,\mathrm{d}s\,\mathrm{d}P_0(x)
+    + \frac{e^{-Cs}}{s}\,\mathrm{d}s \sum_{i = 1}^k(n_i-\sigma)\,\mathrm{d}\delta_{x_i^*}(x) \\
+    & = \frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\left(\frac{U}{C} \right)^\sigma\,\mathrm{d}s\,\mathrm{d}P_0(x) 
+    +\frac{e^{-Cs}}{s}\,\mathrm{d}s\sum_{i=1}^k (n_i - \sigma)\,\mathrm{d}\delta_{x_i^*}(x).
+\end{align*}
+The above expression is not yet in canonical form; we wish to express it as a product of a transition kernel for jumps and a density for atoms.
+
+Note that
+\[
+\mathcal{M}_1\!\left(\tilde{\nu}^*_{S}\right) = \int_{(0, \infty)\times \X}s\,\mathrm{d}\tilde{\nu}^*_{S}(s,x) = 1,
+\]
+since it is the L\'evy intensity of a scaled CRM. The measure $s\,\mathrm{d}\tilde{\nu}^*_{S}$ can therefore be disintegrated as
+\[
+s\,\mathrm{d}\tilde{\nu}^*_{S}(s,x) = \mathrm{d}\varrho_x(s)\,\mathrm{d}Q(x),
+\]
+where $Q$ is the second marginal of $s\,\mathrm{d}\tilde{\nu}^*_{S}$ and $\varrho_x$ is the probability transition kernel.
+
+Since
+\[
+Q(\X) = \int_{(0,\infty)\times \X}s\,\mathrm{d}\tilde{\nu}^*_{S}(s,x) = 1,
+\]
+$Q$ is a probability measure. It follows that
+\[
+\mathrm{d}\tilde{\nu}^*_{S}(s,x) = \frac{1}{s}\,\mathrm{d}\varrho_x(s)\,\mathrm{d}Q(x).
+\]
+To find the terms in this decomposition, we first determine $Q$. For $A \in \mathcal{B}(\X),$
+\begin{align*}
+    Q(A) &= \int_{(0,\infty)\times A}s\,\mathrm{d}\tilde{\nu}^*_{S}(s,x) \\
+    & = \frac{\sigma}{\Gamma(1-\sigma)}\left( \frac{U}{C} \right)^\sigma P_0(A) \int_0^\infty s^{-\sigma}e^{-Cs}\,\mathrm{d}s
+    + \sum_{i = 1}^k (n_i - \sigma) \delta_{x_i^*}(A) \int_0^\infty e^{-Cs}\,\mathrm{d}s \\
+    &= \frac{\sigma}{\Gamma(1-\sigma)}\left( \frac{U}{C}\right)^\sigma P_0(A) \frac{\Gamma(1-\sigma)}{C^{1-\sigma}}
+    + \frac{1}{C} \sum_{i = 1}^k(n_i - \sigma)\delta_{x_i^*}(A) \\
+    & = \frac{\sigma U^\sigma}{C} P_0(A) + \frac{1}{C}\sum_{i = 1}^k (n_i - \sigma) \delta_{x_i^*}(A).
+\end{align*}
+We denote
+\[
+P_0^*(\cdot) = \frac{\sigma U^\sigma}{C} P_0(\cdot) + \frac{1}{C}\sum_{i = 1}^k (n_i - \sigma) \delta_{x_i^*}(\cdot).
+\]
+It remains to determine $\varrho_x$, which must satisfy
+\[
+\frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{\sigma+1}}\left( \frac{U}{C} \right)^\sigma\,\mathrm{d}s\,\mathrm{d}P_0(x) +
+\frac{e^{-Cs}}{s}\,\mathrm{d}s\sum_{i = 1}^k(n_i - \sigma)\,\mathrm{d}\delta_{x_i^*}(x) = \frac{1}{s}\,\mathrm{d}\varrho_x(s)\,\mathrm{d}P^*_0(x).
+\]
+Since $P_0$ is non-atomic, we obtain
+\[
+\mathrm{d}\varrho_x(s) = \frac{C^{1-\sigma}}{\Gamma(1-\sigma)}s^{-\sigma}e^{-Cs}\mathbf{1}_{\X \setminus\{x_1^*,\dots, x_k^*\}}(x)\,\mathrm{d}s +
+Ce^{-Cs}\mathbf{1}_{\{x_1^*,\dots, x_k^*\}}(x)\,\mathrm{d}s.
+\]
+The conclusion follows by setting
+\[
+\mathrm{d}\rho_x^*(s) = \frac{1}{s}\mathrm{d}\varrho_x(s) = \frac{C^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\mathbf{1}_{\X \setminus\{x_1^*,\dots, x_k^*\}}(x)\,\mathrm{d}s + C\frac{e^{-Cs}}{s}\mathbf{1}_{\{x_1^*,\dots, x_k^*\}}(x)\,\mathrm{d}s.
+\]
+\end{proof}
+
+
+We are now ready to study the merging between the Pitman--Yor and Dirichlet processes.
+\begin{proposition}\label{proposition:distance_pitmanyor_gamma}
+    Let $\tilde{\mu}^1$ be a Pitman--Yor CRM with parameters $(\sigma, \theta, P_0)$ and let $\tilde{\mu}^2$ be a Gamma CRM with parameters $(\alpha, 1, P_0)$. Then
+    \[
+    \wad\left( \law\left(\tilde{\nu}^{*,1}_{S}\right),  \law\left(\tilde{\nu}^{*,2}_{S}\right) \right) = \E_U\!\left(\mathcal{A}^U + J_1^U + J_2^U \right),
+    \]
+    where
+    \begin{align*}
+        & \mathcal{A}^U = \wtr\left( \frac{\sigma U^\sigma}{C}P_0 + \frac{1}{C}\sum_{i = 1}^{k_n}(n_i - \sigma)\delta_{x_i^*}, \frac{\alpha}{\alpha + n}P_0 + \frac{1}{\alpha + n}\sum_{i = 1}^n \delta_{x_i}\right), \\
+        & J_1^U = \frac{\sigma U^\sigma}{C}\wext\left( \frac{C^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\,\mathrm{d}s, (\alpha+n)\frac{e^{-(\alpha+n)s}}{s}\,\mathrm{d}s\right), \\
+        & J_2^U = \frac{n - k\sigma}{C}\wext\left( \frac{Ce^{-Cs}}{s}\,\mathrm{d}s, (\alpha + n)\frac{e^{-(\alpha+n)s}}{s}\,\mathrm{d}s\right),
+    \end{align*}
+    where $U$ and $C$ are as defined in Proposition~\ref{proposition:posterior_pitmanyor}.
+\end{proposition}
+\begin{proof}
+    Denote by $\tilde{\nu}^{*,2}_{S}$ the L\'evy intensity of the scaled Gamma posterior; its derivation can be found in the proof of Lemma~12 in \cite{catalano2023merging}, and it has the following form:
+    \[
+    \mathrm{d}\tilde{\nu}^{*,2}_{S}(s,x) = (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\left( \frac{\alpha}{\alpha + n}\,\mathrm{d}P_0(x) + \frac{1}{\alpha + n}\sum_{i = 1}^n \mathrm{d}\delta_{x_i}(x) \right).
+    \]
+    Note that the scaled Gamma posterior is no longer a Cox CRM. Since it is homogeneous, Remark~\ref{remark:adapted_extwas_homogeneous_crms} gives
+    \begin{align*}
+    \wad\left( \law\left(\tilde{\nu}^{*,1}_{S}\right),  \law\left(\tilde{\nu}^{*,2}_{S}\right) \right) &= \E_{U \sim f_U}\!\left[\ad\!\left(\tilde{\nu}^{*,1}_{S}, \tilde{\nu}^{*,2}_{S}\right)\right] \\
+    &= \E_{U \sim f_U}\wtr\!\left(P_0^{*,1}, P_0^{*,2} \right) + \E_{U \sim f_U}\E_{X \sim P_0^{*,1}}\wext\!\left(\rho_X^{*,1} , \rho^{*,2}\right),
+    \end{align*}
+    where
+    \begin{align*}
+        & \mathrm{d}\rho_x^{*,1}(s) = \frac{C^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\mathbf{1}_{\X \setminus\{x_1^*,\dots, x_k^*\}}(x)\,\mathrm{d}s 
+        + C\frac{e^{-Cs}}{s}\mathbf{1}_{\{x_1^*,\dots, x_k^*\}}(x)\,\mathrm{d}s, \\
+        & \mathrm{d}\rho^{*,2}(s) = (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s, \\
+        & P_0^{*,1}(\cdot) = \frac{\sigma U^\sigma}{C} P_0(\cdot) + \frac{1}{C}\sum_{i = 1}^k (n_i - \sigma) \delta_{x_i^*}(\cdot), \\
+        & P_0^{*,2}(\cdot) = \frac{\alpha}{\alpha + n} P_0(\cdot) + \frac{1}{\alpha + n}\sum_{i = 1}^n \delta_{x_i}(\cdot).
+    \end{align*}
+    The first term is
+    \[
+    \E_{U \sim f_U}\wtr\!\left(\frac{\sigma U^\sigma}{C}P_0 + \frac{1}{C}\sum_{i = 1}^{k_n}(n_i - \sigma) \delta_{x_i^*},
+                         \frac{\alpha}{\alpha + n}P_0 + \frac{1}{\alpha + n}\sum_{i = 1}^n\delta_{x_i}\right) = \E_{U \sim f_U} \mathcal{A}^U.
+    \]
+    The second term is
+    \begin{align*}
+        \E_{U \sim f_U}\E_{X \sim P_0^{*,1}}\wext\!\left(\rho_X^{*,1} , \rho^{*,2}\right) & = \E_{U \sim f_U} \frac{\sigma U^\sigma}{C}\E_{X \sim P_0}\wext\!\left(\rho_X^{*,1} , \rho^{*,2} \right)
+        + \E_{U \sim f_U}\frac{1}{C}\sum_{i = 1}^{k_n} (n_i - \sigma)\wext\!\left(\rho_{x_i^*}^{*,1} , \rho^{*,2} \right) \\
+        & =  \E_{U \sim f_U} \frac{\sigma U^\sigma}{C}\wext\!\left(\frac{C^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\,\mathrm{d}s,
+                (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\right) \\
+        & \quad +  \E_{U \sim f_U} \frac{n-k\sigma}{C}\wext\!\left( \frac{Ce^{-Cs}}{s}\,\mathrm{d}s, (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\right) \\
+        & = \E_{U \sim f_U} J_1^U + \E_{U \sim f_U} J_2^U.
+    \end{align*}
+\end{proof}
+
+\begin{theorem}\label{theorem:merging_pitmanyor_gamma}
+    Let $\tilde{\mu}^1$ and $\tilde{\mu}^2$ be as in Proposition~\ref{proposition:distance_pitmanyor_gamma} and let $(x_n)_{n\geq 1}$ be any sequence in $\X$.
+    Then, as $n \to \infty,$
+    \[
+    \wad\!\left( \law\left(\tilde{\nu}^{*,1}_{S}\right),  \law\left(\tilde{\nu}^{*,2}_{S}\right) \right) \asymp \frac{k_n}{n}.
+    \]
+    In particular, $\wbl\!\left( \law\left(\tilde{\mu}^{*,1}_{S}\right), \law\left(\tilde{\mu}^{*,2}_{S}\right) \right)\lesssim \frac{k_n}{n}.$
+
+\end{theorem}
+\begin{proof}
+    First, note that the $\wbl$ bound follows from Theorem~6 of \cite{catalano2023merging}.
+
+    From now on, we attach the subscript $n$ to $k$, $U$, and $C$, writing $k_n$, $U_n$, and $C_n$. Recall that $U_n$ has density function $f_U(u) = \frac{\sigma}{\Gamma\left(k_n+\frac{\theta}{\sigma}\right)} u^{\theta + k_n\sigma - 1}e^{-u^\sigma}\mathbf{1}_{(0,\infty)}(u)$. By the change of variables $y = u^\sigma$, the random variable $U_n^\sigma \sim \mathrm{Gamma}\left(k_n + \frac{\theta}{\sigma}, 1\right)$.
+
+    In view of Proposition~\ref{proposition:distance_pitmanyor_gamma}, we study the behaviour of each term in $\E_U\left(J_1^{U_n} + J_2^{U_n} + \mathcal{A}^{U_n}\right)$.
+    \begin{itemize}
+        \item First term: $\E_{U_n} J_1^{U_n}$.
+    \end{itemize}
+    Recall that
+    \[
+    J_1^{U_n} = \frac{ \sigma U_n^\sigma}{C_n}\wext\left( \frac{C_n^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-C_ns}}{s^{1+\sigma}}\mathrm{d}s, (\alpha+n)\frac{e^{-(\alpha+n)s}}{s}\mathrm{d}s\right) =  \frac{ \sigma U_n^\sigma}{C_n} W_n,
+    \]
+    where $C_n = \sigma U_n^\sigma + n - k_n\sigma$ and
+    \[
+    W_n = \wext\left( \frac{C_n^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-C_ns}}{s^{1+\sigma}}\mathrm{d}s, (\alpha+n)\frac{e^{-(\alpha+n)s}}{s} \mathrm{d}s\right).
+    \]
+
+    We first establish an upper bound for the expected value.
+
+    The extended Wasserstein distance satisfies
+    \begin{align*}
+        W_n &=
+        \int_0^\infty \left| \int_s^\infty \frac{C_n^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-C_nt}}{t^{1+\sigma}}\mathrm{d}t -
+        \int_s^\infty (\alpha+n)\frac{e^{-(\alpha+n)t}}{t} \mathrm{d}t \right| \mathrm{d}s\\
+        & \leq \int_0^\infty  \int_s^\infty \frac{C_n^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-C_nt}}{t^{1+\sigma}}\mathrm{d}t\,\mathrm{d}s +
+        \int_0^\infty\int_s^\infty (\alpha+n)\frac{e^{-(\alpha+n)t}}{t} \mathrm{d}t\,\mathrm{d}s \\
+        & \leq \int_0^\infty s \frac{C_n^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-C_ns}}{s^{1+\sigma}}\mathrm{d}s +
+        \int_0^\infty s  (\alpha+n)\frac{e^{-(\alpha+n)s}}{s} \mathrm{d}s,
+    \end{align*}
+    where the last inequality follows from Fubini's theorem. Since both integrals equal $1$, we conclude that $W_n \leq 2$.
+
+    Note also that
+    \[
+    \frac{\sigma U_n^\sigma}{C_n} = \frac{\sigma U_n^\sigma}{\sigma U_n^\sigma + n - k_n\sigma} \leq \frac{\sigma}{1-\sigma}\frac{U_n^\sigma}{n}.
+    \]
+    Taking expectations, we obtain
+    \[
+    \E \frac{\sigma U_n^\sigma}{C_n} \leq \frac{\sigma}{1-\sigma}\frac{k_n + \frac{\theta}{\sigma}}{n}.
+    \]
+    Therefore,
+    \[
+    \E J_1^{U_n} \leq 2\frac{\sigma}{1-\sigma}\frac{k_n + \frac{\theta}{\sigma}}{n},
+    \]
+    implying that $\E J_1^{U_n}\lesssim \frac{k_n}{n}.$
+
+    We now turn to the lower bound. To this end, we distinguish two cases:
+    \[
+    \sup k_n < \infty \quad \text{and} \quad \sup k_n = \infty.
+    \]
+    \begin{itemize}
+        \item Case: $\sup k_n < \infty$
+    \end{itemize}
+    Since $k_n$ is a nondecreasing sequence of integers, there exists $N \geq 1$ such that $k_n = k$ for all $n \geq N$, where $k = \sup k_n$. This implies that for all $n \geq N$,
+    \[
+    U_n^\sigma \sim \mathrm{Gamma}\left(k +\frac{\theta}{\sigma},1\right).
+    \]
+    Let $p \in (0,1)$ and $t_1 < t_2$ be such that for all $n \geq N$,
+    \[
+    \mathbb{P}\left(t_1 < U_n^\sigma < t_2\right) = p.
+    \]
+    Denote $A_n = \left\{ t_1 < U_n^\sigma < t_2 \right\}$. Then on $A_n$,
+    \[
+    \frac{\sigma U_n^\sigma}{C_n} = \frac{\sigma U_n^\sigma}{\sigma U_n^\sigma + n - k_n\sigma} \geq \frac{t_1 \sigma}{t_2 \sigma + n - k_n\sigma}.
+    \]
+    We now obtain a positive lower bound for $W_n$ on the set $A_n$.
+
+    \begin{align*}
+        \wext\Bigg(\frac{C_n^{1-\sigma}}{\Gamma(1-\sigma)}&\frac{e^{-C_ns}}{s^{1+\sigma}}\mathrm{d}s,
+                  (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\mathrm{d}s\Bigg)  \\
+        & =\int_0^\infty \left| \int_s^\infty \frac{C_n^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-C_nt}}{t^{1+\sigma}}\mathrm{d}t - \int_s^\infty (\alpha + n)\frac{e^{-(\alpha + n)t}}{t}\mathrm{d}t\right|\mathrm{d}s \\
+        & = \int_0^\infty \left|\int_{C_ns}^\infty \frac{C_n^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-y}}{y^{1+\sigma}}C_n^{1+\sigma} \frac{1}{C_n}\mathrm{d}y -
+        \int_{(\alpha+n)s}^\infty (\alpha + n) \frac{e^{-y}}{y}\mathrm{d}y\right|\mathrm{d}s \\
+        & = \int_0^\infty \left| \frac{C_n}{\Gamma(1-\sigma)}\Gamma\left(-\sigma, C_ns\right) - (\alpha + n)\Gamma(0, (\alpha + n)s)\right|\mathrm{d}s,
+    \end{align*}
+    where $\Gamma(z,t) = \int_t^\infty x^{z-1}e^{-x}\,\mathrm{d}x$ denotes the incomplete gamma function.
+
+    By the change of variables $t = C_ns$, the last expression reduces to
+    \[
+    \int_0^\infty \left| \frac{\Gamma(-\sigma, t)}{\Gamma(1-\sigma)}- \frac{\alpha + n}{C_n}\Gamma\left( 0, \frac{\alpha + n}{C_n}t\right)\right|\mathrm{d}t.
+    \]
+    Note that on $A_n$,
+    \[
+    \frac{n}{t_2\sigma + n}\leq \frac{\alpha + n}{\sigma U_n^\sigma + n - k_n \sigma} \leq \frac{\alpha + n}{t_1 \sigma + n(1-\sigma)},
+    \]
+    implying that there exists $N' \geq N$ such that for all $n \geq N'$, on $A_n$, we have $\frac{\alpha + n}{C_n} \in \left[\frac{1}{2},c^*\right]$ for some $c^* \in \left(1,\frac{1}{1-\sigma}\right)$.
+    Define the function $F : (0,\infty) \to \R$,
+    \[
+    F(r) = \int_0^\infty \left| \frac{\Gamma(-\sigma, t)}{\Gamma(1-\sigma)}- r\Gamma\left( 0, rt\right)\right|\mathrm{d}t.
+    \]
+    The function $F$ is continuous. We wish to show that $F$ is bounded below by a positive constant on $\left[\frac{1}{2},c^*\right]$, which will allow us to deduce that $W_n$ is bounded below on $A_n$.
+
+    Suppose that $F(r) = 0$ for some $r \in \left(\frac{1}{2}, c^*\right)$. Since the integrand is continuous, it follows that for every $t \in (0,\infty)$,
+    \[
+    \left| \frac{\Gamma(-\sigma, t)}{\Gamma(1-\sigma)}- r\Gamma\left( 0, rt\right)\right| = 0.
+    \]
+    Hence,
+    \[
+    \frac{\Gamma(-\sigma, t)}{\Gamma(1-\sigma)} = r \Gamma(0, rt).
+    \]
+    Differentiating with respect to $t$, we obtain, for all $t > 0$,
+    \[
+    -\frac{t^{-(1+\sigma)}e^{-t}}{\Gamma(1-\sigma)} = -r^2 (rt)^{-1}e^{-rt},
+    \]
+    that is,
+    \[
+    t^{-\sigma}e^{t(r-1)} = r\Gamma(1-\sigma).
+    \]
+    Since the left-hand side is not constant while the right-hand side is, we obtain a contradiction. Therefore, $F(r) > 0$ for all $r \in \left[\frac{1}{2},c^*\right]$. Since $F$ is continuous, it attains its minimum on this compact interval; denote this minimum by $w > 0$. Consequently, since $\frac{\alpha + n}{C_n} \in \left[\frac{1}{2},c^*\right]$ on $A_n$, we have $W_n \geq w$ on $A_n$.
+
+    Combining the above,
+    \[
+    \E J_1^{U_n} = \E \frac{\sigma U_n^\sigma W_n}{C_n} \geq \E \frac{\sigma U_n^\sigma W_n}{C_n}\mathbf{1}_{A_n} \geq \frac{t_1 \sigma}{t_2 \sigma + n-k_n\sigma}\,w\,p
+    \]
+    for $n \geq N'$. Together with the upper bound, we deduce that $\E J_1^{U_n} \asymp \frac{1}{n}$.
+
+    \begin{itemize}
+        \item Case: $\sup k_n = \infty$
+    \end{itemize}
+    Our strategy is to show that $\frac{n}{k_n}J_1^{U_n}$ converges in probability to a positive constant and is uniformly integrable. This will yield $L^1$ convergence and allow us to bound the expectation asymptotically.
+
+    We begin by establishing the $L^1$ convergence of $\frac{U_n^\sigma}{k_n}$ to $1$.
+    \[
+    \E \left| \frac{U_n^\sigma}{k_n} - 1\right|^2 = \E \left| \frac{U_n^\sigma-k_n}{k_n}\right|^2 = \E \left| \frac{U_n^\sigma - \E U_n^\sigma + \frac{\theta}{\sigma}}{k_n}\right|^2 = \frac{\var(U_n^\sigma)}{k_n^2} + \left(\frac{\frac{\theta}{\sigma}}{k_n} \right)^2.
+    \]
+    Since $\var(U_n^\sigma) = k_n + \frac{\theta}{\sigma}$, we get
+    \[
+    \lim_{n\to \infty}\E \left|\frac{U_n^\sigma}{k_n} - 1 \right|^2 = 0.
+    \]
+    Since $L^2$ convergence implies $L^1$ convergence, the desired result follows.
+
+    We now show that $\frac{n}{C_n}$ converges in probability to a positive value.
+    \[
+    \frac{n}{C_n} = \frac{n}{\sigma U_n^\sigma + n - k_n\sigma} = \frac{1}{\frac{\sigma U_n^\sigma}{n}+ 1 - \frac{k_n\sigma}{n}}.
+    \]
+    Note that if $k_n \asymp n$, then by the above, $\frac{U_n^\sigma}{k_n} \overset{P}{\to} 1$, so $\frac{\sigma U_n^\sigma}{n} - \frac{k_n\sigma}{n} \overset{P}{\to} 0$; otherwise both $\frac{U_n^\sigma}{n}$ and $\frac{k_n\sigma}{n}$ converge to $0$. In either case, the denominator converges in probability to $1$, so
+    \[
+    \frac{n}{C_n} \overset{P}{\to} 1.
+    \]
+
+    We now establish the convergence in probability of $W_n$. As shown above,
+    \[
+    W_n = \int_0^\infty \left| \frac{\Gamma(-\sigma, t)}{\Gamma(1-\sigma)}- \frac{\alpha + n}{C_n}\Gamma\left( 0, \frac{\alpha + n}{C_n}t\right)\right|\mathrm{d}t.
+    \]
+    Since $\frac{n}{C_n}$ converges in probability, so does $\frac{\alpha+n}{C_n}$. By the continuous mapping theorem, the last expression converges in probability to
+    \[
+    \int_0^\infty \left| \frac{\Gamma(-\sigma, t)}{\Gamma(1-\sigma)} - \,\Gamma(0,t) \right|\mathrm{d}t>0.
+    \]
+    
+
+    We have thus shown that $\frac{n}{k_n}J_1^{U_n}$ converges in probability to some positive constant $c$. We now establish uniform integrability. Using $W_n \leq 2$ and $C_n \geq n - k_n\sigma$,
+    \[
+    \frac{n}{k_n}\frac{\sigma U_n^\sigma}{C_n} W_n \leq 2\frac{n\sigma U_n^\sigma}{k_n(n-k_n\sigma)}\leq \frac{n \sigma U_n^\sigma}{k_n n(1-\sigma)} = \frac{\sigma}{1-\sigma}\frac{U_n^\sigma}{k_n}.
+    \]
+    Since the last term converges in $L^1$, we obtain uniform integrability.
+
+    Therefore,
+    \[
+    \E \frac{n}{k_n}J_1^{U_n} \to c,
+    \]
+    from which we deduce that $\E J_1^{U_n} \asymp \frac{k_n}{n}$.
+
+   
+    \begin{itemize}
+        \item Second term: $\E_{U_n} J_2^{U_n}$.
+    \end{itemize}
+    Note that 
+    \[
+    \frac{n-k_n\sigma}{C_n} = \frac{n-k_n\sigma}{ \sigma U_n^\sigma + n - k_n\sigma} \leq \frac{n-k_n\sigma}{n-k_n\sigma} = 1.
+    \]
+    It therefore suffices to bound the extended Wasserstein distance.
+    \begin{align*}
+    \wext\Bigg( C_n\frac{e^{-C_ns}}{s}\mathrm{d}s, & (\alpha + n)\frac{e^{-(\alpha +n)s}}{s}\mathrm{d}s\Bigg) \\
+    & = \int_0^\infty \left| \int_s^\infty C_n \frac{e^{-C_nt}}{t}\mathrm{d}t - \int_s^\infty (\alpha + n)\frac{e^{-(\alpha +n)t}}{t}\mathrm{d}t\right|\mathrm{d}s \\ 
+    & = \int_0^\infty \left| \int_{C_ns}^\infty C_n \frac{e^{-y}}{y}\mathrm{d}y - \int_{(\alpha+n)s}^\infty (\alpha + n)\frac{e^{-y}}{y}\mathrm{d}y\right|\mathrm{d}s\\
+    & = \int_0^\infty \left| C_n\Gamma\left(0,C_ns\right) - (\alpha + n)\Gamma(0, (\alpha + n)s) \right|\mathrm{d}s \\
+    & = J\left(C_n-n,\alpha, n\right),
+    \end{align*}
+    where $J\left(\alpha_1, \alpha_2,n\right)$ is defined as
+    \[
+    J\left(\alpha_1, \alpha_2, n\right) = \int_0^\infty \left| (\alpha_1 + n)\Gamma(0,(\alpha_1 + n)s) - (\alpha_2+n)\Gamma(0,(\alpha_2 +n)s) \right|\mathrm{d}s.
+    \] 
+    By point~2 of Proposition~14 in \cite{catalano2023merging}, we have that for every $n \geq 1,$
+    \[
+    J\left(C_n - n, \alpha, n\right) \leq c \max\left\{ \log\left( \frac{C_n}{\alpha + n}\right), \log\left( \frac{\alpha + n}{C_n}\right)\right\},
+    \]
+    where $c  =\int_0^\infty \left| \Gamma(0, t) - e^{-t} \right|\mathrm{d}t.$
+
+    Using the fact that $\log x \leq x - 1,$ we have that 
+    \[
+    J\left(C_n - n, \alpha, n\right) \leq c \max \left\{ \frac{C_n}{\alpha + n}-1, \frac{\alpha + n}{C_n} - 1\right\}.
+    \]
+    We bound each term in the maximum separately.
+
+    \[
+    \frac{C_n}{\alpha + n} - 1 = \frac{ \sigma U_n^\sigma - k_n \sigma - \alpha}{\alpha + n} \leq  \sigma \frac{U_n^\sigma}{\alpha + n}.
+    \]
+    Since
+    \[
+    \E \frac{ \sigma U_n^\sigma}{\alpha + n} = \frac{\sigma\left(k_n + \frac{\theta}{\sigma}\right)}{\alpha + n},
+    \]
+    we have that
+    \[
+    \E \left( \frac{C_n}{\alpha + n} - 1\right) \lesssim \frac{k_n}{n}.
+    \]
+    We now bound the second term in the maximum.
+
+    
+    \[
+    \frac{\alpha + n}{C_n} - 1 = \frac{\alpha -  \sigma U_n^\sigma + k_n \sigma}{n +  \sigma U_n^\sigma - k_n \sigma}\leq
+    \frac{\alpha + k_n \sigma}{n(1- \sigma)}.
+    \]
+    Therefore,
+    \[
+    \E \left(\frac{\alpha + n}{C_n} - 1\right) \lesssim \frac{k_n}{n}.
+    \]
+    \begin{itemize}
+        \item Third term: $\mathcal{A}^{U_n}$.
+    \end{itemize}
+    Finally, we bound
+    \[
+    \mathcal{A}^{U_n} = \W_{\mathrm{d}_{\X,t}} \left( \frac{ \sigma U_n^\sigma}{C_n}P_0 + \frac{1}{C_n}\sum_{i = 1}^{k_n}(n_i - \sigma)\delta_{x_i^*}, \frac{\alpha}{\alpha + n}P_0 + \frac{1}{\alpha + n}\sum_{i = 1}^n \delta_{x_i}\right)
+    \]
+    The proof uses two convexity properties of the Wasserstein distance. The first is that for all $\lambda \in (0,1)$ and $P^1,P^2,Q^1,Q^2 \in \probx$,
+    \[
+    \wtr\left( \lambda P^1 + (1-\lambda)Q^1, \lambda P^2 + (1-\lambda)Q^2 \right) \leq \lambda \wtr(P^1,P^2) + (1-\lambda)\wtr(Q^1,Q^2).
+    \]
+    The second is that for all $\lambda \in (0,1)$ and $P,Q^1,Q^2 \in \probx$,
+    \[
+    \wtr (\lambda  P + (1-\lambda)Q^1, \lambda P + (1-\lambda)Q^2) = (1-\lambda)\wtr(Q^1,Q^2).
+    \]
+    Since both measures share $P_0$, we aim to match the coefficient of $P_0$ in order to apply the second property. Since the relative magnitudes of these coefficients are not known a priori, we consider two cases:
+    \[
+    \frac{ \sigma U_n^\sigma}{C_n} > \frac{\alpha}{\alpha + n} \quad \text{and} \quad 
+    \frac{ \sigma U_n^\sigma}{C_n} < \frac{\alpha}{\alpha + n}.
+    \]
+ 
+    We decompose the expectation over the sets where these conditions hold. As shown below, on both sets the expectations are asymptotically bounded by
+    \[
+    \frac{k_n}{n}.
+    \]
+
+    Define the set 
+    \[
+    A_n = \left\{ \frac{ \sigma U_n^\sigma}{C_n} > \frac{\alpha}{\alpha + n}\right\}.
+    \]
+    It follows that
+    \[
+    \E \mathcal{A}^U = \E \mathcal{A}^U\mathbf{1}_{A_n} + \E \mathcal{A}^U\mathbf{1}_{A^c_n}.
+    \]
+    On $A_n$, we decompose
+    \[
+    \frac{ \sigma U_n^\sigma}{C_n} P_0 = \frac{\alpha}{\alpha + n}P_0 + \left( \frac{ \sigma U_n^\sigma}{C_n} - \frac{\alpha}{\alpha + n} \right) P_0 = \frac{\alpha}{\alpha + n}P_0 + \lambda_1 P_0,
+    \]
+    where
+    \[
+    \lambda_1 = \frac{ \sigma U_n^\sigma}{C_n} - \frac{\alpha}{\alpha + n}.
+    \]    
+    Note that $\lambda_1 \in (0,1)$. Then
+    \begin{align*}
+        \wtr \Big(\frac{\alpha}{\alpha + n}&P_0 +  \frac{n}{\alpha + n} \left( \frac{\alpha + n}{n}\lambda_1 P_0 + \frac{\alpha + n}{n}\frac{n-k_n\sigma}{C_n}\sum_{i = 1}^{k_n}\frac{\left(n_i - \sigma\right)}{n-k_n\sigma} \delta_{x_i^*} \right), \\
+        & \quad \frac{\alpha}{\alpha + n}P_0 + \frac{n}{\alpha + n}\sum_{i = 1}^n\frac{1}{n}\delta_{x_i}\Big) \\
+        & = \frac{n}{\alpha + n}\wtr \left( \frac{\alpha + n}{n}\lambda_1 P_0 + \frac{\alpha + n}{n}\frac{n-k_n\sigma}{C_n}\sum_{i = 1}^{k_n}\frac{\left(n_i - \sigma\right)}{n-k_n\sigma}\delta_{x_i^*}, \sum_{i = 1}^n \frac{1}{n}\delta_{x_i}\right) \\ 
+        & = \frac{n}{\alpha + n}\wtr \Big( \frac{\alpha + n}{n}\lambda_1 P_0 + \frac{\alpha + n}{n}\frac{n-k_n\sigma}{C_n}\sum_{i = 1}^{k_n}\frac{\left(n_i - \sigma \right)}{n-k_n\sigma}\delta_{x_i^*}, \\
+        & \quad \frac{\alpha + n}{n}\lambda_1\sum_{i = 1}^n\frac{1}{n}\delta_{x_i} + \frac{\alpha + n}{n}\frac{n-k_n\sigma}{C_n}\sum_{i = 1}^n\frac{1}{n}\delta_{x_i}\Big) \\
+        & \leq \lambda_1 \wtr\left(P_0, \sum_{i = 1}^n \frac{1}{n}\delta_{x_i}\right) + \lambda_2\wtr \left( \sum_{i = 1}^{k_n} \frac{(n_i-\sigma)}{n-k_n\sigma}\delta_{x_i^*},\sum_{i = 1}^n\frac{1}{n}\delta_{x_i}\right),
+    \end{align*}
+    where 
+    \[
+    \lambda_2 = \frac{n - k_n \sigma}{C_n}.
+    \]
+    We have shown that
+    \[
+    \E \mathcal{A}^{U_n}\mathbf{1}_{A_n} \leq \E \left[ \mathbf{1}_{A_n}\lambda_1 \wtr\left(P_0, \sum_{i = 1}^n \frac{1}{n}\delta_{x_i}\right) +  \mathbf{1}_{A_n}\lambda_2\wtr \left( \sum_{i = 1}^{k_n} \frac{(n_i-\sigma)}{n-k_n\sigma}\delta_{x_i^*},\sum_{i = 1}^n\frac{1}{n}\delta_{x_i}\right) \right].
+    \]
+    In the first term inside the expectation, since $d_{\X,t} \leq 2$ we can bound the Wasserstein distance by $2$ and $\lambda_1$ by $\frac{ \sigma U_n^\sigma}{C_n}$. Hence,
+    \[
+    \E \left[ \mathbf{1}_{A_n}\lambda_1 \wtr\left(P_0, \sum_{i = 1}^n \frac{1}{n}\delta_{x_i}\right)\right]\leq \E \frac{ \sigma U_n^\sigma}{C_n} \leq \frac{\sigma}{1-\sigma}\frac{k_n + \frac{\theta}{\sigma}}{n},
+    \]
+    so this term is asymptotically bounded by $\frac{k_n}{n}$.
+    
+    We now bound
+    \[
+    \E \left[\mathbf{1}_{A_n}\lambda_2\wtr \left( \sum_{i = 1}^{k_n} \frac{(n_i-\sigma)}{n-k_n\sigma}\delta_{x_i^*},\sum_{i = 1}^n\frac{1}{n}\delta_{x_i}\right)\right].
+    \]
+    Since $C_n \geq n - k_n\sigma$, we have $\lambda_2 \leq 1$, and the Wasserstein distance does not depend on $U_n$. Note also that $\sum_{i = 1}^n \frac{1}{n}\delta_{x_i} = \sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*}$. Since we can decompose
+    \[
+    \sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*} = \sum_{i = 1}^{k_n} \frac{n_i-\sigma}{n}\delta_{x_i^*} + \sum_{i = 1}^{k_n} \frac{\sigma}{n}\delta_{x_i^*} = 
+    \frac{n-k_n\sigma}{n}\sum_{i = 1}^{k_n} \frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*} + \frac{k_n \sigma}{n}\sum_{i = 1}^{k_n}\frac{1}{k_n} \delta_{x_i^*},
+    \]
+    applying the convexity of the Wasserstein distance, we obtain
+    \begin{align*}
+        \wtr\Bigg( \sum_{i = 1}^{k_n} \frac{(n_i-\sigma)}{n-k_n\sigma}&\delta_{x_i^*},\sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*}\Bigg) = \\
+        & = \wtr \Bigg( \frac{n-k_n\sigma}{n}\sum_{i = 1}^{k_n} \frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*} + \frac{k_n \sigma}{n}\sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma} \delta_{x_i^*}, \\ 
+        & \quad  \frac{n-k_n\sigma}{n}\sum_{i = 1}^{k_n} \frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*} + \frac{k_n \sigma}{n}\sum_{i = 1}^{k_n}\frac{1}{k_n} \delta_{x_i^*}\Bigg) \\
+        & = \frac{k_n \sigma}{n} \wtr\left( \sum_{i = 1}^{k_n} \frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, \sum_{i = 1}^{k_n}\frac{1}{k_n}\delta_{x_i^*}\right) \\
+        & \leq 2 \frac{k_n\sigma}{n}.
+    \end{align*}
+    We conclude that $\E \mathcal{A}^U \mathbf{1}_{A_n} \lesssim \frac{k_n}{n}.$
+
+    Now suppose we are on $A_n^c$. We decompose
+    \[
+    \frac{\alpha}{\alpha + n}P_0 = \frac{ \sigma U_n^\sigma}{C_n}P_0 + \left( \frac{\alpha}{\alpha + n}- \frac{ \sigma U_n^\sigma}{C_n}\right) P_0.
+    \]
+    Define
+    \[
+    \lambda_1' = \frac{\alpha}{\alpha + n} - \frac{\sigma U_n^\sigma}{C_n}.
+    \]
+    Note that, on $A_n^c$, $\lambda_1' \in (0,1)$. On $A_n^c$,
+    \begin{align*}
+        \wtr \Bigg( \frac{ \sigma U_n^\sigma}{C_n}P_0 & + \frac{n - k_n\sigma}{C_n}\sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, \\
+        & \quad \frac{ \sigma U_n^\sigma}{C_n}P_0 + \frac{n - k_n\sigma}{C_n}\left( \frac{C_n}{n - k_n\sigma}\lambda_1'P_0 + \frac{C_n}{n-k_n\sigma}\frac{n}{\alpha + n}\sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*}\right) \Bigg) \\
+        & = \frac{n - k_n\sigma}{C_n}\wtr \left( \sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, 
+        \frac{C_n}{n - k_n\sigma}\lambda_1'P_0 + \frac{C_n}{n - k_n\sigma}\frac{n}{\alpha + n}\sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*}\right) \\
+        & \leq \lambda_1'\wtr\left( \sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, P_0\right) + \frac{n}{\alpha + n}\wtr \left(\sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n \sigma}\delta_{x_i^*}, \sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*} \right).
+    \end{align*}
+    Since $\lambda_1' \leq \frac{\alpha}{\alpha + n}$, the first term is asymptotically bounded by $\frac{k_n}{n}$. As we have already bounded the second Wasserstein distance, we deduce that $\E \mathcal{A}^U \mathbf{1}_{A_n^c} \lesssim \frac{k_n}{n}.$
+\end{proof}
