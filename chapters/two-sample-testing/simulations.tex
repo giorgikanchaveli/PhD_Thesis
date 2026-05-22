@@ -1,7 +1,7 @@
-\section{Simulation studies}\label{section::simulations}
+\section{Simulation Studies}\label{section:simulations}
 In this section, we examine the finite-sample performance of the proposed HIPM and WoW testing procedures. Our numerical analysis is organized into three primary components. First, we investigate the validity of the permutation-based test by evaluating the Type I error rate and statistical power of both HIPM and WoW using a synthetic dataset. Second, we compare our methods with those existing in the literature. Finally, we demonstrate the practical utility of the proposed framework through an application to a mortality dataset.
 
-\subsection{Empirical comparison between HIPM and WoW}
+\subsection{Empirical Comparison Between HIPM and WoW}\label{subsection:hipm_wow_comparison}
 
 We compare the use of the HIPM and WoW within our permutation-based test by analysing the Type I error, the power, and the ROC curves in several simulated settings, taking into account both parametric and nonparametric data-generating processes, both in settings that satisfy the assumptions of Theorem~\ref{th:perm_consistency_dlip} for asymptotic guarantees, and settings that do not satisfy them, notably $\X = \R$, but are still interesting in practice. We consider the following baselines for parametric and nonparametric models.
 \begin{enumerate}
@@ -49,7 +49,7 @@ As before, we sample the observations $S= 1000$ times, perform our permutation-b
 \MC{Not for now but to keep in mind for the future: After looking at the results pick one relevant setting and add sensitivy analysis for $n,m,n_{perm}$, changing one at a time in the set $\{50,100,150, 200\}$. Put results in appendix and refer to them to justify your choices. }
 
 
-\subsection{Synthetic data}
+\subsection{Synthetic Data}\label{subsection:synthetic_data}
 
 
 
@@ -161,7 +161,7 @@ As observed in the Figure \ref{figure::counterexample}, since the two distributi
 
 To conclude, although the Fr\'echet test can exhibit higher power than the other testing schemes in certain settings, its main limitation is that it fails to detect the difference when the laws of RPMs are not fully characterized by the Fr\'echet mean and variance. The Energy test, as well as permutation tests based on HIPM or WoW, mitigate this limitation. Moreover, HIPM and WoW may be preferable to the Energy test in practice, since the underlying metric space—in our case, the space of probability measures—may fail to be of negative type, or this property may be difficult to verify.
 
-\subsection{Mortality data}\label{subsection::mortality_data}
+\subsection{Mortality Data}\label{subsection:mortality_data}
 
 We apply our proposed testing scheme to human mortality data available from the Human Mortality Database (https://www.mortality.org/). The dataset contains period life tables for various countries and years. A period life table is constructed by estimating age-specific mortality rates from deaths and exposures in a given year $t$, which are then used to derive the age-at-death distribution for a hypothetical cohort. 
 

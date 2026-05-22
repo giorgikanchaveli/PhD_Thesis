@@ -1,4 +1,4 @@
-\section{Hierarchical sampling and exchangeability}\label{sec::hier_sampling}
+\section{Hierarchical Sampling and Exchangeability}\label{section:hierarchical_sampling}
 
 
 
@@ -47,7 +47,7 @@ Q^1 = Q^2 \quad \text{if and only if} \quad P^{1,(m)} = P^{2,(m)}.
 \]
 This indeed holds true for any $Q^1, Q^2$ for a sufficiently large $m$ (see Lemma \ref{lemma::finite_exchseq_equivalent_infinite_exchseq}).
 
-As noted above, hierarchical samples $\mathbf{X}_{n,m} \sim Q^1$ and $\mathbf{Y}_{n,m} \sim Q^2$ are used to decide whether $Q^1 = Q^2$. We aim to develop a testing scheme inspired by the Kolmogorov-Smirnov (KS) test. Recall that in the KS test, one rejects the null hypothesis if the distance between the empirical measures of the samples exceeds a given threshold. In Section \ref{sec::distances}, we will equip the space $\probprobx$ with a distance function; for the moment, assume that $d$ defines a distance on that space. Then, we could naturally extend the idea of the KS test to our setting if we had access to the samples $\widetilde{P}^1_1, \dots, \widetilde{P}^1_n \overset{\mathrm{i.i.d.}}{\sim} Q^1$ and $\widetilde{P}^2_1, \dots, \widetilde{P}^2_n \overset{\mathrm{i.i.d.}}{\sim} Q^2$, by rejecting $H_0$ if 
+As noted above, hierarchical samples $\mathbf{X}_{n,m} \sim Q^1$ and $\mathbf{Y}_{n,m} \sim Q^2$ are used to decide whether $Q^1 = Q^2$. We aim to develop a testing scheme inspired by the Kolmogorov-Smirnov (KS) test. Recall that in the KS test, one rejects the null hypothesis if the distance between the empirical measures of the samples exceeds a given threshold. In Section \ref{section:two_sample_distances}, we will equip the space $\probprobx$ with a distance function; for the moment, assume that $d$ defines a distance on that space. Then, we could naturally extend the idea of the KS test to our setting if we had access to the samples $\widetilde{P}^1_1, \dots, \widetilde{P}^1_n \overset{\mathrm{i.i.d.}}{\sim} Q^1$ and $\widetilde{P}^2_1, \dots, \widetilde{P}^2_n \overset{\mathrm{i.i.d.}}{\sim} Q^2$, by rejecting $H_0$ if 
 \[
 d\left( \frac{1}{n}\sum_{i=1}^n \delta_{\widetilde{P}^1_i}, \frac{1}{n}\sum_{i=1}^n \delta_{\widetilde{P}^2_i}\right)
 \]
