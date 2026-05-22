@@ -1,4 +1,4 @@
-\section{Completely Random Measures}\label{section:completely_random_measures}
+\section{Completely Random Measures}\label{section:bnp_toolbox_completely_random_measures}
 
 Many Bayesian nonparametric models are constructed by first defining a random measure that need not be a probability measure and then transforming it into a probability measure. Completely random measures (CRM) provide a general framework for this construction.
 
@@ -22,7 +22,7 @@ From now on, we will write $\tilde{\mu}(A)$ instead of $\tilde{\mu}(\omega)(A)$
 A completely random measure $\tilde{\mu}$ is a random measure such that for all finite collection of mutually disjoint sets $A_1,\dots, A_n \in \mathcal{B}(\X),$ the random variables $\tilde{\mu}(A_1),\dots, \tilde{\mu}(A_n)$ are independent. 
 \end{definition}
 
-\subsection{Decomposition of Completely Random Measures}
+\subsection{Decomposition of Completely Random Measures}\label{subsection:bnp_toolbox_decomposition_crm}
 
 A key feature of completely random measures is that, despite their general definition, they admit a decomposition into simpler components. In particular, Kingman's representation theorem shows that a completely random measure can be decomposed into a deterministic part, a part supported on fixed atoms, and a purely random atomic part.
 
@@ -58,9 +58,9 @@ Since, under this representation, the CRM is completely characterized by the L\'
 \]
 for $A \in \mathcal{B}(\X)$, the fact that it takes values in $\mx$ and is measurable is guaranteed by the fact that $\N$ is a random measure.
 
-\subsection{Lévy Intensity and Laplace Functional}
+\subsection{Lévy Intensity and Laplace Functional}\label{subsection:bnp_toolbox_levy_intensity}
 
-A completely random measure, similarly to a random probability measure as discussed in \ref{section:rpm_and_exchangeability}, can be uniquely identified by its finite-dimensional distributions, that is,
+A completely random measure, similarly to a random probability measure as discussed in \ref{section:bnp_toolbox_rpm_and_exchangeability}, can be uniquely identified by its finite-dimensional distributions, that is,
 \[
 \law\left(\tilde{\mu}(A_1), \dots, \tilde{\mu}(A_k) \right),
 \]
@@ -163,7 +163,7 @@ where $P_0$ is a probability measure on $\X$ and $\rho : \X \times \mathcal{B}((
 
 
 
-\subsection{Normalization and Identifiability}\label{subsection:normalization_identifiability}
+\subsection{Normalization and Identifiability}\label{subsection:bnp_toolbox_normalization_identifiability}
 Completely random measures can be transformed into random probability measures. The transformation we consider in this chapter is normalization. In particular, for $\tilde{\mu} \sim \mathrm{CRM}(\nu)$, we consider 
 \[
 \tilde{\mu} \mapsto \frac{\tilde{\mu}}{\tilde{\mu}(\X)}.
@@ -215,7 +215,7 @@ Then the L\'evy intensity $\nu_S$ of the scaled CRM $\tilde{\mu}_S$ is given by
 
 
 
-\subsection{Posterior for Completely Random Measures}
+\subsection{Posterior for Completely Random Measures}\label{subsection:bnp_toolbox_posterior_crm}
 
 One of the main reasons for working with completely random measures is their flexibility for modelling and the tractability of the corresponding posterior distributions. We now describe the general form of the posterior distribution for CRMs, as developed in \cite{james2009posterior}. Consider the Bayesian model
 \begin{equation}\label{model:bayesian_model_crm}
@@ -315,7 +315,7 @@ We denote by $\tilde{\nu}_S$ the random L\'evy intensity associated with the sca
 
 
 %%% aq gavcherdi 
-\subsection{The Gamma Process and the Dirichlet Process}
+\subsection{The Gamma Process and the Dirichlet Process}\label{subsection:bnp_toolbox_gamma_dirichlet}
 
 We begin this subsection by describing another derivation of Dirichlet process via completely random measures.
 
@@ -364,7 +364,7 @@ Since these random variables are independent and $\tilde{\mu}(\X) = \sum_{i = 1}
 
 
 
-\subsection{The Pitman--Yor Process and Equivalences}
+\subsection{The Pitman--Yor Process and Equivalences}\label{subsection:bnp_toolbox_py_equivalences}
 
 Another widely used example of a random probability measure is the Pitman--Yor process. It can be defined in several ways: through exchangeable partition probability functions, stick-breaking processes, Poisson--Kingman processes, and CRMs. Here, we provide two definitions using the latter two approaches and show the equivalence between them.
 

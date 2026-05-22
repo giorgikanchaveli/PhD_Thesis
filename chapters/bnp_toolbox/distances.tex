@@ -1,9 +1,9 @@
-\section{Distances Between Laws of Random Measures and RPMs}
+\section{Distances Between Laws of Random Measures and RPMs}\label{section:bnp_toolbox_distances}
 
 
 In this section, we overview several ways to define distances on the laws of random probability measures and, more generally, on random measures. The distances on $\probprobx$ that are mainly used for two-sample testing are Wasserstein over Wasserstein (WoW) and the Hierarchical Integral Probability Metric (HIPM). The other distances are defined on $\mbx$ and are used to study the merging rate of opinions.
 
-\subsection{Distances on $\probprobx$}
+\subsection{Distances on $\probprobx$}\label{subsection:bnp_toolbox_distances_probprobx}
 
 We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$; it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing} and machine learning \cite{ho2017multilevel, dukler2019wasserstein}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
 
@@ -92,7 +92,7 @@ By representing both distance functions as Integral Probability Metrics, we see 
 
 
 %%%%%%
-\subsection{Distances on $\mbx$}
+\subsection{Distances on $\mbx$}\label{subsection:bnp_toolbox_distances_mbx}
 
 Differently from the previous subsection, we only assume that $\X$ is a Polish space equipped with its Borel $\sigma$-algebra $\mathcal{B}(\X)$. Our motivation for defining a distance between laws of random measures stems from the study of completely random measures. Since we will be working with CRMs taking values in the space of finite measures on $\X$, we begin by introducing a distance on the space $\mbx$.
 
@@ -127,7 +127,7 @@ As mentioned in the previous subsection, the Wasserstein distance is, in general
 
 If $\tilde{\mu}^1$ and $\tilde{\mu}^2$ are random measures with laws $Q^1$ and $Q^2$, respectively, we refer to $\wbl(\tilde{\mu}^1, \tilde{\mu}^2)$ as the distance between the random measures, with the understanding that this denotes the distance between their laws, i.e., $\wbl(Q^1, Q^2)$. For a more detailed overview of the properties of $\wbl$, see \cite{catalano2023merging}.
 
-\subsection{Distance for Completely Random Measures}
+\subsection{Distance for Completely Random Measures}\label{subsection:bnp_toolbox_distance_crm}
 
 In the previous subsection, we defined a distance between laws of random measures taking values in the space of finite measures. Although this framework also includes completely random measures, the resulting distance is generally not tractable in this setting. Since our goal is to work with distances that can be explicitly computed or bounded, we now introduce a distance tailored specifically to CRMs.
 
