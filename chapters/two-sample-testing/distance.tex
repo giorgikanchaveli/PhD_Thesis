@@ -1,0 +1,285 @@
+\section{Distances between laws of random probabilities}\label{sec::distances}
+
+% \textcolor{blue}{Overall basic idea: use a distance between probas over probas, accept if the distance between the HEM is low and reject otherwise. Write a careful description of Wasserstein over Wasserstein and HIPM. Left open: how to fix the threshold?}
+
+%polished start
+In this paper, we consider two distance functions on $\probprobx$. The first, referred to as "Wasserstein over Wasserstein," is the natural lifting of the Wasserstein distance on $\probx$; it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing} and machine learning \cite{ho2017multilevel, dukler2019wasserstein}. The second, termed the "Hierarchical Integral Probability Metric," is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein. 
+
+Recall that the sample space $\X$ is Polish with a bounded diameter. Using the distance function $d_\X$ on $\X$, one can define the Wasserstein distance on $\probx$ by
+$$
+\W_1(P^1, P^2) = \inf_{\pi \in \Gamma(P^1, P^2)} \int_{\X \times \X} d_\X(x, y) \, \pi(dx, dy), \qquad P^1, P^2 \in \probx,
+$$
+where
+$$
+\Gamma(P^1, P^2) = \left\{ \pi \in \mathcal{P}(\X^2) : \pi(A \times \X) = P^1(A), \ \pi(\X \times A) = P^2(A) \quad \forall A \in \mathcal{B}(\X) \right\}.
+$$
+Note that this is the Wasserstein distance of order $1$. Since we do not consider other Wasserstein distances, we denote it simply by $\W$ instead of $\W_1$. 
+
+In general, $\W$ is a distance function on the Wasserstein space of order $1$, defined as 
+$$
+\mathcal{P}_1(\X) = \left\{P \in \probx : \int_\X d_\X(x, x_0) P(dx) < \infty, \quad x_0 \in \X \right\}.
+$$
+Since we assume that $\X$ has a bounded diameter, all $P \in \probx$ belong to $\mathcal{P}_1(\X)$. The assumption that $\X$ is Polish and $d_{\X}$ is bounded implies that the metric space $(\probx, \W)$ is also Polish (see Remark 7.1.7 in \cite{luigi2008gradient}). Note also that $(\probx, \W)$ has a bounded diameter, as $d_{\X}$ is bounded. Therefore, instead of defining a distance function on $\mathcal{P}_1(\probx)$, we can define a distance function on $\probprobx$ using $\W$ as the ground metric: 
+
+\begin{definition}[Wasserstein over Wasserstein]
+    \label{def:wow}
+    Given $Q^1, Q^2 \in \probprobx$, the Wasserstein over Wasserstein (WoW) distance between $Q^1$ and $Q^2$ is 
+    $$
+    \WW(Q^1, Q^2) = \inf_{\pi \in \Gamma(Q^1, Q^2)} \int_{\probx^2} \W(P^1, P^2) \, \pi(dP^1, dP^2).
+    $$
+\end{definition}
+Here, $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\probx \times \probx$ with marginals $Q^1$ and $Q^2$. Again, Remark 7.1.7 in \cite{luigi2008gradient} and the fact that $\W$ has a bounded diameter imply that the metric space $(\probprobx, \WW)$ is a Polish space with a bounded diameter.
+
+The second distance function we consider is the Hierarchical Integral Probability Metric (HIPM), introduced in \cite{catalano2024hierarchical}. The primary intuition behind its definition is as follows: let $Q^1, Q^2$ be probability measures on $\probx$ and let $\widetilde{P}^1 \sim Q^1, \widetilde{P}^2 \sim Q^2$. We compute the distance between $Q^1$ and $Q^2$ by considering the distances between the random integrals $\widetilde{P}^1(f)$ and $\widetilde{P}^2(f)$, where $f$ ranges over a class of functions from $\X$ to $\R$. By considering these projections, we shift the focus from $\probprobx$ to $\mathcal{P}(\R)$, the latter of which is significantly easier to handle. As noted in \cite{catalano2024hierarchical}, such a projection is justified by the fact that for a random probability measure $\widetilde{P}$, the laws of the random integrals $\widetilde{P}(f)$, where $f$ belongs to the set of continuous and bounded functions, are sufficient to characterize the law of $\widetilde{P}$. This leads to the following definition:
+
+\begin{definition}[Hierarchical integral probability metric]
+    \label{def:hipm}
+    Given $Q^1, Q^2 \in \probprobx$, the hierarchical integral probability metric (HIPM) between $Q^1$ and $Q^2$ is defined as 
+    \[
+    d_{\F}(Q^1, Q^2) = \sup_{f \in \F} \W(\mathcal{L}(\widetilde{P}^1(f)), \mathcal{L}(\widetilde{P}^2(f))),
+    \] 
+    where $\widetilde{P}^k \sim Q^k$ for $k=1,2$ and $\F$ is a class of bounded and measurable functions from $\X$ to $\R$. 
+\end{definition}
+
+Alternatively, the HIPM can be expressed as 
+\[
+d_{\F}(Q^1, Q^2) = \sup_{f \in \F} \W(Q^1 \circ \hat{f}^{-1}, Q^2 \circ \hat{f}^{-1}),
+\]
+where $\hat{f}$ denotes the lifting of the function $f$, i.e., $\hat{f}(P) = \int_\X f \, dP$, and $Q^k \circ \hat{f}^{-1}$ is the push-forward measure.
+
+As long as the function class $\F$ is sufficiently rich, this construction defines a valid distance on $\probprobx$. Hereafter, we set $\F = \operatorname{Lip}_1(\X, \R)$ and denote the corresponding metric $d_\F$ by $\dlip$.
+
+Both distance functions possess desirable topological properties. In particular, by Theorem 3.1 in \cite{catalano2024hierarchical}, WoW metrizes weak convergence on $\probprobx$, and HIPM does the same when $\X$ is compact.
+
+There is a relation between the two distance functions; specifically, they are special cases of an Integral Probability Metric defined on a generic Polish space.
+\begin{definition}[Integral Probability Metric]
+    \label{def:ipm}
+    Let $(\mathbb{Y},d_{\mathbb{Y}})$ be a Polish space and $\mathcal{H}$ a class of bounded and measurable functions from $\mathbb{Y}$ to $\R$. The Integral Probability Metric (IPM) between $P^1, P^2 \in \mathcal{P}\left(\mathbb{Y}\right)$ is 
+    $$
+    \mathcal{I}_{\mathcal{H}}(P^1,P^2) = \sup_{f\in\mathcal{H}} \left| \int_{\mathbb{Y}} f(y) P^1(dy) - \int_{\mathbb{Y}} f(y) P^2(dy) \right|. 
+    $$
+\end{definition}
+Firstly, let us show that WoW can be written as an integral probability metric. By Remark 6.5 \cite{villani2008optimal}, if $P^1,P^2$ belong to $\mathcal{P}_1(\X)$, the Wasserstein space of order 1, the Wasserstein distance can be written as
+$$
+\W(P^1,P^2) = \sup_{f\in \text{Lip}_1(\X,\R)} \left| \int_\X f(x) P^1(dx) - \int_\X f(x) P^2(dx) \right|,
+$$
+where $\text{Lip}_1(\X,\R)$ denotes the set of $1-$Lipschitz continuous functions from $\X$ to $\R$. Since $(\probprobx, \WW)$ is a Polish space with a bounded diameter, we can use the above result to obtain, for all $Q^1,Q^2\in\probprobx$,
+\[
+\WW(Q^1,Q^2) = \sup_{f\in \text{Lip}_1(\probx,\R, \W)} \left| \int_{\probx} f(P) Q^1(dP) - \int_{\probx} f(P) Q^2(dP) \right|,
+\]
+where $\text{Lip}_1(\probx,\R, \W)$ denotes the set of $1-$Lipschitz continuous functions from $\probx$ to $\R$ with respect to $\W$.
+
+Similarly, we show that HIPM can be written as an integral probability metric. For $Q^1,Q^2 \in \probprobx$,
+\begin{align*}
+\dlip(Q^1,Q^2) &= \sup_{f\in \text{Lip}_1(\X,\R)} \W(Q^1\circ \hat{f}^{-1}, Q^2\circ \hat{f}^{-1}) \\
+&= \sup_{f\in \text{Lip}_1(\X,\R)}\sup_{g\in\lipR}\left| \int_{\R}g(x) (Q^1\circ\hat{f}^{-1})(dx) - \int_{\R}g(x) (Q^2\circ\hat{f}^{-1})(dx) \right| \\
+& = \sup_{f\in \text{Lip}_1(\X,\R)} \sup_{g\in\lipR}\left|\int_{\probx}g(\widehat{f}(P))Q^1(dP) - \int_{\probx}g(\widehat{f}(P))Q^2(dP) \right| \\
+& = \sup_{f\in \text{Lip}_1(\X,\R)}\sup_{g\in\lipR}\left|\int_{\probx}g(P(f))Q^1(dP) - \int_{\probx}g(P(f))Q^2(dP) \right| \\
+& = \sup_{h\in \D}\left|\int_{\probx}h(P)Q^1(dP) - \int_{\probx}h(P)Q^2(dP) \right|,
+\end{align*}
+where $\D = \{h:\probx\to \R: h(P) = g(P(f)), \ g\in\lipR, f\in \text{Lip}_1(\X,\R) \}$.
+
+By representing both distance functions as Integral Probability Metrics, we see that the HIPM is upper bounded by the WoW distance. Indeed, we can show that $\D$ is a subset of $\text{Lip}_1(\probx, \R, \W)$: let $h \in \mathcal{D}$ and $P^1, P^2 \in \probx$, then
+\begin{align*}
+|h(P^1) - h(P^2)| = |g(P^1(f)) - g(P^2(f))| \leq |P^1(f) - P^2(f) | &\leq \sup_{f \in \text{Lip}_1(\X, \R)} |P^1(f) - P^2(f) | \\
+&= \W(P^1, P^2).
+\end{align*}
+
+\begin{remark}\label{rem::converg_rate}
+The hierarchical estimator $Q_{n,m}$ is used to estimate the law of the random probability measure $Q$. The effectiveness of this estimator can be studied using either WoW or HIPM. A key difference between these distance functions lies in the rate of convergence of the expected distance between $Q_{n,m}$ and $Q$. In particular, by Theorem 4.1 in \cite{catalano2024hierarchical}, if $\X$ is a bounded subset of $\R^d$, then 
+$$
+\E \WW(Q_{n}, Q) = \mathcal{O} \left(\frac{\log \log (n)}{\log(n)}\right),
+$$
+where $\widetilde{P}_1, \dots, \widetilde{P}_n \overset{\mathrm{i.i.d.}}{\sim} Q$ and $Q_n = \frac{1}{n}\sum_{i=1}^n \delta_{\widetilde{P}_i}$. Note that since we only observe $Q_{n,m}$, its convergence rate will be slower than that of $Q_n$. Moreover, the theorem shows that if $Q$ is a Dirichlet process, the convergence is faster than any polynomial rate.
+
+On the other hand, using the HIPM, we obtain a faster convergence rate. In particular, by Theorem 4.3 in \cite{catalano2024hierarchical}, if $\X$ is a bounded subset of $\R^d$, then
+$$
+\E \dlip (Q_{n,m}, Q) = 
+\begin{cases}
+\mathcal{O}\left(\frac{1}{\sqrt{n}} + \frac{1}{\sqrt{m}} \right), & \text{if } d = 1 \\
+\mathcal{O}\left(\frac{1}{\sqrt{n}}\log(n) + \frac{1}{\sqrt{m}}\log(m) \right), & \text{if } d = 2 \\
+\mathcal{O}\left(\frac{1}{n^{\frac{1}{d}}} + \frac{1}{m^{\frac{1}{d}}} \right), & \text{if } d > 2.
+\end{cases}
+$$
+\end{remark}
+Such rates of convergence play an important role in studying the properties of the thresholds in Section \ref{sec::rademacher}.
+
+To summarize, we consider the following hypothesis testing problem. Let $d$ denote either the WoW or the HIPM distance, and let $Q^1, Q^2 \in \probprobx$. We test the null hypothesis
+\[
+H_0 : d(Q^1, Q^2) = 0
+\]
+against the alternative
+\[
+H_1 : d(Q^1, Q^2) > 0.
+\]
+The test is based on independent samples
+\[
+\widehat{P}^1_{1,m}, \dots, \widehat{P}^1_{n,m} \overset{\mathrm{i.i.d.}}{\sim} Q^{1,(m)}, 
+\qquad
+\widehat{P}^2_{1,m}, \dots, \widehat{P}^2_{n,m} \overset{\mathrm{i.i.d.}}{\sim} Q^{2,(m)}.
+\]
+The testing scheme we develop will reject $H_0$ if the distance between the hierarchical estimators exceeds some threshold. In the following sections, we discuss methods for determining this threshold.
+% polished end
+
+% We consider two distance functions on $\probprobx$ in this paper. The first one, referred to as Wasserstein over Wasserstein, is the natural lifting of Wasserstein distance on $\probx$, and it was widely used in Bayesian nonparametrics \cite{nguyen2016borrowing} and Machine learning \cite{ho2017multilevel, dukler2019wasserstein}. The second one, termed the Hierarchical Integral Probability Metric, is very recent and is defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein. 
+
+% Recall that the sample space $\X$ is Polish with a bounded diameter. Using the distance function $d_\X$ on $\X$, one can define a Wasserstein distance on $\probx$ by
+% $$
+% \W(P^1, P^2) = \inf_{\pi \in \Gamma(P^1, P^2)} \int_{\X \times \X} d_\X(x, y) \, d\pi(x, y) \qquad P^1, P^2 \in \probx,
+% $$
+% where
+% $$
+% \Gamma(P^1, P^2) = \left\{ \pi \in \mathcal{P}(\X^2) : \pi(A \times \X) = P^1(A), \ \pi(\X \times A) = P^2(A) \quad \forall A \in \mathcal{B}(\X) \right\}.
+% $$
+% Note that this is the Wasserstein distance of order $1$, and since we do not consider other Wasserstein distances, we simply denote it by $\W$ instead of $\W_1$. 
+
+% In general, $\W$ is a distance function on the Wasserstein space of order 1 defined as 
+% $$
+% \mathcal{P}_1(\X) = \{P\in\probx: \int_\X d_\X(x,x_0)P(dx) < \infty, \quad x_0\in X \}.
+% $$
+% Since we assume that $\X$ has a bounded diameter, all $P\in\probx$ belongs to $\mathcal{P}_1(\X).$
+% The assumption that $\X$ is Polish and that $d_{\X}$ is bounded implies that the metric space $(\probx, \W)$ is also Polish (see Remark 7.1.7 in \cite{luigi2008gradient}). Note also that $(\probx,\W)$ has a bounded diameter, as $d_{\X}$ also has a bounded diameter.
+% Therefore, instead of defining a distance function on $\mathcal{P}_1(\probx),$ we can define a distance function on $\probprobx$ using $\W$ as the ground metric: 
+% \begin{definition}[Wasserstein over Wasserstein]
+%     \label{def:wow}
+%     Given $Q^1, Q^2\in\probprobx$, the Wasserstein over Wasserstein (WoW) distance between $Q^1,Q^2\in\probprobx$ is 
+%     $$
+%     \WW(Q^1,Q^2) = \inf_{\pi \in \Gamma(Q^1,Q^2)} \int_{\probx ^2} \W(P^1,P^2)d\pi(P^1,P^2).
+%     $$
+% \end{definition}
+% Here, $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\probx \times \probx$ with marginals $Q^1$ and $Q^2$. Again, Remark 7.1.7 in \cite{luigi2008gradient} and the fact that $\W$ has bounded diameter imply that the metric space $(\probprobx, \WW)$ is a Polish space with bounded diameter.
+
+% The second distance function we consider is the Hierarchical Integral Probability Metric, defined in \cite{catalano2024hierarchical}. The main idea behind its definition is as follows: Let $Q^1, Q^2$ be probability measures on $\probprobx$ and $\widetilde{P}^1\sim Q^1, \widetilde{P}^2 \sim Q^2$. We compute the distance between $Q^1$ and $Q^2$ by considering the distances between random integrals $\widetilde{P}^1(f)$ and $\widetilde{P}^2(f),$ where $f$ ranges over some set of functions from $\X$ to $\R.$ Note that, by considering such projections, we shift focus from $\probprobx$ to $\mathcal{P}\left(\R\right),$ and the later space is easier to deal with. As noted in \cite{catalano2024hierarchical}, such a projection is justified by the fact that for the random probability measure $\widetilde{P}$, the law of random integrals $\widetilde{P}(f)$ where $f$ belongs to set of continuous and bounded functions, are enough to characterize the law of $\widetilde{P}.$ Therefore, we have the following definition:
+% \begin{definition}[Hierarchical integral probability metric]\label{sec:distances}
+%     \label{def:hipm}
+%     Given $Q^1, Q^2\in\probprobx$, the laws of RPM, the hierarchical integral probability metric (HIPM) between $Q^1,Q^2\in\probprobx$ is 
+%     \[
+%     d_{\F}(Q^1,Q^2) = \sup_{f\in\F}\W(\mathcal{L}(\widetilde{P}^1(f)),\mathcal{L}(\widetilde{P}^2(f))),
+%     \] where $\widetilde{P}^k \sim Q^k, $ and $\F$ contains class of bounded and measurable functions from $\X$ to $\R.$ 
+% \end{definition}
+% Another way to write HIPM is 
+% \[
+% \dlip\left(Q^1, Q^2\right) = \sup_{f \in \F}\W\left(Q^1 \circ \hat{f}^{-1}, Q^2 \circ \hat{f}^{-1} \right),
+% \]
+% where $\hat{f}$ denotes the lifting of the function $f$, i.e. $\hat{f} (P) = \int_\X f dP,$ and $Q^1 \circ \hat{f}^{-1}$ is push-forward measure.
+
+% As long as the function class $ \F $ is sufficiently rich, this construction defines a valid distance on $ \probprobx$. From now on, we set $\F = \text{Lip}_1(\X,\R)$, and denote the corresponding metric $d_\F$ by $\dlip.$
+
+
+% Let $f : \X \to \R$, and define $\hat{f} : \probx \to \R$ by
+% $$
+% \hat{f}(P) = P(f) = \int_\X f \, dP.
+% $$
+% We then consider the pushforward measures
+% \[
+% Q^1 \circ \hat{f}^{-1} \quad \text{and}\quad Q^2 \circ \hat{f}^{-1},
+% \] which are probability measures on $ \R $. The distance between $ Q^1 $ and $ Q^2 $ is computed by comparing distances between $ Q^1 \circ \hat{f}^{-1} $ and $ Q^2 \circ \hat{f}^{-1}$, where $f$ ranges over some function class $\F$. Therefore, we have the following definition:
+% \begin{definition}[Hierarchical integral probability metric]\label{sec:distances}
+%     \label{def:hipm}
+%     Given $Q^1, Q^2\in\probprobx$, the laws of RPM, the hierarchical integral probability metric (HIPM) between $Q^1,Q^2\in\probprobx$ is 
+%     $$ 
+%     d_{\F}(Q^1,Q^2) = \sup_{f\in\F}\W(Q^1 \circ \hat{f}^{-1}, Q^2 \circ \hat{f}^{-1}),
+%     $$ where $\F$ is a set of measurable functions from $\X$ to $\mathbb{R}$. 
+% \end{definition}
+% Another way to write HIPM is the following:
+% $$
+% d_{\F}(Q^1,Q^2) = \sup_{f\in\F}\W(\mathcal{L}(\widetilde{P}^1(f)),\mathcal{L}(\widetilde{P}^2(f))),
+% $$ where $\widetilde{P}^1,\widetilde{P}^2$ are random probability measures with laws $Q^1, Q^2$ respectively.
+
+% As long as the function class $ \F $ is sufficiently rich, this construction defines a valid distance on $ \probprobx $. The intuition behind this, as noted in \cite{catalano2024hierarchical}, is that the collection of pushforward measures $ Q \circ \hat{f}^{-1} $, where $ f $ ranges over bounded continuous functions, is sufficient to characterize the probability measure $ Q \in \probprobx $ \cite{kallenberg2017random}. From now on, for HIPM, we set $\F = \text{Lip}_1(\X,\R)$, and denote the corresponding metric $d_\F$ by $\dlip.$
+% Both of the distance functions have nice topological properties. In particular, by Theorem 3.1 in \cite{catalano2024hierarchical}, WoW metrizes weak convergence on $\probprobx$, and HIPM does the same when $\X$ is compact.
+
+% There is a relation between the two distance functions. In particular, they are special cases of an Integral probability metric defined on a generic Polish space.
+% \begin{definition}[Integral Probability Metric]
+%     \label{def:ipm}
+%     Let $(\mathbb{Y},d_{\mathbb{Y}})$ be a Polish space, $\mathcal{H}$ a class of bounded and measurable functions from $\mathbb{Y}$ to $\R.$ Integral probability metric (IPM) between $P^1, P^2 \in \mathcal{P}\left(\mathbb{Y}\right)$ is 
+%     $$
+%     \mathcal{I}_{\mathcal{H}}(P^1,P^2) = \sup_{f\in\mathcal{H}} \left| \int_{\mathbb{Y}} f dP^1 - \int_{\mathbb{Y}} f dP^2 \right|. 
+%     $$
+% \end{definition}
+% Firstly, let us show that WoW can be written as an integral probability metric. By Remark 6.5 \cite{villani2008optimal}, if $P^1,P^2$ belong to $\mathcal{P}_1(\X),$ Wasserstein space of order 1, the Wasserstein distance can be written as
+% $$
+% \W(P^1,P^2) = \sup_{f\in \text{Lip}_1(\X,\R)} \left| \int_\X f(x) P^1(dx) - \int_\X f(x) P^2(dx) \right|,
+% $$
+% where $\text{Lip}_1(\X,\R)$ denotes set of $1-$Lipschitz continuous functions from $\X$ to $\R.$ Since $(\probprobx, \WW)$ is a Polish space with bounded diameter, we can use the above result to get
+% $$
+% \WW(Q^1,Q^2) = \sup_{f\in \text{Lip}_1(\probx,\R, \W)} \left| \int_{\probx} f(x) P^1(dx) - \int_{\probx}  f(x) P^2(dx) \right| \qquad Q^1,Q^2\in\probprobx,
+% $$ 
+% where 
+% $\text{Lip}_1(\probx,\R, \W)$ denotes set of $1-$Lipschitz continuous functions from $\probx$ to $\R$ with respect to $\W$.
+
+% Similarly, we show that HIPM can be written as an integral probability metric. For $Q^1,Q^2 \in \probprobx,$
+% \begin{align*}
+% \dlip(Q^1,Q^2) &= \sup_{f\in \text{Lip}_1(\X,\R)} \W(Q^1\circ \hat{f}^{-1}, Q^2\circ \hat{f}^{-1}) = \\
+% &= \sup_{f\in \text{Lip}_1(\X,\R)}\sup_{g\in\lipR}\left| \int_{\R}g(x) dQ^1\circ\hat{f}^{-1}(x) - \int_{\R}g(x) dQ^2\circ\hat{f}^{-1}(x) \right| = \\
+% & = \sup_{f\in \text{Lip}_1(\X,\R)} \sup_{g\in\lipR}\left|\int_{\probx}g(\widehat{f}(P))Q^1(dP) - \int_{\probx}g(\widehat{f}(P))Q^2(dP) \right| = \\
+% & = \sup_{f\in \text{Lip}_1(\X,\R)}\sup_{g\in\lipR}\left|\int_{\probx}g(P(f))Q^1(dP) - \int_{\probx}g(P(f))Q^2(dP) \right| = \\
+% & = \sup_{h\in \D}\left|\int_{\probx}h(P)Q^1(dP) - \int_{\probx}h(P)Q^2(dP) \right|,
+% \end{align*}
+% where $\D = \{h:\probx\to \R: h(P) = g(P(f)),  g\in\lipR, f\in \text{Lip}_1(\X,\R) \}$.
+
+% After considering both of the distances as Integral probability metrics, we get that HIPM is upper bounded by WoW. Indeed, we can show that $\D$ is a subset of $\text{Lip}_1(\probx,\R, \W)$: let $h\in\mathcal{D},$ and $ P^1,P^2\in\probx$,
+% \begin{align*}
+% |h(P^1) - h(P^2)| = |g(P^1(f)) - g(P^2(f))| \leq |P^1(f) - P^2(f) |& \leq \sup_{f\in \text{Lip}_1(\X,\R)}|P^1(f) - P^2(f) | \\
+% & =\W(P^1,P^2),
+% \end{align*}
+% \begin{remark}\label{rem::converg_rate}
+% The hierarchical estimator $Q_{n,m}$ is used to estimate the law of the random probability measure $Q.$ The effectiveness of the estimator can be studied either using WoW or HIPM. For that, the difference between those distance function is in the rate of convergence of the expected distance between $Q_{n,m}$ and $Q$. In particular, by Theorems 4.1 in \cite{catalano2024hierarchical}, if $\X$ is a bounded subset of $\R^d$, then 
+% $$
+% \E \WW(Q_{n}, Q) = \mathcal{O} \left(\frac{\log \log (n)}{\log(n)}\right),
+% $$
+% where $\widetilde{P}_1,\ldots,\widetilde{P}_n\overset{\mathrm{i.i.d.}}{\sim} Q,$ and $Q_n = \frac{1}{n}\sum_{i = 1}^n \delta_{\widetilde{P}_i}.$ Note that we assume that we only observe $Q_{n,m}$, which means that its convergence rate will be slower than that of $Q_n$. Moreover, the theorem shows that if $Q$ is a Dirichlet process, the convergence is faster than any polynomial rate.
+
+% On the other hand, using HIPM, we obtain a faster convergence rate. In particular, by Theorem 4.3 in \cite{catalano2024hierarchical}, if $\X$ is a bounded subset of $\R^d$, then
+% $$
+% \E \dlip (Q_{n,m}, Q)= 
+% \begin{cases}
+% \mathcal{O}\left(\frac{1}{\sqrt{n}} + \frac{1}{\sqrt{m}} \right), & \text{if } d = 1 \\
+% \mathcal{O}\left(\frac{1}{\sqrt{n}}\log(n) + \frac{1}{\sqrt{m}}\log(m) \right), & \text{if } d = 2 \\
+% \mathcal{O}\left(\frac{1}{n^{\frac{1}{d}}} + \frac{1}{m^{\frac{1}{d}}} \right), & \text{if } d > 2
+% \end{cases}
+% $$
+% \end{remark}
+% Such rates of convergence plays an important role in studying the properties of the thresholds in Section \ref{sec::rademacher}.
+
+% To summarize, we consider the following hypothesis testing problem. Let $d$ denote either the WoW or the HIPM distance, and let $Q^1, Q^2 \in \probprobx$. We test the null hypothesis
+% \[
+% H_0 : d(Q^1, Q^2) = 0
+% \]
+% against the alternative
+% \[
+% H_1 : d(Q^1, Q^2) > 0.
+% \]
+% The test is based on independent samples
+% \[
+% \widehat{P}^1_{1,m}, \ldots, \widehat{P}^1_{n,m} \overset{\mathrm{i.i.d.}}{\sim} Q^{1,(m)}, 
+% \qquad
+% \widehat{P}^2_{1,m}, \ldots, \widehat{P}^2_{n,m} \overset{\mathrm{i.i.d.}}{\sim} Q^{2,(m)}.
+% \]
+% The testing scheme we develope will reject $H_0$ if distance between hierarchical estimator exceeds some threshold. Let us now discuss the ways to obtain threshold in the following sections.
+
+
+
+
+
+
+% The hierarchical estimator $Q_{n,m}$ is used to estimate the law of the random probability measure $Q.$ The effectiveness of such an estimator is studied in \cite{catalano2024hierarchical}. In particular, they investigate the rate at which the expected distance between $Q_{n,m}$ and $Q$ converges to zero. This convergence rate depends on the chosen distance—whether it is the Wasserstein over Wasserstein distance or the hierarchical IPM. 
+
+% Theorems 4.1 in \cite{catalano2024hierarchical} says that if $\X$ is a bounded subset of $\R^d$, then 
+% $$
+% \E \WW(Q_{n}, Q) = \mathcal{O} \left(\frac{\log \log (n)}{\log(n)}\right),
+% $$
+% where $\widetilde{P}_1,\ldots,\widetilde{P}_n\overset{\mathrm{i.i.d.}}{\sim} Q.$ Note that we assume that we only observe $Q_{n,m}$, which means that its convergence rate will be slower than that of $Q_n$. Moreover, the theorem shows that if $Q$ is a Dirichlet process, the convergence is faster than any polynomial rate.
+
+% On the other hand, hierarchical IPM has a faster convergence rate. In particular, by Theorem 4.3 in \cite{catalano2024hierarchical}, if $\X$ is a bounded subset of $\R^d$, then
+% $$
+% \E \dlip (Q_{n,m}, Q)= 
+% \begin{cases}
+% \mathcal{O}\left(\frac{1}{\sqrt{n}} + \frac{1}{\sqrt{m}} \right), & \text{if } d = 1 \\
+% \mathcal{O}\left(\frac{1}{\sqrt{n}}\log(n) + \frac{1}{\sqrt{m}}\log(m) \right), & \text{if } d = 2 \\
+% \mathcal{O}\left(\frac{1}{n^{\frac{1}{d}}} + \frac{1}{m^{\frac{1}{d}}} \right), & \text{if } d > 2
+% \end{cases}
+% $$
+% Since both distance functions metrize the space, one might prefer using HIPM, as the rate of convergence for estimating the law of the random probability measure generating the data is faster. In addition, such rates will play an important role in studying the properties of the thresholds in Section \ref{sec::rademacher}.
+ 
+

@@ -1,0 +1,341 @@
+\section{Simulation studies}\label{section::simulations}
+% \textcolor{blue}{
+% Find at least one data set where we can apply the algorithms (ideally 2 or 3). Describe an algorithm that works on any interval $[a,b]$ and possible any finite $d$-dimensional cube. Implement it using a cube that contains all $n$ observations. It would be nice to have an example where $d \ge 2$, where the quantile embedding does not work.}
+In this section, we examine the finite-sample performance of the proposed HIPM and WoW testing procedures. Our numerical analysis is organized into three primary components. First, we investigate the validity of the permutation-based test by evaluating the Type I error rate and statistical power of both HIPM and WoW using a synthetic dataset. Second, we compare our methods with those existing in the literature. Finally, we demonstrate the practical utility of the proposed framework through an application to a mortality dataset.
+
+\subsection{Empirical comparison between HIPM and WoW}
+
+We compare the use of the HIPM and WoW within our permutation-based test by analysing the Type I error, the power, and the ROC curves in several simulated settings, taking into account both parametric and nonparametric data-generating processes, both in settings that satisfy the assumptions of Theorem~\ref{th:perm_consistency_dlip} for asymptotic guarantees, and settings that do not satisfy them, notably $\X = \R$, but are still interesting in practice. We consider the following baselines for parametric and nonparametric models.
+\begin{enumerate}
+\item Parametric model that fulfills the assumptions of Theorem~\ref{th:perm_consistency_dlip} (PA):
+\[
+Q^1 = \mathcal{L}(\tilde P), \qquad \tilde P| \tilde \mu = \mathrm{Beta}( \tilde \mu, 1- \tilde \mu), \qquad \tilde \mu \sim \mathrm{Beta}(a_0 = 1, b_0 = 1);
+\]
+\item Parametric model that does not fulfill the assumptions of Theorem~\ref{th:perm_consistency_dlip} (PNA):
+\[
+Q^1 = \mathcal{L}(\tilde P), \qquad \tilde P| \tilde \mu = \mathcal{N}(\tilde \mu, \sigma^2 = 1), \qquad \tilde \mu \sim \N(\mu_0 = 0, \sigma^2_0 = 1);
+\]
+
+\item Nonparametric model that fulfills the assumptions of Theorem~\ref{th:perm_consistency_dlip} (NPA):
+\[
+Q^1 = \mathrm{DP}(\alpha = 1, P_0 = \mathrm{Unif}[0,1]);
+\]
+\item Nonparametric model that does not fulfill the assumptions of Theorem~\ref{th:perm_consistency_dlip} (NPNA)
+\[
+Q^1 = \mathrm{DP}(\alpha = 1, P_0 = N(0,1)),
+\]
+\end{enumerate}
+where $\mathrm{Beta}(a,b)$ is the Beta distribution with shape parameters $a,b$, $\mathcal{N}(\mu, \sigma^2)$ is the Gaussian distribution with mean $\mu$ and variance $\sigma^2$, $\mathrm{Unif}[0,1]$ is the Uniform distribution on the interval $[0,1]$, and $\mathrm{DP}(\alpha, P_0)$ denotes the Dirichlet Process with concentration $\alpha>0$ and base probability $P_0 \in \probx$ \citep{ferguson1973bayesian}. Note that if $P_0$ has full support on $\X$, $\mathrm{DP}(\alpha, P_0)$ has full weak support on $\probx$.
+
+To investigate the behaviour of the Type I error, we simulate the data from $Q^1 = Q^2$ equal to each of the examples above $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the percentage of times it rejects the (correct) $H_0 = Q^1 = Q^2$ for each significance level $\theta$. In each simulation we set $n=m=n_{\text{perm}}= 100$. The results are shown in Figure~\MC{put figure}, where we see that both WoW and HIPM recover a Type I error which is approximately equal to the significance level $\theta$, in all simulation settings. Interestingly, the WoW distance appears to control the Type I error even if our theory does not guaranty it.
+
+
+
+To investigate the power of the test, we simulate the data under the alternative hypothesis $Q^1 \neq Q^2$. Specifically, we take $Q^1$ equal to each of the settings above, and modify its parameters in two different ways for each setting: for the parametric models, we change both the `likelihood' and the `prior', for the Dirichlet process, we change both the concentration parameter and the base measure. We consider the following alternative hypotheses:
+\begin{itemize}
+\item[1a.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathrm{Beta}( 2\tilde \mu, 2(1- \tilde \mu))$, and $\tilde \mu \sim \mathrm{Beta}(a_0 = 1, b_0 = 1)$;
+\item[1b.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathrm{Beta}( \tilde \mu, 1- \tilde \mu)$, and $ \tilde \mu \sim \mathrm{Beta}(a_0 = 2, b_0 = 1)$;
+\item[2a.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathcal{N}(\tilde \mu, \sigma^2 = 2)$, and $\tilde \mu \sim \N(\mu_0 = 0, \sigma^2_0 = 1)$;
+\item[2b.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathcal{N}(\tilde \mu, \sigma^2 = 1)$, and $\tilde \mu \sim \N(\mu_0 = 1, \sigma^2_0 = 1)$;
+\item[3a.] $Q^2 = \mathrm{DP}(\alpha = 2, P_0 = \mathrm{Unif}[0,1])$;
+\item[3b.] $Q^2 = \mathrm{DP}(\alpha = 1, P_0 = \mathrm{Beta}(2,2))$;
+\item[4a.] $Q^2 = \mathrm{DP}(\alpha = 2, P_0 = N(0,1))$;
+\item[4b.] $Q^2 = \mathrm{DP}(\alpha = 1, P_0 = N(1,1))$.
+\end{itemize}
+As before, we sample the observations $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the empirical power, that is, 1 minus the percentage of times it rejects the (incorrect) $H_0 = Q^1 = Q^2$ for each significance level $\theta$, setting $n=m=n_{\text{perm}}= 100$. \\
+\MC{Describe ROC curve and why we also add it} \\
+\MC{Describe results carefully}\\
+\MC{Underline if there is an empirical difference between performance of WoW and HIPM and, if not, underline the asymptotic guarantees and the computational times.}\\
+\MC{Decide which plot/plots to put here and which to move in appendix if they all convey the same message.}\\
+\MC{Find ways to make plots nicer, understand which simulations can be grouped in the same plot - save the data so that we can play with the plots afterwards. }
+\MC{Not for now but to keep in mind for the future: After looking at the results pick one relevant setting and add sensitivy analysis for $n,m,n_{perm}$, changing one at a time in the set $\{50,100,150, 200\}$. Put results in appendix and refer to them to justify your choices. }
+
+
+% n vs m ?????
+\subsection{Synthetic data}
+
+
+
+Let us start with the comparison of HIPM and WoW under the permutation approach. To see the behaviour of the Type I error, we fix two same Dirichlet Processes
+\[
+Q^1 = \mathrm{DP}(1.0, \mathrm{Unif}(0,1)),\quad Q^2 = \mathrm{DP}(1.0, \mathrm{Unif}(0,1)), 
+\]
+and look at the rejection rates for each significance level $\theta.$
+
+For investigating the power, we fix two different Dirichlet processes 
+\[
+Q^1 = \mathrm{DP}(1.0, \mathrm{Unif}(0,1)),\quad Q^2 = \mathrm{DP}(1.0, \mathrm{Beta}(1,1.4)).
+\]
+We first take the small size for the hierarchical samples, $n = 50, m = 100,$ and then increase to $n = 100, m = 100.$ We also set $n_{\text{perm}} = 100$, which is the number of times we permute the observed samples. To estimate the rejection rates, we perform $S = 1000$ Monte-Carlo simulations. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/fp_n=50_m=100_b=1.4.png}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/tp_n=50_m=100_b=1.4.png}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/roc_n=50_m=100_b=1.4.png}
+    \end{subfigure}
+
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/fp_n=100_m=100_b=1.4.png}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/tp_n=100_m=100_b=1.4.png}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \centering
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/roc_n=100_m=100_b=1.4.png}
+    \end{subfigure}
+    \caption{}
+    \label{fig:normal_normal}
+\end{figure}
+
+As we see from the plot, for both of the distance functions, the Type I error is well controlled. Also, Type II error is becoming low as we increase $n$ and $m$. In addition, the ROC curve is much better for both distance functions than the random guessing.
+
+What is not expected from the simulations is that we also control Type I error for the Wasserstein over Wasserstein. In theory, we could not show that under the null hypothesis, the test statistic has the same convergence properties as that with HIPM; however, in practice, it performs well. 
+
+Next, we benchmark our proposed scheme against existing methods in the literature. The first method we consider is the Energy test introduced in \cite{szekely2004testing}. In that work, the authors develop a testing procedure for samples taking values in Euclidean space. This method can be extended to general metric spaces, provided that the underlying space is of strongly negative type.
+
+In our simulations below, we take $\X = \R$ and consider the space of probability measures consisting of Gaussian distributions with variance equal to $1$, i.e.,
+\[
+\probx = \{ \N(\mu, 1) : \mu \in \R \}.
+\]
+Equipped with the Wasserstein-$1$ distance, the metric space $(\probx, \W)$ is of strongly negative type, since the Wasserstein distance between two Gaussian distributions with unit variance coincides with the absolute difference between their means. Hence, the Energy test is applicable in this setting.
+
+As a second scheme, we consider the method proposed in \cite{dubey2019frechet}, which we refer to as the Fr\'echet test. We replicate Figures~1 and~2 from \cite{dubey2019frechet}.
+
+To make a comparison between the testing schemes, we look at the rejection rates of each testing scheme for several pairs of laws of random probability measures (RPMs). Note that, since we work with Gaussian distributions with varying means, the law of a random probability measure is in one-to-one correspondence with the distribution of the mean parameter. In the left and right plots of Figure \ref{figure::varying_mean_variance}, we consider families of pairs of laws of RPMs on $\probx$, identified as the distributions on the mean parameter, defined as
+\begin{align*}
+& \{ \mathrm{TN}(0, 0.5^2, -10, 10), \mathrm{TN}(\delta, 0.5^2, -10, 10) : \delta \in [-1, 1] \}, \\
+& \{ \mathrm{TN}(0, 0.2^2, -10, 10), \mathrm{TN}(0, (0.2\tau)^2, -10, 10) : \tau \in [0, 3] \},
+\end{align*}
+where $\mathrm{TN}(\delta, \tau, a, b)$ denotes the truncated normal distribution on the interval $[a,b]$ with mean $\delta$ and variance $\tau$.
+
+Note that the parameters $\delta = 0$ and $\tau = 1$ in the first and second families, respectively, correspond to estimating the Type~I error, while other parameter values correspond to estimating the power. The other simulation parameters we use are $S = 1000$ and $n_{\text{perm}} = 100$. For the Fr\'echet test, we use a bootstrap approach where $n_{\text{bootstrap}} = 100$.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.43\textwidth}
+        \centering
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/frechet/varying_mean_n=100_m=200_S=1000_permutation_n_samples=100.png}
+    \end{subfigure}
+    \begin{subfigure}{0.43\textwidth}
+        \centering
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/frechet/varying_variance_n=100_m=200_S=1000_permutation_n_samples=100.png}
+    \end{subfigure}
+    \caption{}
+    \label{figure::varying_mean_variance}
+\end{figure}
+All testing schemes exhibit low Type~I error. When varying the mean parameter $\delta$ in the left plot, the Energy, WoW, and HIPM tests outperform the Fr\'echet test. The intuition behind this behavior lies in the non-degeneracy property of distance-based tests. In particular, such tests detect the statistical summaries that are sufficient to characterize the underlying distribution; in the case of differing laws of RPMs, they capture richer distributional information than the Fr\'echet mean and variance alone. However, this intuition is not reflected in the right plot, where the method proposed in \cite{dubey2019frechet} outperforms all other testing schemes.
+The final simulation on the synthetic dataset is designed to demonstrate the necessity of distance-based testing. Note that the underlying assumption behind the Fr\'echet test is that the Fr\'echet mean and variance are sufficient to distinguish between two different laws of random probability measures (RPMs). However, laws of RPMs are not always uniquely characterized by their Fr\'echet means and variances.
+
+Indeed, we can construct a simple counterexample. Consider
+\begin{align*}
+   &Q^1 = \law\left(\widetilde{P}^1\right) \quad \text{where} \quad \widetilde{P}^1 = \N\left( \widetilde{\mu}^1, 1\right), \quad \law\left(\widetilde{\mu}^1\right) =  \tfrac{1}{2}\delta_{-1} + \tfrac{1}{2}\delta_{1}, \\
+   &Q^2 = \law\left(\widetilde{P}^2\right) \quad \text{where} \quad \widetilde{P}^2 = \N\left( \widetilde{\mu}^2, 1\right), \quad \law\left(\widetilde{\mu}^2\right) =  \tfrac{1}{8}\delta_{-2} + \tfrac{3}{4}\delta_{0} + \tfrac{1}{8}\delta_{2},
+\end{align*}
+where $Q^1 \neq Q^2$, yet their associated Fr\'echet means and variances coincide (see Remarks \ref{remark::frechet_mean_variance_special_case_variance_1},\ref{remark::frechet_mean_variance_mixture_of_laws}).
+
+Moreover, if we compare $Q^1$ with a mixture of $Q^1$ and $Q^2$, the resulting laws remain different while still inducing the same Fr\'echet means and variances. Specifically, letting
+\[
+M_\lambda = \lambda Q^1 + (1-\lambda)Q^2,
+\]
+we consider the family of pairs
+\[
+\{(Q^1, M_\lambda) : \lambda \in [0,1]\}.
+\]
+Note that $\lambda = 1$ corresponds to estimating the Type~I error, while other values of $\lambda$ correspond to estimating the power of the testing procedures. We consider mixtures of the two laws because, as the parameter varies, it becomes more challenging for the testing schemes to detect the presence of different laws. We plot the rejection rates in Figure~\ref{figure::counterexample}, where the simulation parameters are the same as those used in Figure~\ref{figure::varying_mean_variance}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.43\textwidth]{chapters/two-sample-testing/figures/frechet/counterexample_n=100_m=200_S=1000_permutation_n_samples=100.png}
+    \caption{}
+    \label{figure::counterexample}
+\end{figure}
+
+As observed in the Figure \ref{figure::counterexample}, since the two distributions induce the same Fr\'echet means and variances, the method proposed in \cite{dubey2019frechet} fails to detect the presence of different laws. In contrast, the HIPM and WoW tests perform slightly better than Energy test in identifying the discrepancy.
+
+To conclude, although the Fr\'echet test can exhibit higher power than the other testing schemes in certain settings, its main limitation is that it fails to detect the difference when the laws of RPMs are not fully characterized by the Fr\'echet mean and variance. The Energy test, as well as permutation tests based on HIPM or WoW, mitigate this limitation. Moreover, HIPM and WoW may be preferable to the Energy test in practice, since the underlying metric space—in our case, the space of probability measures—may fail to be of negative type, or this property may be difficult to verify.
+
+\subsection{Mortality data}\label{subsection::mortality_data}
+
+We apply our proposed testing scheme to human mortality data available from the Human Mortality Database (https://www.mortality.org/). The dataset contains period life tables for various countries and years. A period life table is constructed by estimating age-specific mortality rates from deaths and exposures in a given year $t$, which are then used to derive the age-at-death distribution for a hypothetical cohort. 
+
+Our analysis focuses on how mortality rates differed between 1960 and 2010 when comparing countries that were under Soviet influence during the 20th century against those under Western influence. To this end, we categorize the countries into two groups, following the classification established in \cite{dubey2019frechet}:
+\begin{itemize}
+    \item Group 1 (Soviet Influence): Belarus, Bulgaria, Czechia, Estonia, Hungary, Latvia, Lithuania, Poland, Russia, Slovakia, and Ukraine.
+    \item Group 2 (Western Influence): Australia, Austria, Belgium, Canada, Denmark, Finland, France, Iceland, Ireland, Italy, Japan, Luxembourg, Netherlands, New Zealand, Norway, Spain, Sweden, Switzerland, United Kingdom, and United States of America.
+\end{itemize}
+The age range is $\{0,1,\cdots,110\}$, where $110$ denotes that death occurred at that age or later. We choose not to truncate the age range for the following reasons. First, visual inspection of the probability mass functions and quantiles does not reveal any abnormalities, particularly at higher ages (see Figure \ref{figure::quantile_for_mortality_rates}). Second, truncating the age range leads to significant data loss. For example, among females, the maximum percentage of data lost across countries is at least $20$ percent for all time periods when the age interval is truncated to $\{0,1,\ldots,85\}$.
+
+In Figure \ref{figure::quantile_for_mortality_rates}, we present the quantile plots of the probability mass functions corresponding to age at death. We consider the years 1960, 1992, and 2008 to capture different historical periods: the Cold war era that is closer to the post-war period, the years shortly after the collapse of Soviet Union, and a more recent period after the breakup. The plots are shown separately for females and males. As observed, noticeable differences can be visually identified, particularly in the more recent time periods.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth} % Increased width since they are stacked
+        \centering
+        \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_allquantiles_0_110.png}
+        \caption{Males}
+    \end{subfigure}
+    \\ % <--- This line break forces the next subfigure down
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_allquantiles_0_110.png}
+        \caption{Females}
+    \end{subfigure}
+    \caption{Quantiles for mortality rates}
+    \label{figure::quantile_for_mortality_rates}
+\end{figure}
+To assess whether there is a difference in mortality rates between the two groups of countries in each time period, we apply our proposed test separately for males and females. We set the significance level to $\theta = 0.05$ and use $n_{\text{perm}} = 100$ permutations. The p-values are computed for each year.
+
+We also compare the p-values obtained from our approach with those derived from the following alternative methods:
+\begin{itemize}
+    \item Averaging: Given $\widehat{P}^1_1,\cdots, \widehat{P}^1_{n_1}$ from group 1 and $\widehat{P}^2_1,\cdots, \widehat{P}^2_{n_2}$ from group 2, we obtain average probability measures inside each group, i.e.
+    \[
+    \overline{P}^1 = \frac{1}{n_1}\sum_{i = 1}^{n_1}\widehat{P}^1_i, \quad 
+    \overline{P}^2 = \frac{1}{n_2}\sum_{i = 1}^{n_2}\widehat{P}^2_i.
+    \]
+    The test statistic is obtained by computing Wasserstein-1 distance between $\overline{P}^1$ and $\overline{P}^2.$ The threshold is obtained via a permutation approach, in which the observed probability measures are permuted across the two groups.
+    \item Pooling: Within each group, we first pool the death counts across all countries. This yields a single probability measure for each group, and the test statistic is then computed as the Wasserstein-1 distance between these two measures. As before, the significance threshold is obtained via a permutation approach. The permutation procedure is implemented by reconstructing observations of ages at death from the aggregated counts in each group. Specifically, if there are $k$ deaths at age $a$, we generate $k$ observations equal to $a$. This is done for each group, after which the resulting observations are permuted across groups.
+\end{itemize}
+
+Note that the test statistic is identical for both the pooling and averaging approaches; the difference between the two testing schemes lies in the permutation procedure. In particular, the averaging approach preserves the probability measure structure within each group, whereas the pooling approach does not.
+
+Examining the p-values obtained from the proposed method in Figure \ref{figure::p_values_mortality}, we observe that for females, the difference between the groups is statistically significant in 1960. During the following decade, this difference becomes less significant, which may be explained by economic growth. After the 1970s, the disparity in mortality rates between the groups increases again, potentially reflecting the economic decline in the countries influenced by Soviet Union. Following the breakup of the Soviet Union, the observed differences may be associated with countries that were unable to integrate well into the Western blocks.
+
+A similar trend is observed for males; however, the key difference is that during the period from 1960 to 1970, althouth the differences in mortality rates was decreasing, the p-values did not exceed the $0.05$ threshold.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth} % Increased width since they are stacked
+        \centering
+        \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_pvalues_poolingaveraginghipm.png}
+        \caption{Males}
+    \end{subfigure}
+    \\ % <--- This line break forces the next subfigure down
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_pvalues_poolingaveraginghipm.png}
+        \caption{Females}
+    \end{subfigure}
+    \caption{P-values for mortality rates}
+    \label{figure::p_values_mortality}
+\end{figure}
+
+Note also that p-values for averaging and pooling look similar. This is because the average measure in this case is sufficient to detect the difference between two groups.
+
+
+It is important to note that the pooling approach may fail to control Type I error in hierarchical settings. This limitation arises because pooling observations ignores the presence of latent random probability measures. Under hierarchical sampling, we observe $n$ sequences, each of length $m$, where each sequence is generated from a different latent random probability measure. The empirical distribution obtained by pooling all observations converges to the mean measure of the law of RPM, so the test statistic converges to the distance between the mean measures of the two groups. Observations from the permutation approach are similar to samples from the mean measure; however, we obtain $nm$ samples. Intuitively, this makes the permutation threshold converge to $0$ faster than the observed distance. Note that this is not an issue if latent probability measures are identical.
+
+Still, both of the approaches fail to detect the different laws of random probability measures if the mean measures are the same. This again underlines the importance of working with the objects that uniquely characterize the laws we want to distinguish.
+
+
+
+
+
+% The $p$-values described in Figure \ref{figure::mortality_0_70} indicate that mortality rates for both genders differed significantly prior to 2005. While our method finds that these rates remained distinct for males throughout the 2005--2010 period, it suggests that the mortality distributions for females in the two groups were no longer statistically different during those years. 
+
+
+
+
+
+
+
+
+
+% To investigate the underlying reasons for these observed $p$-values, we analyze mortality rates restricted to four specific age bands: 
+% \[
+% B_1: [0, 1), \quad B_2: [1, 18], \quad B_3: [19, 35], \quad B_4: [36, 70].
+% \]
+% The resulting p-values are illustrated in Figure \ref{figure::mortality_decomposed}.
+% \begin{figure}[H]
+%     \centering
+%     % Row 1
+%     \begin{subfigure}{0.43\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_0_0.png}
+        
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}{0.43\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_0_0.png}
+        
+%     \end{subfigure}
+
+%     \vspace{1em} % Add some vertical spacing between rows
+
+%     % Row 2
+%     \begin{subfigure}{0.43\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_1_18.png}
+        
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}{0.43\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_1_18.png}
+      
+%     \end{subfigure}
+
+%     \vspace{1em}
+
+%     % Row 3
+%     \begin{subfigure}{0.43\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_19_35.png}
+        
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}{0.43\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_19_35.png}
+       
+%     \end{subfigure}
+
+%     \vspace{1em}
+
+%     % Row 4
+%     \begin{subfigure}{0.43\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_36_70.png}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}{0.43\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_36_70.png}
+        
+%     \end{subfigure}
+%     \caption{}
+%     \label{figure::mortality_decomposed}
+% \end{figure}
+
+% Using period life tables, we first construct age-at-death probability mass functions truncated to ages $0$--$90$. Let $p(x)$ denote the resulting distribution. We partition the age range into three disjoint bands:
+% \[
+% B_1=\{0\}, \qquad
+% B_2=\{1,\dots,35\}, \qquad
+% B_3=\{36,\dots,90\}.
+% \]
+
+% For the infant age group $B_1$, we compare the probability mass at age zero,
+% \[
+% M_0 = p(0),
+% \]
+% which represents the share of deaths occurring at age $0$ among all deaths at ages $0$--$90$ and serves as a summary measure of infant mortality.
+
+% For the remaining age bands $B_2$ and $B_3$, our focus is on the \emph{shape} of the age-at-death distribution within each band rather than on the total probability mass assigned to the band. Accordingly, for each band $B \in \{B_2,B_3\}$ we define the band-conditional probability mass function
+% \[
+% p_B(x) = \Pr(X=x \mid X \in B)
+%        = \frac{p(x)}{\sum_{a \in B} p(a)}, \qquad x \in B.
+% \]
+% These conditional distributions remove differences in the overall frequency of deaths within a band and isolate differences in the age profile of mortality within the specified age range.
+
+% Two-sample comparisons between the country groups are then conducted separately for $M_0$ and for the band-conditional distributions $p_{B_2}$ and $p_{B_3}$. Because multiple age-band comparisons are performed, statistical significance is assessed using a multiple-testing adjustment.
+
+
+
