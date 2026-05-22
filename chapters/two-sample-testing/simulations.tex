@@ -1,6 +1,4 @@
 \section{Simulation studies}\label{section::simulations}
-% \textcolor{blue}{
-% Find at least one data set where we can apply the algorithms (ideally 2 or 3). Describe an algorithm that works on any interval $[a,b]$ and possible any finite $d$-dimensional cube. Implement it using a cube that contains all $n$ observations. It would be nice to have an example where $d \ge 2$, where the quantile embedding does not work.}
 In this section, we examine the finite-sample performance of the proposed HIPM and WoW testing procedures. Our numerical analysis is organized into three primary components. First, we investigate the validity of the permutation-based test by evaluating the Type I error rate and statistical power of both HIPM and WoW using a synthetic dataset. Second, we compare our methods with those existing in the literature. Finally, we demonstrate the practical utility of the proposed framework through an application to a mortality dataset.
 
 \subsection{Empirical comparison between HIPM and WoW}
@@ -51,7 +49,6 @@ As before, we sample the observations $S= 1000$ times, perform our permutation-b
 \MC{Not for now but to keep in mind for the future: After looking at the results pick one relevant setting and add sensitivy analysis for $n,m,n_{perm}$, changing one at a time in the set $\{50,100,150, 200\}$. Put results in appendix and refer to them to justify your choices. }
 
 
-% n vs m ?????
 \subsection{Synthetic data}
 
 
@@ -238,7 +235,6 @@ Still, both of the approaches fail to detect the different laws of random probab
 
 
 
-% The $p$-values described in Figure \ref{figure::mortality_0_70} indicate that mortality rates for both genders differed significantly prior to 2005. While our method finds that these rates remained distinct for males throughout the 2005--2010 period, it suggests that the mortality distributions for females in the two groups were no longer statistically different during those years. 
 
 
 
@@ -248,94 +244,23 @@ Still, both of the approaches fail to detect the different laws of random probab
 
 
 
-% To investigate the underlying reasons for these observed $p$-values, we analyze mortality rates restricted to four specific age bands: 
-% \[
-% B_1: [0, 1), \quad B_2: [1, 18], \quad B_3: [19, 35], \quad B_4: [36, 70].
-% \]
-% The resulting p-values are illustrated in Figure \ref{figure::mortality_decomposed}.
-% \begin{figure}[H]
-%     \centering
-%     % Row 1
-%     \begin{subfigure}{0.43\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_0_0.png}
         
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}{0.43\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_0_0.png}
         
-%     \end{subfigure}
 
-%     \vspace{1em} % Add some vertical spacing between rows
 
-%     % Row 2
-%     \begin{subfigure}{0.43\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_1_18.png}
         
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}{0.43\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_1_18.png}
       
-%     \end{subfigure}
 
-%     \vspace{1em}
 
-%     % Row 3
-%     \begin{subfigure}{0.43\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_19_35.png}
         
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}{0.43\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_19_35.png}
        
-%     \end{subfigure}
 
-%     \vspace{1em}
 
-%     % Row 4
-%     \begin{subfigure}{0.43\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_36_70.png}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}{0.43\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_36_70.png}
         
-%     \end{subfigure}
-%     \caption{}
-%     \label{figure::mortality_decomposed}
-% \end{figure}
 
-% Using period life tables, we first construct age-at-death probability mass functions truncated to ages $0$--$90$. Let $p(x)$ denote the resulting distribution. We partition the age range into three disjoint bands:
-% \[
-% B_1=\{0\}, \qquad
-% B_2=\{1,\dots,35\}, \qquad
-% B_3=\{36,\dots,90\}.
-% \]
 
-% For the infant age group $B_1$, we compare the probability mass at age zero,
-% \[
-% M_0 = p(0),
-% \]
-% which represents the share of deaths occurring at age $0$ among all deaths at ages $0$--$90$ and serves as a summary measure of infant mortality.
 
-% For the remaining age bands $B_2$ and $B_3$, our focus is on the \emph{shape} of the age-at-death distribution within each band rather than on the total probability mass assigned to the band. Accordingly, for each band $B \in \{B_2,B_3\}$ we define the band-conditional probability mass function
-% \[
-% p_B(x) = \Pr(X=x \mid X \in B)
-%        = \frac{p(x)}{\sum_{a \in B} p(a)}, \qquad x \in B.
-% \]
-% These conditional distributions remove differences in the overall frequency of deaths within a band and isolate differences in the age profile of mortality within the specified age range.
 
-% Two-sample comparisons between the country groups are then conducted separately for $M_0$ and for the band-conditional distributions $p_{B_2}$ and $p_{B_3}$. Because multiple age-band comparisons are performed, statistical significance is assessed using a multiple-testing adjustment.
 
 
 

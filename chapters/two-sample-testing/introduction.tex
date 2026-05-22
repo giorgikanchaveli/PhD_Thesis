@@ -1,8 +1,4 @@
 \section{Introduction}\label{section::Introduction}
-% \textcolor{blue}{
-% Ideas: Laws of random probabilities are now everywhere: in BNP, to model data-sets, to model distributions of images, in functional data analysis, etc. In this work: two-sample test.}
-% \textcolor{blue}{
-% Related work: consider if there are available hypothesis testing in arbitrary metric spaces and come up with convincing motivation of why our approach is more natural. Mention that one could embed the probabilities in an Hilbert space through the quantile function but a) this works only on $\R$ and b) find (standard) motivation for preferring working on the space itself; e.g. look for motivation of paper using the standard wasserstein for testing.}
 
 The two-sample test is a fundamental statistical procedure used to test the null hypothesis that two datasets are generated from the same underlying distribution. Specifically, given two sets of samples, the goal is to assess whether their associated distributions are statistically indistinguishable. The hypotheses are formulated as follows:
 \begin{itemize}
@@ -19,21 +15,6 @@ In this work, we adopt a distance-based approach. This framework first requires 
 
 
 
-% While extensions of two-sample tests to general metric spaces already exist (see Section 3.7 in \cite{van1996weak}), they are not directly applicable to our setting, since we must also account for the sampling scheme. In particular, given two laws of random probability measures $Q^1, Q^2$, we do not assume i.i.d.\ samples of probability measures from $Q^1$ and $Q^2$. Instead, we observe i.i.d.\ samples of probability measures from other laws that are close to the original ones $Q^1$ and $Q^2$ (see details in Section \ref{sec::hier_sampling}). Formally, the extended setting compared to the one in \cite{van1996weak} is described as follows: Let $P,Q$ be probability measures on a general metric space $\mathcal{X}$. Consider sequences of probability measures $(P_m)_{m \geq 1}$ and $(Q_m)_{m \geq 1}$ such that  
-% \[
-% P_m \overset{w}{\to} P \quad \text{and} \quad Q_m \overset{w}{\to} Q.
-% \]  
-% Instead of observing  
-% \[
-% X_1,\ldots, X_n \sim P \quad \text{and} \quad Y_1,\ldots, Y_n \sim Q,
-% \]  
-% we observe  
-% \[
-% X^m_1,\ldots, X^m_n \overset{\mathrm{i.i.d.}}{\sim} P_m 
-% \quad \text{and} \quad 
-% Y^m_1,\ldots, Y^m_n \overset{\mathrm{i.i.d.}}{\sim} Q_m,
-% \]  
-% for some fixed $m \geq 1$.
 
 
 Our objective is to establish theoretical guarantees for both the false positive rate (the probability of incorrectly rejecting the null hypothesis when it is true) and the power (the probability of correctly rejecting the null hypothesis when it is false). 
