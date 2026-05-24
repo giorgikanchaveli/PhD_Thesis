@@ -1,0 +1,111 @@
+\section{Function class for HIPM}\label{appendix:reductionD}
+Recall that $(\X,d_x)$ is a Polish space with bounded diameter $\mathrm{diam}X = K.$ Recall also, the definition of the function class $\D$ on which HIPM is defined.
+\[
+\D = \{h:\probx\to \R: h(P) = g(P(f)),  g\in\lipR, f\in \text{Lip}_1(\X,\R) \}
+\]
+Note that, as $g$ can be any constant function, $\D$ is not uniformly bounded. However, as we are working with the Lipschitz functions, and the sample space has a bounded diameter, intuition suggests that we can obtain a uniformly bounded function class starting from $\D$ without changing the distance function. 
+
+We show that after reducing the function class $\D$ to another function class $\dstar,$ where 
+$$
+\dstar = \{h:\probx \to \R : h = g(P(f)), \ f \in \lipstar, \ g \in \lipzero \},
+$$
+with 
+$$
+\lipstar = \{ f^* = f - f(x_0) : f \in \lipX \}, \quad x_0 \in \X \ \text{fixed}, 
+$$
+and 
+$$
+\lipzero = \{ g^* = g - g(0) : g \in \lipK \},
+$$
+HIPM remains the same distance function when the supremum is taken over $\dstar.$ 
+
+Recall that 
+$$
+\dlip(Q^1,Q^2) = \sup_{h\in D}\left| \int_{\probx} h(P)\,Q^1(dP) - \int_{\probx} h(P)\,Q^2(dP) \right|.
+$$  
+\begin{itemize}
+    \item Step 1: Reduce $\D$ on 
+    \[
+    \D' =  \{h : \probx \to \R : h(P) = g(P(f)) \text{ s.t. } g \in \lipR, f \in \lipstar \}.
+    \]
+\end{itemize}
+As $\lipX$ contains all constant functions, it is not uniformly bounded. Because of that, we consider 
+$$\lipstar = \{ f^* = f - f(x_0) : f\in \lipX\} \quad \text{for fixed } x_0 \in \X.$$
+Note that the functions in $\lipstar$ are $1$-Lipschitz, and they are uniformly bounded by $K$, because 
+\[
+\sup_{x\in\X}|f^*(x)| = \sup_{x\in\X}|f(x) - f(x_0) |\leq \sup_{x\in \X}d_\X(x,x_0)<K \quad \text{for all } f^*\in \lipstar.
+\]
+Now the question is whether the distance changes when we consider $\lipstar$ instead of $\lipX.$ For that we have to show that $\D \subset \D'$ as the other direction is trivial.    
+
+Let $h(P) = g(P(f))$ where $f\in\lipX, g\in \lipR$. Define $\widetilde{g}(x) = g(x + f(x_0)),$ and $f^*(x) = f(x) - f(x_0),$ Note that $\widetilde{g}\in \lipR$, because for every $x, y \in R,$
+$$
+|\widetilde{g}(x) - \widetilde{g}(y)| = |g(x+f(x_0)) - g(y+f(x_0))\leq|(x+f(x_0)) - (y + f(x_0)| = |x-y|.
+$$
+So we get,
+$$
+\widetilde{g}(P(f^*)) = \widetilde{g}(P(f) - f(x_0)) = g(P(f))= h(P).
+$$
+\begin{itemize}
+    \item Step 2: Reduce the function class $\D'$ on the function class
+    \[
+    D'' = \{ h : \probx \to \R: h(P) = g(P(f)) \text{ s.t. } g \in \lipK, f \in \lipstar \}.
+    \]
+\end{itemize}
+Since $\lipstar$ is uniformly bounded by $K$, every function $g\in\lipR$ receives an input that takes values in $[-K,K]$. Indeed, for every $f^*\in\lipstar$
+$$
+\sup_{P\in\probx}|P(f^*)|\leq \sup_{P\in\probx}P|f^*|<K,
+$$ Because of this, we reduce $\lipR$ to $\lipK.$
+
+\begin{itemize}
+    \item Step 3: Reduce $D''$ on 
+    \[
+    \dstar = \{ h : \probx \to \R: h(P) = g(P(f)) \text{ s.t. } g \in \lipzero, f \in \lipstar \}.
+    \]
+\end{itemize}
+
+Note that $\lipK$ is not uniformly bounded, as it contains all the constant functions. So, we instead consider  
+$$\lipzero= \{g^* = g - g(0): g \in \lipK\}.$$  
+This function class is uniformly bounded, because for all $g^* \in \lipzero$
+$$
+\sup_{x\in[-K,K]}|g^*(x)| = \sup_{x\in[-K,K]}|g(x) - g(0)| \leq \sup_{x\in[-K,K]} |x| \leq K.
+$$
+The last thing to check is that the supremum does not change when we consider $\lipzero$ instead of $\lipK.$ For that we show that 
+\[
+\sup\limits_{h' \in \D'' } \left|\int_{\probx} h'(P)\,Q^1(dP) - \int_{\probx} h'(P)\,Q^2(dP) \; \right|=
+\sup\limits_{h \in \dstar} \left|\int_{\probx} h(P)\,Q^1(dP) - \int_{\probx}h(P)\,Q^2(dP)\right|.
+\]
+Note that right term is smaller than left term as $\dstar \subset \D''.$
+
+Now let $h' \in \D'', $ i.e. $h'(P) = g(Pf^*)$ for  $f^* \in \lipstar$, $g \in \lipK$. Define $g^*(x):= g(x) - g(0)$. We have,
+\begin{align*}
+    \bigg|\int_{\probx} h'(P)\,Q^1(dP) &- \int_{\probx} h'(P)\,Q^2(dP) \bigg| \\
+    & = \bigg|\int_{\probx} g(P(f^*))\,Q^1(dP) - \int_{\probx} g(P(f^*))\,Q^2(dP) \bigg|\\
+    & = \bigg|\int_{\probx} g^*(P(f^*))\,Q^1(dP) - \int_{\probx} g^*(P(f^*))\,Q^2(dP)\bigg|,
+\end{align*}
+since $Q^1$ and $Q^2$ have the same total mass equal to 1. So we get that for every $h' \in \D'',$
+\[
+\bigg|\int_{\probx} h'(P)\,Q^1(dP) - \int_{\probx} h'(P)\,Q^2(dP) \bigg| \leq \sup\limits_{h \in \dstar} \left|\int_{\probx} h(P)\,Q^1(dP) - \int_{\probx}h(P)\,Q^2(dP)\right|
+\]
+
+\par To sum up, the function class we consider for computing HIPM is
+\[
+\dstar= \{h:\probx \to \R : h = g(P(f)), \; f \in \lipstar, \; g \in \lipzero\}.
+\] 
+Since $\lipzero$ is uniformly bounded by $K$, we get that $\dstar$ is also uniformly bounded by $K.$ When it is clear from the context, we will write $g$ and $f$ instead of $g^*$ and $f^*$.
+
+To prove theorems in sections \ref{section::permutation} and \ref{sec::rademacher}, we use the bound for the covering number of the function class $\dstar.$ In particular,
+
+\begin{lemma}\label{lemma::covnumbdstar}
+    Let $\X\subset \R^d$ with a bounded diameter. Then, there exists a constant $C_d \in \R$ such that
+    \[
+    \log \N\left(\epsilon, \dstar, \|\cdot\|_\infty\right) \leq C_d \frac{1}{\epsilon^d} \quad \text{for all }\epsilon > 0.
+    \]
+\end{lemma}
+\begin{proof}
+Let $K = \text{diam}(\X).$ As it was shown in page 25 of \cite{catalano2024hierarchical}, we have 
+\[
+\log \N \left(\epsilon, \dstar, \|\cdot\|_\infty \right) \leq \log (2) \left\lceil \frac{4K}{\epsilon}\right\rceil + \log \N\left(\frac{\epsilon}{2}, \lipstar, \|\cdot\|_\infty \right).
+\]    
+By Theorem 2.7.1 in \cite{van1996weak} there exists a constant $C_d$ depending on $\text{diam}X$ such that $\log \N \left(\epsilon, \mathrm{Lip}_1\left(\X\right), \| \cdot \|_\infty \right) \leq C_d \epsilon^{-d},$ so we get the desired result.
+ % \leq \log (2) \left\lceil \frac{4K}{\epsilon}\right\rceil + \log (2) \left\lceil \frac{8K}{\epsilon}\right\rceil.
+\end{proof}

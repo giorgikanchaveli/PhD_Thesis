@@ -5,7 +5,7 @@ In this section, we overview several ways to define distances on the laws of ran
 
 \subsection{Distances on $\probprobx$}\label{subsection:bnp_toolbox_distances_probprobx}
 
-We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$; it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing} and machine learning \cite{ho2017multilevel, dukler2019wasserstein}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
+We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$; it has been widely used in Bayesian nonparametrics \citep{nguyen2016borrowing,nguyen2026optimal} and machine learning \citep{ho2017multilevel, dukler2019wasserstein,alvarez2020geometric,piening2026generalized}, with also recent works studying its geometric structure \citep{pinzi2025nested,pinzi2025totally,beiglbock2025brenier} and the gradient flows it generates \citep{bonet2025flowing}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
 
 Only in this subsection and in the chapter on two-sample testing, we assume that the sample space $\X$ is Polish with bounded diameter. Using the distance function $d_\X$ on $\X$, one can define the Wasserstein distance on $\probx$ by
 \[
@@ -24,7 +24,7 @@ $$
 Since we assume that $\X$ has bounded diameter, all $P \in \probx$ belong to $\mathcal{P}_1(\X)$. The assumption that $\X$ is Polish and $d_{\X}$ is bounded implies that the metric space $(\probx, \W)$ is also Polish; see Remark 7.1.7 in \cite{luigi2008gradient}. Note also that $(\probx, \W)$ has bounded diameter, since $d_{\X}$ is bounded. Therefore, instead of defining a distance function on $\mathcal{P}_1(\probx)$, we can define a distance function on $\probprobx$ using $\W$ as the ground metric.
 
 \begin{definition}[Wasserstein over Wasserstein]
-    \label{def:wow}
+    \label{definition:wow}
     Given $Q^1, Q^2 \in \probprobx$, the Wasserstein over Wasserstein (WoW) distance between $Q^1$ and $Q^2$ is
     $$
     \WW(Q^1, Q^2) = \inf_{\pi \in \Gamma(Q^1, Q^2)} \int_{\probx^2} \W(P^1, P^2) \, \pi(dP^1, dP^2).
@@ -35,7 +35,7 @@ Here, $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\probx \time
 The second distance function we consider is HIPM, introduced in \cite{catalano2024hierarchical}. The primary intuition behind its definition is as follows. Let $Q^1, Q^2$ be probability measures on $\probx$, and let $\widetilde{P}^1 \sim Q^1$ and $\widetilde{P}^2 \sim Q^2$. We compute the distance between $Q^1$ and $Q^2$ by considering the distances between the random integrals $\widetilde{P}^1(f)$ and $\widetilde{P}^2(f)$, where $f$ ranges over a class of functions from $\X$ to $\R$. By considering these projections, we shift the focus from $\probprobx$ to $\mathcal{P}(\R)$, the latter being significantly easier to handle. As noted in \cite{catalano2024hierarchical}, such a projection is justified by the fact that, for a random probability measure $\widetilde{P}$, the laws of the random integrals $\widetilde{P}(f)$, where $f$ belongs to the set of continuous and bounded functions, are sufficient to characterize the law of $\widetilde{P}$. This leads to the following definition.
 
 \begin{definition}[Hierarchical integral probability metric]
-    \label{def:hipm}
+    \label{definition:hipm}
     Given $Q^1, Q^2 \in \probprobx$, the hierarchical integral probability metric between $Q^1$ and $Q^2$ is defined as
     \[
     d_{\F}(Q^1, Q^2) = \sup_{f \in \F} \W(\law(\widetilde{P}^1(f)), \law(\widetilde{P}^2(f))),
@@ -55,7 +55,7 @@ Both distance functions possess desirable topological properties. In particular,
 
 There is a relation between the two distance functions; specifically, they are special cases of an Integral Probability Metric defined on a generic Polish space.
 \begin{definition}[Integral Probability Metric]
-    \label{def:ipm}
+    \label{definition:ipm}
     Let $(\mathbb{Y},d_{\mathbb{Y}})$ be a Polish space and $\mathcal{H}$ a class of bounded and measurable functions from $\mathbb{Y}$ to $\R$. The Integral Probability Metric (IPM) between $P^1, P^2 \in \mathcal{P}\left(\mathbb{Y}\right)$ is
     \[
     \mathcal{I}_{\mathcal{H}}(P^1,P^2) = \sup_{f\in\mathcal{H}} \left| \int_{\mathbb{Y}} f(y) P^1(dy) - \int_{\mathbb{Y}} f(y) P^2(dy) \right|.

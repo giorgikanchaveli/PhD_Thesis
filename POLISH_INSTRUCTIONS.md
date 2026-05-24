@@ -4,7 +4,7 @@
 
 1. `commands.tex` — custom macros and theorem environments
 2. `notations.tex` — notation table
-3. Any sibling `.tex` files in the same chapter folder (e.g., `introduction.tex`, `known_results_merging.tex`) to check notation and style consistency
+3. Any sibling `.tex` files in the same chapter folder and other chapters (e.g., `introduction.tex`, `known_results_merging.tex`) to check notation and style consistency
 
 > **Scoped reads:** When polishing a specific line range (e.g., lines 100–130), read the target file **only up to the start of that range** (e.g., lines 1–100) to gather preceding context — do not read beyond the polished section. For sibling files, read enough to identify style and notation conventions rather than the full file.
 
