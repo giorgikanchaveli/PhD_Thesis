@@ -99,9 +99,9 @@ from which we conclude that $P^{1,(m)} \neq P^{2,(m)}$.
 \end{proof}
 
 
-As noted above, hierarchical samples $\mathbf{X}_{n,m} \sim Q^1$ and $\mathbf{Y}_{n,m} \sim Q^2$ are used to decide whether $Q^1 = Q^2$. We aim to develop a testing scheme inspired by the Kolmogorov--Smirnov (KS) test. Recall that in the KS test, one rejects the null hypothesis if the distance between the empirical measures of the samples exceeds a given threshold. In Section \ref{section:two_sample_distances}, we will equip the space $\probprobx$ with a distance function; for the moment, assume that $\D$ defines a distance on that space. Then, we could naturally extend the idea of the KS test to our setting if we had access to the samples $\widetilde{P}^1_1, \dots, \widetilde{P}^1_n \overset{\iid}{\sim} Q^1$ and $\widetilde{P}^2_1, \dots, \widetilde{P}^2_n \overset{\iid}{\sim} Q^2$, by rejecting $H_0$ if 
+As noted above, hierarchical samples $\mathbf{X}_{n,m} \sim Q^1$ and $\mathbf{Y}_{n,m} \sim Q^2$ are used to decide whether $Q^1 = Q^2$. We aim to develop a testing scheme inspired by the Kolmogorov--Smirnov (KS) test. Recall that in the KS test, one rejects the null hypothesis if the distance between the empirical measures of the samples exceeds a given threshold. In Section \ref{section:two_sample_distances}, we will equip the space $\probprobx$ with a distance function; for the moment, assume that $d$ defines a distance on that space. Then, we could naturally extend the idea of the KS test to our setting if we had access to the samples $\widetilde{P}^1_1, \dots, \widetilde{P}^1_n \overset{\iid}{\sim} Q^1$ and $\widetilde{P}^2_1, \dots, \widetilde{P}^2_n \overset{\iid}{\sim} Q^2$, by rejecting $H_0$ if 
 \[
-\D\left( \frac{1}{n}\sum_{i=1}^n \delta_{\widetilde{P}^1_i}, \frac{1}{n}\sum_{i=1}^n \delta_{\widetilde{P}^2_i}\right)
+d\left( \frac{1}{n}\sum_{i=1}^n \delta_{\widetilde{P}^1_i}, \frac{1}{n}\sum_{i=1}^n \delta_{\widetilde{P}^2_i}\right)
 \]
 exceeds some threshold. However, recall that we do not observe $\widetilde{P}^1_i$ and $\widetilde{P}^2_i$. Nevertheless, we can estimate them from the observations they generated; that is, we estimate each of them using the corresponding sequences $X_{i,1}, \dots, X_{i,m}$ and $Y_{i,1}, \dots, Y_{i,m}$ as
 \[
@@ -109,7 +109,7 @@ exceeds some threshold. However, recall that we do not observe $\widetilde{P}^1_
 \]
 Thus, the idea of the test is to reject $H_0$ if 
 \[
-\D\left( \frac{1}{n}\sum_{i=1}^n \delta_{\widehat{P}^1_{i,m}}, \frac{1}{n}\sum_{i=1}^n \delta_{\widehat{P}^2_{i,m}}\right)
+d\left( \frac{1}{n}\sum_{i=1}^n \delta_{\widehat{P}^1_{i,m}}, \frac{1}{n}\sum_{i=1}^n \delta_{\widehat{P}^2_{i,m}}\right)
 \]
 is higher than some threshold. As the estimators in the distance function are the fundamental objects of this chapter, we introduce specific notation for them. 
 \begin{definition}[Hierarchical empirical estimator]

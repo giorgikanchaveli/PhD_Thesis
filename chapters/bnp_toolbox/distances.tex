@@ -5,7 +5,7 @@ In this section, we overview several ways to define distances on the laws of ran
 
 \subsection{Distances on $\probprobx$}\label{subsection:bnp_toolbox_distances_probprobx}
 
-We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$; it has been widely used in Bayesian nonparametrics \citep{nguyen2016borrowing,nguyen2026optimal} and machine learning \citep{ho2017multilevel, dukler2019wasserstein,alvarez2020geometric,piening2026generalized}, with also recent works studying its geometric structure \citep{pinzi2025nested,pinzi2025totally,beiglbock2025brenier} and the gradient flows it generates \citep{bonet2025flowing}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
+We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$; it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing,nguyen2026optimal} and machine learning \cite{ho2017multilevel, dukler2019wasserstein,alvarez2020geometric,piening2026generalized}, with also recent works studying its geometric structure \cite{pinzi2025nested,pinzi2025totally,beiglbock2025brenier} and the gradient flows it generates \cite{bonet2025flowing}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
 
 Only in this subsection and in the chapter on two-sample testing, we assume that the sample space $\X$ is Polish with bounded diameter. Using the distance function $d_\X$ on $\X$, one can define the Wasserstein distance on $\probx$ by
 \[
@@ -32,7 +32,7 @@ Since we assume that $\X$ has bounded diameter, all $P \in \probx$ belong to $\m
 \end{definition}
 Here, $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\probx \times \probx$ with marginals $Q^1$ and $Q^2$. Again, Remark 7.1.7 in \cite{luigi2008gradient}, together with the fact that $\W$ has bounded diameter, implies that the metric space $(\probprobx, \WW)$ is Polish with bounded diameter.
 
-The second distance function we consider is HIPM, introduced in \cite{catalano2024hierarchical}. The primary intuition behind its definition is as follows. Let $Q^1, Q^2$ be probability measures on $\probx$, and let $\widetilde{P}^1 \sim Q^1$ and $\widetilde{P}^2 \sim Q^2$. We compute the distance between $Q^1$ and $Q^2$ by considering the distances between the random integrals $\widetilde{P}^1(f)$ and $\widetilde{P}^2(f)$, where $f$ ranges over a class of functions from $\X$ to $\R$. By considering these projections, we shift the focus from $\probprobx$ to $\mathcal{P}(\R)$, the latter being significantly easier to handle. As noted in \cite{catalano2024hierarchical}, such a projection is justified by the fact that, for a random probability measure $\widetilde{P}$, the laws of the random integrals $\widetilde{P}(f)$, where $f$ belongs to the set of continuous and bounded functions, are sufficient to characterize the law of $\widetilde{P}$. This leads to the following definition.
+The second distance function we consider is HIPM, introduced in \cite{catalano2024hierarchical}. The primary intuition behind its definition is as follows. Let $Q^1, Q^2$ be probability measures on $\probx$, and let $\widetilde{P}^1 \sim Q^1$ and $\widetilde{P}^2 \sim Q^2$. We compute the distance between $Q^1$ and $Q^2$ by considering the distances between the random integrals $\widetilde{P}^1(f)$ and $\widetilde{P}^2(f)$, where $f$ ranges over a class of functions from $\X$ to $\R$. By considering these projections, we shift the focus from $\probprobx$ to $\mathcal{P}(\R)$, the latter being significantly easier to handle. Such a projection is justified by the fact that, for a random probability measure $\widetilde{P}$, the laws of the random integrals $\widetilde{P}(f)$, where $f$ belongs to the set of continuous and bounded functions, are sufficient to characterize the law of $\widetilde{P}$ (see Theorem 4.11 in \cite{kallenberg2017random}). This leads to the following definition.
 
 \begin{definition}[Hierarchical integral probability metric]
     \label{definition:hipm}
@@ -49,7 +49,7 @@ d_{\F}(Q^1, Q^2) = \sup_{f \in \F} \W(Q^1 \circ \hat{f}^{-1}, Q^2 \circ \hat{f}^
 \]
 where $\hat{f}$ denotes the lifting of the function $f$, i.e., $\hat{f}(P) = \int_\X f \, dP$, and $Q^k \circ \hat{f}^{-1}$ is the corresponding push-forward measure.
 
-As long as the function class $\F$ is sufficiently rich, this construction defines a valid distance on $\probprobx$. Hereafter, we set $\F = \operatorname{Lip}_1(\X, \R)$ and denote the corresponding metric $d_\F$ by $\dlip$.
+As long as the function class $\F$ is sufficiently rich, this construction defines a valid distance on $\probprobx$. Hereafter, we set $\F = \lipX$ and denote the corresponding metric $d_\F$ by $\dlip$.
 
 Both distance functions possess desirable topological properties. In particular, by Theorem 3.1 in \cite{catalano2024hierarchical}, WoW metrizes weak convergence on $\probprobx$, and HIPM does the same when $\X$ is compact.
 
@@ -63,27 +63,27 @@ There is a relation between the two distance functions; specifically, they are s
 \end{definition}
 First, let us show that WoW can be written as an integral probability metric. By Remark 6.5 in \cite{villani2008optimal}, if $P^1,P^2$ belong to $\mathcal{P}_1(\X)$, the Wasserstein space of order $1$, then the Wasserstein distance can be written as
 $$
-\W(P^1,P^2) = \sup_{f\in \text{Lip}_1(\X,\R)} \left| \int_\X f(x) P^1(dx) - \int_\X f(x) P^2(dx) \right|,
+\W(P^1,P^2) = \sup_{f\in \lipX} \left| \int_\X f(x) P^1(dx) - \int_\X f(x) P^2(dx) \right|,
 $$
-where $\text{Lip}_1(\X,\R)$ denotes the set of $1$-Lipschitz continuous functions from $\X$ to $\R$. Since $(\probprobx, \WW)$ is a Polish space with bounded diameter, we can use the above result to obtain, for all $Q^1,Q^2\in\probprobx$,
+where $\lipX$ denotes the set of $1$-Lipschitz continuous functions from $\X$ to $\R$. Since $(\probprobx, \WW)$ is a Polish space with bounded diameter, we can use the above result to obtain, for all $Q^1,Q^2\in\probprobx$,
 \[
-\WW(Q^1,Q^2) = \sup_{f\in \text{Lip}_1(\probx,\R, \W)} \left| \int_{\probx} f(P) Q^1(dP) - \int_{\probx} f(P) Q^2(dP) \right|,
+\WW(Q^1,Q^2) = \sup_{f\in \mathrm{Lip}_1(\probx,\R, \W)} \left| \int_{\probx} f(P) Q^1(dP) - \int_{\probx} f(P) Q^2(dP) \right|,
 \]
-where $\text{Lip}_1(\probx,\R, \W)$ denotes the set of $1$-Lipschitz continuous functions from $\probx$ to $\R$ with respect to $\W$.
+where $\mathrm{Lip}_1(\probx,\R, \W)$ denotes the set of $1$-Lipschitz continuous functions from $\probx$ to $\R$ with respect to $\W$.
 
 Similarly, we show that HIPM can be written as an integral probability metric. For $Q^1,Q^2 \in \probprobx$,
 \begin{align*}
-\dlip(Q^1,Q^2) &= \sup_{f\in \text{Lip}_1(\X,\R)} \W(Q^1\circ \hat{f}^{-1}, Q^2\circ \hat{f}^{-1}) \\
-&= \sup_{f\in \text{Lip}_1(\X,\R)}\sup_{g\in\lipR}\left| \int_{\R}g(x) (Q^1\circ\hat{f}^{-1})(dx) - \int_{\R}g(x) (Q^2\circ\hat{f}^{-1})(dx) \right| \\
-& = \sup_{f\in \text{Lip}_1(\X,\R)} \sup_{g\in\lipR}\left|\int_{\probx}g(\widehat{f}(P))Q^1(dP) - \int_{\probx}g(\widehat{f}(P))Q^2(dP) \right| \\
-& = \sup_{f\in \text{Lip}_1(\X,\R)}\sup_{g\in\lipR}\left|\int_{\probx}g(P(f))Q^1(dP) - \int_{\probx}g(P(f))Q^2(dP) \right| \\
+\dlip(Q^1,Q^2) &= \sup_{f\in \lipX} \W(Q^1\circ \hat{f}^{-1}, Q^2\circ \hat{f}^{-1}) \\
+&= \sup_{f\in \lipX}\sup_{g\in\lipR}\left| \int_{\R}g(x) (Q^1\circ\hat{f}^{-1})(dx) - \int_{\R}g(x) (Q^2\circ\hat{f}^{-1})(dx) \right| \\
+& = \sup_{f\in \lipX} \sup_{g\in\lipR}\left|\int_{\probx}g(\widehat{f}(P))Q^1(dP) - \int_{\probx}g(\widehat{f}(P))Q^2(dP) \right| \\
+& = \sup_{f\in \lipX}\sup_{g\in\lipR}\left|\int_{\probx}g(P(f))Q^1(dP) - \int_{\probx}g(P(f))Q^2(dP) \right| \\
 & = \sup_{h\in \D}\left|\int_{\probx}h(P)Q^1(dP) - \int_{\probx}h(P)Q^2(dP) \right|,
 \end{align*}
-where $\D = \{h:\probx\to \R: h(P) = g(P(f)), \ g\in \lipR, f\in \text{Lip}_1(\X,\R) \}$.
+where $\D = \{h:\probx\to \R: h(P) = g(P(f)), \ g\in \lipR, f\in \lipX \}$.
 
-By representing both distance functions as Integral Probability Metrics, we see that HIPM is upper bounded by the WoW distance. Indeed, we can show that $\D$ is a subset of $\text{Lip}_1(\probx, \R, \W)$: let $h \in \mathcal{D}$ and $P^1, P^2 \in \probx$; then
+By representing both distance functions as Integral Probability Metrics, we see that HIPM is upper bounded by the WoW distance. Indeed, we can show that $\D$ is a subset of $\mathrm{Lip}_1(\probx, \R, \W)$: let $h \in \mathcal{D}$ and $P^1, P^2 \in \probx$; then
 \begin{align*}
-|h(P^1) - h(P^2)| = |g(P^1(f)) - g(P^2(f))| \leq |P^1(f) - P^2(f) | &\leq \sup_{f \in \text{Lip}_1(\X, \R)} |P^1(f) - P^2(f) | \\
+|h(P^1) - h(P^2)| = |g(P^1(f)) - g(P^2(f))| \leq |P^1(f) - P^2(f) | &\leq \sup_{f \in \lipX} |P^1(f) - P^2(f) | \\
 &= \W(P^1, P^2).
 \end{align*}
 
