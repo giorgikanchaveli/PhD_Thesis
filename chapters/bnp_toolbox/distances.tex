@@ -62,9 +62,9 @@ There is a relation between the two distance functions; specifically, they are s
     \]
 \end{definition}
 First, let us show that WoW can be written as an integral probability metric. By Remark 6.5 in \cite{villani2008optimal}, if $P^1,P^2$ belong to $\mathcal{P}_1(\X)$, the Wasserstein space of order $1$, then the Wasserstein distance can be written as
-$$
+\begin{equation}\label{equation:wow_is_ipm}
 \W(P^1,P^2) = \sup_{f\in \lipX} \left| \int_\X f(x) P^1(dx) - \int_\X f(x) P^2(dx) \right|,
-$$
+\end{equation}
 where $\lipX$ denotes the set of $1$-Lipschitz continuous functions from $\X$ to $\R$. Since $(\probprobx, \WW)$ is a Polish space with bounded diameter, we can use the above result to obtain, for all $Q^1,Q^2\in\probprobx$,
 \[
 \WW(Q^1,Q^2) = \sup_{f\in \mathrm{Lip}_1(\probx,\R, \W)} \left| \int_{\probx} f(P) Q^1(dP) - \int_{\probx} f(P) Q^2(dP) \right|,

@@ -17,9 +17,24 @@ where the supremum is taken over all probability measures $P$ on $\Y$ with $Y_1,
 where $\mathcal{H}^* = \left\{h - h(y_0) : h \in \mathcal{H}, y_0 \in \Y \right\}$,
 together with the following deviation bound: if all functions in $\mathcal{H}$ are bounded by $M$, then with probability $1-\theta$,
 \begin{equation}
-\label{eq:IPM_deviation}
+\label{eq:IPM_deviation_one_measure}
 |\mathcal{I}_{\mathcal{H}}(P,\hat{P}_n) - \E \, \mathcal{I}_{\mathcal{H}}(P,\hat{P}_n)| \leq M \sqrt{\frac{2}{n} \log \frac{2}{\theta}}.
 \end{equation}
+
+As a consequence, for $P^1, P^2 \in \mathcal{P}(\Y)$, with probability $1-\theta$,
+\begin{equation}
+\label{eq:IPM_deviation_two_measures}
+|\mathcal{I}_{\mathcal{H}}(\hat{P}^1_n,\hat{P}^2_n) -  \mathcal{I}_{\mathcal{H}}(P^1, P^2)| \leq 4\,\mathcal{R}_n(\mathcal{H}^*) + 2M\sqrt{\frac{2}{n} \log \frac{4}{\theta}}.
+\end{equation}
+Indeed, by the triangle inequality for IPMs,
+\[
+|\mathcal{I}_{\mathcal{H}}(\hat{P}^1_n,\hat{P}^2_n) - \mathcal{I}_{\mathcal{H}}(P^1,P^2)| \leq \mathcal{I}_{\mathcal{H}}(P^1,\hat{P}^1_n) + \mathcal{I}_{\mathcal{H}}(P^2,\hat{P}^2_n).
+\]
+Applying~\eqref{eq:IPM_deviation_one_measure} to each term with parameter $\theta/2$ and combining via a union bound, both hold simultaneously with probability $1-\theta$:
+\[
+\mathcal{I}_{\mathcal{H}}(P^i,\hat{P}^i_n) \leq \E\,\mathcal{I}_{\mathcal{H}}(P^i,\hat{P}^i_n) + M\sqrt{\frac{2}{n}\log\frac{4}{\theta}}, \quad i = 1, 2.
+\]
+Applying the bias bound~\eqref{eq:IPM_R} and summing yields~\eqref{eq:IPM_deviation_two_measures}.
 
 As concentration inequalities are generic for the integral probability metric, and the distance functions we consider are special cases of it, we will show in Section~\ref{section:rademacher_complexity} that such inequalities can be obtained for those cases. 
 
