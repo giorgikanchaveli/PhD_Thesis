@@ -2,19 +2,15 @@
 
 
 In this section, we introduce a permutation-based framework for two-sample testing that yields improved performance in practice. As discussed earlier, the threshold derived from Rademacher complexity is overly conservative, resulting in low power for finite sample sizes. The permutation approach alleviates this issue by providing a more accurate approximation of the quantile function of the test statistic under the null hypothesis $H_0,$ while typically yielding a much smaller threshold under the alternative.
-Recall that, given $Q^1,Q^2\in \probprobx$, we observe
+
+Recall that, given $Q^1,Q^2\in \probprobx$, we observe hierarchical samples $\mathbf{X}_{n,m} \sim Q^1$ and $\mathbf{Y}_{n,m} \sim Q^2$ as in Definition~\ref{def:hier_sample} and we construct $\widehat{Q}^1_{n,m}$ and $\widehat{Q}^{2}_{n,m}$, the hierarchical empirical estimators, as in Definition~\ref{definition:hier_emp_estimator}. Equivalently, given the notation $\T_m$ introduced in Definition~\ref{definition:tau_m} and the equivalent formulation~\eqref{eq:equivalent_sampling_Tm}, we observe
 \[
-\widehat{P}^1_{1,m},\cdots, \widehat{P}^1_{n,m} \overset{\iid}{\sim} Q^{1,(m)}, \quad 
-\widehat{P}^2_{1,m},\cdots, \widehat{P}^2_{n,m} \overset{\iid}{\sim} Q^{2,(m)}.
+\widehat{P}^1_{1,m}, \dots, \widehat{P}^1_{n,m} \overset{\iid}{\sim} \T_m[Q^{1}], \qquad \widehat{P}^2_{1,m}, \dots, \widehat{P}^2_{n,m} \overset{\iid}{\sim} \T_m[Q^{2}].
 \]
 Using these samples, we compute the distance $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$, where $d$ can be either WoW or HIPM. Our goal is to estimate the quantile function of the random variable $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$ assuming that $Q^1 = Q^2,$ and use it as a testing threshold. Ideally, such a quantile could be estimated empirically from multiple independent realizations of this random variable. In practice, however, only a single realization is available.
 
-We circumvent this limitation by noting that under the null hypothesis $Q^1 = Q^2$, all random probability measures $\widehat{P}^k_{i,m}$ share the same distribution. Consequently, if we randomly shuffle these objects and recompute the distance, the resulting value constitutes another realization from the distribution of $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$. By repeating this process, we can obtain several samples of the distance between hierarchical estimators. Although these samples are not independent, this dependence is typically negligible in practice when the sample sizes $n$ and $m$ are sufficiently large.
+We circumvent this limitation by noting that under the null hypothesis $Q^1 = Q^2$, all random probability measures $\widehat{P}^k_{i,m}$ share the same distribution. Consequently, if we randomly shuffle these objects and recompute the distance, the resulting value constitutes another realization from the distribution of $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$. By repeating this process, we can obtain several samples of the distance between hierarchical estimators. Although these samples are not independent, this dependence is typically negligible in practice when $n$ is sufficiently large.
 
-We now formalize this procedure. Recall the hierarchical estimators 
-\[
-\widehat{Q}^1_{n,m} = \frac{1}{n} \sum_{i = 1}^n \delta_{\widehat{P}^1_{i,m}} \quad \text{and} \quad \widehat{Q}^2_{n,m} = \frac{1}{n} \sum_{i = 1}^n \delta_{\widehat{P}^2_{i,m}}.
-\]
 To implement the permutation test, we first form the pooled collection of random probability measures
 \[
 \left\{ \widehat{P}_{1,m},\cdots, \widehat{P}_{2n,m}  \right\} :=\left\{ \widehat{P}^1_{1,m}, \dots, \widehat{P}^1_{n,m}, \widehat{P}^2_{1,m}, \dots, \widehat{P}^2_{n,m} \right\} .
@@ -29,7 +25,7 @@ Finally, we compute the distance $d(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}
 
 Repeating this process, randomly permuting the pooled sample and recomputing the distance, yields the approximate samples of the distance between the hierarchical estimators of $Q^1$ and $Q^2$. Then, for a given significance level $\theta \in (0,1),$ we set the testing threshold equal to the empirical $(1-\theta)$-quantile of these values.
 
-In practice, since we work with the hierarchical samples $\mathbf{X}_{n,m}, \mathbf{Y}_{n,m}$ permutation is implemented by exchanging the rows between or across them. The resulting procedure is summarized in Algorithm~\ref{algorithm::permutation_approach}.
+In practice, since we work with the hierarchical samples $\mathbf{X}_{n,m}, \mathbf{Y}_{n,m}$, permutation is implemented by shuffling rows across the two matrices. The resulting procedure is summarized in Algorithm~\ref{algorithm::permutation_approach}.
 
 \begin{center}
 \begin{minipage}{0.85\textwidth} % Adjust 0.85 to make it narrower or wider
@@ -60,7 +56,7 @@ T_{n,m} = \sqrt{\frac{n}{2}}\dlip\left( \widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}
 \]
 The corresponding threshold is defined as
 \[
-r(n,m,\theta) = \inf \left\{ t \in \R : \mathbb{P}\left(\widetilde{T}_{n,m} > t \right) \leq \theta \right\},
+r(n,m,\theta) = \inf \left\{ t \in \R : \mathbb{P}\left(\widetilde{T}_{n,m} > t \mid \mathbf{X}_{n,m},\mathbf{Y}_{n,m} \right) \leq \theta \right\},
 \]
 where 
 \[
@@ -68,12 +64,11 @@ where
 \]
 Note that this scaling is introduced solely for theoretical analysis and is not required for the practical implementation of the algorithm.
 
-In this section, we restrict attention to the case $d=\dlip$. Deriving the asymptotic distribution of $T_{n,m}$ depends on whether the function class over which the corresponding integral probability metric is defined is a Donsker class (see the proof of Theorem~\ref{theorem::asympt_distr_dlip}). At present, we are unable to verify this property for the WoW distance, and therefore do not establish the theoretical guarantees.
-
-To conclude, we establish asymptotic level-$\theta$ control and consistency guarantees for the proposed testing scheme.
+For the distance $\dlip$ in dimension $1$, we are able to establish theoretical guarantees for the permutation test described above. The reason is that the class of measurable functions $\dstar$ used to express the distance as an IPM in this case is a Donsker class. This implies that we can control the asymptotic behavior of both the test statistic and the permutation threshold towards norms of Brownian bridges.
+The permutation test can be implemented for both metrics and in any dimension, but the asymptotic guarantees are only available for the HIPM metric in dimension $1$. 
 \begin{theorem}[Consistency of permutation approach]
-\label{theorem::perm__consistency_dlip}
-Given $\X = [a,b]$, and $Q^1, Q^2 \in \probprobx$. Let $\theta$ denote the significance level and $r(n,m, \theta)$ be a threshold from permutation approach. Then
+\label{theorem:perm__consistency_dlip}
+Given $\X = [a,b]$ and $Q^1, Q^2 \in \probprobx$. Let $\theta$ denote the significance level and $r(n,m, \theta)$ be the threshold from the permutation approach. Then
 \begin{itemize}
     \item if $Q^1 = Q^2,$ then $$ \limsup_{n,m\to \infty} \mathbb{P}\left(T_{n,m}>r(n,m, \theta)\right)\leq \theta.$$
     \item if $Q^1 \neq Q^2,$ then $$ \lim_{n,m\to \infty} \mathbb{P}\left(T_{n,m} > r(n,m,\theta) \right) = 1.$$
