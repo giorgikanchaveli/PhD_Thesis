@@ -127,14 +127,14 @@ Note that the law of each $\widehat{P}^k_{i,m}$ is different from $Q^k$ for $k =
     Let $Q \in \probprobx$ and $m \geq 1$. We define $\T_m[Q] \in \probprobx$ as the law of $\frac{1}{m} \sum_{i=1}^m \delta_{X_i}$ for $\tilde{P} \sim Q$ and $X_1, \dots, X_m | \tilde{P} \overset{\iid}{\sim} \tilde{P}$.
 \end{definition}
 As noted above, a direct consequence of de Finetti's theorem is that, for any $Q \in \probprobx$,
-\begin{equation}\label{eq:equivalent_sampling_Tm}
+\begin{equation*}
 \T_m[Q] \overset{w}{\to} Q \quad \text{as } m \to \infty.
-\end{equation}
+\end{equation*}
 
 To summarize, given $Q^1$ and $Q^2$, since we estimate the random probability measures $\widehat{P}^k_{i,m}$ from the hierarchical samples $\mathbf{X}_{n,m}$ and $\mathbf{Y}_{n,m}$, we effectively observe 
-\[
+\begin{equation}\label{eq:equivalent_sampling_Tm}
 \widehat{P}^1_{1,m}, \dots, \widehat{P}^1_{n,m} \overset{\iid}{\sim} \T_m[Q^1], \quad \widehat{P}^2_{1,m}, \dots, \widehat{P}^2_{n,m} \overset{\iid}{\sim} \T_m[Q^2].
-\]
+\end{equation}
 We aim to determine whether $Q^1$ and $Q^2$ are identical by comparing the empirical measures supported on these two samples. For such a comparison, we require a distance function on $\probprobx$.
 
 

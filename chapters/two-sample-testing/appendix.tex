@@ -1,9 +1,9 @@
 \section{Function class for HIPM}\label{appendix:reductionD}
-Recall that $(\X,d_\X)$ is a Polish space with bounded diameter $\mathrm{diam}(\X) = K.$ Recall also, the definition of the function class $\D$ on which HIPM is defined.
+Recall that $(\X,d_\X)$ is a Polish space with bounded diameter $\mathrm{diam}(\X) = K.$ Recall also the definition of the function class $\D$ on which HIPM is defined.
 \[
 \D = \{h:\probx\to \R: h(P) = g(P(f)),  g\in\lipR, f\in \lipX \}
 \]
-Note that, as $g$ can be any constant function, $\D$ is not uniformly bounded. However, as we are working with the Lipschitz functions, and the sample space has a bounded diameter, intuition suggests that we can obtain a uniformly bounded function class starting from $\D$ without changing the distance function. 
+Note that, as $g$ can be any constant function, $\D$ is not uniformly bounded. However, as we are working with Lipschitz functions and the sample space has bounded diameter, intuition suggests that we can obtain a uniformly bounded function class starting from $\D$ without changing the distance function. 
 
 We show that after reducing the function class $\D$ to another function class $\dstar,$ where 
 \begin{equation}\label{definition:dstar}
@@ -17,11 +17,11 @@ and
 $$
 \lipKzero = \{ g^* = g - g(0) : g \in \lipK \},
 $$
-HIPM remains the same distance function when the supremum is taken over $\dstar.$ 
+the HIPM distance is unchanged when the supremum is taken over $\dstar.$ 
 
 Recall that 
 $$
-\dlip(Q^1,Q^2) = \sup_{h\in \D}\left| \int_{\probx} h(P)\,Q^1(dP) - \int_{\probx} h(P)\,Q^2(dP) \right|.
+\dlip(Q^1,Q^2) = \sup_{h\in \D}\left| \int_{\probx} h(P)\,\mathrm{d}Q^1(P) - \int_{\probx} h(P)\,\mathrm{d}Q^2(P) \right|.
 $$  
 \begin{itemize}
     \item Step 1: Reduce $\D$ to
@@ -35,61 +35,1769 @@ Note that the functions in $\lipXstar$ are $1$-Lipschitz, and they are uniformly
 \[
 \sup_{x\in\X}|f^*(x)| = \sup_{x\in\X}|f(x) - f(x_0) |\leq \sup_{x\in \X}d_\X(x,x_0)\leq K.
 \]
-Now the question is whether the distance changes when we consider $\lipXstar$ instead of $\lipX.$ For that we have to show that $\D \subset \D'$ as the other direction is trivial.    
+The question is whether the distance changes when we replace $\lipX$ by $\lipXstar.$ It therefore suffices to verify that $\D \subset \D'$, since the reverse inclusion is immediate.    
 
 Let $h(P) = g(P(f))$ where $f\in\lipX, g\in \lipR$. Define $\widetilde{g}(x) = g(x + f(x_0))$ and $f^*(x) = f(x) - f(x_0)$. Note that $\widetilde{g}\in \lipR$, because for every $x, y \in \R,$
 $$
 |\widetilde{g}(x) - \widetilde{g}(y)| = |g(x+f(x_0)) - g(y+f(x_0))| \leq |(x+f(x_0)) - (y + f(x_0))| = |x-y|.
 $$
-So we get,
+Hence,
 $$
 \widetilde{g}(P(f^*)) = \widetilde{g}(P(f) - f(x_0)) = g(P(f))= h(P).
 $$
 \begin{itemize}
     \item Step 2: Reduce the function class $\D'$ to the function class
     \[
-    D'' = \{ h : \probx \to \R: h(P) = g(P(f)) \text{ s.t. } g \in \lipK, f \in \lipXstar \}.
+    \D'' = \{ h : \probx \to \R: h(P) = g(P(f)) \text{ s.t. } g \in \lipK, f \in \lipXstar \}.
     \]
 \end{itemize}
 Since $\lipXstar$ is uniformly bounded by $K$, every function $g\in\lipR$ receives an input that takes values in $[-K,K]$. Indeed, for every $f^*\in\lipXstar$
 $$
-\sup_{P\in\probx}|P(f^*)|\leq \sup_{P\in\probx}P|f^*|\leq K,
-$$ Because of this, we reduce $\lipR$ to $\lipK.$
+\sup_{P\in\probx}|P(f^*)|\leq \sup_{P\in\probx}P|f^*|\leq K.
+$$
+Consequently, we restrict attention to $\lipK$ in place of $\lipR.$
 
 \begin{itemize}
-    \item Step 3: Reduce $D''$ to
+    \item Step 3: Reduce $\D''$ to
     \[
     \dstar = \{ h : \probx \to \R: h(P) = g(P(f)) \text{ s.t. } g \in \lipKzero, f \in \lipXstar \}.
     \]
 \end{itemize}
 
-Note that $\lipK$ is not uniformly bounded, as it contains all the constant functions. So, we instead consider  
+Note that $\lipK$ is not uniformly bounded, as it contains all constant functions. So, we instead consider  
 $$\lipKzero= \{g^* = g - g(0): g \in \lipK\}.$$  
 This function class is uniformly bounded, because for all $g^* \in \lipKzero$
 $$
 \sup_{x\in[-K,K]}|g^*(x)| = \sup_{x\in[-K,K]}|g(x) - g(0)| \leq \sup_{x\in[-K,K]} |x| \leq K.
 $$
-The last thing to check is that the supremum does not change when we consider $\lipKzero$ instead of $\lipK.$ For that we show that 
-\[
-\sup\limits_{h' \in \D'' } \left|\int_{\probx} h'(P)\,Q^1(dP) - \int_{\probx} h'(P)\,Q^2(dP) \; \right|=
-\sup\limits_{h \in \dstar} \left|\int_{\probx} h(P)\,Q^1(dP) - \int_{\probx}h(P)\,Q^2(dP)\right|.
-\]
+It remains to verify that the supremum is unchanged when $\lipK$ is replaced by $\lipKzero.$ To this end, we show that
+\begin{align*}
+\sup_{h' \in \D''} \left|\int_{\probx} h'(P)\,\mathrm{d}Q^1(P) - \int_{\probx} h'(P)\,\mathrm{d}Q^2(P)\right|
+&= \sup_{h \in \dstar} \left|\int_{\probx} h(P)\,\mathrm{d}Q^1(P) - \int_{\probx}h(P)\,\mathrm{d}Q^2(P)\right|.
+\end{align*}
 Note that the right-hand side is at most the left-hand side, since $\dstar \subset \D''.$
 
 Now let $h' \in \D''$, i.e.\ $h'(P) = g(P(f^*))$ for $f^* \in \lipXstar$, $g \in \lipK$. Define $g^*(x):= g(x) - g(0)$. We have,
 \begin{align*}
-    \bigg|\int_{\probx} h'(P)\,Q^1(dP) &- \int_{\probx} h'(P)\,Q^2(dP) \bigg| \\
-    & = \bigg|\int_{\probx} g(P(f^*))\,Q^1(dP) - \int_{\probx} g(P(f^*))\,Q^2(dP) \bigg|\\
-    & = \bigg|\int_{\probx} g^*(P(f^*))\,Q^1(dP) - \int_{\probx} g^*(P(f^*))\,Q^2(dP)\bigg|,
+    \bigg|\int_{\probx} h'(P)\,\mathrm{d}Q^1(P) &- \int_{\probx} h'(P)\,\mathrm{d}Q^2(P) \bigg| \\
+    & = \bigg|\int_{\probx} g(P(f^*))\,\mathrm{d}Q^1(P) - \int_{\probx} g(P(f^*))\,\mathrm{d}Q^2(P) \bigg|\\
+    & = \bigg|\int_{\probx} g^*(P(f^*))\,\mathrm{d}Q^1(P) - \int_{\probx} g^*(P(f^*))\,\mathrm{d}Q^2(P)\bigg|,
 \end{align*}
-since $Q^1$ and $Q^2$ have the same total mass equal to 1. So we get that for every $h' \in \D'',$
-\[
-\bigg|\int_{\probx} h'(P)\,Q^1(dP) - \int_{\probx} h'(P)\,Q^2(dP) \bigg| \leq \sup\limits_{h \in \dstar} \left|\int_{\probx} h(P)\,Q^1(dP) - \int_{\probx}h(P)\,Q^2(dP)\right|
-\]
+since $Q^1$ and $Q^2$ are probability measures, so the constant $g(0)$ cancels in the difference. Consequently, for every $h' \in \D'',$
+\begin{align*}
+\bigg|\int_{\probx} h'(P)\,\mathrm{d}Q^1(P) - \int_{\probx} h'(P)\,\mathrm{d}Q^2(P) \bigg|
+&\leq \sup_{h \in \dstar} \left|\int_{\probx} h(P)\,\mathrm{d}Q^1(P) - \int_{\probx}h(P)\,\mathrm{d}Q^2(P)\right|
+\end{align*}
 
-\par In summary, the function class we consider for computing HIPM is
+In summary, the function class we consider for computing HIPM is
 \[
 \dstar= \{h:\probx \to \R : h = g(P(f)), \; f \in \lipXstar, \; g \in \lipKzero\}.
 \] 
 Since $\lipKzero$ is uniformly bounded by $K$, we get that $\dstar$ is also uniformly bounded by $K.$ When it is clear from the context, we will write $g$ and $f$ instead of $g^*$ and $f^*$.
+
+
+
+
+
+
+
+
+
+\section{Weak Convergence of Empirical Processes}\label{appendix:weakconvergence}
+In this section, we describe the general strategy for establishing weak convergence (also known as convergence in distribution) of empirical processes and discuss conditions under which this convergence can be metrized. Finally, we introduce the notion of uniform Donsker
+classes of functions. 
+
+\subsection{Weak convergence on $\ell_\infty(T)$}
+Consider some set $T$ and $\ell_\infty(T)$, the space of bounded functions from $T$ to $\R$ equipped with the supnorm. The space $\left(\ell_\infty(T), \|\cdot\|_\infty\right)$ is equipped with the Borel sigma algebra. We consider $\ell_\infty(T)$ since empirical process contains random variables taking values in this space. Weak convergence on $\ell_\infty(T)$ is defined as follows.
+
+
+\begin{definition}[Weak convergence on $\ell_\infty(T)$]\label{definition::weak_convergence}
+A sequence of probability measures $(\mu_n)_{n \geq 1}$ on $\ell_\infty(T)$ converges weakly to a probability measure $\mu$ on $\ell_\infty(T)$ if for all $ f \in C_b(\ell_\infty(T), \R)$,
+\[
+\lim_{n \to \infty}\int_{\ell_\infty(T)} f \, \mathrm{d}\mu_n = \int_{\ell_\infty(T)} f \, \mathrm{d}\mu.
+\]
+\end{definition}
+Consequently, a sequence of random variables $\left(\mathbb{Z}_n\right)_{n\geq 1}$ converges weakly to a random variable $\mathbb{Z}$ if their associated laws converge weakly. We will use the notations
+\[
+\lim_{n \to \infty} \mathbb{Z}_n = \mathbb{Z}, \qquad
+\mathbb{Z}_n \overset{w}{\to} \mathbb{Z}, \qquad
+\mathcal{L}(\mathbb{Z}_n) \overset{w}{\to} \mathcal{L}(\mathbb{Z}).
+\]
+In the case of a separable probability measure, weak convergence can be metrized by the bounded Lipschitz metric (see Definition~\ref{definition:bounded_lipschitz}). Recall the definition of a separable probability measure.
+\begin{definition}[Separable probability measure]\label{definition::separable_probmeasure}
+A probability measure $\mu$ on a measurable space $\left(\ell_\infty(T), \mathcal{B}\left(\ell_\infty(T)\right) \right)$ is separable if there exists a separable subset $A \subset \ell_\infty(T)$ such that $\mu\left(A\right) = 1$.
+\end{definition}
+Then, for a sequence of probability measures $(\mu_n)_{n\geq 1}$ on $\ell_\infty(T)$ and a separable probability measure $\mu \in \mathcal{P}(\ell_\infty(T))$, we have (see page~73 in~\cite{van1996weak})
+\[
+\mu_n \overset{w}{\to} \mu \quad \iff \quad \lim_{n \to \infty} \bl(\mu_n, \mu) = 0.
+\]
+
+Separability is closely related to the tightness of a probability measure. We recall the definition of tightness.
+
+\begin{definition}[Tightness]\label{def::tight_probmeasure}
+A probability measure $\mu$ on a metric space $(\ell_\infty(T), \|\cdot \|_\infty)$ is tight if, for every $\epsilon > 0$, there exists a compact subset $A \subset \ell_\infty(T)$ such that
+\[
+\mu\left(A\right) \geq 1 - \epsilon.
+\]
+\end{definition}
+On complete metric spaces, separability of probability measures is equivalent to tightness (see Lemma~1.3.2 in~\cite{van1996weak}). This equivalence applies in our setting, since the space $\left(\ell_\infty(T), \|\cdot\|_\infty\right)$ is complete.
+
+The general strategy for showing the weak convergence of random variables taking values in $\ell_\infty(T)$ is based on the following theorem.
+\begin{theorem}\label{theorem::weak_conv_stochproc}
+    The sequence $\mathbb{Z}_n : \Omega_n \to \ell_\infty(T)$ converges weakly to the tight limit $\mathbb{Z}$ if and only if the following conditions hold:
+    \begin{itemize}
+        \item i) (Finite-dimensional convergence) The marginals 
+        \[
+        \left(\mathbb{Z}_n(t_1),\cdots, \mathbb{Z}_n(t_k)\right) \overset{w}{\to} \left(\mathbb{Z}(t_1),\cdots,\mathbb{Z}(t_k)\right)
+        \] for every $k\geq 1$ and $t_1,\cdots,t_k \in T.$
+        \item ii) (Asymptotic equicontinuity) There exists a semimetric $\rho$ on $T$ such that $(T,\rho)$ is totally bounded and the sequence $\mathbb{Z}_n$ is asymptotically uniformly $\rho$-equicontinuous in probability, i.e.
+        \[
+        \lim_{\delta \to 0} \limsup_{n} \mathbb{P}\left( \sup_{s,t\in T, \rho(s,t)<\delta} \left| \mathbb{Z}_n(s)-\mathbb{Z}_n(t) \right| > \epsilon\right) = 0
+        \]
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    The proof follows by combining Theorem 1.5.7, Theorem 1.5.4, and point (ii) of Lemma 1.3.8 from \cite{van1996weak}.
+\end{proof}
+
+\subsection{Empirical processes} 
+Empirical processes generalize the central limit theorem to functions of random variables by establishing uniform convergence over classes of functions. The main object is the empirical measure constructed from observed random variables; from it, one defines a stochastic process indexed by a function class, for which we are interested in studying a uniform central limit theorem. In this subsection, we will consider the Polish space denoted by $\Y$.
+\begin{definition}[Empirical process]\label{definition::empirical_process}
+Let $\mathcal{H}$ be a class of measurable functions from $\Y$ to $\R$, let $P\in \mathcal{P}(\Y)$ be a probability measure, and let $Y_1,Y_2,\dots\overset{\iid}{\sim}P$. The empirical process is the sequence of random variables $(G_{n,P})_{n\geq 1}$, each taking values in $\R^\mathcal{H}$, defined by
+\[
+G_{n,P}(f) = \sqrt{n}(P_n(f) - P(f)),
+\]
+where $P_n =\frac{1}{n}\sum_{i = 1}^n\delta_{Y_i}$.
+\end{definition}
+Eventhough empirical process is a sequence of random variables, we will denote it as $G_{n,P}$. Note that, in this setting, $T = \mathcal{H}.$ To guarantee that such random variables take values in $\ell_\infty(\mathcal{H}),$ we assume that the function class $\mathcal{H}$ satisfies:
+\begin{equation}\label{equation:assumption_for_empirical_proc}
+\sup_{f\in\mathcal{H}} \left|f(y) - P(f) \right| < \infty
+\end{equation}
+for all $y \in \Y.$ For the definitions that follow, we will asume that the condition~\eqref{equation:assumption_for_empirical_proc} is satisfied.
+
+Provided that the second moment exists for some fixed $f \in \mathcal{H}$, we have that $G_{n,P}(f)$ converges in distribution to a normally distributed random variable with mean $0$ and variance $P(f^2) - (P(f))^2$. If such convergence holds
+uniformly over $f \in \mathcal{H}$, then the function class $\mathcal{H}$ has a special name:
+\begin{definition}[Donsker class]\label{definition::donsker}
+Let $G_{n,P}$ be an empirical process associated with $P \in \mathcal{P}(\mathbb{Y})$ and let $\mathcal{H}$ be a class of measurable functions from $\mathbb{Y}$ to $\R$. The class $\mathcal{H}$ is $P$-Donsker if the empirical process $G_{n,P}$ converges in distribution in the
+space $\ell_\infty(\mathcal{H})$ to a tight random variable.
+\end{definition}
+If such convergence holds, the limiting random variable also has a special name.
+\begin{definition}[Brownian bridge]\label{def::brownbridge}
+Let $P \in \mathcal{P}\left(\mathbb{Y}\right)$ and let $\mathcal{H}$ be a class of measurable functions from $\mathbb{Y}$ to $\R$ satisfying. The $P$-Brownian bridge process indexed by $\mathcal{H}$ is the zero-mean
+Gaussian process $(G_f)_{f \in \mathcal{H}}$ such that, for every $k \geq 1$ and
+$f_1,\dots,f_k \in \mathcal{H}$,
+\[
+\left(G_{f_1},\dots, G_{f_k}\right) \sim \mathcal{N}\left(0, \Sigma^k\right),
+\]
+where the covariance matrix $\Sigma^k$ is given by
+\[
+\Sigma^k_{ij} = P(f_i f_j) - P(f_i)P(f_j)
+\]
+for $i,j = 1,\dots,k.$
+\end{definition}
+The main tool for establishing the weak convergence of empirical processes is Theorem~\ref{theorem::weak_conv_stochproc}. For marginal convergence, one typically uses the classical central limit theorem. For the asymptotic equicontinuity, the main tool we will use is the following maximal inequality (lemma 19.34 in~\cite{van2000asymptotic}).
+\begin{lemma}\label{lemma:maximalineq}
+Let $\mathcal{H}$ be a class of measurable functions $f : \mathbb{Y}\to\R$ such that $Pf^2 < \delta^2$ for all $f \in \mathcal{H}$, and let $G_{n,P}$ be empirical process. Let $F$ be an envelope function of $\mathcal{H}$ and define
+\[
+\alpha(\delta) = \frac{\delta}{\sqrt{\log \mathcal{N}_{[]}\left(\delta, \mathcal{H}, \mathrm{L}_2(P) \right)}}.
+\]
+Then
+\[
+\E\left\| G_{n,P} \right\|_{\mathcal{H}}
+\lesssim
+J_{[]} (\delta, \mathcal{H}, \mathrm{L}_2(P))
++ \sqrt{n}\,P\left\{F\mathbf{1}\big(F > \sqrt{n}\alpha(\delta)\big) \right\},
+\]
+where $\left\|G_{n,P} \right\|_{\mathcal{H}} = \sup_{f \in \mathcal{H}} \left|G_{n,P}(f) \right|$,
+\[
+J_{[]} (\delta, \mathcal{H}, \mathrm{L}_2(P))
+= \int_0^\delta \sqrt{\log \mathcal{N}_{[]}\left(\epsilon, \mathcal{H}\cup\{0\}, \mathrm{L}_2(P) \right)}\,\mathrm{d}\epsilon,
+\]
+and $\mathcal{N}_{[]}$ denotes the bracketing number.
+\end{lemma}
+\subsection{Uniform Donsker Classes}
+In the previous subsection, we introduced the notion of a Donsker class, where the property is defined relative to a fixed probability measure. The concept of a uniform Donsker class extends this idea by requiring that weak convergence hold uniformly over a family of probability measures. This notion will be useful in the context of hierarchical sampling because, as the number of columns in a hierarchical sample increases, the distributions of the random probability measures constructed from exchangeable sequences also vary.
+\begin{definition}\label{definition::donsker_uniform}
+Let $\mathcal{H}$ be a class of real-valued measurable functions on $\mathbb{Y}$, and let $(G_{n,P})_{P \in \mathcal{P}}$ be family of empirical processes associated with set of probability measures $\mathcal{P} \subset \mathcal{P}(\mathbb{Y})$. The class $\mathcal{H}$ is Donsker uniformly over $\mathcal{P}$ if
+\[
+\lim_{n \to \infty} \sup_{P \in \mathcal{P}}
+\bl\!\left( \mathcal{L}(G_{n,P}), \mathcal{L}(G_P) \right) = 0,
+\]
+where $G_P$ is a tight Gaussian process for every $P \in \mathcal{P}$.
+\end{definition}
+
+The main tool for establishing that a function class is uniformly Donsker is Theorem~2.8.4 in~\cite{van1996weak}, which we state as follows.
+\begin{theorem}\label{theorem::uniform_donsker}
+Let $\mathcal{H}$ be a class of measurable functions with envelope function $F$ and $\mathcal{P}$ some class of probability measures such that 
+\[
+\lim_{M\to \infty} \sup_{P \in \mathcal{P}} PF^2\left\{ F > M \right\} = 0
+\]
+\[
+\int_0^\infty \sup_{P \in \mathcal{P}}\sqrt{\log \N_{[]}\left(\epsilon \|F\|_{P,2}, \mathcal{H}, \mathrm{L}_2(P) \right)}\,\mathrm{d}\epsilon < \infty,
+\]
+where $\|F\|_{P,r} = \left(\int_{\mathbb{Y}}|F|^r\, \mathrm{d}P\right)^{1/r}$, and $\N_{[]}$ denotes the bracketing number.
+
+Then, $\mathcal{H}$ is Donsker and pre-Gaussian uniformly in $P \in \mathcal{P}$.    
+\end{theorem}
+\begin{definition}\label{definition::pre_gaussian}
+The function class $\mathcal{H}$ is pre-Gaussian uniformly in $P \in \mathcal{P}$ if the associated Brownian bridge processes satisfy the two conditions:
+\[
+\sup_{P \in \mathcal{P}} \E \| G_P \|_\mathcal{H} < \infty, \quad \lim_{\delta \to 0}\sup_{P \in \mathcal{P}} \E \sup_{\rho_P\left(f,g\right)<\delta} \left|G_P(f)-G_P(g) \right| = 0,
+\]
+where 
+\[
+\rho_P(f,f') = \left[ \int_{\mathbb{Y}} \left(f(y) -f'(y) \right)^2 \mathrm{d}P(y) - \left(\int_{\mathbb{Y}}\left(f(y) - f'(y) \right)\mathrm{d}P(y) \right)^2 \right]^{\frac{1}{2}}.
+\]
+\end{definition}
+\begin{remark}\label{remark::seminorm_l_2_supnorm}
+There is a relation between the semi-metric $\rho_P(\cdot, \cdot)$, the $\mathrm{L}_2(P)$ norm, and the supnorm. In particular, since
+\[
+\rho_P(f,f')^2 = \|f - f'\|_{\mathrm{L}_2(P)}^2 - \left(\int_{\mathbb{Y}}\left(f(y) - f'(y) \right)\mathrm{d}P(y) \right)^2,
+\]
+this implies that 
+\[
+\|f-f'\|_\infty \geq \|f - f'\|_{\mathrm{L}_2(P)} \geq \rho_P(f,f').
+\]
+\end{remark}
+
+
+
+
+
+\section{Proofs for Section~\ref{section:permutation_approach}}\label{section:proofs_for_permutation_section}
+In this section, we define the empirical process related to our setting and prove the main Theorem~\ref{theorem:perm_consistency_dlip}.
+
+We consider the space $(\ellstar, \| \cdot \|_{\dstar})$ (see Appendix~\ref{appendix:reductionD} for the definition of $\dstar$) with $\|G\|_{\dstar} = \sup_{h \in \dstar} |G(h)|.$ We equip this space with the Borel sigma-algebra generated by the distance function induced by the norm $\| \cdot \|_{\dstar},$ and work with random variables taking values in $\ellstar.$ Finally, we denote $K = \operatorname{diam}\X.$
+
+Recall the formulation of our problem~\eqref{eq:equivalent_sampling_Tm}. Using the hierarchical estimators $\widehat{Q}_{n,m},$ we define the sequence of empirical processes, i.e. for each $m \geq 1$, empirical process $G_{n,m,Q}$ is defined as 
+$$
+h\in \dstar \mapsto G_{n,m,Q}(h) = \sqrt{n} \left( \widehat{Q}_{n,m}(h) - Q^{(m)}(h)\right).
+$$
+To show that it takes values in $\ellstar$, note that
+\begin{align*}
+\sup_{h \in \dstar} \left|G_{n,m,Q}(h)\right| = \sqrt{n} \sup_{h \in \dstar} \left| \widehat{Q}_{n,m}(h) - Q^{(m)}(h)\right| & \leq  \sqrt{n} \sup_{h \in \dstar} \widehat{Q}_{n,m}(|h|) + \sqrt{n} \sup_{h \in \dstar} Q^{(m)}(|h|) \\
+& \leq 2K\sqrt{n},
+\end{align*}
+since $\dstar$ is uniformly bounded by $K.$
+
+
+
+Note also that, as $\dstar$ is uniformly bounded, we get 
+\[
+\sup_{h \in \dstar} \left|h(P) - Q^{(m)}(h)\right| < \infty \quad \text{for all }Q\in\probprobx.
+\]
+Before proving the main Theorem~\ref{theorem:perm_consistency_dlip}, we study the asymptotic distribution of the test statistic and the threshold via the permutation approach.
+\begin{theorem}[Asymptotic distribution of test statistic]
+\label{theorem::asympt_distr_dlip}
+Given $\X = [a,b]$ and $Q^1,Q^2\in\probprobx.$ Let $T_{n,m} = \sqrt{\frac{n}{2}}\dlip \left(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m} \right)$ for $n,m \geq 1$. Then the following statements hold:
+\begin{itemize}
+    \item If $Q^1 = Q^2,$ then $T_{n,m} \overset{w}{\to} \left\| G_{Q^1} \right\|_{\dstar}$ as $n,m \to \infty$, where $G_{Q^1}$ is a tight $Q^1$-Brownian bridge process indexed by $\dstar$.
+    \item If $Q^1 \neq Q^2$, then $T_{n,m} \overset{p}{\to}\infty $ as $n,m \to \infty$.
+\end{itemize}
+\end{theorem}
+\begin{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We first consider the case $Q^1 = Q^2$.
+
+Our setting is as follows:
+\[
+\widehat{P}^1_{1,m},\dots,\widehat{P}^1_{n,m}
+\overset{\iid}{\sim} Q^{1,(m)}
+\quad \text{and} \quad
+\widehat{P}^2_{1,m},\dots,\widehat{P}^2_{n,m}
+\overset{\iid}{\sim} Q^{2,(m)}.
+\]
+Under the null hypothesis, we have
+\[
+Q^{1,(m)} = Q^{2,(m)}.
+\]
+
+We write the test statistic $T_{n,m}$ as
+\begin{align*}
+T_{n,m}
+= \sqrt{\frac{n}{2}}\dlip(\widehat{Q}^1_{n,m},\widehat{Q}^2_{n,m})
+&= \sup_{h \in \dstar} \Bigg|\sqrt{\frac{n}{2}}\left(\widehat{Q}^1_{n,m}(h) - \widehat{Q}^2_{n,m}(h) \right) \Bigg| \\
+&= \sup_{h \in \dstar} \Bigg|
+\frac{1}{\sqrt{2}}\sqrt{n}\left(\widehat{Q}^1_{n,m}(h) - Q^{1,(m)}(h) \right) \\ 
+& - \frac{1}{\sqrt{2}}\sqrt{n}\left(\widehat{Q}^2_{n,m}(h) - Q^{2,(m)}(h) \right)
+\Bigg|.
+\end{align*}
+
+Since we let $n$ and $m$ diverge to infinity without any dependence between them, let $(n_q)_{q\geq 1}$ and $(m_q)_{q\geq 1}$ be sequences such that
+\[
+\lim_{q \to \infty} n_q = \infty
+\quad \text{and} \quad
+\lim_{q \to \infty} m_q = \infty.
+\]
+Our goal is to show that
+\[
+\lim_{q \to \infty} T_{n_q,m_q} = \left\|G_{Q^1}\right\|_{\dstar}.
+\]
+
+As we have
+\[
+T_{n_q, m_q}
+= \sup_{h \in \dstar} \left|
+\frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - Q^{1,(m_q)}(h)\right)
+- \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^2_{n_q,m_q}(h) - Q^{2,(m_q)}(h)\right)
+\right|,
+\]
+
+In what follows, we use the notation $G_{Q}$ for a tight $Q$-Brownian bridge process indexed by $\dstar$, for $Q \in \probprobx.$ We decompose the proof into four steps: for $k = 1, 2,$ we first show
+\begin{enumerate}[label=(\arabic*)]
+  \item Empirical processes converge uniformly:
+    \[
+    \lim_{n \to \infty}\sqrt{n}\left(Q^k_{n,m}(h) - Q^{k,(m)}(h)\right) =G_{Q^{k,(m)}}\quad \text{uniformly over } m\geq 1.
+    \]
+  \item $\lim_{m \to \infty} G_{Q^{k,(m)}} =G_{Q^k}$
+  \item $\lim_{q\to\infty} \sqrt{n_q}\left( Q^k_{n_q,m_q}(h) - Q^{k,(m_q)}(h)\right) = G_{Q^k}$
+\end{enumerate}
+and finally we show 
+\begin{itemize}
+    \item [(4)] $\lim_{q \to \infty} T_{n_q, m_q} =\left\| G_{Q^1} \right\|_{\dstar}$
+\end{itemize}
+We show (1), (2), and (3) for $Q^1$, as the arguments for $Q^2$ are the same. Let us start with (1). 
+
+Denote by $G_{n,m,Q^1} = \sqrt{n}(\widehat{Q}^1_{n,m} - Q^{1,(m)})$ the empirical process for each $n, m \geq 1$. To show that the function class $\dstar$ is uniformly Donsker over the laws of RPM $Q^{1,(m)}$ for all $m = 1,2,\dots$, we use Theorem~\ref{theorem::uniform_donsker}.
+
+The envelope function of the class $\dstar$ is the constant function
+\[
+K = \operatorname{diam}(\X).
+\]
+Hence, the first assumption is trivially satisfied. Moreover,
+\[
+\|F\|_{P,2} = K.
+\]
+
+By Lemma~\ref{lemma::bracketing-number_covering_number}, we obtain
+\[
+\int_0^\infty \sup_{m \geq 1}\sqrt{\log \N_{[]}\!\left(\epsilon K, \dstar, \mathrm{L}_2(Q^{1,(m)}) \right)}\, d\epsilon
+\leq
+\int_0^\infty \sup_{m \geq 1}\sqrt{\log \N\!\left(\tfrac{\epsilon}{2} K, \dstar, \|\cdot\|_\infty \right)}\, d\epsilon .
+\]
+Since $\|h-h'\|_\infty \leq 2K$ for all $h,h' \in \dstar$, it follows that for all $\epsilon \geq 4$,
+\[
+\N\!\left(\tfrac{\epsilon K}{2}, \dstar, \|\cdot\|_\infty\right)=1.
+\]
+Consequently, it suffices to consider
+\[
+\int_0^4 \sup_{m \geq 1}\sqrt{\log \N\!\left(\tfrac{\epsilon}{2} K, \dstar, \|\cdot\|_\infty \right)}\, d\epsilon,
+\]
+since the remainder of the integral vanishes. By Lemma~\ref{lemma::covnumbdstar}, there exists a constant $C'>0$ such that
+\[
+\int_0^4 \sup_{m \geq 1}\sqrt{\log \N\!\left(\tfrac{\epsilon}{2} K, \dstar, \|\cdot\|_\infty \right)}\, d\epsilon
+\leq
+\int_0^4 C' \epsilon^{-1/2}\, d\epsilon < \infty.
+\]
+
+Therefore, by Theorem~2.8.4 in~\cite{van1996weak},
+\[
+G_{n,m,Q^1} \overset{w}{\to} G_{Q^{1,(m)}} \quad \text{uniformly in } m,
+\]
+where $\{G_{Q^{1,(m)}}\}_{m\ge1}$ is a family of tight Gaussian processes and the class $\dstar$ is uniformly pre-Gaussian in the sense that
+\begin{itemize}
+\item $\displaystyle \sup_{m \geq 1} \E \|G_{Q^{1,(m)}}\|_{\dstar} < \infty$,
+\item $\displaystyle \lim_{\delta \to 0} \sup_{m \geq 1} \E \sup_{\rho_m(h,h')<\delta} \bigl|G_{Q^{1,(m)}}(h)-G_{Q^{1,(m)}}(h')\bigr| = 0,$
+\end{itemize}
+where
+\[
+\rho_m(h,h') :=
+\left(
+\|h-h'\|^2_{\mathrm{L}_2(Q^{1,(m)})}
+-
+\Bigl(\int_{\probx} (h(P)-h'(P))\, Q^{1,(m)}(dP)\Bigr)^2
+\right)^{1/2}.
+\]
+
+We now prove~(2).
+
+By Lemma~\ref{lemma::convergence_Qm},
+\[
+\lim_{m \to \infty} \dlip(Q^{1,(m)},Q^1)=0.
+\]
+To show convergence of the corresponding Gaussian processes, we apply Theorem~\ref{theorem::weak_conv_stochproc}. We equip $\dstar$ with the supremum norm $\|\cdot\|_\infty$. Since the covering number of $\dstar$ is finite, $(\dstar,\|\cdot\|_\infty)$ is totally bounded. It therefore suffices to verify convergence of finite-dimensional distributions and asymptotic equicontinuity.
+
+Fix $h_1,\dots,h_N \in \dstar$ for some integer $N\geq 1$. For each $m$,
+\[
+\bigl(G_{Q^{1,(m)}}(h_1),\dots,G_{Q^{1,(m)}}(h_N)\bigr)
+\sim \mathcal{N}(0,\Sigma^m),
+\]
+where
+\[
+\Sigma^m_{ij}
+=
+Q^{1,(m)}(h_i h_j) - Q^{1,(m)}(h_i)Q^{1,(m)}(h_j).
+\]
+Let
+\[
+\Sigma_{ij}
+=
+Q^{1}(h_i h_j) - Q^{1}(h_i)Q^{1}(h_j)
+\]
+denote the covariance matrix of $\bigl(G_{Q^{1}}(h_1),\dots,G_{Q^{1}}(h_N)\bigr)$.
+
+Note that $\lim_{m\to\infty}\dlip(Q^{1,(m)},Q^1) = 0$ implies that $\lim_{m \to \infty}Q^{1,(m)}(h_i) = Q^1(h_i)$ for all $i = 1,\dots,N.$ Hence the second terms in the covariance matrices $\Sigma_{i,j}^m$ and $\Sigma_{i,j}$ converge.
+
+Since $\dlip$ metrizes weak convergence on $\probprobx$, we have
+\[
+Q^{1,(m)}(h) \to Q^1(h)
+\]
+for every function $h$ that is bounded and continuous with respect to weak convergence on $\probx.$ Therefore, to show the convergence of the first terms of the covariance matrices, it suffices to show that the product $h_ih_j$ is continuous and bounded.
+
+Each $h_i$ is bounded by $K$, hence $\|h_i h_j\|_\infty \le K^2$. Moreover, if $P_n \overset{w}{\to} P$ in $\probx$, then
+\[
+\lim_{n \to \infty} h_i(P_n) 
+= \lim_{n \to \infty} g_i(P_n(f_i)) 
+= g_i \left(\lim_{n \to \infty} P_n(f_i)  \right) 
+= g_i\left(P(f_i)\right) 
+= h_i(P),
+\]
+since both $f_i$ and $g_i$ are continuous and $f_i$ is bounded. Thus $h_i h_j$ is bounded and continuous, implying
+\[
+\Sigma^m_{ij} \to \Sigma_{ij}.
+\]
+Therefore, finite-dimensional distributions converge.
+
+Uniform pre-Gaussianity yields asymptotic equicontinuity. Indeed, since
+\[
+\rho_m(h,h') \le \|h-h'\|_\infty,
+\]
+we have
+\[
+\lim_{\delta\to0}\sup_{m\ge1}
+\E\sup_{\|h-h'\|_\infty<\delta}
+|G_{Q^{1,(m)}}(h)-G_{Q^{1,(m)}}(h')|
+=0.
+\]
+Hence, by Theorem~\ref{theorem::weak_conv_stochproc},
+\[
+\mathcal{L}(G_{Q^{1,(m)}}) \overset{w}{\longrightarrow} \mathcal{L}(G_{Q^1}).
+\]
+
+Next, we show (3). Since $\ellstar$ is complete, the law of the tight Gaussian process $G_{Q^1}$ is separable (see Lemma~1.3.2 in~\cite{van1996weak}); therefore, we can use the metrization of weak convergence on $\ellstar$ (see Appendix~\ref{appendix:weakconvergence}).
+
+Consider the sequences $(n_q)_{q\geq 1}$ and $(m_q)_{q\geq 1}$ defined above. Then
+\begin{align*}
+\bl\left( \mathcal{L}\left(G_{n_q,m_q,Q^1}\right), \mathcal{L}\left(G_{Q^1} \right)\right)
+& \leq \bl\left( \mathcal{L}\left(G_{n_q,m_q,Q^1}\right), \mathcal{L}\left(G_{Q^{1,(m_q)}} \right)\right) \\
+& \quad + \bl\left( \mathcal{L}\left(G_{Q^{1,(m_q)}}\right), \mathcal{L}\left(G_{Q^{1}} \right)\right) \\
+& \leq \sup_{m \geq 1} \bl\left( \mathcal{L}\left(G_{n_q,m}\right), \mathcal{L}\left(G_{Q^{1,(m)}} \right)\right) \\
+& \quad + \bl\left( \mathcal{L}\left(G_{Q^{1,(m_q)}}\right), \mathcal{L}\left(G_{Q^{1}} \right)\right)
+\to 0
+\end{align*}
+by (1) and (2) as $q \to \infty$. 
+
+Now we show (4). Recall that
+\[
+T_{n_q,m_q}
+= \sup_{h \in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - Q^{1,(m_q)}(h) \right)
+- \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^2_{n_q,m_q}(h) - Q^{2,(m_q)}(h) \right)\right|.
+\]
+The term inside the absolute value converges weakly in the space $\ellstar$ to the difference of Gaussian processes
+\[
+\frac{1}{\sqrt{2}}G_{Q^1} - \frac{1}{\sqrt{2}}G_{Q^2}
+\;\overset{d}{=}\;
+G_{Q^1}.
+\]
+Since $\|\cdot\|_{\dstar}$ is a continuous function from $\ellstar$ to $\mathbb{R}$, the Continuous Mapping Theorem yields
+\[
+T_{n_q,m_q} \overset{w}{\to} \|G_{Q^1}\|_{\dstar}
+\quad \text{as } q \to \infty.
+\]
+
+We now address the case $Q^1 \neq Q^2$.
+
+We aim to show that $T_{n_q,m_q} \overset{p}{\to} \infty$. Recall that
+\begin{align*}
+T_{n_q,m_q}
+&= \sup_{h \in \dstar}\left| \sqrt{\frac{n_q}{2}} \left(Q^1_{n_q,m_q}(h) - Q^2_{n_q,m_q}(h) \right)\right| \\
+&= \sup_{h \in \dstar} \Bigg|
+\frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - Q^{1,(m_q)}(h) \right)
+- \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^2_{n_q,m_q}(h) - Q^{2,(m_q)}(h) \right) \\
+& \qquad\qquad
++ \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^{1,(m_q)}(h) - Q^{2,(m_q)}(h) \right)
+\Bigg|.
+\end{align*}
+
+Let $T_{n_q,m_q} = \|a - b + c\|_{\dstar}$, where for $h \in \dstar$,
+\begin{align*}
+a(h) &= \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - Q^{1,(m_q)}(h) \right),\\
+b(h) &= \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^2_{n_q,m_q}(h) - Q^{2,(m_q)}(h) \right),\\
+c(h) &= \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^{1,(m_q)}(h) - Q^{2,(m_q)}(h) \right).
+\end{align*}
+Since
+\[
+\|c\|_{\dstar}
+= \|(a - b + c) - (a - b)\|_{\dstar}
+\leq \|a - b + c\|_{\dstar} + \|a - b\|_{\dstar},
+\]
+we obtain
+\[
+\|a - b + c\|_{\dstar}
+\geq \|c\|_{\dstar} - \|a - b\|_{\dstar}
+\geq \|c\|_{\dstar} - \|a\|_{\dstar} - \|b\|_{\dstar}.
+\]
+
+Thus,
+\begin{align*}
+T_{n_q,m_q}
+&\geq \sup_{h \in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^{1,(m_q)}(h) - Q^{2,(m_q)}(h) \right)\right| \\
+&\quad - \sup_{h\in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - Q^{1,(m_q)}(h) \right)\right| \\
+&\quad - \sup_{h\in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^2_{n_q,m_q}(h) - Q^{2,(m_q)}(h) \right)\right|.
+\end{align*}
+
+From part (a), we showed that
+\begin{align*}
+\sup_{h \in \dstar}\left|\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - Q^{1,(m_q)}(h) \right)\right|
+&\overset{w}{\to} \| G_{Q^1}\|_{\dstar}, \\
+\sup_{h \in \dstar}\left|\sqrt{n_q}\left(Q^2_{n_q,m_q}(h) - Q^{2,(m_q)}(h) \right)\right|
+&\overset{w}{\to} \| G_{Q^2}\|_{\dstar},
+\end{align*}
+where $G_{Q^1}$ and $G_{Q^2}$ are tight Gaussian processes. By Lemma~\ref{lemma::tightness_under_continuity}, the random variables $\| G_{Q^1} \|_{\dstar}$ and $\| G_{Q^2} \|_{\dstar}$ are almost surely bounded.
+
+For brevity, define
+\begin{align*}
+A_q &= \sup_{h\in \dstar} \left|\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - Q^{1,(m_q)}(h) \right)\right|,\\
+B_q &= \sup_{h\in \dstar} \left|\sqrt{n_q}\left(Q^2_{n_q,m_q}(h) - Q^{2,(m_q)}(h) \right)\right|,\\
+C_q &= \sup_{h\in \dstar} \left| \sqrt{n_q} \left(Q^{1,(m_q)}(h) - Q^{2,(m_q)}(h) \right)\right|.
+\end{align*}
+Note that $C_q = \sqrt{n_q} \dlip\left(Q^{1,(m_q)},Q^{2,(m_q)}\right) \to \infty.$ Indeed,
+\begin{align*}
+\Big| \dlip(Q^{1,(m_q)},Q^{2,(m_q)})  &- \dlip(Q^{1},Q^{2})\Big|\\
+&= \left| \sup_{h \in \dstar} \left| Q^{1,(m_q)}(h) -  Q^{2,(m_q)}(h)\right|
+- \sup_{h \in \dstar} \left| Q^{1}(h) -  Q^{2}(h)\right|\right| \\
+& \leq \sup_{h \in \dstar} \Bigg|
+\left| Q^{1,(m_q)}(h) -  Q^{2,(m_q)}(h) \right|
+- \left| Q^{1}(h) -  Q^{2}(h) \right|
+\Bigg| \\
+& \leq \sup_{h \in \dstar}  \left| \left(Q^{1,(m_q)}(h) -  Q^{2,(m_q)}(h)\right) - \left(Q^{1}(h) -  Q^{2}(h)\right) \right| \\
+& \leq \sup_{h \in \dstar} \left| Q^{1,(m_q)}(h) -  Q^{1}(h)\right|
++ \sup_{h \in \dstar} \left| Q^{2,(m_q)}(h) -  Q^{2}(h)\right|,
+\end{align*}
+which converges to $0$ by Lemma~\ref{lemma::convergence_Qm}. As $\dlip(Q^1,Q^2) > 0,$ we get that $C_q \to \infty$ as $q \to \infty$.
+
+Recall that our goal is to show that for every $M > 0$ and $\delta \in (0,1)$, there exists $q_0 \geq 1$ such that for all $q \geq q_0$,
+\[
+\mathbb{P}\left( T_{n_q,m_q} > M\right) > \delta.
+\]
+Now fix $M > 0$ and $\delta \in (0,1)$. Also fix $\delta' > \frac{\delta + 1}{2}$. As $\| G_{Q^1} \|_{\dstar}$ and $\| G_{Q^2} \|_{\dstar}$ are almost surely bounded, there exists a constant $c' \in \mathbb{R}$ such that
+\[
+\mathbb{P} \left( \|G_{Q^1}\|_{\dstar} < c' \right) > \delta'
+\quad \text{and} \quad
+\mathbb{P} \left( \|G_{Q^2}\|_{\dstar} < c' \right) > \delta'.
+\]
+As $A_q \overset{w}{\to} \|G_{Q^1}\|_{\dstar}$ and $B_q \overset{w}{\to} \|G_{Q^2}\|_{\dstar}$ as $q \to \infty$, by the Portmanteau Theorem we get that there exists $q' \geq 1$ such that for all $q \geq q'$,
+\[
+\mathbb{P}\left(A_q < c' \right) > \delta'
+\quad \text{and} \quad
+\mathbb{P}\left(B_q < c' \right) > \delta'.
+\]
+Note that
+\begin{align*}
+\mathbb{P}\left( A_q < c' , B_q < c'\right)
+&= 1 - \mathbb{P}\left( A_q > c' \text{ or } B_q > c'\right)
+\geq 1 - \mathbb{P}\left( A_q > c'\right) - \mathbb{P}\left( B_q > c'\right) \\
+& \geq 1 - (1 - \delta') - (1 - \delta') = 2\delta' - 1.
+\end{align*}
+Recall that $C_q \to \infty$. This implies that there exists $q''$ such that
+\[
+C_q > \sqrt{2}M + c' + c'
+\quad \text{for all } q \geq q''.
+\]
+
+Now, let $S_1 = \left\{A_q < c' \right\}$ and $S_2 = \left\{B_q < c' \right\}$ and take $q \geq \max\{q',q''\}$. Then
+\begin{align*}
+\mathbb{P}\left(T_{n_q, m_q} > M \right)
+& \geq \mathbb{P}\left( \frac{1}{\sqrt{2}}C_q - \frac{1}{\sqrt{2}}A_q - \frac{1}{\sqrt{2}}B_q > M \right) \\
+& \geq \mathbb{P}\left( \left\{C_q  > \sqrt{2}M + A_q + B_q\right\}\cap S_1\cap S_2 \right) \\
+& \geq \mathbb{P}\left( \left\{C_q > \sqrt{2}M + c' + c'\right\}\cap S_1\cap S_2 \right) \\
+& = \mathbb{P}\left( S_1\cap S_2\right) \geq 2\delta' - 1> \delta.
+\end{align*}
+
+
+
+
+\end{proof}
+We now study the asymptotic behaviour of the threshold under the permutation approach. As in the case of the test statistic, to derive the asymptotic distribution of the threshold, we first analyse the asymptotic distribution of the underlying empirical process. Before stating the result, let us set up some notation.
+
+Recall the definition of the permuted hierarchical estimators $\widetilde{Q}^1_{n,m}$ and $\widetilde{Q}^2_{n,m}$ from Section~\ref{section:permutation_approach}.
+
+Define also the pooled probability measures using the hierarchical estimators as
+\[
+H_{n,m} = \frac{1}{2}\widehat{Q}^1_{n,m} + \frac{1}{2}\widehat{Q}^2_{n,m}.
+\]
+Note that given the hierarchical samples $\mathbf{X}_{n,m}, \mathbf{Y}_{n,m}$,
+\[
+\frac{1}{2}\widetilde{Q}^1_{n,m} + \frac{1}{2}\widetilde{Q}^2_{n,m} = \frac{1}{2}\widehat{Q}^1_{n,m} + \frac{1}{2}\widehat{Q}^2_{n,m}.
+\]
+Finally we define the pooled probability measure using $Q^1$ and $Q^2$ as
+\[
+H = \frac{1}{2}Q^1 + \frac{1}{2}Q^2.
+\]
+
+\begin{theorem}\label{theorem::asympt_distr_perm_emp_process}
+Let $\X = [a,b]$ and $Q^1,Q^2 \in \probprobx.$ For $n,m \geq 1,$ Define the permuted empirical process 
+\[
+\widetilde{G}_{n,m} = \sqrt{n}(\widetilde{Q}^1_{n,m} - H_{n,m}).
+\]
+Then, for almost every sequence of hierarchical samples $(\mathbf{X}_{n,m})_{n,m\geq 1}$,$(\mathbf{Y}_{n,m})_{n,m\geq 1}$ from $Q^1$ and $Q^2,$
+\[
+\widetilde{G}_{n,m} \overset{w}{\to}\sqrt{\frac{1}{2}}G_H \quad \text{as } n,m\to\infty,
+\]
+where $G_H$ is the $H$-Brownian bridge process indexed by $\dstar.$
+\end{theorem}
+\begin{proof}
+
+
+
+
+Let us consider the sequences $(n_q)_{q\geq1}$ and $(m_q)_{q\geq1}$ such that
+\[
+\lim_{q \to \infty} n_q = \lim_{q \to \infty} m_q = \infty.
+\]
+Accordingly, we slightly adapt the notation from Section~\ref{section:permutation_approach}.
+
+For $q \geq 1$, denote by $Z_q$ the random vector of length $2n_q$, defined by
+\[
+Z_q = \left(Z_{q,1},\dots,Z_{q,2n_q}\right)
+= \left(\widehat{P}^1_{1,m_q},\dots,\widehat{P}^1_{n_q,m_q},
+\widehat{P}^2_{1,m_q},\dots,\widehat{P}^2_{n_q,m_q}\right).
+\]
+Denote by $R_q = \left(R_{q,1},\dots,R_{q,2n_q}\right)$ a random vector taking values uniformly over the set of all permutations of $\{1,\dots,2n_q\}$. We also denote
+\[
+Q^1_q = Q^1_{n_q,m_q}, \qquad Q^2_q = Q^2_{n_q,m_q},\qquad 
+\widetilde{Q}^1_q = \widetilde{Q}^1_{n_q,m_q},
+\qquad
+\widetilde{Q}^2_q = \widetilde{Q}^2_{n_q,m_q}.
+\]
+Define the pooled probability measure of the permuted hierarchical estimators as
+\[
+H_q = \frac{1}{2}\widetilde{Q}^1_q + \frac{1}{2}\widetilde{Q}^2_q.
+\]
+Note that given the hierarchical samples,
+\[
+\frac{1}{2}\widetilde{Q}^1_q + \frac{1}{2}\widetilde{Q}^2_q = \frac{1}{2}Q^1_q + \frac{1}{2}Q^2_q.
+\]
+Finally, we define the pooled probability measure associated with the laws of the random probability measures as
+\[
+H = \frac{1}{2}Q^1 + \frac{1}{2}Q^2.
+\]
+We divide the proof of the convergence of the permuted empirical process
+\[
+\widetilde{G}_q = \widetilde{G}_{n_q,m_q}
+\]
+into two main steps: finite-dimensional convergence and asymptotic equicontinuity. By Theorem~\ref{theorem::weak_conv_stochproc}, these suffice. We begin with the first.
+
+\begin{itemize}
+    \item Step 1) Finite-dimensional convergence.
+\end{itemize}
+
+This part is further divided into two steps: first, we show convergence for a single function in $\dstar$, and then, using the Cramér--Wold theorem, we extend the result to a finite number of functions.
+
+\begin{itemize}
+    \item Step 1.1) Marginal convergence.
+\end{itemize}
+
+Fix a measurable function $h : \probx \to \R$ such that $\|h\|_\infty < \infty$. Note that every function in $\dstar$ has a bounded sup norm. We want to show that
+\[
+\widetilde{G}_q(h) \overset{w}{\to} \N \left(0, \frac{1}{2}\var_H(h) \right),
+\]
+where $\var_H(h) = H\left(h^2\right) - \left(H(h)\right)^2.$
+
+If $h = 0$, then the result follows trivially. Assume that $h \neq 0$. We have
+\begin{align*}
+    \widetilde{G}_q(h)
+    &= \frac{1}{\sqrt{n_q}}\sum_{i = 1}^{n_q}\left(\delta_{Z_{q, R_{q,i}}}(h) - H_q(h)\right) \\
+    &= \frac{1}{\sqrt{n_q}}\sum_{i = 1}^{n_q}\left(h\left(Z_{q, R_{q,i}}\right) - H_q(h)\right) \\
+    &= \frac{1}{\sqrt{n_q}}\left(\sum_{i = 1}^{n_q}h\left(Z_{q, R_{q,i}}\right) - n_qH_q(h) \right).
+\end{align*}
+
+Define, for $q \geq 1$,
+\[
+S_q = \sum_{i = 1}^{2n_q} a_{q,R_{q,i}} b_{q,i},
+\]
+where
+\[
+a_q = \left(h\left(Z_{q,1}\right),\dots,h\left(Z_{q,2n_q}\right)\right)
+= \left(h\left(\widehat{P}^1_{1,m_q}\right),\dots, h\left(\widehat{P}^1_{n_q,m_q}\right), h\left(\widehat{P}^2_{1,m_q}\right),\dots, h\left(\widehat{P}^2_{n_q,m_q}\right)\right),
+\]
+and $b_q = \left(b_{q,1},\dots, b_{q,2n_q} \right)$, where
+\[
+b_{q,i} =
+\begin{cases}
+1, & \text{if } i \leq n_q, \\
+0, & \text{if } i > n_q .
+\end{cases}
+\]
+Note that both vectors have length $2n_q$.
+
+We compute
+\[
+\E_{R_q} S_q
+= \sum_{i = 1}^{2n_q} \E_{R_q} a_{q,R_{q,i}} b_{q,i}
+= \sum_{i = 1}^{n_q} \E_{R_q} a_{q,R_{q,i}}
+= \sum_{i = 1}^{n_q} H_q(h)
+= n_q H_q(h).
+\]
+Thus,
+\[
+\widetilde{G}_q(h)
+= \frac{1}{\sqrt{n_q}}\left( S_q - \E_{R_q}S_q\right)
+= \frac{\sqrt{\var\left(S_q\right)}}{\sqrt{n_q}}
+\frac{\left( S_q - \E_{R_q}S_q\right)}{\sqrt{\var\left(S_q\right)}}.
+\]
+
+First, we show that
+\[
+\frac{\left( S_q - \E_{R_q}S_q\right)}{\sqrt{\var\left(S_q\right)}}
+\overset{w}{\to} \N\left(0,1\right),
+\]
+using Theorem~4.1 in~\cite{hajek1961some} \textcolor{red}{(Theorem~\ref{thm::rank_clt} in these notes)}
+
+\begin{theorem}[Rank central limit theorem]\label{thm::rank_clt}
+Let $\left(R_{v,1}, R_{v,2},\dots, R_{v,N_v} \right)$ be a random vector taking values uniformly in the space of permutations of $\left\{1,\dots, N_v\right\}.$
+
+Let $\{a_{v,i} : 1\leq i \leq N_v, v \geq 1\}$ and $\{b_{v,i} : 1\leq i \leq N_v, v \geq 1\}$ be double sequences of real numbers. Define
+\[
+S_v = \sum_{i = 1}^{N_v} b_{v,i} a_{v, R_{v,i}}.
+\]
+Denote by $\bar{a}_v$ and $\bar{b}_v$ the averages of the sequences $a_v$ and $b_v$, respectively. Suppose that
+\[
+\lim_{v \to \infty}\frac{\max_{1 \leq i \leq N_v}\left( a_{v,i} - \bar{a}_v \right)^2}{\sum_{i = 1}^{N_v}\left( a_{v,i} - \bar{a}_v \right)^2} = 0
+\]
+and
+\[
+\lim_{v \to \infty}\frac{\max_{1 \leq i \leq N_v}\left( b_{v,i} - \bar{b}_v \right)^2}{\sum_{i = 1}^{N_v}\left( b_{v,i} - \bar{b}_v \right)^2} = 0.
+\]
+Then
+\[
+\frac{S_v - \E S_v}{\sqrt{\var\left(S_v\right)}} \overset{w}{\to} \N\left(0,1\right)
+\]
+if and only if, for any $\tau > 0$,
+\[
+\lim_{v \to \infty}\frac{1}{N_v}\sum_{i,j : |\delta_{v,i,j}|>\tau}\delta^2_{v,i,j} = 0,
+\]
+where
+\[
+\delta_{v,i,j} =
+\frac{\left(a_{v,j} - \bar{a}_v\right)\left( b_{v,i} - \bar{b}_v \right)}
+{\left[\frac{1}{N_v}\sum_{i = 1}^{N_v}\left( b_{v,i} - \bar{b}_v \right)^2
+\sum_{i = 1}^{N_v}\left( a_{v,i} - \bar{a}_v \right)^2\right]^{1/2}},
+\quad \text{for all } 1 \leq i,j \leq N_v,\ v \geq 1.
+\]
+\end{theorem}
+
+To apply the theorem above, define
+\begin{align*}
+    A_q^2 &= \sum_{i = 1}^{2n_q} \left(a_{q,i} - \bar{a}_q \right)^2, \\
+    B_q^2 &= \sum_{i = 1}^{2n_q} \left(b_{q,i} - \bar{b}_q \right)^2.
+\end{align*}
+We verify the three conditions of Theorem~\ref{thm::rank_clt}.
+\begin{itemize}
+    \item i) $\displaystyle \lim_{q \to \infty} \frac{\max_{1 \leq i \leq 2n_q}\left( a_{q,i} - \bar{a}_q \right)^2}{A_q^2} = 0.$
+    
+    For fixed $q \geq 1$,
+    \[
+    \frac{\max_{1 \leq i \leq 2n_q}\left( a_{q,i} - \bar{a}_q \right)^2}{A_q^2}
+    = \dfrac{\frac{\max_{1 \leq i \leq 2n_q}\left( a_{q,i} - \bar{a}_q \right)^2}{2n_q}}
+    {\frac{\sum_{i = 1}^{2n_q}\left( a_{q,i} - \bar{a}_q \right)^2}{2n_q}}.
+    \]
+    Consider the denominator:
+    \begin{align*}
+    \frac{A_q^2}{2n_q}
+    = \frac{\sum_{i = 1}^{2n_q}\left( a_{q,i} - \bar{a}_q \right)^2}{2n_q}
+    = \frac{1}{2}\frac{1}{n_q}\sum_{i = 1}^{n_q}
+    \left(h\left( \widehat{P}^1_{i,m_q}\right)- H_q(h) \right)^2
+    + \frac{1}{2}\frac{1}{n_q}\sum_{i = 1}^{n_q}
+    \left(h\left( \widehat{P}^2_{i,m_q}\right)- H_q(h) \right)^2.
+    \end{align*}
+    
+    Let us study the behavior of each term:
+    \begin{align*}
+    \frac{1}{2}\frac{1}{n_q}\sum_{i = 1}^{n_q}
+    \left(h\left( \widehat{P}^1_{i,m_q}\right)- H_q(h) \right)^2
+    &= \frac{1}{2}\frac{1}{n_q}\sum_{i = 1}^{n_q}h^2\left(\widehat{P}^1_{i,m_q} \right)
+    - \frac{1}{2}\left(H_q(h)\right)^2 \\ 
+    &\overset{a.s.}{\to}
+    \frac{1}{2}Q^1(h^2) - \frac{1}{2}\left(H(h)\right)^2,
+    \end{align*}
+    by Lemma~\ref{lemma::triangularslln}, since $h$ is bounded.
+
+    The same holds for the second term. Therefore,
+    \[
+    \frac{A_q^2}{2n_q}
+    \overset{a.s.}{\to}
+    \frac{1}{2}Q^1(h^2) - \frac{1}{2}(H(h))^2
+    + \frac{1}{2}Q^2(h^2) - \frac{1}{2}(H(h))^2
+    = H(h^2) - \left(H(h)\right)^2
+    = \var_H(h).
+    \]
+
+    For the numerator, note that
+    \[
+    \frac{\max_{1 \leq i \leq 2n_q}\left( a_{q,i} - \bar{a}_q \right)^2}{2n_q}
+    \leq
+    \max_{1 \leq i \leq 2n_q}
+    \frac{a_{q,i}^2 + \bar{a}_q^2 + 2|a_{q,i}||\bar{a}_q|}{2n_q}.
+    \]
+    We have already shown that $\bar{a}_q \overset{a.s.}{\to} H(h)$. Hence, it suffices to show that
+    \[
+    \max_{1 \leq i \leq 2n_q} \frac{a_{q,i}^2}{2n_q}
+    \overset{a.s.}{\to} 0
+    \quad \text{and} \quad
+    \max_{1 \leq i \leq 2n_q} \frac{|a_{q,i}|}{2n_q}
+    \overset{a.s.}{\to} 0.
+    \]
+    Since $a_{q,i} = h\left(Z_{q,i}\right)$ and the function $h$ is bounded, the desired conclusion follows.
+
+    \item ii) $\displaystyle \lim_{q \to \infty}
+    \frac{\max_{1 \leq i \leq 2n_q} \left(b_{q,i} - \bar{b}_q \right)^2}{B_q^2} = 0.$
+
+    Note that
+    \[
+    B_q^2
+    = \sum_{i = 1}^{2n_q} (b_{q,i} - \bar{b}_q)^2
+    = \sum_{i = 1}^{n_q}\left( 1 - \frac{1}{2}\right)^2
+    + \sum_{i = n_q + 1}^{2n_q}\left( - \frac{1}{2}\right)^2
+    = \frac{n_q}{2}.
+    \]
+    Hence,
+    \[
+    \lim_{q \to \infty}
+    \frac{\max_{1 \leq i \leq 2n_q} \left(b_{q,i} - \bar{b}_q \right)^2}{B_q^2}
+    = \dfrac{\dfrac{1}{4}}{\dfrac{n_q}{2}}
+    = 0.
+    \]
+
+    \item iii) For all $\tau > 0$,
+    \[
+    \lim_{q \to \infty}
+    \frac{1}{2n_q}\sum_{i,j : |\delta_{q,i,j}| > \tau}\delta_{q,i,j}^2 = 0,
+    \]
+    where
+    \[
+    \delta_{q,i,j}
+    = \frac{\left( b_{q,i} - \bar{b}_q\right)\left( a_{q,j} - \bar{a}_q\right)}
+    {\left( \frac{1}{2n_q}A_q^2 B_q^2\right)^{1/2}},
+    \quad 1 \leq i,j \leq 2n_q,\ q \geq 1.
+    \]
+
+    We show that there exists an almost sure set such that, for all $\tau > 0$, there exists $q' \geq 1$ with the property that, for all $q \geq q'$, there are no indices $i,j \in \{1,\dots,2n_q\}$ satisfying $|\delta_{q,i,j}| > \tau$. Indeed, note that
+    \[
+    \delta_{q,i,j}
+    = \frac{\left(\big( b_{q,i} - \bar{b}_q\big)^2\big( a_{q,j} - \bar{a}_q\big)^2\right)^{1/2}}
+    {\left( \frac{1}{2n_q}A_q^2 B_q^2\right)^{1/2}}
+    \leq
+    \left(
+    \frac{\frac{1}{4}\max_{1\leq j \leq 2n_q}\left( a_{q,j} - \bar{a}_q\right)^2}
+    {\frac{1}{2n_q}A_q^2 \frac{n_q}{2}}
+    \right)^{1/2}
+    \overset{a.s.}{\to} 0,
+    \]
+    by point~i). This implies that
+    \[
+    \max_{1 \leq i,j \leq 2n_q} |\delta_{q,i,j}|
+    \overset{a.s.}{\to} 0.
+    \]
+\end{itemize}
+
+Therefore, for almost every $(\mathbf{X}_{n,m})_{n,m\geq 1}$ and
+$(\mathbf{Y}_{n,m})_{n,m\geq 1}$,
+\[
+\frac{\left( S_q - \E_{R_q}S_q\right)}{\sqrt{\var\left(S_q\right)}}
+\overset{w}{\to} \N\left(0,1\right).
+\]
+
+Next, we show that, almost surely,
+\[
+\frac{\sqrt{\var\left(S_q\right)}}{\sqrt{n_q}}
+\to \sqrt{\frac{1}{2}\var_H(h)}.
+\]
+By Lemma~\ref{lemma::sum_under_permutation},
+\[
+\var(S_q)
+= \frac{n_q^2 A_q^2}{2n_q(2n_q - 1)}
+= \frac{n_q}{2(2n_q - 1)} A_q^2.
+\]
+From point~i), we have shown that
+\[
+\frac{A_q^2}{2n_q} \overset{a.s.}{\to} \var_H(h).
+\]
+Therefore,
+\[
+\frac{\sqrt{\var\left(S_q\right)}}{\sqrt{n_q}}
+= \sqrt{\frac{\frac{n_q}{2(2n_q - 1)} A_q^2}{n_q}}
+\overset{a.s.}{\to}
+\sqrt{\frac{1}{2}\var_H(h)}.
+\]
+
+Consequently,
+\[
+\widetilde{G}_q(h) \overset{w}{\to} \sqrt{\frac{1}{2}}\, G_H(h),
+\]
+for almost every sequence of hierarchical samples from $Q^1$ and $Q^2$.
+
+Next, we use this result to show finite-dimensional convergence.
+
+\begin{itemize}
+    \item Step 1.2) Finite-dimensional convergence.
+\end{itemize}
+
+Let $k \geq 1$ and let $h_1,\dots,h_k \in \dstar$. We want to show that
+\[
+\left(\widetilde{G}_q\left(h_1\right),\dots, \widetilde{G}_q\left(h_k\right)\right)
+\overset{w}{\to}
+\sqrt{\frac{1}{2}}\left(G_H\left(h_1\right),\dots, G_H\left(h_k\right)\right)
+\]
+for almost every hierarchical sample $\{\mathbf{X}_{n,m}: n,m \geq 1\}, \{\mathbf{Y}_{n,m}:n,m\geq 1\}$ from $Q^1$ and $Q^2$ respectively.
+
+Note that, by Theorem~29.4 in~\cite{billingsley2017probability}, the above convergence is equivalent to
+\[
+\sum_{i = 1}^k t_i\widetilde{G}_q\left(h_i\right)
+\overset{w}{\to}
+\sum_{i = 1}^k \sqrt{\frac{1}{2}}\,t_i G_H\left(h_i\right)
+\quad \text{for all } t_1,\dots,t_k \in \R.
+\]
+Therefore, it suffices to prove the latter.
+
+Observe that
+\[
+\sum_{i = 1}^k t_i \widetilde{G}_q(h_i)
+= \sum_{i = 1}^k t_i\sqrt{n_q}\left( \widetilde{Q}^1_q - H_q\right)\left(h_i\right)
+= \sqrt{n_q}\left( \widetilde{Q}^1_q - H_q\right)\left(\sum_{i = 1}^k t_i h_i\right)
+= \widetilde{G}_q\left(\sum_{i = 1}^k t_i h_i\right).
+\]
+Moreover, $\left\|\sum_{i = 1}^k t_i h_i\right\|_\infty < \infty$. By Step~1,
+\[
+\sum_{i = 1}^k t_i \widetilde{G}_q(h_i)
+= \widetilde{G}_q\left(\sum_{i = 1}^k t_i h_i\right)
+\overset{w}{\to}
+\N\left(0, \frac{1}{2}\var_H\left( \sum_{i = 1}^k t_i h_i\right) \right),
+\]
+for almost every hierarchical sample from $Q^1$ and $Q^2.$
+
+It remains to show that
+\[
+\sum_{i = 1}^k \sqrt{\frac{1}{2}}\,t_i G_H\left(h_i\right)
+\sim
+\N\left(0, \frac{1}{2}\var_H\left( \sum_{i = 1}^k t_i h_i\right) \right).
+\]
+
+Note that
+\begin{align*}
+    \var_H\left( \sum_{i = 1}^k t_i h_i\right)
+    &= H\left(\left(\sum_{i = 1}^k t_i h_i \right)^2\right)
+    - \left(H \left( \sum_{i = 1}^k t_i h_i\right) \right)^2 \\
+    &= H \left( \sum_{i = 1}^k \sum_{j = 1}^k t_i t_j h_i h_j\right)
+    - \left( \sum_{i = 1}^k t_i H(h_i) \right)^2 \\
+    &= \sum_{i = 1}^k \sum_{j = 1}^k t_i t_j H\left(h_i h_j\right)
+    - \sum_{i = 1}^k \sum_{j = 1}^k t_i t_j H(h_i) H(h_j) \\
+    &= \sum_{i = 1}^k \sum_{j = 1}^k
+    t_i t_j \left( H\left(h_i h_j\right) - H(h_i) H(h_j) \right) \\
+    &= t^\top \Sigma^k t,
+\end{align*}
+where $\Sigma^k$ is the covariance matrix of the random vector
+$\left(G_H\left(h_1\right),\dots, G_H\left(h_k\right)\right)$.
+
+Consequently,
+\[
+\frac{1}{2}\var_H\left( \sum_{i = 1}^k t_i h_i\right)
+= \frac{1}{2} t^\top \Sigma^k t
+= \var\left( \sum_{i = 1}^k \sqrt{\frac{1}{2}}\,t_i G_H(h_i)\right).
+\]
+Since this is a sum of centered Gaussian random variables, we obtain
+\[
+\sum_{i = 1}^k \sqrt{\frac{1}{2}}\,t_i G_H(h_i)
+\sim
+\N\left(0, \frac{1}{2}\var_H\left( \sum_{i = 1}^k t_i h_i\right) \right).
+\]
+\begin{itemize}
+    \item Step 2) Asymptotic equicontinuity.
+\end{itemize}
+
+For the metric, we consider $\|\cdot\|_\infty$. By Lemma~\ref{lemma::covnumbdstar}, the space $\left( \dstar, \|\cdot\|_\infty \right)$ is totally bounded.
+
+Now fix $\epsilon > 0$ and any sequence of hierarchical samples $(\mathbf{X}_{n,m})_{n,m\geq1}, (\mathbf{Y}_{n,m})_{n,m\geq1}$ from $Q^1$ and $Q^2$ respectively. Note that, since we fix the hierarchical samples, the only randomness of the empirical process comes from the permutation. We want to show that
+\[
+\lim_{\delta \to 0}\limsup_{q\to\infty}\mathbb{P}_{R_q}\left(
+\sup_{\substack{h,h'\in\dstar \\ \|h-h'\|_\infty < \delta}}
+\left| \widetilde{G}_q(h) - \widetilde{G}_q(h') \right| > \epsilon
+\right) = 0.
+\]
+
+Now fix $\delta > 0$. By Markov's inequality,
+\[
+\mathbb{P}_{R_q}\left(
+\sup_{\substack{h,h'\in\dstar \\ \|h-h'\|_\infty < \delta}}
+\left| \widetilde{G}_q(h) - \widetilde{G}_q(h') \right| > \epsilon
+\right)
+\leq \frac{1}{\epsilon}\E_{R_q}\sup_{\substack{h,h'\in\dstar \\ \|h-h'\|_\infty < \delta}}
+\left| \widetilde{G}_q(h-h') \right|
+= \frac{1}{\epsilon} \E_{R_q}\left\| \widetilde{G}_q \right\|_{\dstar_\delta},
+\]
+where $\dstar_\delta = \{ h - h' : h,h'\in\dstar,\ \|h - h'\|_\infty < \delta\}$.
+
+To bound the expectation above, we would like to use a maximal inequality (Lemma~19.34 in~\cite{van2000asymptotic}). However, since the empirical process $\widetilde{G}_q$ does not sample i.i.d.\ random variables from $H_q$, we first bound it by an empirical process based on i.i.d.\ random variables. For this, we use Hoeffding's inequality (Proposition~A.1.10 in~\cite{van1996weak}, restated as Proposition~\ref{prop::hoeffding} below):
+
+\begin{proposition}\label{prop::hoeffding}
+Let $\{c_1,\dots, c_N\}$ be elements of an arbitrary vector space $\mathbb{V}$, and let $U_1,\dots, U_n$ and $V_1,\dots, V_n$ denote samples of size $n \leq N$ drawn without and with replacement, respectively, from $\{c_1,\dots,c_N\}$. Then, for every convex function $\phi : \mathbb{V}\to \R$,
+\[
+\E \phi\left( \sum_{j = 1}^n U_j\right) \leq \E \phi\left( \sum_{j = 1}^n V_j\right).
+\]
+\end{proposition}
+
+Note that the function
+\[
+\ell_\infty\left(\dstar\right) \ni G \mapsto \left\|G\right\|_{\dstar_\delta}
+\]
+is convex.
+
+Consider the set
+\[
+C_q := \left\{\frac{1}{\sqrt{n_q}}\left(\delta_{Z_{q,1}} - H_q \right),\dots,
+\frac{1}{\sqrt{n_q}}\left(\delta_{Z_{q,2n_q}} - H_q \right) \right\}.
+\]
+Let $U_1,\dots,U_{n_q}$ and $V_1,\dots,V_{n_q}$ be random variables taking values in $C_q$ without and with replacement, respectively. Then, by Proposition~A.1.10 in~\cite{van1996weak}, we have
+\[
+\E \left\| \sum_{i = 1}^{n_q} U_i\right\|_{\dstar_\delta}
+\leq
+\E \left\| \sum_{i = 1}^{n_q} V_i\right\|_{\dstar_\delta}.
+\]
+Note that
+\[
+\sum_{i = 1}^{n_q} U_i = \widetilde{G}_q.
+\]
+Therefore,
+\[
+\E_{R_q}\left\| \widetilde{G}_q \right\|_{\dstar_\delta}
+\leq
+\E_{\widehat{Z}_q}\left\| \frac{1}{\sqrt{n_q}} \sum_{i = 1}^{n_q}\left(\delta_{\widehat{Z}_{q,i}} - H_q\right)\right\|_{\dstar_\delta},
+\]
+where $\widehat{Z}_{q,1},\dots, \widehat{Z}_{q,n_q}\overset{\iid}{\sim}H_q$.
+
+Now we apply the maximal inequality (Lemma~19.34 in~\cite{van2000asymptotic}, restated as Lemma~\ref{lemma:maximalineq} above).
+
+Note that $\|h - h'\|_\infty < \delta$ implies $H_q\left( (h - h')^2\right) < \delta^2$. Hence, by Lemma~\ref{lemma:maximalineq},
+\[
+\E_{\widehat{Z}_q}\left\| \frac{1}{\sqrt{n_q}} \sum_{i = 1}^{n_q}\left(\delta_{\widehat{Z}_{q,i}} - H_q\right)\right\|_{\dstar_\delta}
+\lesssim
+J_{[]} (\delta, \dstar_\delta, \mathrm{L}_2(H_q))
++ \sqrt{n_q}\,H_q\left\{K\mathbf{1}\big(K > \sqrt{n_q}\alpha_q(\delta)\big) \right\},
+\]
+where
+\[
+\alpha_q(\delta)
+= \frac{\delta}{\sqrt{\log \N_{[]}\left(\delta, \dstar_\delta,\mathrm{L}_2(H_q)\right)}},
+\]
+and $K$ is an envelope function of $\dstar$, which is a constant function. The constant in the inequality is universal; it does not depend on the probability measures or the function class, so we ignore it.
+
+First, we bound the second term. By Lemma~\ref{lemma::bracketing-number_covering_number},
+\[
+\N_{[]}\left(\delta, \dstar_\delta,\mathrm{L}_2(H_q)\right)
+\leq
+\N\left(\frac{\delta}{2}, \dstar_\delta,\|\cdot\|_\infty\right).
+\]
+This implies that
+\[
+\alpha_q(\delta)
+\geq
+\frac{\delta}{\sqrt{\log \N\left(\frac{\delta}{2}, \dstar_\delta,\|\cdot\|_\infty\right)}}
+=: \alpha(\delta).
+\]
+Therefore,
+\[
+H_q\left\{K\mathbf{1}\big(K > \sqrt{n_q}\alpha_q(\delta)\big) \right\}
+\leq
+H_q\left\{K\mathbf{1}\big(K > \sqrt{n_q}\alpha(\delta)\big) \right\}.
+\]
+Since $K$ is a constant function, the set over which we integrate is empty for sufficiently large $q$. Hence,
+\[
+\lim_{\delta \to 0} \limsup_{q \to \infty}
+\sqrt{n_q}\,H_q\left\{K\mathbf{1}\big(K > \sqrt{n_q}\alpha_q(\delta)\big) \right\} = 0.
+\]
+
+Now we focus on the first term in the maximal inequality. By Lemmas~\ref{lemma::bracketing-number_covering_number} and \ref{lemma::covnumbdstar},
+\begin{align*}
+J_{[]} (\delta, \dstar_\delta, \mathrm{L}_2(H_q))
+&= \int_0^\delta \sqrt{\log \mathcal{N}_{[]}\left(\epsilon, \dstar_\delta, \mathrm{L}_2(H_q) \right)}\,d\epsilon \\
+&\leq \int_0^\delta \sqrt{\log \mathcal{N}\left(\frac{\epsilon}{2}, \dstar, \|\cdot\|_\infty \right)}\,d\epsilon
+= C' \sqrt{\delta}
+\overset{\delta \to 0}{\to} 0,
+\end{align*}
+for some constant $C'$ that does not depend on $q$ or on $\delta$. Therefore,
+\[
+\lim_{\delta \to 0} \limsup_{q \to \infty}
+J_{[]} (\delta, \dstar_\delta, \mathrm{L}_2(H_q)) = 0.
+\]
+
+We conclude that
+\[
+\lim_{\delta \to 0} \limsup_{q \to \infty}
+\frac{1}{\epsilon}\E_{R_q}\left\| \widetilde{G}_q \right\|_{\dstar_\delta} = 0.
+\]
+Finally, by Theorem~\ref{theorem::weak_conv_stochproc}, we conclude that for almost every sequence of hierarchical samples from $Q^1$ and $Q^2$,
+\[
+\widetilde{G}_q \overset{w}{\to}\sqrt{\frac{1}{2}}G_H.
+\]
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Now we show the convergence of the threshold via the permutation approach.
+
+\begin{theorem}\label{theorem::asympt_distr_perm_threshold}
+Given $\X = [a,b]$ and $Q^1, Q^2 \in \probprobx$, let $r(n,m,\theta)$ be the permutation threshold defined in Section~\ref{section:permutation_approach}. Then,
+\[
+r(n,m,\theta) \overset{a.s.}{\to} q_{1-\theta}\!\left( \left\| G_{H} \right\|_{\dstar} \right)
+\quad \text{as } n,m \to \infty,
+\]
+where $q_{1-\theta}$ denotes the $1-\theta$ quantile.
+\end{theorem}
+
+\begin{proof}
+Recall that
+\[
+r(n,m,\theta)
+= \inf\left\{ t \in \R :
+\mathbb{P}_{R_{n,m}}\!\left(
+\sqrt{\frac{n}{2}}\,\dlip\!\left(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}\right) > t
+\right) \leq \theta
+\right\}.
+\]
+Note that, as 
+\[
+H_{n,m} = \frac{1}{2}\widetilde{Q}^1_{n,m} + \frac{1}{2}\widetilde{Q}^2_{n,m},
+\]
+the empirical process satisfies
+\[
+\sqrt{\frac{n}{2}}\left(\widetilde{Q}^1_{n,m} - \widetilde{Q}^2_{n,m}\right)
+= \sqrt{2}\,\sqrt{n}\left(\widetilde{Q}^1_{n,m} - H_{n,m}\right).
+\]
+By Theorem~\ref{theorem::asympt_distr_perm_emp_process},
+\[
+\sqrt{n}\left(\widetilde{Q}^1_{n,m} - H_{n,m}\right)
+\overset{w}{\to} \sqrt{\frac{1}{2}}\, G_H
+\] 
+for almost every sequence of hierarchical samples $(\mathbf{X}_{n,m})_{n,m\geq 1}, (\mathbf{Y}_{n,m})_{n,m\geq 1}$.
+This implies that
+\[
+\sqrt{\frac{n}{2}}\left(\widetilde{Q}^1_{n,m} - \widetilde{Q}^2_{n,m}\right)
+\overset{w}{\to} G_H.
+\]
+Since $\|\cdot\|_{\dstar}$ is a continuous function from $\ellstar$ to $\mathbb{R}$, the Continuous Mapping Theorem yields
+\[
+\sqrt{\frac{n}{2}}\,
+\dlip\!\left(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}\right)
+\overset{w}{\to}
+\left\| G_H \right\|_{\dstar}.
+\]
+Finally, as the random variable $\left\| G_H \right\|_{\dstar}$ has an absolutely continuous density (see Proposition~2 of \cite{beran1986confidence}), its associated quantiles converge for every $\theta$ by Lemma~21.2 in \cite{van2000asymptotic}.
+\end{proof}
+
+
+
+
+
+
+\begin{lemma}\label{lemma::general__asympt_level}
+Let $T$ be an almost surely bounded and absolutely continuous random variable, and let $\{T_n\}_{n\geq 1}$ be a sequence of random variables such that $T_n \overset{w}{\to} T$. Let $q(\theta)$ denote the $(1-\theta)$-quantile of $T$, and let $r(n,\theta)$ be a sequence of random variables such that
+\[
+r(n,\theta) \overset{p}{\to} q(\theta)
+\quad \text{as } n \to \infty
+\]
+for every $\theta \in (0,1)$. Then,
+\[
+\limsup_{n \to \infty} \mathbb{P}\!\left(T_n > r(n,\theta)\right) \leq \theta
+\quad \text{for all } \theta \in (0,1).
+\]
+\end{lemma}
+
+\begin{proof}
+Fix $\theta \in (0,1)$. Since $r(n,\theta) \overset{p}{\to} q(\theta)$, for every $\epsilon > 0$ and $\delta \in (0,1)$, there exists $N \geq 1$ such that, for all $n \geq N$,
+\[
+\mathbb{P}\!\left(\left| r(n,\theta) - q(\theta) \right| < \epsilon \right) > \delta.
+\]
+In particular,
+\[
+\mathbb{P}\!\left(r(n,\theta) > q(\theta) - \epsilon\right)
+\geq \mathbb{P}\!\left(\left| r(n,\theta) - q(\theta) \right| < \epsilon \right)
+> \delta.
+\]
+Define the event
+\[
+A_n = \left\{ r(n,\theta) > q(\theta) - \epsilon \right\}.
+\]
+Then $\mathbb{P}(A_n^c) < 1 - \delta$ for every $n \geq N$. For such $n$, we have
+\begin{align*}
+\mathbb{P}\!\left(T_n > r(n,\theta)\right)
+&= \mathbb{P}\!\left(\{T_n > r(n,\theta)\} \cap A_n\right)
+  + \mathbb{P}\!\left(\{T_n > r(n,\theta)\} \cap A_n^c\right) \\
+&\leq \mathbb{P}\!\left(\{T_n \geq q(\theta) - \epsilon\} \cap A_n\right)
+  + \mathbb{P}(A_n^c) \\
+&\leq \mathbb{P}\!\left(T_n \geq q(\theta) - \epsilon\right) + 1 - \delta.
+\end{align*}
+Since $[q(\theta) - \epsilon, \infty)$ is a closed set, the Portmanteau theorem implies that
+\[
+\limsup_{n \to \infty}
+\mathbb{P}\!\left(T_n \geq q(\theta) - \epsilon\right)
+\leq
+\mathbb{P}\!\left(T \geq q(\theta) - \epsilon\right).
+\]
+Therefore, for every $\epsilon > 0$ and $\delta \in (0,1)$,
+\[
+\limsup_{n \to \infty}
+\mathbb{P}\!\left(T_n > r(n,\theta)\right)
+\leq
+\mathbb{P}\!\left(T \geq q(\theta) - \epsilon\right) + 1 - \delta.
+\]
+Since $\epsilon > 0$ and $\delta \in (0,1)$ were arbitrary, taking $\epsilon \to 0$ and $\delta \to 1$, and invoking the continuity of probability measures together with the absolute continuity of $T$, yields the desired result.
+\end{proof}
+
+
+
+
+\begin{lemma}\label{lemma::general_consist}
+Let $\{T_n\}_{n\geq 1}$ be a sequence of random variables such that $T_n \overset{p}{\to} \infty$. Let $r(n,\theta)$ be a sequence of random variables such that
+\[
+r(n,\theta) \overset{p}{\to} r(\theta) < \infty
+\quad \text{as } n \to \infty
+\]
+for every $\theta \in (0,1)$, where $r(\theta)\in\R.$ Then,
+\[
+\lim_{n \to \infty} \mathbb{P}\!\left(T_n > r(n,\theta)\right) = 1
+\quad \text{for all } \theta \in (0,1).
+\]
+\end{lemma}
+
+\begin{proof}
+Fix $\epsilon > 0$ and $\delta \in (0,1)$. Since $T_n \overset{p}{\to} \infty$ and $r(n,\theta) \overset{p}{\to} r(\theta)$, there exists $N \geq 1$ such that for all $n \geq N$,
+\begin{align*}
+\mathbb{P}\!\left(T_n > r(\theta) + \epsilon\right) &> \delta, \\
+\mathbb{P}\!\left(r(n,\theta) < r(\theta) + \epsilon\right) &> \delta.
+\end{align*}
+Define the events
+\[
+A_n = \{T_n > r(\theta) + \epsilon\},
+\qquad
+B_n = \{r(n,\theta) < r(\theta) + \epsilon\}.
+\]
+Then, for every $n \geq N$,
+\[
+\mathbb{P}(A_n \cap B_n)
+= 1 - \mathbb{P}(A_n^c \cup B_n^c)
+\geq 1 - \mathbb{P}(A_n^c) - \mathbb{P}(B_n^c)
+> 2\delta - 1.
+\]
+On the event $A_n \cap B_n$, we have $T_n > r(\theta) + \epsilon > r(n,\theta)$, and hence $T_n > r(n,\theta)$. Therefore, for all $n \geq N$,
+\[
+\mathbb{P}\!\left(T_n > r(n,\theta)\right)
+\geq \mathbb{P}\!\left(\{T_n > r(n,\theta)\} \cap A_n \cap B_n\right)
+= \mathbb{P}(A_n \cap B_n)
+> 2\delta - 1.
+\]
+Since $\delta \in (0,1)$ was arbitrary, the claim follows.
+\end{proof}
+
+
+
+
+
+
+
+
+\subsection*{Proof of Theorem~\ref{theorem:perm_consistency_dlip}}
+\begin{proof}
+Suppose first that $Q^1 = Q^2$. Let $(n_q)_{q \geq 1}$ and $(m_q)_{q \geq 1}$ be sequences such that
+\[
+\lim_{q \to \infty} n_q = \lim_{q \to \infty} m_q = \infty.
+\]
+By the first part of Theorem~\ref{theorem::asympt_distr_dlip}, the sequence of random variables $T_{n_q,m_q}$ converges in distribution to $\left\| G_{Q^1} \right\|_{\dstar}$, which is an almost surely bounded random variable by Lemma~\ref{lemma::tightness_under_continuity} and has an absolutely continuous density (see Proposition~2 of \cite{beran1986confidence}).
+
+In addition, by Theorem~\ref{theorem::asympt_distr_perm_threshold}, the sequence of random variables $r(n_q,m_q,\theta)$ obtained from the permutation approach converges almost surely to the $(1-\theta)$-quantile of the random variable $\left\| G_{Q^1} \right\|_{\dstar}$ for all $\theta \in (0,1)$.
+
+Then, by Lemma~\ref{lemma::general__asympt_level}, we obtain
+\[
+\limsup_{q \to \infty}\mathbb{P}\!\left(T_{n_q,m_q} > r(n_q,m_q,\theta)\right)
+\leq \theta
+\quad \text{for all } \theta \in (0,1).
+\]
+
+Now suppose that $Q^1 \neq Q^2$. By the second part of Theorem~\ref{theorem::asympt_distr_dlip}, the sequence of random variables $T_{n_q,m_q}$ converges in probability to $\infty$.
+
+Moreover, by Theorem~\ref{theorem::asympt_distr_perm_threshold}, the sequence of random variables $r(n_q,m_q,\theta)$ from the permutation approach converges almost surely to the $(1-\theta)$-quantile of the random variable $\left\| G_{\frac{1}{2}Q^1 + \frac{1}{2}Q^2} \right\|_{\dstar}$ for all $\theta \in (0,1)$. The random variable $\left\| G_{\frac{1}{2}Q^1 + \frac{1}{2}Q^2} \right\|_{\dstar}$ is almost surely bounded by Lemma~\ref{lemma::tightness_under_continuity}, and hence its $(1-\theta)$-quantile is finite.
+
+Therefore, by Lemma~\ref{lemma::general_consist}, we obtain
+\[
+\lim_{q \to \infty}
+\mathbb{P}\!\left(T_{n_q, m_q} > r(n_q, m_q, \theta)\right)
+= 1
+\quad \text{for all } \theta \in (0,1).
+\]
+\end{proof}
+
+
+
+
+
+
+
+
+
+Now we prove the rest of the auxiliary Lemmas.
+
+
+\begin{lemma}\label{lemma::sum_under_permutation}
+Let $n \geq 1$ and let $\{a_1, \dots, a_{2n}\} \subset \R$. Consider a random permutation
+$R = (R_1, \dots, R_{2n})$ of $\{1, \dots, 2n\}$, and define
+\[
+S_n = \sum_{i = 1}^n a_{R_i}.
+\]
+Then
+\[
+\var(S_n) = \frac{n^2\,\var(a_{R_1})}{2n - 1},
+\]
+where $\bar{a} = \frac{1}{2n}\sum_{i = 1}^{2n} a_i.$
+
+\end{lemma}
+
+\begin{proof}
+We have
+\[
+\var(S_n)
+= \sum_{i = 1}^n \var(a_{R_i}) + 2 \sum_{i < j} \cov(a_{R_i}, a_{R_j})
+= n\,\var(a_{R_1}) + n(n-1)\,\cov(a_{R_1}, a_{R_2}).
+\]
+We now compute $\cov(a_{R_1}, a_{R_2})$:
+\[
+\cov(a_{R_1}, a_{R_2})
+= \E[a_{R_1} a_{R_2}] - \bar{a}^{\,2}.
+\]
+For the first term, we have
+\begin{align*}
+\E[a_{R_1} a_{R_2}]
+&= \sum_{i = 1}^{2n} \sum_{j \neq i}
+\frac{1}{2n}\frac{1}{2n - 1} a_i a_j \\
+&= \sum_{i = 1}^{2n} \frac{1}{2n - 1} a_i
+\left( \sum_{j = 1}^{2n} \frac{a_j}{2n} - \frac{a_i}{2n} \right) \\
+&= \sum_{i = 1}^{2n} \frac{1}{2n - 1} a_i \bar{a}
+- \frac{1}{2n - 1}\frac{1}{2n} \sum_{i = 1}^{2n} a_i^2 \\
+&= \frac{2n}{2n - 1} \bar{a}^{\,2}
+- \frac{1}{2n - 1}\left(\var(a_{R_1}) + \bar{a}^{\,2}\right) \\
+&= \bar{a}^{\,2} - \frac{1}{2n - 1}\var(a_{R_1}).
+\end{align*}
+Therefore,
+\[
+\cov(a_{R_1}, a_{R_2})
+= \bar{a}^{\,2} - \frac{1}{2n - 1}\var(a_{R_1}) - \bar{a}^{\,2}
+= -\frac{1}{2n - 1}\var(a_{R_1}).
+\]
+Substituting this into the expression for $\var(S_n)$ yields
+\begin{align*}
+\var(S_n)
+&= n\,\var(a_{R_1})
++ n(n-1)\left(-\frac{1}{2n - 1}\var(a_{R_1})\right) \\
+&= n\,\var(a_{R_1})
+\left(1 - \frac{n-1}{2n - 1}\right)
+= \frac{n^2\,\var(a_{R_1})}{2n - 1}.
+\end{align*}
+\end{proof}
+
+\begin{lemma}\label{lemma::bracketing-number_covering_number}
+Let $\mathcal{H}$ be a class of functions from $\mathbb{Y}$ to $\R$, and let $P$ be a probability measure on $\mathbb{Y}$. Then
+\[
+\N_{[]}\!\left(\epsilon, \mathcal{H}, \mathrm{L}_2(P)\right)
+\leq
+\N\!\left(\frac{\epsilon}{2}, \mathcal{H}, \|\cdot\|_\infty\right).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\{h_1, \dots, h_N\}$ be an $\epsilon/2$-cover of $\mathcal{H}$ with respect to the $\|\cdot\|_\infty$ norm. Define
+\[
+l_i = h_i - \frac{\epsilon}{2},
+\qquad
+u_i = h_i + \frac{\epsilon}{2},
+\quad \text{for } i = 1, \dots, N.
+\]
+Then $\|u_i - l_i\|_{\mathrm{L}_2(P)} = \epsilon$ for each $i$.
+Moreover, for every $h \in \mathcal{H}$ there exists an index $i$ such that
+$\|h - h_i\|_\infty \leq \epsilon/2$, which implies
+\[
+h_i(y) - \frac{\epsilon}{2} \leq h(y) \leq h_i(y) + \frac{\epsilon}{2}
+\quad \text{for all } y \in \mathbb{Y}.
+\]
+Thus, $h \in [l_i, u_i]$, and the collection $\{[l_i, u_i]\}_{i=1}^N$
+forms a family of $\epsilon$-brackets that covers $\mathcal{H}$.
+\end{proof}
+
+
+
+
+
+
+
+
+    
+
+
+\begin{lemma}\label{lemma::convergence_Qm}
+Let $\X$ be a compact Polish space with bounded diameter, let $Q \in \probprobx$, and define
+\[
+Q^{(m)} = \mathcal{L}\!\left( \frac{1}{m}\sum_{j = 1}^m \delta_{X_j} \right),
+\quad m \geq 1,
+\]
+where, for each $m \geq 1$, the random variables $(X_1, \dots, X_m)$ are generated as
+\[
+P \sim Q,
+\qquad
+X_1, \dots, X_m \mid P \sim P.
+\]
+Then
+\[
+\lim_{m \to \infty} \dlip\!\left(Q^{(m)}, Q\right) = 0.
+\]
+\end{lemma}
+
+\begin{proof}
+By de Finetti’s theorem,
+\[
+\frac{1}{m}\sum_{j = 1}^m \delta_{X_j}
+\overset{w}{\to} \widetilde{P}
+\quad \text{almost surely},
+\]
+where $\widetilde{P} \sim Q$. Since almost sure convergence implies weak convergence, we obtain
+\[
+\mathcal{L}\!\left( \frac{1}{m}\sum_{j = 1}^m \delta_{X_j} \right)
+\overset{w}{\to}
+\mathcal{L}(\widetilde{P}).
+\]
+Note that this weak convergence takes place on $\probprobx$, whereas the previous convergence was on $\probx$. Since $\dlip$ metrizes weak convergence (see Theorem~3.1 and Lemma~3.2 in \cite{catalano2024hierarchical}), the desired result follows.
+\end{proof}
+
+\begin{lemma}\label{lemma::finite_exchseq_equivalent_infinite_exchseq}
+Let $Q^1, Q^2 \in \probprobx$. Then there exists $m_0 \geq 1$ such that, for all $m \geq m_0$,
+\[
+Q^1 = Q^2
+\quad \text{if and only if} \quad
+Q^{1,(m)} = Q^{2,(m)}.
+\]
+\end{lemma}
+
+\begin{proof}
+The implication $Q^1 = Q^2 \Rightarrow Q^{1,(m)} = Q^{2,(m)}$ is immediate.
+
+Now suppose that $Q^1 \neq Q^2$. By Lemma~\ref{lemma::convergence_Qm}, we have
+\[
+\lim_{m \to \infty} \dlip\!\left(Q^1, Q^{1,(m)}\right) = 0,
+\qquad
+\lim_{m \to \infty} \dlip\!\left(Q^2, Q^{2,(m)}\right) = 0.
+\]
+Let
+\[
+\epsilon = \frac{\dlip(Q^1, Q^2)}{2}.
+\]
+Then there exists $m_0 \geq 1$ such that, for all $m \geq m_0$,
+\[
+\dlip\!\left(Q^1, Q^{1,(m)}\right) < \epsilon,
+\qquad
+\dlip\!\left(Q^2, Q^{2,(m)}\right) < \epsilon.
+\]
+For all $m \geq m_0$, we therefore have
+\begin{align*}
+\dlip\!\left(Q^{1,(m)}, Q^{2,(m)}\right)
+&\geq \dlip(Q^1, Q^2)
+     - \dlip\!\left(Q^2, Q^{2,(m)}\right)
+     - \dlip\!\left(Q^1, Q^{1,(m)}\right) \\
+&> \dlip(Q^1, Q^2) - 2\epsilon
+= 0.
+\end{align*}
+Hence $Q^{1,(m)} \neq Q^{2,(m)}$.
+\end{proof}
+
+As a consequence of the above lemma, for any two distinct laws of random probability measures $Q^1, Q^2 \in \probprobx$, there exists an integer $m \geq 1$ such that the laws of their associated exchangeable sequences are different if and only if $Q^1 \neq Q^2$.
+\begin{lemma}\label{lemma::tightness_under_continuity}
+Let $G$ be a tight random variable taking values in $\ellstar$, and let $f$ be a continuous function from $\ellstar$ to $\R$. Then $f(G)$ is a tight random variable taking values in $\R$ and it is almost surely bounded.
+\end{lemma}
+
+\begin{proof}
+Fix $\epsilon \in (0,1)$. Since $G$ is tight, we know that there exists a compact subset $S \subset \ellstar$ such that
+\[
+\mathbb{P}\left(G \in S\right) > \epsilon.
+\]
+Since $f$ is continuous, we also have that
+\[
+f(S) = \{ t \in \R : \exists g \in \ellstar \text{ such that } f(g) = t \}
+\]
+is compact. Indeed, let $(A_i)_{i \in \mathcal{I}}$ be an open cover of $f(S)$. If $x \in S$, then $f(x) \in A_i$ for some $i \in \mathcal{I}$, meaning that $x \in f^{-1}(A_i)$. Thus, $\left(f^{-1}(A_i)\right)_{i \in \mathcal{I}}$ is also an open cover of $S$, since $f$ is continuous.
+
+As $S$ is compact, the sets $f^{-1}\left(A_{i_1}\right), \dots, f^{-1}\left(A_{i_N}\right)$ form a finite open cover of $S$. Let $t \in f(S)$, meaning that there exists $x \in S$ such that $f(x) = t$. This implies that $x \in f^{-1}(A_{i_j})$ for some $j$, and hence $t = f(x) \in A_{i_j}$. Therefore, $A_{i_1}, \dots, A_{i_N}$ is a finite subcover of $f(S)$.
+
+Now,
+\[
+\mathbb{P}\left\{ f(G) \in f(S) \right\}
+= \mathbb{P}\left\{ G \in f^{-1}\left(f(S)\right) \right\}
+\geq \mathbb{P}\left\{ G \in S \right\}
+> \epsilon,
+\]
+since $S \subset f^{-1}\left(f(S)\right)$. This shows that $f(G)$ is tight.
+
+Now we show that $f(G)$ is almost surely bounded, that is,
+\[
+\lim_{M \to \infty} \mathbb{P}\left\{ f(G) \in [-M, M] \right\} = 1.
+\]
+Suppose that
+\[
+\lim_{M \to \infty} \mathbb{P}\left\{ f(G) \in [-M, M] \right\} = \delta
+\]
+for some $\delta < 1$ (note that the limit always exists, as the sets are increasing). Take $\epsilon > \delta$. We know that there exists a compact subset $B \subset \R$ such that
+\[
+\mathbb{P}\left(f(G) \in B\right) > \epsilon.
+\]
+Since $B$ is bounded, there exists $M' > 0$ such that $B \subset [-M', M']$, and hence
+\[
+\mathbb{P}\left(f(G) \in [-M', M']\right)
+\geq \mathbb{P}\left(f(G) \in B\right)
+> \epsilon
+> \delta,
+\]
+which leads to a contradiction. Therefore, $f(G)$ is almost surely bounded.
+\end{proof}
+\begin{lemma}[Triangular SLLN]\label{lemma::triangularslln}
+Let $P, P^q \in \mathcal{P}\left(\mathbb{Y}\right)$, and let
+$X_{q,1}, X_{q,2}, \dots \overset{\text{i.i.d.}}{\sim} P^q$
+for $q \geq 1$. Let also $X_q \sim P^q$ and $X \sim P$.
+
+Assume that $X_{q,i}$ is bounded for all $q \geq 1$ and $i \geq 1$, and that
+$P^q \overset{w}{\to} P$. Then, for any sequence $(n_q)_{q \geq 1}$ such that
+$\lim_{q \to \infty} n_q = \infty$, we have
+\[
+\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{q,i} - EX \right|
+\overset{a.s.}{\to} 0.
+\]
+\end{lemma}
+
+\begin{proof}
+Take any sequence $(n_q)_{q \geq 1}$ such that $\lim_{q \to \infty} n_q = \infty$.
+We decompose the quantity of interest as
+\[
+\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{q,i} - EX \right|
+\leq
+\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{q,i} - EX_q \right|
++
+\left| \E X_q - \E X \right|.
+\]
+Note that, since $X_q$ is bounded for all $q \geq 1$, the sequence $\{X_q\}_{q \geq 1}$
+is uniformly integrable, which implies that
+\[
+\E X_q \to \E X.
+\]
+Now define
+\[
+S_q := \frac{1}{n_q}\sum_{i = 1}^{n_q} X_{q,i} - EX_q
+= \frac{1}{n_q}\sum_{i = 1}^{n_q} \left(X_{q,i} - EX_q\right).
+\]
+We aim to show that $S_q \overset{a.s.}{\to} 0$. We show that for every subsequence
+$(q_k)_{k \geq 1}$, there exists a further subsequence
+$\left(q_{k_l}\right)_{l \geq 1}$ of $q_k$ such that $S_{q_{k_l}}$ converges almost surely
+to $0$ as $l \to \infty$.
+
+Consider
+\[
+S_{q_k} = \frac{1}{n_{q_k}}\sum_{i = 1}^{n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k}\right).
+\]
+Recall that, in general, $Y_q \overset{a.s.}{\to} Y$ is implied by showing that, for all
+$\epsilon > 0$,
+\[
+\sum_{q = 1}^\infty \mathbb{P}\left(\left|Y_q - Y\right| > \epsilon \right) < \infty.
+\]
+Fix $\epsilon > 0$ and $p > 2$. By Markov’s inequality,
+\begin{align*}
+\sum_{k = 1}^\infty
+\mathbb{P}\left(
+\left|\frac{1}{n_{q_k}}\sum_{i = 1}^{n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k,i}\right)\right| > \epsilon
+\right)
+&\leq
+\sum_{k = 1}^\infty
+\frac{1}{n_{q_k}^p \epsilon^p}
+\E\left|
+\sum_{i = 1}^{n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k,i}\right)
+\right|^p.
+\end{align*}
+By the Marcinkiewicz--Zygmund inequality (see Theorem~2 in Section~10.3 of
+\cite{chow2012probability}), there exists a constant $B_p \in \R$ such that
+\[
+\E\left|
+\sum_{i = 1}^{n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k,i}\right)
+\right|^p
+\leq
+B_p \E\left[
+\left(
+\sum_{i = 1}^{n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k,i}\right)^2
+\right)^{\frac{p}{2}}
+\right].
+\]
+Therefore,
+\begin{align*}
+\sum_{k = 1}^\infty
+\mathbb{P}\left(
+\left|\frac{1}{n_{q_k}}\sum_{i = 1}^{n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k,i}\right)\right| > \epsilon
+\right)
+&\leq
+\sum_{k = 1}^\infty
+\frac{B_p}{\epsilon^p}
+\frac{1}{n_{q_k}^p}
+\E\left[
+\left(
+\sum_{i = 1}^{n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k,i}\right)^2
+\right)^{\frac{p}{2}}
+\right] \\
+&\leq
+\sum_{k = 1}^\infty
+\frac{B_p}{\epsilon^p}
+\frac{1}{n_{q_k}^p}
+\E\left[
+\left(
+n_{q_k}
+\max_{1 \leq i \leq n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k,i}\right)^2
+\right)^{\frac{p}{2}}
+\right] \\
+&\leq
+\sum_{k = 1}^\infty
+\frac{B_p}{\epsilon^p}
+\frac{1}{n_{q_k}^p}
+\left(n_{q_k}\right)^{\frac{p}{2}}
+\E\left[
+\left(
+\max_{1 \leq i \leq n_{q_k}}
+\left(X_{q_k,i} - \E X_{q_k,i}\right)^2
+\right)^{\frac{p}{2}}
+\right] \\
+&\leq
+\sum_{k = 1}^\infty
+\frac{C_p}{n_{q_k}^{\frac{p}{2}}},
+\end{align*}
+for some constant $C_p \in \R$.
+
+Since $n_q \to \infty$, we can extract a subsequence $q_{k_l}$ from $q_k$ such that
+\[
+\sum_{l = 1}^\infty \frac{1}{n_{q_{k_l}}^{\frac{p}{2}}}
+\]
+converges. Hence, $S_{q_{k_l}} \overset{a.s.}{\to} 0$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

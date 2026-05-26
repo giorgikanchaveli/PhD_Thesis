@@ -67,13 +67,14 @@ Note that this scaling is introduced solely for theoretical analysis and is not 
 For the distance $\dlip$ in dimension $1$, we are able to establish theoretical guarantees for the permutation test described above. The reason is that the class of measurable functions $\dstar$ used to express the distance as an IPM in this case is a Donsker class. This implies that we can control the asymptotic behavior of both the test statistic and the permutation threshold towards norms of Brownian bridges.
 The permutation test can be implemented for both metrics and in any dimension, but the asymptotic guarantees are only available for the HIPM metric in dimension $1$. 
 \begin{theorem}[Consistency of permutation approach]
-\label{theorem:perm__consistency_dlip}
+\label{theorem:perm_consistency_dlip}
 Given $\X = [a,b]$ and $Q^1, Q^2 \in \probprobx$. Let $\theta$ denote the significance level and $r(n,m, \theta)$ be the threshold from the permutation approach. Then
 \begin{itemize}
     \item if $Q^1 = Q^2,$ then $$ \limsup_{n,m\to \infty} \mathbb{P}\left(T_{n,m}>r(n,m, \theta)\right)\leq \theta.$$
     \item if $Q^1 \neq Q^2,$ then $$ \lim_{n,m\to \infty} \mathbb{P}\left(T_{n,m} > r(n,m,\theta) \right) = 1.$$
 \end{itemize}
 \end{theorem}
+The main strategy of the proof of Theorem~\ref{theorem:perm_consistency_dlip} is to show that the test statistic and the permutation threshold converge in distribution to the same random variable under the null hypothesis; under the alternative, the test statistic diverges to infinity while the permutation threshold converges to an almost surely bounded random variable, so that the test statistic eventually exceeds the threshold. Since the proof relies on several auxiliary results, we defer it to Appendix~\ref{section:proofs_for_permutation_section}.
 
 
 

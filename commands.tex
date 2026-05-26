@@ -6,10 +6,10 @@
 
 % ============================================================
 %  THEOREM ENVIRONMENTS
-%  Numbered per chapter (standard for a PhD thesis).
+%  Numbered per section (chapter.section.number).
 % ============================================================
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -42,6 +42,7 @@
 \newcommand{\lipXstar}{\mathrm{Lip}_1^*(\X,\R)}
 \newcommand{\lipKzero}{\mathrm{Lip}_1^0([-K,K],\R)}
 \newcommand{\dstar}{\D^*}
+\newcommand{\ellstar}{\ell^\infty(\dstar)}
 
 % For objects
 \newcommand{\mustar}{\widetilde{\mu}^*}
@@ -55,6 +56,8 @@
 \newcommand{\wtr}{\W_{d_{\X,t}}}
 \newcommand{\dlip}{d_{\mathrm{Lip}}}
 \newcommand{\WW}{\mathcal{W}_{\mathcal{W}}}
+
+
 
 
 
@@ -75,5 +78,6 @@
 \newcommand{\T}{\mathcal{T}}
 \newcommand{\law}{\mathcal{L}}
 \newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{Cov}}
 \newcommand{\iid}{\mathrm{i.i.d}}
 
