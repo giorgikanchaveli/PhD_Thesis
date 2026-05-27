@@ -18,9 +18,9 @@ To implement the permutation test, we first form the pooled collection of random
 A random permutation of this collection is induced by a vector $R = (R_1, \dots, R_{2n})$ sampled uniformly from the set of all permutations of $\{1, \dots, 2n\}$. For notational brevity, we omit the explicit dependence of $R$ on $n$ and $m$.
 
 We then define the permuted hierarchical estimators as
-\[
+\begin{equation}\label{definition:permuted_hierarchical_estimators}
 \widetilde{Q}^1_{n,m} = \frac{1}{n} \sum_{i = 1}^n \delta_{\widehat{P}_{R_i,m}} \quad \text{and} \quad \widetilde{Q}^2_{n,m} = \frac{1}{n} \sum_{i = n+1}^{2n} \delta_{\widehat{P}_{R_i,m}}.
-\]
+\end{equation}
 Finally, we compute the distance $d(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}).$
 
 Repeating this process, randomly permuting the pooled sample and recomputing the distance, yields the approximate samples of the distance between the hierarchical estimators of $Q^1$ and $Q^2$. Then, for a given significance level $\theta \in (0,1),$ we set the testing threshold equal to the empirical $(1-\theta)$-quantile of these values.
