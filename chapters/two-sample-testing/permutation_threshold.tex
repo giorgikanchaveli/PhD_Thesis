@@ -55,9 +55,9 @@ The theoretical properties of the proposed procedure are studied by analyzing th
 T_{n,m} = \sqrt{\frac{n}{2}}\dlip\left( \widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m} \right).
 \]
 The corresponding threshold is defined as
-\[
+\begin{equation}\label{definition:permutation_threshold}
 r(n,m,\theta) = \inf \left\{ t \in \R : \mathbb{P}\left(\widetilde{T}_{n,m} > t \mid \mathbf{X}_{n,m},\mathbf{Y}_{n,m} \right) \leq \theta \right\},
-\]
+\end{equation}
 where 
 \[
 \widetilde{T}_{n,m} = \sqrt{\frac{n}{2}} \, d(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}).
@@ -70,7 +70,7 @@ The permutation test can be implemented for both metrics and in any dimension, b
 \label{theorem:perm_consistency_dlip}
 Given $\X = [a,b]$ and $Q^1, Q^2 \in \probprobx$. Let $\theta$ denote the significance level and $r(n,m, \theta)$ be the threshold from the permutation approach. Then
 \begin{itemize}
-    \item if $Q^1 = Q^2,$ then $$ \limsup_{n,m\to \infty} \mathbb{P}\left(T_{n,m}>r(n,m, \theta)\right)\leq \theta.$$
+    \item if $Q^1 = Q^2,$ then $$ \limsup_{n,m\to \infty} \mathbb{P}\left(T_{n,m}>r(n,m, \theta)\right) = \theta.$$
     \item if $Q^1 \neq Q^2,$ then $$ \lim_{n,m\to \infty} \mathbb{P}\left(T_{n,m} > r(n,m,\theta) \right) = 1.$$
 \end{itemize}
 \end{theorem}

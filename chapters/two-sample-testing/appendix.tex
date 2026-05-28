@@ -590,18 +590,18 @@ Recall the definition of the permuted hierarchical estimators $\widetilde{Q}^1_{
 H_{n,m} = \frac{1}{2}\widehat{Q}^1_{n,m} + \frac{1}{2}\widehat{Q}^2_{n,m}, \quad  
 H = \frac{1}{2}Q^1 + \frac{1}{2}Q^2.
 \]
-Note that given the hierarchical samples $\mathbf{X}_{n,m}, \mathbf{Y}_{n,m}$,
+Note that given the hierarchical samples $\mathbf{X}_{n,m}, Y_{n,m}$,
 \[
 \frac{1}{2}\widetilde{Q}^1_{n,m} + \frac{1}{2}\widetilde{Q}^2_{n,m} = \frac{1}{2}\widehat{Q}^1_{n,m} + \frac{1}{2}\widehat{Q}^2_{n,m}.
 \]
 \begin{theorem}\label{theorem::asympt_distr_perm_emp_process}
-Let $\X = [a,b]$ and $Q^1,Q^2 \in \probprobx.$ Given hierarchical samples $(\mathbf{X}_{n,m})_{n,m\geq 1}$,$(\mathbf{Y}_{n,m})_{n,m\geq 1},$ define
+Let $\X = [a,b]$ and $Q^1,Q^2 \in \probprobx.$ Given hierarchical samples $(X_{n,m})_{n,m\geq 1}$,$(Y_{n,m})_{n,m\geq 1},$ define
 \[
 \widetilde{G}_{n,m} = \sqrt{n}(\widetilde{Q}^1_{n,m} - H_{n,m})
 \]
 for $n,m \geq 1.$
 
-Then, for almost every sequence of infinite size hierarchical samples $(X_{n,m})_{n,m\geq 1}$,$(Y_{n,m})_{n,m\geq 1}$ from $Q^1$ and $Q^2,$
+Then, for almost every infinite size hierarchical samples $(X_{n,m})_{n,m\geq 1}$,$(Y_{n,m})_{n,m\geq 1}$ from $Q^1$ and $Q^2,$
 \[
 \widetilde{G}_{n,m} \overset{w}{\to}\sqrt{\frac{1}{2}}G_H \quad \text{as } n,m\to\infty,
 \]
@@ -644,7 +644,7 @@ This part is further divided into two steps: first, we show convergence for a si
 \begin{itemize}
     \item Step 1.1. Marginal convergence.
 \end{itemize}
-Fix a measurable function $h : \probx \to \R$ such that $\|h\|_\infty < \infty$. Note that every function in $\dstar$ has a bounded sup norm. We want to show that almost surely on $(\mathbf{X}_{n,m})_{n,m\geq 1}$,$(\mathbf{Y}_{n,m})_{n,m\geq 1}$ from $Q^1$ and $Q^2,$
+Fix a measurable function $h : \probx \to \R$ such that $\|h\|_\infty < \infty$. Note that every function in $\dstar$ has a bounded sup norm. We want to show that almost surely on $(X_{n,m})_{n,m\geq 1}$,$(Y_{n,m})_{n,m\geq 1}$ from $Q^1$ and $Q^2,$
 \[
 \widetilde{G}_q(h) \overset{w}{\to} \N \left(0, \frac{1}{2}\var_H(h) \right),
 \]
@@ -757,7 +757,7 @@ i) $\displaystyle \lim_{q \to \infty} \frac{\max_{1 \leq i \leq 2n_q}\left( a_{i
     \max_{1 \leq i \leq 2n_q} \frac{|a_{i,q}|}{2n_q}
     \overset{a.s.}{\to} 0.
     \]
-    Since $a_{i,q} = h\left(Z_{q,i}\right)$ and the function $h$ is bounded, the desired conclusion follows.
+    Since $a_{i,q} = h\left(Z_{i,q}\right)$ and the function $h$ is bounded, the desired conclusion follows.
 
   ii) $\displaystyle \lim_{q \to \infty}
     \frac{\max_{1 \leq i \leq 2n_q} \left(b_{i,q} - \bar{b}_q \right)^2}{B_q^2} = 0.$
@@ -843,7 +843,7 @@ Consequently,
 \[
 \widetilde{G}_q(h) \overset{w}{\to} \sqrt{\frac{1}{2}}\, G_H(h),
 \]
-for almost every sequence of hierarchical samples from $Q^1$ and $Q^2$.
+for almost every infinite size hierarchical samples from $Q^1$ and $Q^2$.
 
 Next, we use this result to show finite-dimensional convergence.
 
@@ -971,15 +971,15 @@ Therefore,
 \[
 \E_{R_q}\left\| \widetilde{G}_q \right\|_{\dstar_\delta}
 \leq
-\E_{\widehat{Z}_q}\left\| \frac{1}{\sqrt{n_q}} \sum_{i = 1}^{n_q}\left(\delta_{\widehat{Z}_{q,i}} - H_q\right)\right\|_{\dstar_\delta},
+\E_{\widehat{Z}_q}\left\| \frac{1}{\sqrt{n_q}} \sum_{i = 1}^{n_q}\left(\delta_{\widehat{Z}_{i,q}} - H_q\right)\right\|_{\dstar_\delta},
 \]
 where $\widehat{Z}_{1,q},\dots, \widehat{Z}_{n_q,q}\overset{\iid}{\sim}H_q$.
 
-Now we apply the maximal inequality (Lemma~19.34 in~\cite{van2000asymptotic}, restated as Lemma~\ref{lemma:maximalineq} above).
+Now we apply the maximal inequality.
 
 Note that $\|h - h'\|_\infty < \delta$ implies $H_q\left( (h - h')^2\right) < \delta^2$. Hence, by Lemma~\ref{lemma:maximalineq},
 \[
-\E_{\widehat{Z}_q}\left\| \frac{1}{\sqrt{n_q}} \sum_{i = 1}^{n_q}\left(\delta_{\widehat{Z}_{q,i}} - H_q\right)\right\|_{\dstar_\delta}
+\E_{\widehat{Z}_q}\left\| \frac{1}{\sqrt{n_q}} \sum_{i = 1}^{n_q}\left(\delta_{\widehat{Z}_{i,q}} - H_q\right)\right\|_{\dstar_\delta}
 \lesssim
 J_{[]} (\delta, \dstar_\delta, \mathrm{L}_2(H_q))
 + \sqrt{n_q}\,H_q\left\{K\mathbf{1}\big(K > \sqrt{n_q}\alpha_q(\delta)\big) \right\},
@@ -1081,7 +1081,7 @@ J_{[]} (\delta, \dstar_\delta, \mathrm{L}_2(H_q)) = 0.
 Now we show the convergence of the threshold via the permutation approach.
 
 \begin{theorem}\label{theorem::asympt_distr_perm_threshold}
-Given $\X = [a,b]$ and $Q^1, Q^2 \in \probprobx$, let $r(n,m,\theta)$ be the permutation threshold defined in Section~\ref{section:permutation_approach}. Then,
+Given $\X = [a,b]$ and $Q^1, Q^2 \in \probprobx$, let $r(n,m,\theta)$ be the permutation threshold~\eqref{definition:permutation_threshold}. Then,
 \[
 r(n,m,\theta) \overset{a.s.}{\to} q_{1-\theta}\!\left( \left\| G_{H} \right\|_{\dstar} \right)
 \quad \text{as } n,m \to \infty,
@@ -1090,20 +1090,7 @@ where $q_{1-\theta}$ denotes the $1-\theta$ quantile.
 \end{theorem}
 
 \begin{proof}
-Recall that
-\[
-r(n,m,\theta)
-= \inf\left\{ t \in \R :
-\mathbb{P}_{R_{n,m}}\!\left(
-\sqrt{\frac{n}{2}}\,\dlip\!\left(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}\right) > t
-\right) \leq \theta
-\right\}.
-\]
-Note that, as 
-\[
-H_{n,m} = \frac{1}{2}\widetilde{Q}^1_{n,m} + \frac{1}{2}\widetilde{Q}^2_{n,m},
-\]
-the empirical process satisfies
+Note that, as $H_{n,m} = \frac{1}{2}\widetilde{Q}^1_{n,m} + \frac{1}{2}\widetilde{Q}^2_{n,m},$ we have that
 \[
 \sqrt{\frac{n}{2}}\left(\widetilde{Q}^1_{n,m} - \widetilde{Q}^2_{n,m}\right)
 = \sqrt{2}\,\sqrt{n}\left(\widetilde{Q}^1_{n,m} - H_{n,m}\right).
@@ -1113,7 +1100,7 @@ By Theorem~\ref{theorem::asympt_distr_perm_emp_process},
 \sqrt{n}\left(\widetilde{Q}^1_{n,m} - H_{n,m}\right)
 \overset{w}{\to} \sqrt{\frac{1}{2}}\, G_H
 \] 
-for almost every sequence of hierarchical samples $(\mathbf{X}_{n,m})_{n,m\geq 1}, (\mathbf{Y}_{n,m})_{n,m\geq 1}$.
+for almost every infinite size hierarchical samples $(X_{n,m})_{n,m\geq 1}, (Y_{n,m})_{n,m\geq 1}$.
 This implies that
 \[
 \sqrt{\frac{n}{2}}\left(\widetilde{Q}^1_{n,m} - \widetilde{Q}^2_{n,m}\right)
@@ -1132,9 +1119,153 @@ Finally, as the random variable $\left\| G_H \right\|_{\dstar}$ has an absolutel
 
 
 
+\subsection*{Proof of Theorem~\ref{theorem:perm_consistency_dlip}}
+\begin{proof}
+Suppose first that $Q^1 = Q^2$. Let $(n_q)_{q \geq 1}$ and $(m_q)_{q \geq 1}$ be sequences such that
+\[
+\lim_{q \to \infty} n_q = \lim_{q \to \infty} m_q = \infty.
+\]
+By the first part of Theorem~\ref{theorem::asympt_distr_dlip}, the sequence of random variables $T_{n_q,m_q}$ converges in distribution to $\left\| G_{Q^1} \right\|_{\dstar}$, which is an almost surely bounded random variable by Lemma~\ref{lemma::tightness_under_continuity} and has an absolutely continuous density (see Proposition~2 of \cite{beran1986confidence}).
+
+In addition, by Theorem~\ref{theorem::asympt_distr_perm_threshold}, the sequence of random variables $r(n_q,m_q,\theta)$ obtained from the permutation approach converges almost surely to the $(1-\theta)$-quantile of the random variable $\left\| G_{Q^1} \right\|_{\dstar}$ for all $\theta \in (0,1)$.
+
+Then, by Lemma~\ref{lemma:general_asympt_level}, for all $\theta \in (0,1)$
+\[
+\lim_{q \to \infty}\mathbb{P}\!\left(T_{n_q,m_q} > r(n_q,m_q,\theta)\right)
+= \theta
+\quad \text{for all }.
+\]
+
+Now suppose that $Q^1 \neq Q^2$. By the second part of Theorem~\ref{theorem::asympt_distr_dlip}, the sequence of random variables $T_{n_q,m_q}$ converges in probability to $\infty$.
+
+Moreover, by Theorem~\ref{theorem::asympt_distr_perm_threshold}, the sequence of random variables $r(n_q,m_q,\theta)$ from the permutation approach converges almost surely to the $(1-\theta)$-quantile of the random variable $\left\| G_{\frac{1}{2}Q^1 + \frac{1}{2}Q^2} \right\|_{\dstar}$ for all $\theta \in (0,1)$. The random variable $\left\| G_{\frac{1}{2}Q^1 + \frac{1}{2}Q^2} \right\|_{\dstar}$ is almost surely bounded by Lemma~\ref{lemma::tightness_under_continuity}, and hence its $(1-\theta)$-quantile is finite.
+
+Therefore, by Lemma~\ref{lemma:general_consist}, for all $\theta \in (0,1)$
+\[
+\lim_{q \to \infty}
+\mathbb{P}\!\left(T_{n_q, m_q} > r(n_q, m_q, \theta)\right)
+= 1
+\quad \text{for all }.
+\]
+\end{proof}
 
 
-\begin{lemma}\label{lemma::general__asympt_level}
+
+
+
+
+
+
+
+Now we prove the rest of the auxiliary Lemmas.
+
+
+\begin{lemma}[Triangular SLLN]\label{lemma::triangularslln}
+Let $(X_{n,m})_{n,m\geq 1}$ be sequence of random variables in a bounded interval of $\R$. Let also $X,X_1,X_2,\dots \overset{\iid}{\sim}P$. Assume that $X_{n,m}\overset{a.s}{\to}X_n$ for all $n \geq 1$ and $(X_n,X_{n,1},X_{n,2},\dots)$ are i.i.d over $n$. Then,
+\[
+\left| \frac{1}{n} \sum_{i = 1}^n X_{i,m} - \E X\right| \overset{a.s.}{\to} 0 \quad \text{as} n,m\to \infty.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $(n_q)_{q \geq 1}, (m_q)_{q \geq 1}$ be any sequences such that $n_q \to \infty$ and $m_q \to \infty$. We upper bound the quantity of interest as
+\[
+\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{i, m_q} - \E X \right| \leq 
+\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{i, m_q} - \frac{1}{n_q}\sum_{i = 1}^{n_q}X_i \right|
++ \left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_i - \E X \right|.
+\]
+Second term converges to $0$ almost surely by Strong law of large numbers. So we show the almost sure convergence of the first term.
+\begin{align*}
+\limsup_{q \to \infty}\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{i, m_q} - \frac{1}{n_q}\sum_{i = 1}^{n_q}X_i \right| & 
+\leq \limsup_{q \to \infty}\frac{1}{n_q}\sum_{i = 1}^{n_q}\left|X_{i,m_q} - X_i \right|.
+\end{align*}
+Note that for all $M \geq 1$, we have
+\[
+\limsup_{q \to \infty}\frac{1}{n_q}\sum_{i = 1}^{n_q}\left|X_{i,m_q} - X_i \right|
+\leq \limsup_{q \to \infty} \frac{1}{n_q}\sum_{i = 1}^{n_q} \sup_{m \geq M} \left|X_{i, m} - X_i \right|.
+\]
+We define $Y_{i,M} = \sup_{m \geq M}\left| X_{i, m} - X_i\right|$ for $i, M\geq 1$. Then, for fixed $M$, $Y_{i,M}$ are random variables i.i.d over $i$. Therefore, by SLLN
+\[
+\frac{1}{n_q}\sum_{i = 1}^{n_q}Y_{i,M} \overset{a.s}{\to} \E Y_{1,M} \quad \text{as } q \to \infty.
+\]
+Note that such almost sure set depends on integer $M$. However, as we have countable number of sets, by taking the countable intersection, we have almost sure convergence for all $M\geq 1$. Also, by our assumption on $X_{i,m}$, we have that $Y_{i,M} \overset{a.s.}{\to}0 $ as $M \to \infty$. Therefore, we have that 
+\[
+\lim_{M \to \infty}\E Y_{1,M} = 0
+\]
+by Dominated convergence theorem. So we have
+\[
+\lim_{M \to \infty}\limsup_{q \to \infty}\frac{1}{n_q}\sum_{i = 1}^{n_q}Y_{i,M} = \lim_{M \to \infty} \E Y_{1,M} = 0 \quad \text{a.s.}
+\]
+\end{proof}
+
+\begin{lemma}\label{lemma::convergence_Qm}
+Let $\X$ be a compact Polish space and $Q \in \probprobx$.Then
+\[
+\lim_{m \to \infty} \dlip\!\left(\T_m[Q], Q\right) = 0.
+\]
+\end{lemma}
+
+\begin{proof}
+By de Finetti’s theorem,
+\[
+\frac{1}{m}\sum_{j = 1}^m \delta_{X_j}
+\overset{w}{\to} \widetilde{P}
+\quad \text{almost surely},
+\]
+where $\widetilde{P} \sim Q$. Since almost sure convergence implies weak convergence, we obtain
+\[
+\law\!\left( \frac{1}{m}\sum_{j = 1}^m \delta_{X_j} \right)
+\overset{w}{\to}
+\law(\widetilde{P}).
+\]
+Since $\dlip$ metrizes weak convergence (see Theorem~3.1 and Lemma~3.2 in \cite{catalano2024hierarchical}), the desired result follows.
+\end{proof}
+
+\begin{lemma}\label{lemma::tightness_under_continuity}
+Let $G$ be a tight random variable taking values in $\ellstar$, and let $f$ be a continuous function from $\ellstar$ to $\R$. Then $f(G)$ is a tight random variable taking values in $\R$ and it is almost surely bounded.
+\end{lemma}
+
+\begin{proof}
+Fix $\epsilon \in (0,1)$. Since $G$ is tight, we know that there exists a compact subset $S \subset \ellstar$ such that
+\[
+\mathbb{P}\left(G \in S\right) > \epsilon.
+\]
+Since $f$ is continuous, we also have that $f(S)$ is compact. Then,
+\[
+\mathbb{P}\left\{ f(G) \in f(S) \right\}
+= \mathbb{P}\left\{ G \in f^{-1}\left(f(S)\right) \right\}
+\geq \mathbb{P}\left\{ G \in S \right\}
+> \epsilon,
+\]
+since $S \subset f^{-1}\left(f(S)\right)$. This shows that $f(G)$ is tight.
+
+Now we show that $f(G)$ is almost surely bounded, that is,
+\[
+\lim_{M \to \infty} \mathbb{P}\left\{ f(G) \in [-M, M] \right\} = 1.
+\]
+Suppose that
+\[
+\lim_{M \to \infty} \mathbb{P}\left\{ f(G) \in [-M, M] \right\} = \delta
+\]
+for some $\delta < 1$ (note that the limit always exists, as the sets are increasing). Take $\epsilon > \delta$. We know that there exists a compact subset $B \subset \R$ such that
+\[
+\mathbb{P}\left(f(G) \in B\right) > \epsilon.
+\]
+Since $B$ is bounded, there exists $M' > 0$ such that $B \subset [-M', M']$, and hence
+\[
+\mathbb{P}\left(f(G) \in [-M', M']\right)
+\geq \mathbb{P}\left(f(G) \in B\right)
+> \epsilon
+> \delta,
+\]
+which leads to a contradiction. Therefore, $f(G)$ is almost surely bounded.
+\end{proof}
+
+
+
+
+
+\begin{lemma}\label{lemma:general_asympt_level}
 Let $T$ be an almost surely bounded and absolutely continuous random variable, and let $\{T_n\}_{n\geq 1}$ be a sequence of random variables such that $T_n \overset{w}{\to} T$. Let $q(\theta)$ denote the $(1-\theta)$-quantile of $T$, and let $r(n,\theta)$ be a sequence of random variables such that
 \[
 r(n,\theta) \overset{p}{\to} q(\theta)
@@ -1142,56 +1273,27 @@ r(n,\theta) \overset{p}{\to} q(\theta)
 \]
 for every $\theta \in (0,1)$. Then,
 \[
-\limsup_{n \to \infty} \mathbb{P}\!\left(T_n > r(n,\theta)\right) \leq \theta
+\lim_{n \to \infty} \mathbb{P}\!\left(T_n > r(n,\theta)\right) = \theta
 \quad \text{for all } \theta \in (0,1).
 \]
 \end{lemma}
 
 \begin{proof}
-Fix $\theta \in (0,1)$. Since $r(n,\theta) \overset{p}{\to} q(\theta)$, for every $\epsilon > 0$ and $\delta \in (0,1)$, there exists $N \geq 1$ such that, for all $n \geq N$,
+Fix $\theta \in (0,1)$. By Slutsky’s theorem,
 \[
-\mathbb{P}\!\left(\left| r(n,\theta) - q(\theta) \right| < \epsilon \right) > \delta.
+T_n - r(n,\theta) \overset{w}{\to}T-q(\theta).
 \]
-In particular,
+As $T$ is absolutely continuous, $\mathbb{P}(T - q(\theta) = 0) = 0$. Therefore, by Portmanteau theorem
 \[
-\mathbb{P}\!\left(r(n,\theta) > q(\theta) - \epsilon\right)
-\geq \mathbb{P}\!\left(\left| r(n,\theta) - q(\theta) \right| < \epsilon \right)
-> \delta.
+\lim_{n \to \infty}\mathbb{P}(T_n - r(n,\theta) > 0) 
+= \mathbb{P}(T - q(\theta) > 0) = \theta.
 \]
-Define the event
-\[
-A_n = \left\{ r(n,\theta) > q(\theta) - \epsilon \right\}.
-\]
-Then $\mathbb{P}(A_n^c) < 1 - \delta$ for every $n \geq N$. For such $n$, we have
-\begin{align*}
-\mathbb{P}\!\left(T_n > r(n,\theta)\right)
-&= \mathbb{P}\!\left(\{T_n > r(n,\theta)\} \cap A_n\right)
-  + \mathbb{P}\!\left(\{T_n > r(n,\theta)\} \cap A_n^c\right) \\
-&\leq \mathbb{P}\!\left(\{T_n \geq q(\theta) - \epsilon\} \cap A_n\right)
-  + \mathbb{P}(A_n^c) \\
-&\leq \mathbb{P}\!\left(T_n \geq q(\theta) - \epsilon\right) + 1 - \delta.
-\end{align*}
-Since $[q(\theta) - \epsilon, \infty)$ is a closed set, the Portmanteau theorem implies that
-\[
-\limsup_{n \to \infty}
-\mathbb{P}\!\left(T_n \geq q(\theta) - \epsilon\right)
-\leq
-\mathbb{P}\!\left(T \geq q(\theta) - \epsilon\right).
-\]
-Therefore, for every $\epsilon > 0$ and $\delta \in (0,1)$,
-\[
-\limsup_{n \to \infty}
-\mathbb{P}\!\left(T_n > r(n,\theta)\right)
-\leq
-\mathbb{P}\!\left(T \geq q(\theta) - \epsilon\right) + 1 - \delta.
-\]
-Since $\epsilon > 0$ and $\delta \in (0,1)$ were arbitrary, taking $\epsilon \to 0$ and $\delta \to 1$, and invoking the continuity of probability measures together with the absolute continuity of $T$, yields the desired result.
 \end{proof}
 
 
 
 
-\begin{lemma}\label{lemma::general_consist}
+\begin{lemma}\label{lemma:general_consist}
 Let $\{T_n\}_{n\geq 1}$ be a sequence of random variables such that $T_n \overset{p}{\to} \infty$. Let $r(n,\theta)$ be a sequence of random variables such that
 \[
 r(n,\theta) \overset{p}{\to} r(\theta) < \infty
@@ -1223,7 +1325,7 @@ Then, for every $n \geq N$,
 \geq 1 - \mathbb{P}(A_n^c) - \mathbb{P}(B_n^c)
 > 2\delta - 1.
 \]
-On the event $A_n \cap B_n$, we have $T_n > r(\theta) + \epsilon > r(n,\theta)$, and hence $T_n > r(n,\theta)$. Therefore, for all $n \geq N$,
+On the event $A_n \cap B_n$, we have $T_n > r(\theta) + \epsilon > r(n,\theta)$. Therefore, for all $n \geq N$,
 \[
 \mathbb{P}\!\left(T_n > r(n,\theta)\right)
 \geq \mathbb{P}\!\left(\{T_n > r(n,\theta)\} \cap A_n \cap B_n\right)
@@ -1234,51 +1336,48 @@ Since $\delta \in (0,1)$ was arbitrary, the claim follows.
 \end{proof}
 
 
+\begin{lemma}\label{lemma::bracketing-number_covering_number}
+Let $\mathcal{H}$ be a class of functions from $\mathbb{Y}$ to $\R$, and let $P$ be a probability measure on $\mathbb{Y}$. Then
+\[
+\N_{[]}\!\left(\epsilon, \mathcal{H}, \mathrm{L}_2(P)\right)
+\leq
+\N\!\left(\frac{\epsilon}{2}, \mathcal{H}, \|\cdot\|_\infty\right).
+\]
+\end{lemma}
 
-
-
-
-
-
-\subsection*{Proof of Theorem~\ref{theorem:perm_consistency_dlip}}
 \begin{proof}
-Suppose first that $Q^1 = Q^2$. Let $(n_q)_{q \geq 1}$ and $(m_q)_{q \geq 1}$ be sequences such that
+Let $\{h_1, \dots, h_N\}$ be an $\epsilon/2$-cover of $\mathcal{H}$ with respect to the $\|\cdot\|_\infty$ norm. Define
 \[
-\lim_{q \to \infty} n_q = \lim_{q \to \infty} m_q = \infty.
+l_i = h_i - \frac{\epsilon}{2},
+\qquad
+u_i = h_i + \frac{\epsilon}{2},
+\quad \text{for } i = 1, \dots, N.
 \]
-By the first part of Theorem~\ref{theorem::asympt_distr_dlip}, the sequence of random variables $T_{n_q,m_q}$ converges in distribution to $\left\| G_{Q^1} \right\|_{\dstar}$, which is an almost surely bounded random variable by Lemma~\ref{lemma::tightness_under_continuity} and has an absolutely continuous density (see Proposition~2 of \cite{beran1986confidence}).
-
-In addition, by Theorem~\ref{theorem::asympt_distr_perm_threshold}, the sequence of random variables $r(n_q,m_q,\theta)$ obtained from the permutation approach converges almost surely to the $(1-\theta)$-quantile of the random variable $\left\| G_{Q^1} \right\|_{\dstar}$ for all $\theta \in (0,1)$.
-
-Then, by Lemma~\ref{lemma::general__asympt_level}, we obtain
+Then $\|u_i - l_i\|_{\mathrm{L}_2(P)} = \epsilon$ for each $i$.
+Moreover, for every $h \in \mathcal{H}$ there exists an index $i$ such that
+$\|h - h_i\|_\infty \leq \epsilon/2$, which implies
 \[
-\limsup_{q \to \infty}\mathbb{P}\!\left(T_{n_q,m_q} > r(n_q,m_q,\theta)\right)
-\leq \theta
-\quad \text{for all } \theta \in (0,1).
+h_i(y) - \frac{\epsilon}{2} \leq h(y) \leq h_i(y) + \frac{\epsilon}{2}
+\quad \text{for all } y \in \mathbb{Y}.
 \]
-
-Now suppose that $Q^1 \neq Q^2$. By the second part of Theorem~\ref{theorem::asympt_distr_dlip}, the sequence of random variables $T_{n_q,m_q}$ converges in probability to $\infty$.
-
-Moreover, by Theorem~\ref{theorem::asympt_distr_perm_threshold}, the sequence of random variables $r(n_q,m_q,\theta)$ from the permutation approach converges almost surely to the $(1-\theta)$-quantile of the random variable $\left\| G_{\frac{1}{2}Q^1 + \frac{1}{2}Q^2} \right\|_{\dstar}$ for all $\theta \in (0,1)$. The random variable $\left\| G_{\frac{1}{2}Q^1 + \frac{1}{2}Q^2} \right\|_{\dstar}$ is almost surely bounded by Lemma~\ref{lemma::tightness_under_continuity}, and hence its $(1-\theta)$-quantile is finite.
-
-Therefore, by Lemma~\ref{lemma::general_consist}, we obtain
-\[
-\lim_{q \to \infty}
-\mathbb{P}\!\left(T_{n_q, m_q} > r(n_q, m_q, \theta)\right)
-= 1
-\quad \text{for all } \theta \in (0,1).
-\]
+Thus, $h \in [l_i, u_i]$, and the collection $\{[l_i, u_i]\}_{i=1}^N$
+forms a family of $\epsilon$-brackets that covers $\mathcal{H}$.
 \end{proof}
 
+\begin{lemma}\label{lemma::covnumbdstar}
+    Let $\X\subset \R^d$ with bounded diameter. Then there exists a constant $C_d \in \R$ such that
+    \[
+    \log \N\left(\epsilon, \dstar, \|\cdot\|_\infty\right) \leq C_d \frac{1}{\epsilon^d} \quad \text{for all } \epsilon > 0.
+    \]
+\end{lemma}
+\begin{proof}
+Let $K = \mathrm{diam}(\X)$. As shown on page 25 of \cite{catalano2024hierarchical}, we have
+\[
+\log \N \left(\epsilon, \dstar, \|\cdot\|_\infty \right) \leq \log 2 \left\lceil \frac{4K}{\epsilon}\right\rceil + \log \N\left(\frac{\epsilon}{2}, \lipXstar, \|\cdot\|_\infty \right).
+\]
+By Theorem 2.7.1 in \cite{van1996weak}, there exists a constant $C_d$ depending on $\mathrm{diam}(\X)$ such that $\log \N \left(\epsilon, \lipXstar, \| \cdot \|_\infty \right) \leq C_d \epsilon^{-d}$, which yields the desired result.
+\end{proof}
 
-
-
-
-
-
-
-
-Now we prove the rest of the auxiliary Lemmas.
 
 
 \begin{lemma}\label{lemma::sum_under_permutation}
@@ -1336,206 +1435,3 @@ Substituting this into the expression for $\var(S_n)$ yields
 = \frac{n^2\,\var(a_{R_1})}{2n - 1}.
 \end{align*}
 \end{proof}
-
-\begin{lemma}\label{lemma::bracketing-number_covering_number}
-Let $\mathcal{H}$ be a class of functions from $\mathbb{Y}$ to $\R$, and let $P$ be a probability measure on $\mathbb{Y}$. Then
-\[
-\N_{[]}\!\left(\epsilon, \mathcal{H}, \mathrm{L}_2(P)\right)
-\leq
-\N\!\left(\frac{\epsilon}{2}, \mathcal{H}, \|\cdot\|_\infty\right).
-\]
-\end{lemma}
-
-\begin{proof}
-Let $\{h_1, \dots, h_N\}$ be an $\epsilon/2$-cover of $\mathcal{H}$ with respect to the $\|\cdot\|_\infty$ norm. Define
-\[
-l_i = h_i - \frac{\epsilon}{2},
-\qquad
-u_i = h_i + \frac{\epsilon}{2},
-\quad \text{for } i = 1, \dots, N.
-\]
-Then $\|u_i - l_i\|_{\mathrm{L}_2(P)} = \epsilon$ for each $i$.
-Moreover, for every $h \in \mathcal{H}$ there exists an index $i$ such that
-$\|h - h_i\|_\infty \leq \epsilon/2$, which implies
-\[
-h_i(y) - \frac{\epsilon}{2} \leq h(y) \leq h_i(y) + \frac{\epsilon}{2}
-\quad \text{for all } y \in \mathbb{Y}.
-\]
-Thus, $h \in [l_i, u_i]$, and the collection $\{[l_i, u_i]\}_{i=1}^N$
-forms a family of $\epsilon$-brackets that covers $\mathcal{H}$.
-\end{proof}
-
-\begin{lemma}\label{lemma::covnumbdstar}
-    Let $\X\subset \R^d$ with bounded diameter. Then there exists a constant $C_d \in \R$ such that
-    \[
-    \log \N\left(\epsilon, \dstar, \|\cdot\|_\infty\right) \leq C_d \frac{1}{\epsilon^d} \quad \text{for all } \epsilon > 0.
-    \]
-\end{lemma}
-\begin{proof}
-Let $K = \mathrm{diam}(\X)$. As shown on page 25 of \cite{catalano2024hierarchical}, we have
-\[
-\log \N \left(\epsilon, \dstar, \|\cdot\|_\infty \right) \leq \log 2 \left\lceil \frac{4K}{\epsilon}\right\rceil + \log \N\left(\frac{\epsilon}{2}, \lipXstar, \|\cdot\|_\infty \right).
-\]
-By Theorem 2.7.1 in \cite{van1996weak}, there exists a constant $C_d$ depending on $\mathrm{diam}(\X)$ such that $\log \N \left(\epsilon, \lipXstar, \| \cdot \|_\infty \right) \leq C_d \epsilon^{-d}$, which yields the desired result.
-\end{proof}
-
-\begin{lemma}\label{lemma::convergence_Qm}
-Let $\X$ be a compact Polish space and $Q \in \probprobx$.Then
-\[
-\lim_{m \to \infty} \dlip\!\left(\T_m[Q], Q\right) = 0.
-\]
-\end{lemma}
-
-\begin{proof}
-By de Finetti’s theorem,
-\[
-\frac{1}{m}\sum_{j = 1}^m \delta_{X_j}
-\overset{w}{\to} \widetilde{P}
-\quad \text{almost surely},
-\]
-where $\widetilde{P} \sim Q$. Since almost sure convergence implies weak convergence, we obtain
-\[
-\law\!\left( \frac{1}{m}\sum_{j = 1}^m \delta_{X_j} \right)
-\overset{w}{\to}
-\law(\widetilde{P}).
-\]
-Since $\dlip$ metrizes weak convergence (see Theorem~3.1 and Lemma~3.2 in \cite{catalano2024hierarchical}), the desired result follows.
-\end{proof}
-
-\begin{lemma}\label{lemma::finite_exchseq_equivalent_infinite_exchseq}
-Let $Q^1, Q^2 \in \probprobx$. Then there exists $m_0 \geq 1$ such that, for all $m \geq m_0$,
-\[
-Q^1 = Q^2
-\quad \text{if and only if} \quad
-\T_m[Q^1] = \T_m[Q^2].
-\]
-\end{lemma}
-
-\begin{proof}
-The implication $Q^1 = Q^2 \Rightarrow \T_m[Q^1] = \T_m[Q^2]$ is immediate.
-
-Now suppose that $Q^1 \neq Q^2$. By Lemma~\ref{lemma::convergence_Qm}, we have
-\[
-\lim_{m \to \infty} \dlip\!\left(Q^1, \T_m[Q^1]\right) = 0,
-\qquad
-\lim_{m \to \infty} \dlip\!\left(Q^2, \T_m[Q^2]\right) = 0.
-\]
-Let
-\[
-\epsilon = \frac{\dlip(Q^1, Q^2)}{2}.
-\]
-Then there exists $m_0 \geq 1$ such that, for all $m \geq m_0$,
-\[
-\dlip\!\left(Q^1, \T_m[Q^1]\right) < \epsilon,
-\qquad
-\dlip\!\left(Q^2, \T_m[Q^2]\right) < \epsilon.
-\]
-For all $m \geq m_0$, we therefore have
-\begin{align*}
-\dlip\!\left(\T_m[Q^1], \T_m[Q^2]\right)
-&\geq \dlip(Q^1, Q^2)
-     - \dlip\!\left(Q^2, \T_m[Q^2]\right)
-     - \dlip\!\left(Q^1, \T_m[Q^1]\right) \\
-&> \dlip(Q^1, Q^2) - 2\epsilon
-= 0.
-\end{align*}
-Hence $\T_m[Q^1] \neq \T_m[Q^2]$.
-\end{proof}
-
-As a consequence of the above lemma, for any two distinct laws of random probability measures $Q^1, Q^2 \in \probprobx$, there exists an integer $m \geq 1$ such that the laws of their associated exchangeable sequences are different if and only if $Q^1 \neq Q^2$.
-\begin{lemma}\label{lemma::tightness_under_continuity}
-Let $G$ be a tight random variable taking values in $\ellstar$, and let $f$ be a continuous function from $\ellstar$ to $\R$. Then $f(G)$ is a tight random variable taking values in $\R$ and it is almost surely bounded.
-\end{lemma}
-
-\begin{proof}
-Fix $\epsilon \in (0,1)$. Since $G$ is tight, we know that there exists a compact subset $S \subset \ellstar$ such that
-\[
-\mathbb{P}\left(G \in S\right) > \epsilon.
-\]
-Since $f$ is continuous, we also have that $f(S)$ is compact. Then,
-\[
-\mathbb{P}\left\{ f(G) \in f(S) \right\}
-= \mathbb{P}\left\{ G \in f^{-1}\left(f(S)\right) \right\}
-\geq \mathbb{P}\left\{ G \in S \right\}
-> \epsilon,
-\]
-since $S \subset f^{-1}\left(f(S)\right)$. This shows that $f(G)$ is tight.
-
-Now we show that $f(G)$ is almost surely bounded, that is,
-\[
-\lim_{M \to \infty} \mathbb{P}\left\{ f(G) \in [-M, M] \right\} = 1.
-\]
-Suppose that
-\[
-\lim_{M \to \infty} \mathbb{P}\left\{ f(G) \in [-M, M] \right\} = \delta
-\]
-for some $\delta < 1$ (note that the limit always exists, as the sets are increasing). Take $\epsilon > \delta$. We know that there exists a compact subset $B \subset \R$ such that
-\[
-\mathbb{P}\left(f(G) \in B\right) > \epsilon.
-\]
-Since $B$ is bounded, there exists $M' > 0$ such that $B \subset [-M', M']$, and hence
-\[
-\mathbb{P}\left(f(G) \in [-M', M']\right)
-\geq \mathbb{P}\left(f(G) \in B\right)
-> \epsilon
-> \delta,
-\]
-which leads to a contradiction. Therefore, $f(G)$ is almost surely bounded.
-\end{proof}
-\begin{lemma}[Triangular SLLN]\label{lemma::triangularslln}
-Let $(X_{n,m})_{n,m\geq 1}$ be sequence of random variables in a bounded interval of $\R$. Let also $X,X_1,X_2,\dots \overset{\iid}{\sim}P$. Assume that $X_{n,m}\overset{a.s}{\to}X_n$ for all $n \geq 1$ and $(X_n,X_{n,1},X_{n,2},\dots)$ are i.i.d over $n$. Then,
-\[
-\left| \frac{1}{n} \sum_{i = 1}^n X_{i,m} - \E X\right| \overset{a.s.}{\to} 0 \quad \text{as} n,m\to \infty.
-\]
-\end{lemma}
-
-\begin{proof}
-Let $(n_q)_{q \geq 1}, (m_q)_{q \geq 1}$ be any sequences such that $n_q \to \infty$ and $m_q \to \infty$. We upper bound the quantity of interest as
-\[
-\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{i, m_q} - \E X \right| \leq 
-\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{i, m_q} - \frac{1}{n_q}\sum_{i = 1}^{n_q}X_i \right|
-+ \left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_i - \E X \right|.
-\]
-Second term converges to $0$ almost surely by Strong law of large numbers. So we show the almost sure convergence of the first term.
-\begin{align*}
-\limsup_{q \to \infty}\left|\frac{1}{n_q}\sum_{i = 1}^{n_q} X_{i, m_q} - \frac{1}{n_q}\sum_{i = 1}^{n_q}X_i \right| & 
-\leq \limsup_{q \to \infty}\frac{1}{n_q}\sum_{i = 1}^{n_q}\left|X_{i,m_q} - X_i \right|.
-\end{align*}
-Note that for all $M \geq 1$, we have
-\[
-\limsup_{q \to \infty}\frac{1}{n_q}\sum_{i = 1}^{n_q}\left|X_{i,m_q} - X_i \right|
-\leq \limsup_{q \to \infty} \frac{1}{n_q}\sum_{i = 1}^{n_q} \sup_{m \geq M} \left|X_{i, m} - X_i \right|.
-\]
-We define $Y_{i,M} = \sup_{m \geq M}\left| X_{i, m} - X_i\right|$ for $i, M\geq 1$. Then, for fixed $M$, $Y_{i,M}$ are random variables i.i.d over $i$. Therefore, by SLLN
-\[
-\frac{1}{n_q}\sum_{i = 1}^{n_q}Y_{i,M} \overset{a.s}{\to} \E Y_{1,M} \quad \text{as } q \to \infty.
-\]
-Note that such almost sure set depends on integer $M$. However, as we have countable number of sets, by taking the countable intersection, we have almost sure convergence for all $M\geq 1$. Also, by our assumption on $X_{i,m}$, we have that $Y_{i,M} \overset{a.s.}{\to}0 $ as $M \to \infty$. Therefore, we have that 
-\[
-\lim_{M \to \infty}\E Y_{1,M} = 0
-\]
-by Dominated convergence theorem. So we have
-\[
-\lim_{M \to \infty}\limsup_{q \to \infty}\frac{1}{n_q}\sum_{i = 1}^{n_q}Y_{i,M} = \lim_{M \to \infty} \E Y_{1,M} = 0 \quad \text{a.s.}
-\]
-\end{proof}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
