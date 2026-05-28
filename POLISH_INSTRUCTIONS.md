@@ -10,10 +10,8 @@ Before editing any `.tex` file, always read the following context files:
 
 1. `commands.tex` — custom macros, theorem environments, and frequently used commands.
 3. Relevant `.tex` files from the same chapter folder.
-4. Relevant `.tex` files from other chapter folders, for example:
-   - `introduction.tex`
-   - `known_results_merging.tex`
-   - `rpms_and_exchangeability.tex`
+4. `.tex` files apart from 'completely_random_measures.tex' from the bnp_toolbox folder.
+4. Relevant `.tex` files from other chapter folders.
 
 Use these files to understand the thesis style, notation, terminology, and logical structure.
 
