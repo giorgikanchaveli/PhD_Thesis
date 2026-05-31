@@ -3,145 +3,146 @@ In this section, we examine the finite-sample performance of the proposed HIPM a
 
 \subsection{Empirical Comparison Between HIPM and WoW}\label{subsection:hipm_wow_comparison}
 
-We compare the use of the HIPM and WoW within our permutation-based test by analysing the Type I error, the power, and the ROC curves in several simulated settings, taking into account both parametric and nonparametric data-generating processes, both in settings that satisfy the assumptions of Theorem~\ref{th:perm_consistency_dlip} for asymptotic guarantees, and settings that do not satisfy them, notably $\X = \R$, but are still interesting in practice. We consider the following baselines for parametric and nonparametric models.
+We compare the use of the HIPM and WoW within our permutation-based test by analysing the Type I error and the power in several simulated settings, taking into account both parametric and nonparametric data-generating processes, both in settings that satisfy the assumptions of Theorem~\ref{theorem:perm_consistency_dlip} for asymptotic guarantees, and settings that do not satisfy them, notably $\X = \R$, but are still interesting in practice. We consider the following baselines for parametric and nonparametric models.
 \begin{enumerate}
-\item Parametric model that fulfills the assumptions of Theorem~\ref{th:perm_consistency_dlip} (PA):
+\item Parametric model that fulfills the assumptions:
 \[
 Q^1 = \mathcal{L}(\tilde P), \qquad \tilde P| \tilde \mu = \mathrm{Beta}( \tilde \mu, 1- \tilde \mu), \qquad \tilde \mu \sim \mathrm{Beta}(a_0 = 1, b_0 = 1);
 \]
-\item Parametric model that does not fulfill the assumptions of Theorem~\ref{th:perm_consistency_dlip} (PNA):
+\item Parametric model that does not fulfill the assumptions:
 \[
 Q^1 = \mathcal{L}(\tilde P), \qquad \tilde P| \tilde \mu = \mathcal{N}(\tilde \mu, \sigma^2 = 1), \qquad \tilde \mu \sim \N(\mu_0 = 0, \sigma^2_0 = 1);
 \]
 
-\item Nonparametric model that fulfills the assumptions of Theorem~\ref{th:perm_consistency_dlip} (NPA):
+\item Nonparametric model that fulfills the assumptions:
 \[
 Q^1 = \mathrm{DP}(\alpha = 1, P_0 = \mathrm{Unif}[0,1]);
 \]
-\item Nonparametric model that does not fulfill the assumptions of Theorem~\ref{th:perm_consistency_dlip} (NPNA)
+\item Nonparametric model that does not fulfill the assumptions:
 \[
 Q^1 = \mathrm{DP}(\alpha = 1, P_0 = N(0,1)),
 \]
 \end{enumerate}
-where $\mathrm{Beta}(a,b)$ is the Beta distribution with shape parameters $a,b$, $\mathcal{N}(\mu, \sigma^2)$ is the Gaussian distribution with mean $\mu$ and variance $\sigma^2$, $\mathrm{Unif}[0,1]$ is the Uniform distribution on the interval $[0,1]$, and $\mathrm{DP}(\alpha, P_0)$ denotes the Dirichlet Process with concentration $\alpha>0$ and base probability $P_0 \in \probx$ \citep{ferguson1973bayesian}. Note that if $P_0$ has full support on $\X$, $\mathrm{DP}(\alpha, P_0)$ has full weak support on $\probx$.
+where $\mathrm{Beta}(a,b)$ is the Beta distribution with shape parameters $a,b$, $\mathcal{N}(\mu, \sigma^2)$ is the Gaussian distribution with mean $\mu$ and variance $\sigma^2$, $\mathrm{Unif}[0,1]$ is the Uniform distribution on the interval $[0,1]$, and $\mathrm{DP}(\alpha, P_0)$ denotes the Dirichlet Process with concentration $\alpha>0$ and base probability $P_0 \in \probx$. Note that if $P_0$ has full support on $\X$, $\mathrm{DP}(\alpha, P_0)$ has full weak support on $\probx$.
 
-To investigate the behaviour of the Type I error, we simulate the data from $Q^1 = Q^2$ equal to each of the examples above $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the percentage of times it rejects the (correct) $H_0 = Q^1 = Q^2$ for each significance level $\theta$. In each simulation we set $n=m=n_{\text{perm}}= 100$. The results are shown in Figure~\MC{put figure}, where we see that both WoW and HIPM recover a Type I error which is approximately equal to the significance level $\theta$, in all simulation settings. Interestingly, the WoW distance appears to control the Type I error even if our theory does not guaranty it.
+To investigate the behaviour of the Type I error, we simulate the data from $Q^1 = Q^2$ equal to each of the examples above $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the percentage of times it rejects the (correct) $H_0 = Q^1 = Q^2$ for each significance level $\theta$. In each simulation we set $n=m=n_{\text{perm}}= 100$. The results are shown in Figure~\ref{figure:fp}, where we see that both WoW and HIPM recover a Type I error which is approximately equal to the significance level $\theta$, in all simulation settings. We report only one of the four graphs as the remaining ones do not show any differences. Interestingly, the WoW distance appears to control the Type I error even if our theory does not guaranty it, and both behave well on unbounded settings as well.
+
+\begin{figure}[H]
+    \centering
+      \includegraphics[width = 0.49\linewidth]{chapters/two-sample-testing/figures/wow_vs_hipm/fp_label=1_n=100_m=100_S=1000_n_perm=100.png}
+    \caption{False Positive Rates for HIPM and WoW}
+    \label{figure:fp}
+\end{figure}
 
 
 
-To investigate the power of the test, we simulate the data under the alternative hypothesis $Q^1 \neq Q^2$. Specifically, we take $Q^1$ equal to each of the settings above, and modify its parameters in two different ways for each setting: for the parametric models, we change both the `likelihood' and the `prior', for the Dirichlet process, we change both the concentration parameter and the base measure. We consider the following alternative hypotheses:
+To investigate the power of the test, we simulate the data under the alternative hypothesis $Q^1 \neq Q^2$. Specifically, we take $Q^1$ equal to each of the settings above, and modify its parameters for each setting. We consider the following alternative hypotheses:
 \begin{itemize}
-\item[1a.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathrm{Beta}( 2\tilde \mu, 2(1- \tilde \mu))$, and $\tilde \mu \sim \mathrm{Beta}(a_0 = 1, b_0 = 1)$;
-\item[1b.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathrm{Beta}( \tilde \mu, 1- \tilde \mu)$, and $ \tilde \mu \sim \mathrm{Beta}(a_0 = 2, b_0 = 1)$;
-\item[2a.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathcal{N}(\tilde \mu, \sigma^2 = 2)$, and $\tilde \mu \sim \N(\mu_0 = 0, \sigma^2_0 = 1)$;
-\item[2b.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathcal{N}(\tilde \mu, \sigma^2 = 1)$, and $\tilde \mu \sim \N(\mu_0 = 1, \sigma^2_0 = 1)$;
-\item[3a.] $Q^2 = \mathrm{DP}(\alpha = 2, P_0 = \mathrm{Unif}[0,1])$;
-\item[3b.] $Q^2 = \mathrm{DP}(\alpha = 1, P_0 = \mathrm{Beta}(2,2))$;
-\item[4a.] $Q^2 = \mathrm{DP}(\alpha = 2, P_0 = N(0,1))$;
-\item[4b.] $Q^2 = \mathrm{DP}(\alpha = 1, P_0 = N(1,1))$.
+\item[1a.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \mathrm{Beta}( \tilde{\mu}, 1- \tilde{\mu})$, and $\tilde \mu \sim \mathrm{Beta}(a_0 = 1, b_0 = 5)$;
+\item[2b.] $Q^2 = \mathcal{L}(\tilde P)$, where $\tilde P| \tilde \mu = \N(\tilde \mu, \sigma^2 = 1)$, and $\tilde \mu \sim \N(\mu_0 = 0, \sigma^2_0 = 1.5)$;
+\item[3c.] $Q^2 = \mathrm{DP}(\alpha = 1, P_0 = \mathrm{Beta}(a_0 = 1,b_0 = 1.5))$;
+\item[4d.] $Q^2 = \mathrm{DP}(\alpha = 1, P_0 = \N(0,1))$.
 \end{itemize}
-As before, we sample the observations $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the empirical power, that is, 1 minus the percentage of times it rejects the (incorrect) $H_0 = Q^1 = Q^2$ for each significance level $\theta$, setting $n=m=n_{\text{perm}}= 100$. \\
-\MC{Describe ROC curve and why we also add it} \\
-\MC{Describe results carefully}\\
-\MC{Underline if there is an empirical difference between performance of WoW and HIPM and, if not, underline the asymptotic guarantees and the computational times.}\\
-\MC{Decide which plot/plots to put here and which to move in appendix if they all convey the same message.}\\
-\MC{Find ways to make plots nicer, understand which simulations can be grouped in the same plot - save the data so that we can play with the plots afterwards. }
-\MC{Not for now but to keep in mind for the future: After looking at the results pick one relevant setting and add sensitivy analysis for $n,m,n_{perm}$, changing one at a time in the set $\{50,100,150, 200\}$. Put results in appendix and refer to them to justify your choices. }
-
-
-\subsection{Synthetic Data}\label{subsection:synthetic_data}
-
-
-
-Let us start with the comparison of HIPM and WoW under the permutation approach. To see the behaviour of the Type I error, we fix two same Dirichlet Processes
-\[
-Q^1 = \mathrm{DP}(1.0, \mathrm{Unif}(0,1)),\quad Q^2 = \mathrm{DP}(1.0, \mathrm{Unif}(0,1)), 
-\]
-and look at the rejection rates for each significance level $\theta.$
-
-For investigating the power, we fix two different Dirichlet processes 
-\[
-Q^1 = \mathrm{DP}(1.0, \mathrm{Unif}(0,1)),\quad Q^2 = \mathrm{DP}(1.0, \mathrm{Beta}(1,1.4)).
-\]
-We first take the small size for the hierarchical samples, $n = 50, m = 100,$ and then increase to $n = 100, m = 100.$ We also set $n_{\text{perm}} = 100$, which is the number of times we permute the observed samples. To estimate the rejection rates, we perform $S = 1000$ Monte-Carlo simulations. 
+As before, we sample the observations $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the empirical power, that is, 1 minus the percentage of times it rejects the (incorrect) $H_0 = Q^1 = Q^2$ for each significance level $\theta$, setting $n=m=n_{\text{perm}}= 100$. \textcolor{red}{missing interpretation}
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}{0.32\textwidth}
+    \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/fp_n=50_m=100_b=1.4.png}
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/wow_vs_hipm/tp_label_1=4_label_2=7_n=100_m=100_S=1000_n_perm=100.png}
     \end{subfigure}
-    \begin{subfigure}{0.32\textwidth}
+    \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/tp_n=50_m=100_b=1.4.png}
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/wow_vs_hipm/tp_label_1=4_label_2=8_n=100_m=100_S=1000_n_perm=100.png}
     \end{subfigure}
-    \begin{subfigure}{0.32\textwidth}
+    \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/roc_n=50_m=100_b=1.4.png}
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/wow_vs_hipm/tp_label_1=4_label_2=8_n=100_m=10_S=1000_n_perm=100.png}
     \end{subfigure}
-
-    \begin{subfigure}{0.32\textwidth}
+    \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/fp_n=100_m=100_b=1.4.png}
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/wow_vs_hipm/tp_label_1=5_label_2=9_n=100_m=100_S=1000_n_perm=100.png}
     \end{subfigure}
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/tp_n=100_m=100_b=1.4.png}
-    \end{subfigure}
-    \begin{subfigure}{0.32\textwidth}
-        \centering
-        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/ch5/roc_n=100_m=100_b=1.4.png}
-    \end{subfigure}
-    \caption{}
-    \label{fig:normal_normal}
+    \caption{Power for WoW and HIPM}
+    \label{figure:tp_wow_vs_hipm}
 \end{figure}
 
-As we see from the plot, for both of the distance functions, the Type I error is well controlled. Also, Type II error is becoming low as we increase $n$ and $m$. In addition, the ROC curve is much better for both distance functions than the random guessing.
 
-What is not expected from the simulations is that we also control Type I error for the Wasserstein over Wasserstein. In theory, we could not show that under the null hypothesis, the test statistic has the same convergence properties as that with HIPM; however, in practice, it performs well. 
+\subsection{Empirical comparison with existing methods}\label{subsection:comparison_of_all_methods}
 
-Next, we benchmark our proposed scheme against existing methods in the literature. The first method we consider is the Energy test introduced in \cite{szekely2004testing}. In that work, the authors develop a testing procedure for samples taking values in Euclidean space. This method can be extended to general metric spaces, provided that the underlying space is of strongly negative type.
+Several framework for two sample testing in general metric spaces have been developed in the literature. As $(\probx, \W)$ is a metric space those methods can be specialized into that setting. We benchmark our proposed scheme against existing methods. The first method we consider is the method proposed in \cite{dubey2019frechet}, which we refer to as the Fr\'echet test. The Second method is the Energy test introduced in \cite{szekely2004testing}. 
 
-In our simulations below, we take $\X = \R$ and consider the space of probability measures consisting of Gaussian distributions with variance equal to $1$, i.e.,
+The Fr\'echet test utilizes the concept of mean and variance for a random probability measures. Recall that mean of a random variable in $X$ in $\R$ is a number $a \in \R$ such that
 \[
-\probx = \{ \N(\mu, 1) : \mu \in \R \}.
+a = \argmin_{a' \in \R}\E (X-a')^2. 
 \]
-Equipped with the Wasserstein-$1$ distance, the metric space $(\probx, \W)$ is of strongly negative type, since the Wasserstein distance between two Gaussian distributions with unit variance coincides with the absolute difference between their means. Hence, the Energy test is applicable in this setting.
+Such characterization can be used to generalize the concept of mean in general metric space. In the case of space $(\probx,\W_2)$ such mean is refered as Frechet mean defined as 
+\begin{definition}[Fr\'echet Mean]
+\label{definition:Frechet_mean}
+Let $Q \in \probprobx$. The Fr\'{e}chet mean is the probability measure $\mu_{F} \in \probxtwo$ defined as
+\[
+\mu_{F} = \argmin_{P \in \probxtwo} \E_{\widetilde{P}\sim Q} \left[\W^2_2(P, \widetilde{P})\right].
+\]
+\end{definition}
+Accordignly, we define describe the dispersion around that point which is referred as Fr\'echet variance.
+\begin{definition}[Fr\'echet Variance]
+\label{definition:Frechet_variance}
+Let $Q \in \probprobx$. The Fr\'echet variance $V_{F}$ is defined as
+\[
+V_{F} = \min_{P \in \probxtwo}\E_{\widetilde{P}\sim Q} \left[\W^2_2(P, \widetilde{P})\right] 
+= \E_{\widetilde{P}\sim Q} \left[\W^2_2(\mu_F, \widetilde{P})\right]
+\]
+\end{definition}
+asymptotic theory of Frechet test is developed for bounded metric spaces under additional regularity assumptions. In the
+case of $\probx$, these assumptions are known to hold when the Wasserstein distance is of order 2 and X is a compact interval of the real line. It is crucial to ote that the Fr´echet test targets the surrogate null hypothesis of equality of Fr´echet means and Fr´echet variances associated to laws of random probability measures.
 
-As a second scheme, we consider the method proposed in \cite{dubey2019frechet}, which we refer to as the Fr\'echet test. We replicate Figures~1 and~2 from \cite{dubey2019frechet}.
 
-To make a comparison between the testing schemes, we look at the rejection rates of each testing scheme for several pairs of laws of random probability measures (RPMs). Note that, since we work with Gaussian distributions with varying means, the law of a random probability measure is in one-to-one correspondence with the distribution of the mean parameter. In the left and right plots of Figure \ref{figure::varying_mean_variance}, we consider families of pairs of laws of RPMs on $\probx$, identified as the distributions on the mean parameter, defined as
-\begin{align*}
-& \{ \mathrm{TN}(0, 0.5^2, -10, 10), \mathrm{TN}(\delta, 0.5^2, -10, 10) : \delta \in [-1, 1] \}, \\
-& \{ \mathrm{TN}(0, 0.2^2, -10, 10), \mathrm{TN}(0, (0.2\tau)^2, -10, 10) : \tau \in [0, 3] \},
-\end{align*}
-where $\mathrm{TN}(\delta, \tau, a, b)$ denotes the truncated normal distribution on the interval $[a,b]$ with mean $\delta$ and variance $\tau$.
+The Energy test was first developed as a testing procedure for samples taking values in Euclidean space. This method can be extended to general metric space $(\Y,d)$, provided that the underlying space is of strongly negative type (see \cite{lyons2013distance} for a comprehensive overview).
 
-Note that the parameters $\delta = 0$ and $\tau = 1$ in the first and second families, respectively, correspond to estimating the Type~I error, while other parameter values correspond to estimating the power. The other simulation parameters we use are $S = 1000$ and $n_{\text{perm}} = 100$. For the Fr\'echet test, we use a bootstrap approach where $n_{\text{bootstrap}} = 100$.
+We start comparing methods in two different scenarios using the same baseline as \cite{dubey2019frechet}. In each scenario, We will look at the rejection rates of each testing scheme for several pairs of laws of random probability measures. The random probabilities we consider are
+\begin{equation}\label{equation:tnormal_normal_model}
+\tilde P^i| \tilde \mu^{(i)} = \mathcal{N}(\tilde \mu^{(i)}, 1), \qquad \tilde \mu^{(i)} \sim  \mathcal{N}_T(\mu_{0i}, \sigma^2_{0i} , a, b),
+\end{equation}
+for $i = 1,2$, where $\mathcal{N}_T (\cdot, \cdot, a,b)$ denotes a truncated normal on an interval $[a,b]$. To obtain the set of pairs, we will vary some parameter for the random means. In particular, we consider the following settings:
+\begin{enumerate}
+\item The difference between two distributions is dictated by changing the mean parameter of the random mean, reproducing the setting of Figure~1 in \cite{dubey2019frechet}, where $Q^i$ are as in \eqref{equation:tnormal_normal_model} with $\sigma_{01} = \sigma_{02} = 0.5$, $a = -10$, $b = 10$ and
+\[
+\mu_{01} = 0, \qquad \mu_{02} = \delta, \qquad \delta \in [-1, 1]. 
+\]
+\item The difference between two distributions is dictated by changing the variance parameter of the random mean, reproducing the setting of Figure~1 in \cite{dubey2019frechet}, where $Q^i$ are as in \eqref{equation:tnormal_normal_model} with $\mu_{01} = \mu_{02} = 0$, $a = -10$, $b = 10$ and
+\[
+\sigma_{01} = 0.2, \qquad \sigma_{02} = 0.2\tau, \qquad  \tau \in [0, 3].
+\]
+\end{enumerate}
+A low type I error is reflected by a low rejection rate under $H_0$, corresponding respectively to $\delta = 0$ and  $\tau = 1$. High power is instead reflected by the ability to maintain a high rejection rate under the alternative, namely by a steep increase of the rejection curve away from $H_0$.
+
+For each setting we simulate the data $S=1000$ times, perform all tests on the same data, and report the percentage of times it reject the corresponding null hypothesis. We fix size of the hierarchical samples $n = 100, m = 200$. Our tests use a permutation approach based on  $n_{\text{perm}} = 100$ re-samples, the Fr\'echet test uses a bootstrap approach based on $n_{\text{boot}} = 100$ re-samples. For the Frechet test we directly work witht the samples of Gaussian distributions instead of hierarchical samples. Results are reported in Figure~\ref{figure:rejections_mean_variance}. 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}{0.43\textwidth}
+    \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/frechet/varying_mean_n=100_m=200_S=1000_permutation_n_samples=100.png}
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/all_schemes/mean_n=100_m=200_S=1000_bootstrap=false_n_samples=100.png}
     \end{subfigure}
-    \begin{subfigure}{0.43\textwidth}
+    \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/frechet/varying_variance_n=100_m=200_S=1000_permutation_n_samples=100.png}
+        \includegraphics[width = \linewidth]{chapters/two-sample-testing/figures/all_schemes/variance_n=100_m=200_S=1000_bootstrap=false_n_samples=100.png}
     \end{subfigure}
-    \caption{}
-    \label{figure::varying_mean_variance}
+    \caption{Rejection rates for WoW, HIPM, Fr\'echet and Energy tests}
+    \label{figure:rejections_mean_variance}
 \end{figure}
-All testing schemes exhibit low Type~I error. When varying the mean parameter $\delta$ in the left plot, the Energy, WoW, and HIPM tests outperform the Fr\'echet test. The intuition behind this behavior lies in the non-degeneracy property of distance-based tests. In particular, such tests detect the statistical summaries that are sufficient to characterize the underlying distribution; in the case of differing laws of RPMs, they capture richer distributional information than the Fr\'echet mean and variance alone. However, this intuition is not reflected in the right plot, where the method proposed in \cite{dubey2019frechet} outperforms all other testing schemes.
-The final simulation on the synthetic dataset is designed to demonstrate the necessity of distance-based testing. Note that the underlying assumption behind the Fr\'echet test is that the Fr\'echet mean and variance are sufficient to distinguish between two different laws of random probability measures (RPMs). However, laws of RPMs are not always uniquely characterized by their Fr\'echet means and variances.
+\textcolor{red}{missing interpretation}
+
+
+The final simulation on the synthetic dataset is designed to demonstrate the necessity of distance-based testing. Note that the underlying assumption behind the Fr\'echet test is that the Fr\'echet mean and variance are sufficient to distinguish between two different laws of random probability measures. However, laws of RPMs are not always uniquely characterized by their Fr\'echet means and variances.
 
 Indeed, we can construct a simple counterexample. Consider
 \begin{align*}
-   &Q^1 = \law\left(\widetilde{P}^1\right) \quad \text{where} \quad \widetilde{P}^1 = \N\left( \widetilde{\mu}^1, 1\right), \quad \law\left(\widetilde{\mu}^1\right) =  \tfrac{1}{2}\delta_{-1} + \tfrac{1}{2}\delta_{1}, \\
-   &Q^2 = \law\left(\widetilde{P}^2\right) \quad \text{where} \quad \widetilde{P}^2 = \N\left( \widetilde{\mu}^2, 1\right), \quad \law\left(\widetilde{\mu}^2\right) =  \tfrac{1}{8}\delta_{-2} + \tfrac{3}{4}\delta_{0} + \tfrac{1}{8}\delta_{2},
+   &Q^1 = \law\widetilde{P}^1 \quad \text{where} \quad \widetilde{P}^1 | \tilde{\mu} = \N\left( \widetilde{\mu}^1, 1\right), \quad \widetilde{\mu}^1 \sim \tfrac{1}{2}\delta_{-1} + \tfrac{1}{2}\delta_{1}, \\
+   &Q^2 = \law \widetilde{P}^2 \quad \text{where} \quad \widetilde{P}^2 | \tilde{\mu}  = \N\left( \widetilde{\mu}^2, 1\right), \quad \widetilde{\mu}^2 \sim  \tfrac{1}{8}\delta_{-2} + \tfrac{3}{4}\delta_{0} + \tfrac{1}{8}\delta_{2},
 \end{align*}
-where $Q^1 \neq Q^2$, yet their associated Fr\'echet means and variances coincide (see Remarks \ref{remark::frechet_mean_variance_special_case_variance_1},\ref{remark::frechet_mean_variance_mixture_of_laws}).
+where $Q^1 \neq Q^2$, yet their associated Fr\'echet means and variances coincide (see Remark~\ref{remark:frechet_mean_variance_special_case_variance_1}).
 
-Moreover, if we compare $Q^1$ with a mixture of $Q^1$ and $Q^2$, the resulting laws remain different while still inducing the same Fr\'echet means and variances. Specifically, letting
+Moreover, if we compare $Q^1$ with a mixture of $Q^1$ and $Q^2$, the resulting laws remain different while still inducing the same Fr\'echet means and variances (see Remark~\ref{remark:frechet_mean_variance_mixture_of_laws}). Specifically, letting
 \[
 M_\lambda = \lambda Q^1 + (1-\lambda)Q^2,
 \]
@@ -159,7 +160,7 @@ Note that $\lambda = 1$ corresponds to estimating the Type~I error, while other 
 
 As observed in the Figure \ref{figure::counterexample}, since the two distributions induce the same Fr\'echet means and variances, the method proposed in \cite{dubey2019frechet} fails to detect the presence of different laws. In contrast, the HIPM and WoW tests perform slightly better than Energy test in identifying the discrepancy.
 
-To conclude, although the Fr\'echet test can exhibit higher power than the other testing schemes in certain settings, its main limitation is that it fails to detect the difference when the laws of RPMs are not fully characterized by the Fr\'echet mean and variance. The Energy test, as well as permutation tests based on HIPM or WoW, mitigate this limitation. Moreover, HIPM and WoW may be preferable to the Energy test in practice, since the underlying metric space—in our case, the space of probability measures—may fail to be of negative type, or this property may be difficult to verify.
+
 
 \subsection{Mortality Data}\label{subsection:mortality_data}
 
