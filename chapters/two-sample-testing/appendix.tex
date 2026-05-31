@@ -1370,3 +1370,98 @@ Substituting this into the expression for $\var(S_n)$ yields
 = \frac{n^2\,\var(a_{R_1})}{2n - 1}.
 \end{align*}
 \end{proof}
+
+
+
+
+
+
+\section{Fr\'echet mean and variance}\label{section:frechet_mean_variance}
+
+In this section, we compute Fr\'{e}chet means and variances for a specific class of probability measures, namely normal distributions. Let $\W_2$ denote the Wasserstein-2 distance on $\probxtwo$, which is the space of probability measures with finite second moments. 
+
+Let $\X = \R$ and consider the class of probability measures $\mathcal{P}_\N$ defined as
+\begin{equation}\label{equation:class_of_normals}
+\mathcal{P}_\N = \left\{\N(\mu, \sigma^2) : \mu \in \R, \sigma^2 \in (0,\infty) \right\}.
+\end{equation}
+Note that for $P^1, P^2 \in \mathcal{P}_\N$,
+\[
+\W_2^2 (P^1, P^2) = (\mu_1 - \mu_2)^2 + (\sigma_1 - \sigma_2)^2,
+\]
+where $\mu_1, \mu_2$ and $\sigma_1^2, \sigma_2^2$ are the means and variances of $P^1$ and $P^2$, respectively. In this setting, Fr\'{e}chet mean and variance for the law of a random probability measure $Q \in \mathcal{P}(\mathcal{P}_\N)$ can be computed from the following lemma:
+
+\begin{lemma}\label{lemma::frechet_mean_variance}
+Let $Q \in \mathcal{P}(\mathcal{P}_\N)$ where $\mathcal{P}_\N$ is as $\ref{equation:class_of_normals}$. Let $\widetilde{P} \sim Q$, and define the random mean and variance as
+\[
+\widetilde{\mu} = \int_\R x \widetilde{P}(dx), \quad \widetilde{\sigma}^2 = \int_\R x^2 \widetilde{P}(dx) - \left(\int_\R x \widetilde{P}(dx)\right)^2.
+\]
+Then, 
+\[
+\mu_F = \N(\E[\widetilde{\mu}], (\E [\widetilde{\sigma}])^2), \quad  V_F = \var(\widetilde{\mu}) + \var(\widetilde{\sigma})
+\]
+are Fr\'{e}chet mean and variance respectively. 
+\end{lemma}
+\begin{proof}
+It is a well-known fact that if $P, P' \in \mathcal{P}_2(\R)$, then 
+\[
+\W_2^2(P, P') \geq \W_2^2(\N(\mu_X, \sigma^2_X), \N(\mu_Y, \sigma^2_Y)),
+\]
+where $\mu_X, \sigma^2_X$ and $\mu_Y, \sigma^2_Y$ are the means and variances of $P$ and $P'$, respectively. Indeed, let $X \sim P$ and $Y \sim P'$, and consider an optimal coupling $(X^*, Y^*) \sim \pi^*$. We have:
+\begin{align*}
+    \W_2^2(P, P') & = \E [(X^* - Y^*)^2] \\
+    & = \E [(X^*)^2] + \E [(Y^*)^2] - 2\E [X^*Y^*] \\
+    & = \var(X^*) + \var(Y^*) + (\E [X^*])^2 + (\E [Y^*])^2 - 2\E [X^*Y^*] \\
+    & = \var(X^*) + \var(Y^*) + (\E [X^*])^2 + (\E [Y^*])^2 - 2\cov(X^*, Y^*) - 2\E [X^*]\E [Y^*] \\
+    & \geq \var(X^*) + \var(Y^*) + (\E [X^*])^2 + (\E [Y^*])^2  \\
+    & - 2\sqrt{\var(X^*)}\sqrt{\var(Y^*)} - 2\E [X^*]\E [Y^*] \\
+    & = (\E [X^*] - \E [Y^*])^2 + (\sqrt{\var(X^*)} - \sqrt{\var(Y^*)})^2 \\
+    & = (\E [X] - \E [Y])^2 + (\sqrt{\var(X)} - \sqrt{\var(Y)})^2 \\
+    & = \W_2^2(\N(\mu_X, \sigma^2_X), \N(\mu_Y, \sigma^2_Y)).
+\end{align*}
+Thus, we obtain
+\[
+\E [\W_2^2(P, \widetilde{P})] \geq \E [\W_2^2(\N(\mu_P, \sigma^2_P), \N(\widetilde{\mu}, \widetilde{\sigma}^2))],
+\]
+where $\mu_P$ and $\sigma^2_P$ denote the mean and variance of $X \sim P$. We now lower bound the Fr\'{e}chet variance:
+\begin{align*}
+    \min_{P \in \probxtwo} \E [\W_2^2(P, \widetilde{P})] & \geq 
+    \min_{P \in \probxtwo} \E [\W_2^2(\N(\mu_P, \sigma^2_P), \N(\widetilde{\mu}, \widetilde{\sigma}^2))] \\
+    & = \min_{\mu \in \R, \sigma \in (0,\infty)} \E [(\mu - \widetilde{\mu})^2 + (\sigma - \widetilde{\sigma})^2] \\
+    & \overset{(*)}{=} \E [(\E[\widetilde{\mu}] - \widetilde{\mu})^2 + (\E[\widetilde{\sigma}] - \widetilde{\sigma})^2]  \\
+    & = \var(\widetilde{\mu}) + \var(\widetilde{\sigma}),
+\end{align*}
+where $(*)$ follows from the fact that the expectation minimizes the mean squared error. By defining the candidate for the Fr\'{e}chet mean as
+\[
+\mu_F = \N(\E[\widetilde{\mu}], (\E [\widetilde{\sigma}])^2),
+\]
+we observe that $\mu_F \in \probxtwo$, and furthermore,
+\[
+\E [\W_2^2(\mu_F, \widetilde{P})] = \E [(\E[\widetilde{\mu}] - \widetilde{\mu})^2 + (\E[\widetilde{\sigma}] - \widetilde{\sigma})^2] = \var(\widetilde{\mu}) + \var(\widetilde{\sigma}).
+\]
+\end{proof}
+
+\begin{remark}\label{remark:frechet_mean_variance_special_case_variance_1}
+A special case of the above occurs when $Q \in \mathcal{P}(\mathcal{P}_\N)$ is concentrated on the class $\mathcal{P}_\N'$ of normal distributions with unit variance, i.e.,
+\[
+\mathcal{P}_\N' = \{ \N(\mu, 1) : \mu \in \R \}.
+\]
+In this case, if $\widetilde{P} \sim Q$, then $\widetilde{\sigma}^2 \overset{a.s.}{=} 1$. Consequently, 
+\[
+\N(\E [\widetilde{\mu}], 1) \quad \text{and} \quad \var(\widetilde{\mu})
+\]
+are the Fr\'{e}chet mean and variance, respectively. Furthermore, since $\W_1$ and $\W_2$ coincide on this space, their associated Fr\'{e}chet means and variances also coincide.
+\end{remark}
+
+\begin{remark}\label{remark:frechet_mean_variance_mixture_of_laws}
+Using Lemma \ref{lemma::frechet_mean_variance}, we can also compute the Fr\'{e}chet mean and variance for a mixture of the laws of RPMs. Specifically, let $Q^1$ and $Q^2$ be in $\mathcal{P}(\mathcal{P}_\N)$ with same Fr\'echet means and variances.Then, the Fr\'{e}chet mean and variance for the mixture $\lambda Q^1 + (1-\lambda)Q^2$ coincide with those of $Q^1$ and $Q^2$. This follows from the following fact: 
+
+Let $P^1,P^2 \in \mathcal{P}(\R)$ and $Y_1 \sim P^1$, $Y_2 \sim P^2$ be independent random variables. Then for every $\lambda \in (0,1)$ and $Z \sim \lambda P^1 + (1-\lambda) P^2$
+\begin{align*}
+& \E [Z] = \lambda \E Y_1 + (1-\lambda)\E [Y_2] \\
+& \var\left( Z \right) = \lambda \var(Y_1) + (1-\lambda)\var(Y_2) + \lambda (1 - \lambda)\left(\E [Y_1] - \E [Y_2] \right)^2.
+\end{align*}
+\end{remark}
+
+
+
+
