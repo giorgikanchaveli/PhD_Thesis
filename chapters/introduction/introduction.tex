@@ -1,2 +1,55 @@
-% Introduction chapter
-\section{Introduction}\label{section:general_introduction}
+
+
+\section{Metrics on Probability Measures: From Historical Origins to Statistical Applications}\label{section:general_intro_metrics_on_probabilities}
+
+Historically, several distinct motivations led to the development of distances between probability measures. One of the earliest and most influential examples arose from the problem of optimal transport. Its origins go back to the work of \cite{monge1781memoire}, who posed the practical question of how to move a pile of soil in order to fill another hole while minimizing the total transportation cost. Monge formulated the problem in terms of transport maps, which specify where each infinitesimal unit of mass is sent. Around 160 years later, \cite{kantorovich1942translocation} introduced a relaxation of Monge's formulation by allowing transport plans rather than deterministic maps. This relaxation led to what is now known as the Monge--Kantorovich problem:
+\begin{equation}\label{equation:kantorovich_formulation}
+\min_{\gamma \in \Gamma(\mu, \nu)}
+\int_{\X\times \Y} c(x,y)\,\mathrm{d}\gamma(x,y),
+\end{equation}
+where \(\Gamma(\mu,\nu)\) denotes the set of all couplings of \(\mu\) and \(\nu\), that is, probability measures on \(\X\times\Y\) with marginals \(\mu\) and \(\nu\). This formulation was later complemented by the duality results of \cite{kantorovich1958space}.
+
+Since \eqref{equation:kantorovich_formulation} includes the Wasserstein distance as a special case, one may regard the Monge--Kantorovich formulation as the mathematical birthplace of the Wasserstein distance. Indeed, when \(\X=\Y\) is equipped with a metric \(d\), and the cost is chosen as \(c(x,y)=d(x,y)^p\) for \(p\geq 1\), the corresponding optimal value defines the \(p\)-Wasserstein distance,
+\[
+W_p(\mu,\nu)
+=
+\left(
+\inf_{\gamma\in\Gamma(\mu,\nu)}
+\int_{\X\times\Y} d(x,y)^p\,\mathrm d\gamma(x,y)
+\right)^{1/p}.
+\]
+However, the terminology itself has a separate historical origin. The name ``Wasserstein distance'' first appeared in the work of \cite{dobrushin1970prescribing}, who studied the existence and uniqueness of random fields and referred to earlier work of Leonid Vaserstein. In \cite{vaserstein1969markov}, Vaserstein studied Markov processes on denumerable products of spaces, motivated by the analysis of large systems of automata, and used a transportation-type metric to compare probability distributions on such product spaces.
+
+A further historical root of Wasserstein-type distances can be traced to work influenced by Paul L\'evy, where the emphasis was on distances between random variables and their probability laws rather than on Kantorovich's transportation formulation. In a note written for the book of \cite{frechet1950recherches}, L\'evy proposed several notions of distance between random variables and between their induced laws, one of which corresponds to what is now recognized as a Wasserstein-type distance.
+
+
+
+Wasserstein distances have become important tools in statistics and machine learning because they provide a geometrically meaningful discrepancy between probability measures. In statistics, they are used in theory of point estimation, where parameters are estimated by minimizing the Wasserstein distance between the empirical distribution and a model distribution \cite{bassetti2006wasserstein,bernton2019parameter}; similarly convergence of empirical estimators based on wasserstein disntance are studied in \cite{bobkov2019one,panaretos2019statistical}l in hypothesis testing problem,where empirical Wasserstein distances are used to measure departures from a null hypothesis (\cite{ramdas2017wasserstein},\cite{wang2021two},\cite{hu2025two}) and in goodness of fit test \cite{hallin2021multivariate}. In computational statistics, Wasserstein distances are used to study convergence rates of MCMC algorithms (\cite{qin2022wasserstein}, \cite{lavenant2024convergence}) and to design likelihood-free inference methods, such as Wasserstein approximate Bayesian computation, by comparing observed and simulated empirical distributions directly \cite{bernton2019abc}. In machine learning, they play a central role in generative modeling, especially in Wasserstein generative adversarial networks \cite{arjovsky2017wasserstein}, and have also been used in domain adaptation \cite{courty2016optimal}
+
+
+
+
+
+
+
+
+
+% shesacvlevlia qvemot
+
+
+A second historical motivation came from the need to metrize weak convergence. In probability theory, convergence in distribution is weaker than convergence in total variation, but it is often the natural mode of convergence in limit theorems. The Prokhorov and bounded-Lipschitz metrics were introduced and studied in this context because they generate the topology of weak convergence under appropriate conditions. Prokhorov’s theorem links tightness of probability measures with relative compactness in the topology of weak convergence, while the bounded-Lipschitz and Fortet--Mourier metrics make convergence of expectations over suitable classes of test functions quantitative.
+
+A third line of development came from statistics itself. Classical goodness-of-fit tests, such as Kolmogorov--Smirnov and Cramér--von Mises type procedures, compare an empirical distribution with a hypothesized distribution through functionals of their difference. In modern language, these procedures are distance-based: they reject the null hypothesis when the empirical measure P
+ is sufficiently far from the model distribution P
+
+ under a chosen discrepancy. Later developments generalized this idea to multivariate and non-Euclidean settings through energy distances, maximum mean discrepancy, Wasserstein distances, and other integral probability metrics.
+
+
+
+
+ Another important class is given by divergences, such as Kullback--Leibler, Hellinger, chi-square, and total variation divergences. These are often natural in likelihood theory because they compare densities pointwise. For instance, under correct specification, maximum likelihood estimation can be interpreted as minimizing the empirical analogue of the Kullback--Leibler divergence. However, divergences such as KL may be infinite when measures are mutually singular or when densities do not exist with respect to a common dominating measure. This limitation partly explains the growing interest in distances such as Wasserstein or MMD, which can remain meaningful for discrete empirical measures, singular distributions, and distributions supported on lower-dimensional structures.
+
+
+
+
+
