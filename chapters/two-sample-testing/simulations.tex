@@ -150,30 +150,30 @@ we consider the family of pairs
 \[
 \{(Q^1, M_\lambda) : \lambda \in [0,1]\}.
 \]
-Note that $\lambda = 1$ corresponds to estimating the Type~I error, while other values of $\lambda$ correspond to estimating the power of the testing procedures. We consider mixtures of the two laws because, as the parameter varies, it becomes more challenging for the testing schemes to detect the presence of different laws. We plot the rejection rates in Figure~\ref{figure::counterexample}, where the simulation parameters are the same as those used in Figure~\ref{figure::varying_mean_variance}.
+Note that $\lambda = 1$ corresponds to estimating the Type~I error, while other values of $\lambda$ correspond to estimating the power of the testing procedures. We consider mixtures of the two laws because, as the parameter varies, it becomes more challenging for the testing schemes to detect the presence of different laws. We plot the rejection rates in Figure~\ref{figure:counterexample}, where the simulation parameters are the same as those used in Figure~\ref{figure:rejections_mean_variance}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.43\textwidth]{chapters/two-sample-testing/figures/frechet/counterexample_n=100_m=200_S=1000_permutation_n_samples=100.png}
     \caption{}
-    \label{figure::counterexample}
+    \label{figure:counterexample}
 \end{figure}
 
-As observed in the Figure \ref{figure::counterexample}, since the two distributions induce the same Fr\'echet means and variances, the method proposed in \cite{dubey2019frechet} fails to detect the presence of different laws. In contrast, the HIPM and WoW tests perform slightly better than Energy test in identifying the discrepancy.
+As observed in the Figure \ref{figure:counterexample}, since the two distributions induce the same Fr\'echet means and variances, the method proposed in \cite{dubey2019frechet} fails to detect the presence of different laws. In contrast, the HIPM and WoW tests perform slightly better than Energy test in identifying the discrepancy.
 
 
 
 \subsection{Mortality Data}\label{subsection:mortality_data}
 
-We apply our proposed testing scheme to human mortality data available from the Human Mortality Database (https://www.mortality.org/). The dataset contains period life tables for various countries and years. A period life table is constructed by estimating age-specific mortality rates from deaths and exposures in a given year $t$, which are then used to derive the age-at-death distribution for a hypothetical cohort. 
+We apply our proposed testing scheme to human mortality data obtained from the Human Mortality Database (https://www.mortality.org/). The dataset contains period life tables for various countries and calendar years. A period life table summarizes mortality conditions in a given calendar year by describing how a hypothetical cohort would die over age if it experienced the age-specific mortality proportions observed in that year.  The resulting mortality proportions are then used to derive the age-at-death distribution of the hypothetical cohort.
 
-Our analysis focuses on how mortality rates differed between 1960 and 2010 when comparing countries that were under Soviet influence during the 20th century against those under Western influence. To this end, we categorize the countries into two groups, following the classification established in \cite{dubey2019frechet}:
+Our analysis compares mortality proportions in 1960 and 2010 between two historically motivated groups of countries. Following the classification in \cite{dubey2019frechet}, the first group consists of countries that were either part of the Soviet Union or belonged to the Soviet-aligned Eastern Bloc during much of the 20th century. The second group consists mainly of Western or non-Soviet high-income countries, including several countries that were politically neutral during the Cold War.
 \begin{itemize}
-    \item Group 1 (Soviet Influence): Belarus, Bulgaria, Czechia, Estonia, Hungary, Latvia, Lithuania, Poland, Russia, Slovakia, and Ukraine.
-    \item Group 2 (Western Influence): Australia, Austria, Belgium, Canada, Denmark, Finland, France, Iceland, Ireland, Italy, Japan, Luxembourg, Netherlands, New Zealand, Norway, Spain, Sweden, Switzerland, United Kingdom, and United States of America.
+    \item Group 1 : Belarus, Bulgaria, Czechia, Estonia, Hungary, Latvia, Lithuania, Poland, Russia, Slovakia, and Ukraine.
+    \item Group 2 : Australia, Austria, Belgium, Canada, Denmark, Finland, France, Iceland, Ireland, Italy, Japan, Luxembourg, Netherlands, New Zealand, Norway, Spain, Sweden, Switzerland, United Kingdom, and United States of America.
 \end{itemize}
-The age range is $\{0,1,\cdots,110\}$, where $110$ denotes that death occurred at that age or later. We choose not to truncate the age range for the following reasons. First, visual inspection of the probability mass functions and quantiles does not reveal any abnormalities, particularly at higher ages (see Figure \ref{figure::quantile_for_mortality_rates}). Second, truncating the age range leads to significant data loss. For example, among females, the maximum percentage of data lost across countries is at least $20$ percent for all time periods when the age interval is truncated to $\{0,1,\ldots,85\}$.
+The age range is $\{0,1,\cdots,110\}$, where $110$ denotes that death occurred at that age or later. We choose not to truncate the age range for the following reasons. First, visual inspection of the probability mass functions and quantiles does not reveal any abnormalities, particularly at higher ages (see Figure \ref{figure:quantile_for_mortality_rates}). Second, truncating the age range leads to significant data loss. For example, among females, the maximum percentage of data lost across countries is at least $20$ percent for all time periods when the age interval is truncated to $\{0,1,\dots,85\}$.
 
-In Figure \ref{figure::quantile_for_mortality_rates}, we present the quantile plots of the probability mass functions corresponding to age at death. We consider the years 1960, 1992, and 2008 to capture different historical periods: the Cold war era that is closer to the post-war period, the years shortly after the collapse of Soviet Union, and a more recent period after the breakup. The plots are shown separately for females and males. As observed, noticeable differences can be visually identified, particularly in the more recent time periods.
+In Figure \ref{figure:quantile_for_mortality_rates}, we present the quantile plots of the probability mass functions corresponding to age at death for both males and females. We consider the years 1960, 1992, and 2008 to capture different historical periods: the Cold war era that is closer to the post-war period, the years shortly after the collapse of Soviet Union, and a more recent period after the breakup. The plots are shown separately for females and males. As observed, noticeable differences can be visually identified, particularly in the more recent time periods.
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.5\textwidth} % Increased width since they are stacked
@@ -187,10 +187,11 @@ In Figure \ref{figure::quantile_for_mortality_rates}, we present the quantile pl
         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_allquantiles_0_110.png}
         \caption{Females}
     \end{subfigure}
-    \caption{Quantiles for mortality rates}
-    \label{figure::quantile_for_mortality_rates}
+    \caption{Quantile plots of the age-at-death probability mass functions for the two country groups}
+    \label{figure:quantile_for_mortality_rates}
 \end{figure}
-To assess whether there is a difference in mortality rates between the two groups of countries in each time period, we apply our proposed test separately for males and females. We set the significance level to $\theta = 0.05$ and use $n_{\text{perm}} = 100$ permutations. The p-values are computed for each year.
+To assess whether there is a difference in mortality proportions between the two groups of countries in each time period, we apply our proposed test separately for males and females. We set the significance level to $\theta = 0.05$ and use $n_{\text{perm}} = 100$ permutations to compute a
+different p-value for each year.
 
 We also compare the p-values obtained from our approach with those derived from the following alternative methods:
 \begin{itemize}
@@ -200,14 +201,14 @@ We also compare the p-values obtained from our approach with those derived from 
     \overline{P}^2 = \frac{1}{n_2}\sum_{i = 1}^{n_2}\widehat{P}^2_i.
     \]
     The test statistic is obtained by computing Wasserstein-1 distance between $\overline{P}^1$ and $\overline{P}^2.$ The threshold is obtained via a permutation approach, in which the observed probability measures are permuted across the two groups.
-    \item Pooling: Within each group, we first pool the death counts across all countries. This yields a single probability measure for each group, and the test statistic is then computed as the Wasserstein-1 distance between these two measures. As before, the significance threshold is obtained via a permutation approach. The permutation procedure is implemented by reconstructing observations of ages at death from the aggregated counts in each group. Specifically, if there are $k$ deaths at age $a$, we generate $k$ observations equal to $a$. This is done for each group, after which the resulting observations are permuted across groups.
+    \item \textbf{Pooling:} This approach is included to emphasize the importance of preserving the probability-measure structure within each group. Since the goal is to compare mortality proportions across the two groups, one might instead ignore the country-level distributional structure and simply aggregate deaths within each group. This aggregation produces a single probability measure for each group, and the test statistic is then computed as the Wasserstein-1 distance between these two measures. As before, the significance threshold is obtained using a permutation procedure. Because the data for each country consist of death counts by age, we first convert these counts into observations of age at death. Specifically, if there are $k$ deaths at age $a$, we generate $k$ observations equal to $a$. This is done separately for each group. The resulting age-at-death observations are then permuted across the two groups, which allows the permutation procedure to operate directly on individual age-at-death observations rather than on aggregated counts.
 \end{itemize}
 
 Note that the test statistic is identical for both the pooling and averaging approaches; the difference between the two testing schemes lies in the permutation procedure. In particular, the averaging approach preserves the probability measure structure within each group, whereas the pooling approach does not.
 
-Examining the p-values obtained from the proposed method in Figure \ref{figure::p_values_mortality}, we observe that for females, the difference between the groups is statistically significant in 1960. During the following decade, this difference becomes less significant, which may be explained by economic growth. After the 1970s, the disparity in mortality rates between the groups increases again, potentially reflecting the economic decline in the countries influenced by Soviet Union. Following the breakup of the Soviet Union, the observed differences may be associated with countries that were unable to integrate well into the Western blocks.
+Examining the p-values obtained from the proposed method in Figure \ref{figure::p_values_mortality}, we observe that for females, the difference between the groups is statistically significant in 1960. During the following decade, this difference becomes less significant, which may be explained by economic growth. After the 1970s, the disparity in mortality proportions between the groups increases again, potentially reflecting the economic decline in the countries in group $1$. Following the breakup of the Soviet Union, the observed differences may be associated with countries that were unable to integrate well into the Western blocks.
 
-A similar trend is observed for males; however, the key difference is that during the period from 1960 to 1970, althouth the differences in mortality rates was decreasing, the p-values did not exceed the $0.05$ threshold.
+A similar trend is observed for males; however, the key difference is that during the period from 1960 to 1970, althouth the differences in mortality proportions was decreasing, the p-values did not exceed the $0.05$ threshold.
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.5\textwidth} % Increased width since they are stacked
@@ -221,19 +222,16 @@ A similar trend is observed for males; however, the key difference is that durin
         \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_pvalues_poolingaveraginghipm.png}
         \caption{Females}
     \end{subfigure}
-    \caption{P-values for mortality rates}
+    \caption{P-values for mortality proportions}
     \label{figure::p_values_mortality}
 \end{figure}
 
-Note also that p-values for averaging and pooling look similar. This is because the average measure in this case is sufficient to detect the difference between two groups.
-
-
-It is important to note that the pooling approach may fail to control Type I error in hierarchical settings. This limitation arises because pooling observations ignores the presence of latent random probability measures. Under hierarchical sampling, we observe $n$ sequences, each of length $m$, where each sequence is generated from a different latent random probability measure. The empirical distribution obtained by pooling all observations converges to the mean measure of the law of RPM, so the test statistic converges to the distance between the mean measures of the two groups. Observations from the permutation approach are similar to samples from the mean measure; however, we obtain $nm$ samples. Intuitively, this makes the permutation threshold converge to $0$ faster than the observed distance. Note that this is not an issue if latent probability measures are identical.
-
-Still, both of the approaches fail to detect the different laws of random probability measures if the mean measures are the same. This again underlines the importance of working with the objects that uniquely characterize the laws we want to distinguish.
+Note also that p-values for averaging and HIPM look similar. This is because the average measure in this case is sufficient to detect the difference between two groups.
 
 
 
+
+Note that pooling procedure may fail to control the Type I error in hierarchical sampling settings. Pooling ignores the fact that observations within each country are generated from a latent random probability measure. Under hierarchical sampling, where we observe $n$ sequences of length $m$, each generated from a different latent random probability measure, The empirical distribution obtained by pooling all observations converges to the mean measure of the law of the random probability measure. Hence, the pooled test statistic converges to the Wasserstein distance between the two group-level mean measures. In contrast, the permutation samples behave as if they were drawn directly from this mean measure, with an effective sample size of $nm$. As a result, the permutation threshold converges to zero faster than the observed distance, leading to systematically small p-values. This issue disappears when the latent probability measures are identical.
 
 
 
