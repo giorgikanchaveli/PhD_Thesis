@@ -1,7 +1,7 @@
 
-This thesis studies statistical applications of distances on the space of laws of random probability measures. Such objects arise naturally in Bayesian nonparametrics and in modern statistical problems where the observed units are distributions rather than finite-dimensional vectors. In these settings, distances provide a way to compare the laws governing random probability measures, thereby opening the possibility of extending classical statistical questions to this more general framework. At a broad level, these questions include convergence analysis, hypothesis testing, robustness analysis, and sensitivity analysis in Bayesian models. 
+This thesis studies statistical applications of distances on the space of laws of random probability measures. Such objects arise naturally in Bayesian nonparametrics and in modern statistical problems where the observed units are distributions rather than finite-dimensional vectors. In these settings, distances provide a way to compare the laws governing random probability measures, thereby opening the possibility of extending classical statistical questions to this more general framework. 
 
-The thesis develops two applications of this distance-based perspective. First, it studies a hypothesis testing problem in which a distance-based approach is used to compare laws of random probability measures. Second, it investigates merging under different prior specifications in Bayesian nonparametric models.
+The thesis develops two applications of this distance-based perspective. First, it studies a hypothesis testing problem in which a distance-based approach is used to compare laws of random probability measures. Second, it investigates merging of opinions in Bayesian nonparametric models.
 
 The rest of the introduction is organized as follows. We begin with a historical overview of distances on spaces of probability measures, emphasizing the mathematical, information-theoretic, and statistical motivations that led to their development. We then discuss the motivation for considering distances on laws of random probability measures and review related work in this direction. Finally, we describe the organization of the thesis and specific contributions to the two problems considered: a distance-based approach to hypothesis testing for laws of random probability measures, and the analysis of merging under different prior specifications in Bayesian nonparametric models.
 
@@ -38,9 +38,6 @@ Lastly, Wasserstein distance plays important role in quantifying the dependence 
 
 
 
-
-
-
 \section{Motivation and Applications of Distances Between Laws of Random Probability Measures}
 \label{section:motivation_applications_distances_on_rpms}
 
@@ -56,4 +53,9 @@ The third motivation is the complex data structure perspective. In many modern s
 
 
 \section{Organization and Contributions of the Thesis}\label{section:organization_and_contributions}
-bayes toolbox , two sample, merging.
+
+The thesis begins with a chapter that collects the background material in Bayesian nonparametrics needed for the subsequent chapters. It starts with the framework for random probability measures and exchangeability, together with de Finetti's representation theorem. It then covers completely random measures, including the role of L\'evy intensities and Laplace functionals, identifiability issues under normalization, posterior distributions, and examples. Finally, it reviews the distances on laws of random probability measures, including the Wasserstein over Wasserstein distance and the Hierarchical Integral Probability Metric, as well as the distances on laws of random measures specialized for completely random measures.
+
+The second chapter studies a two-sample testing problem in which the observed units are probability measures. The null hypothesis is that two samples of probability measures are drawn from the same underlying law, against the alternative that the laws differ. Our contribution is to consider this problem when the samples are probability measures themselves and to propose a distance-based approach together with its theoretical properties. Specifically, we derive a threshold based on Rademacher complexity that controls the type-I error, and then introduce a permutation-based threshold that is both practical and theoretically justified, with guarantees on both the type-I error and the power of the resulting test. We note that the theoretical guarantees are established at the level of the raw observations used to estimate the underlying probability measures, which we call hierarchical samples. The method is benchmarked against existing approaches in simulations and applied to a mortality dataset.
+
+The third chapter studies the merging of opinions in Bayesian nonparametric models: whether posterior distributions induced by two different prior specifications become close as the number of observations grows, independently of the data-generating mechanism. The framework for studying this problem is provided by \cite{catalano2023merging}, which introduces distances between laws of completely random measures and establishes identifiability results that make the comparison of posteriors informative. Within this framework, the known results concern merging between two Dirichlet process priors, which occurs at rate $1/n$, and merging between a generalized Gamma CRM and a Gamma CRM, where the rate is $\max\{n^{-1/(1+\sigma)}, k_n/n\}$ and merging may fail when $k_n \sim n$. The contribution of this thesis is to establish the merging rate between the Pitman--Yor process and the Dirichlet process, showing that it equals $k_n/n$ for any sequence of observations.
