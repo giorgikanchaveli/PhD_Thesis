@@ -125,7 +125,7 @@ where $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\mbx \times 
 As mentioned in the previous subsection, the Wasserstein distance is, in general, a metric on the space of probability measures with finite first moments. In the present setting, since $\bl$ is bounded by $2$, $\wbl$ is a well-defined distance on $\probmb$.
 \end{remark}
 
-If $\tilde{\mu}^1$ and $\tilde{\mu}^2$ are random measures with laws $Q^1$ and $Q^2$, respectively, we refer to $\wbl(\tilde{\mu}^1, \tilde{\mu}^2)$ as the distance between the random measures, with the understanding that this denotes the distance between their laws, i.e., $\wbl(Q^1, Q^2)$. For a more detailed overview of the properties of $\wbl$, see \cite{catalano2023merging}.
+If $\tilde{\mu}^1$ and $\tilde{\mu}^2$ are random measures with laws $Q^1$ and $Q^2$, respectively, we refer to $\wbl(\tilde{\mu}^1, \tilde{\mu}^2)$ as the distance between the random measures, with the understanding that this denotes the distance between their laws, i.e., $\wbl(Q^1, Q^2)$. For a more detailed overview of the properties of $\wbl$, see \cite{catalano2026merging}.
 
 \subsection{Distance for Completely Random Measures}\label{subsection:bnp_toolbox_distance_crm}
 
@@ -176,7 +176,7 @@ It is also worth noting that $\ad$ is not a distance. Indeed, the factor
 \frac{\M_1(\nu^1)+\M_1(\nu^2)}{2}
 \]
 makes the triangle inequality fail. Thus, $\ad$ should be regarded as a discrepancy rather than a distance.
-The following remark is stated in \cite{catalano2023merging} (see Remark 2 on page 10). Due to its importance for the computations involved in merging, we restate it here.
+The following remark is stated in \cite{catalano2026merging} (see Remark 2 on page 10). Due to its importance for the computations involved in merging, we restate it here.
 
 \begin{remark}\label{remark:adapted_extwas_homogeneous_crms}
 Consider two completely random measures with L\'evy intensities $\nu^1, \nu^2$ of the form
@@ -202,9 +202,9 @@ More precisely, let $\tilde{\nu}^1, \tilde{\nu}^2$ be random L\'evy intensities.
 \wad(\law(\tilde{\nu}^1), \law(\tilde{\nu}^2)) = \inf_{\pi \in \Gamma(\law(\tilde{\nu}^1), \law(\tilde{\nu}^2))} \E_{(\nu^1,\nu^2)\sim \pi}\left[\ad(\nu^1,\nu^2)\right].
 \]
 
-Finally, since in the case of merging rates our goal is to consider CRMs (or Cox CRMs) that uniquely determine a random probability measure through normalization, we restrict attention to scaled CRMs and Cox CRMs. In this case, the first moment of the L\'evy intensity $\M_1(\nu)$ is equal to $1$. As a consequence, by Proposition~5 in \cite{catalano2023merging}, the quantity $\wad$ defines a distance on the corresponding laws.
+Finally, since in the case of merging rates our goal is to consider CRMs (or Cox CRMs) that uniquely determine a random probability measure through normalization, we restrict attention to scaled CRMs and Cox CRMs. In this case, the first moment of the L\'evy intensity $\M_1(\nu)$ is equal to $1$. As a consequence, by Proposition~5 in \cite{catalano2026merging}, the quantity $\wad$ defines a distance on the corresponding laws.
 
-Our main tool for controlling the Wasserstein over bounded Lipschitz distance is provided by Theorem 6 in \cite{catalano2023merging}, which states that, in the case of scaled Cox CRMs $\tilde{\mu}^1, \tilde{\mu}^2$ with random L\'evy intensities $\tilde{\nu}^1, \tilde{\nu}^2$, 
+Our main tool for controlling the Wasserstein over bounded Lipschitz distance is provided by Theorem 6 in \cite{catalano2026merging}, which states that, in the case of scaled Cox CRMs $\tilde{\mu}^1, \tilde{\mu}^2$ with random L\'evy intensities $\tilde{\nu}^1, \tilde{\nu}^2$, 
 \[
 \wbl\!\left( \law\left(\tilde{\mu}^1\right), \law\left(\tilde{\mu}^1\right) \right) \leq
 \wad(\law(\tilde{\nu}^1), \law(\tilde{\nu}^2)).

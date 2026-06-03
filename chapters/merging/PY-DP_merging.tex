@@ -46,7 +46,7 @@ Note that both $k$ and $U$ implicitly depend on $n$ and are thus sequences; howe
 
 Since $\mustar \mid U$ is a sum of CRMs, we compute its L\'evy intensity.
 
-By iteratively applying Lemma~SM4 in \cite{catalano2023merging}, for a general CRM $\tilde{\mu}$ with L\'evy intensity $\nu$, independent and infinitely divisible random variables $J_1,\dots, J_k$ with L\'evy measures $\pi_i,$ and fixed atoms $y_1,\dots, y_k,$ the L\'evy intensity of $\tilde{\mu} + \sum_{i = 1}^k J_i \delta_{y_i}$ is
+By iteratively applying Lemma~SM4 in \cite{catalano2026merging}, for a general CRM $\tilde{\mu}$ with L\'evy intensity $\nu$, independent and infinitely divisible random variables $J_1,\dots, J_k$ with L\'evy measures $\pi_i,$ and fixed atoms $y_1,\dots, y_k,$ the L\'evy intensity of $\tilde{\mu} + \sum_{i = 1}^k J_i \delta_{y_i}$ is
 \[
 \mathrm{d}\nu(s,x) + \sum_{i = 1}^k \mathrm{d}\left( \pi_i \otimes \delta_{y_i} \right)(s,x),
 \]
@@ -77,7 +77,7 @@ As discussed in Subsection~\ref{subsection:bnp_toolbox_normalization_identifiabi
 \[
 \mathrm{d}\nu_S(s,x) = \E\!\left(\tilde{\mu}(\X)\right) \rho_x\!\left( \E\!\left(\tilde{\mu}(\X)\right)s\right)\mathrm{d}P_0(x),
 \]
-by Lemma~SM3 in \cite{catalano2023merging}. By applying the same argument to 
+by Lemma~SM3 in \cite{catalano2026merging}. By applying the same argument to 
 \[
 \mathrm{d}\tilde{\nu}^*(s,x) = \mathrm{d}\rho^1(s)\,\mathrm{d}P^1_0(x) + \mathrm{d}\rho^2(s)\,\mathrm{d}P^2_0(x),
 \] we get
@@ -173,7 +173,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     where $U$ and $C$ are as defined in Proposition~\ref{proposition:posterior_pitmanyor}.
 \end{proposition}
 \begin{proof}
-    Denote by $\tilde{\nu}^{*,2}_{S}$ the L\'evy intensity of the scaled Gamma posterior; its derivation can be found in the proof of Lemma~12 in \cite{catalano2023merging}, and it has the following form:
+    Denote by $\tilde{\nu}^{*,2}_{S}$ the L\'evy intensity of the scaled Gamma posterior; its derivation can be found in the proof of Lemma~12 in \cite{catalano2026merging}, and it has the following form:
     \[
     \mathrm{d}\tilde{\nu}^{*,2}_{S}(s,x) = (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\left( \frac{\alpha}{\alpha + n}\,\mathrm{d}P_0(x) + \frac{1}{\alpha + n}\sum_{i = 1}^n \mathrm{d}\delta_{x_i}(x) \right).
     \]
@@ -216,7 +216,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
 
 \end{theorem}
 \begin{proof}
-    First, note that the $\wbl$ bound follows from Theorem~6 of \cite{catalano2023merging}.
+    First, note that the $\wbl$ bound follows from Theorem~6 of \cite{catalano2026merging}.
 
     From now on, we attach the subscript $n$ to $k$, $U$, and $C$, writing $k_n$, $U_n$, and $C_n$. Recall that $U_n$ has density function $f_U(u) = \frac{\sigma}{\Gamma\left(k_n+\frac{\theta}{\sigma}\right)} u^{\theta + k_n\sigma - 1}e^{-u^\sigma}\mathbf{1}_{(0,\infty)}(u)$. By the change of variables $y = u^\sigma$, the random variable $U_n^\sigma \sim \mathrm{Gamma}\left(k_n + \frac{\theta}{\sigma}, 1\right)$.
 
@@ -397,7 +397,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \[
     J\left(\alpha_1, \alpha_2, n\right) = \int_0^\infty \left| (\alpha_1 + n)\Gamma(0,(\alpha_1 + n)s) - (\alpha_2+n)\Gamma(0,(\alpha_2 +n)s) \right|\mathrm{d}s.
     \] 
-    By point~2 of Proposition~14 in \cite{catalano2023merging}, we have that for every $n \geq 1,$
+    By point~2 of Proposition~14 in \cite{catalano2026merging}, we have that for every $n \geq 1,$
     \[
     J\left(C_n - n, \alpha, n\right) \leq c \max\left\{ \log\left( \frac{C_n}{\alpha + n}\right), \log\left( \frac{\alpha + n}{C_n}\right)\right\},
     \]

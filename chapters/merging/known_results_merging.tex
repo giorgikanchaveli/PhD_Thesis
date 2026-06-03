@@ -6,7 +6,7 @@ In this section, we summarize known results on merging between two posterior dis
 
 Since we work with distances between random measures, the key step is to quantify the distance between posterior distributions. To this end, we consider two priors given by completely random measures, derive the corresponding posterior distributions, and then compare them. Due to the identifiability issue discussed in Subsection \ref{subsection:bnp_toolbox_normalization_identifiability}, we compute distances between scaled versions of these posterior distributions.
 
-We start with the case of merging between two Dirichlet processes. Recall that the Dirichlet process is obtained by normalizing a Gamma CRM. By Theorem 15 in \cite{catalano2023merging}, for two Gamma CRMs $\tilde{\mu}^1$ and $\tilde{\mu}^2$ with parameters $(\alpha_i, 1,  P_0^i)$, $i=1,2$, and for any sequence of observations $(x_n)_{n \geq 1}$ in $\X$, it holds that
+We start with the case of merging between two Dirichlet processes. Recall that the Dirichlet process is obtained by normalizing a Gamma CRM. By Theorem 15 in \cite{catalano2026merging}, for two Gamma CRMs $\tilde{\mu}^1$ and $\tilde{\mu}^2$ with parameters $(\alpha_i, 1,  P_0^i)$, $i=1,2$, and for any sequence of observations $(x_n)_{n \geq 1}$ in $\X$, it holds that
 \[
 \ad(\nu_S^{1,*}, \nu_S^{2,*}) \asymp \frac{1}{n}, 
 \qquad
@@ -28,7 +28,7 @@ d\nu(s,x) = \frac{\alpha}{\Gamma(1-\sigma)}\frac{e^{-s}}{s^{1+\sigma}}\,\mathrm{
 where $\alpha > 0$ is the total mass parameter, $\sigma \in (0,1)$ is the discount parameter, and $P_0 \in \probx$ is the base probability measure.
 \end{definition}
 
-By Theorem 19 in \cite{catalano2023merging}, let $\tilde{\mu}^1$ be a generalized Gamma CRM with parameters $(\alpha, \sigma, P_0)$ and let $\tilde{\mu}^2$ be a Gamma CRM with parameters $(\alpha, 1, P_0)$. Then,
+By Theorem 19 in \cite{catalano2026merging}, let $\tilde{\mu}^1$ be a generalized Gamma CRM with parameters $(\alpha, \sigma, P_0)$ and let $\tilde{\mu}^2$ be a Gamma CRM with parameters $(\alpha, 1, P_0)$. Then,
 \[
 \wad\big(\law(\tilde{\nu}_S^{1,*}), \law(\tilde{\nu}_S^{2,*})\big) \asymp \max\left\{n^{-\frac{1}{1+\sigma}}, \frac{k_n}{n}\right\},
 \]
