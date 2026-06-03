@@ -133,14 +133,23 @@
   publisher={MDPI}
 }
 
-@inproceedings{arjovsky2017wasserstein,
-  title={Wasserstein generative adversarial networks},
-  author={Arjovsky, Martin and Chintala, Soumith and Bottou, L{\'e}on},
-  booktitle={International conference on machine learning},
-  pages={214--223},
-  year={2017},
-  organization={PMLR}
+
+
+@InProceedings{arjovsky2017wasserstein,
+  title = 	 {{W}asserstein Generative Adversarial Networks},
+  author =       {Martin Arjovsky and Soumith Chintala and L{\'e}on Bottou},
+  booktitle = 	 {Proceedings of the 34th International Conference on Machine Learning},
+  pages = 	 {214--223},
+  year = 	 {2017},
+  volume = 	 {70},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {06--11 Aug},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v70/arjovsky17a/arjovsky17a.pdf},
+  url = 	 {https://proceedings.mlr.press/v70/arjovsky17a.html},
+  abstract = 	 {We introduce a new algorithm named WGAN, an alternative to traditional GAN training. In this new model, we show that we can improve the stability of learning, get rid of problems like mode collapse, and provide meaningful learning curves useful for debugging and hyperparameter searches. Furthermore, we show that the corresponding optimization problem is sound, and provide extensive theoretical work highlighting the deep connections to different distances between distributions.}
 }
+
 
 @article{ambrogioni2018wasserstein,
   title={Wasserstein variational inference},
@@ -199,12 +208,23 @@
   year={2012},
   publisher={Springer Science \& Business Media}
 }
-@book{billingsley2017probability,
-  title={Probability and measure},
-  author={Billingsley, Patrick},
-  year={2017},
-  publisher={John Wiley \& Sons}
+
+@book{billingsley1995probability,
+  author    = {Billingsley, Patrick},
+  title     = {Probability and Measure},
+  edition   = {3},
+  series    = {Wiley Series in Probability and Mathematical Statistics},
+  publisher = {Wiley},
+  address   = {New York},
+  year      = {1995},
+  isbn      = {0-471-00710-2}
 }
+
+
+
+
+
+
 @article{hajek1961some,
   title={Some extensions of the Wald-Wolfowitz-Noether theorem},
   author={H{\'a}jek, Jaroslav},
@@ -214,13 +234,19 @@
   publisher={JSTOR}
 }
 @article{beran1986confidence,
-  title={Confidence sets for a multivariate distribution},
-  author={Beran, R and Millar, PW},
-  journal={The Annals of Statistics},
-  pages={431--443},
-  year={1986},
-  publisher={JSTOR}
+author = {R. Beran and P. W. Millar},
+title = {{Confidence Sets for a Multivariate Distribution}},
+volume = {14},
+journal = {The Annals of Statistics},
+number = {2},
+publisher = {Institute of Mathematical Statistics},
+pages = {431 -- 443},
+keywords = {affine invariance, bootstrap, conﬁdence set, local asymptotic minimax, multivariate distribution},
+year = {1986},
+doi = {10.1214/aos/1176349931},
+URL = {https://doi.org/10.1214/aos/1176349931}
 }
+
 @inproceedings{sriperumbudur2010non,
   title={Non-parametric estimation of integral probability metrics},
   author={Sriperumbudur, Bharath K and Fukumizu, Kenji and Gretton, Arthur and Sch{\"o}lkopf, Bernhard and Lanckriet, Gert RG},
@@ -279,16 +305,20 @@
   year={2017},
   journal={The Annals of Applied Probability}
 }
+
 @article{blackwell1962merging,
-  title={Merging of opinions with increasing information},
-  author={Blackwell, David and Dubins, Lester},
-  journal={The Annals of Mathematical Statistics},
-  volume={33},
-  number={3},
-  pages={882--886},
-  year={1962},
-  publisher={JSTOR}
+author = {David Blackwell and Lester Dubins},
+title = {{Merging of Opinions with Increasing Information}},
+volume = {33},
+journal = {The Annals of Mathematical Statistics},
+number = {3},
+publisher = {Institute of Mathematical Statistics},
+pages = {882 -- 886},
+year = {1962},
+doi = {10.1214/aoms/1177704456},
+URL = {https://doi.org/10.1214/aoms/1177704456}
 }
+
 @article{figalli2010new,
   title={A new transportation distance between non-negative measures, with applications to gradients flows with Dirichlet boundary conditions},
   author={Figalli, Alessio and Gigli, Nicola},
@@ -400,15 +430,17 @@
   primaryClass  = {math.ST}
 }
 
-@inproceedings{alvarez2020geometric,
-  author    = {Alvarez-Melis, David and Fusi, Nicol{\`o}},
-  title     = {Geometric Dataset Distances via Optimal Transport},
-  booktitle = {Advances in Neural Information Processing Systems},
-  volume    = {33},
-  pages     = {21428--21439},
-  year      = {2020},
-  publisher = {Curran Associates, Inc.}
+@inproceedings{alvarezmelis2020geometric,
+ author = {Alvarez-Melis, David and Fusi, Nicolo},
+ booktitle = {Advances in Neural Information Processing Systems},
+ pages = {21428--21439},
+ title = {Geometric Dataset Distances via Optimal Transport},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2020/file/f52a7b2610fb4d3f74b4106fb80b233d-Paper.pdf},
+ volume = {33},
+ year = {2020}
 }
+
+
 
 @misc{piening2025slicing,
   author        = {Piening, Moritz and Beinert, Robert},
@@ -437,14 +469,15 @@
   primaryClass  = {math.OC}
 }
 
-@misc{beiglbock2025brenier,
+@article{beiglbock2025brenier,
   author        = {Beiglb{\"o}ck, Mathias and Pammer, Gudmund and Schrott, Stefan},
-  title         = {A {Brenier} theorem on $(\mathcal{P}_2(\ldots\mathcal{P}_2(H)\ldots), W_2)$ and applications to adapted transport},
-  year          = {2025},
-  eprint        = {2509.03506},
-  archivePrefix = {arXiv},
-  primaryClass  = {math.PR}
+  title         = {A {Brenier} Theorem for Measures on
+                   $(\mathcal{P}_2(\cdots \mathcal{P}_2(H)\cdots), W_2)$
+                   and Applications to Adapted Transport},
+  journal = {arXiv preprint arXiv:2509.03506},
+  year    = {2025}
 }
+
 
 @inproceedings{bonet2025flowing,
   author    = {Bonet, Cl{\'e}ment and Vauthier, Christophe and Korba, Anna},
@@ -510,25 +543,36 @@
   year={1969},
   publisher={Russian Academy of Sciences, Branch of Informatics, Computer Equipment and~…}
 }
-@article{bassetti2006wasserstein,
-  author  = {Bassetti, Federico and Bodini, Alberto and Regazzini, Eugenio},
-  title   = {On Minimum Kantorovich Distance Estimators},
-  journal = {Statistics \& Probability Letters},
-  volume  = {76},
-  number  = {12},
-  pages   = {1298--1302},
-  year    = {2006}
+
+
+@article{basseti2006kantorovich,
+title = {On minimum Kantorovich distance estimators},
+journal = {Statistics \& Probability Letters},
+volume = {76},
+number = {12},
+pages = {1298-1302},
+year = {2006},
+issn = {0167-7152},
+doi = {https://doi.org/10.1016/j.spl.2006.02.001},
+url = {https://www.sciencedirect.com/science/article/pii/S0167715206000381},
+author = {Federico Bassetti and Antonella Bodini and Eugenio Regazzini}
 }
 
 @article{bernton2019parameter,
-  author  = {Bernton, Espen and Jacob, Pierre E. and Gerber, Mathieu and Robert, Christian P.},
-  title   = {On Parameter Estimation with the Wasserstein Distance},
-  journal = {Information and Inference: A Journal of the IMA},
-  volume  = {8},
-  number  = {4},
-  pages   = {657--676},
-  year    = {2019}
+    author = {Bernton, Espen and Jacob, Pierre E and Gerber, Mathieu and Robert, Christian P},
+    title = {On parameter estimation with the Wasserstein distance},
+    journal = {Information and Inference: A Journal of the IMA},
+    volume = {8},
+    number = {4},
+    pages = {657-676},
+    year = {2019},
+    month = {12},
+    issn = {2049-8772},
+    doi = {10.1093/imaiai/iaz003},
+    url = {https://doi.org/10.1093/imaiai/iaz003},
+    eprint = {https://academic.oup.com/imaiai/article-pdf/8/4/657/31772180/iaz003.pdf},
 }
+
 @article{hu2025two,
   title={Two-sample distribution tests in high dimensions via max-sliced Wasserstein distance and bootstrapping},
   author={Hu, Xiaoyu and Lin, Zhenhua},
@@ -564,14 +608,20 @@
   year={2024},
   publisher={SIAM}
 }
+
 @article{bernton2019abc,
-  author  = {Bernton, Espen and Jacob, Pierre E. and Gerber, Mathieu and Robert, Christian P.},
-  title   = {Approximate Bayesian Computation with the Wasserstein Distance},
-  journal = {Journal of the Royal Statistical Society: Series B},
-  volume  = {81},
-  number  = {2},
-  pages   = {235--269},
-  year    = {2019}
+    author = {Bernton, Espen and Jacob, Pierre E. and Gerber, Mathieu and Robert, Christian P.},
+    title = {Approximate Bayesian Computation with the Wasserstein Distance},
+    journal = {Journal of the Royal Statistical Society Series B: Statistical Methodology},
+    volume = {81},
+    number = {2},
+    pages = {235-269},
+    year = {2019},
+    month = {04},
+    issn = {1369-7412},
+    doi = {10.1111/rssb.12312},
+    url = {https://doi.org/10.1111/rssb.12312},
+    eprint = {https://academic.oup.com/jrsssb/article-pdf/81/2/235/49273594/jrsssb_81_2_235.pdf},
 }
 
 @article{bobkov2019one,
