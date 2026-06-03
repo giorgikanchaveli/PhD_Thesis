@@ -938,7 +938,7 @@ Now fix $\delta > 0$. By Markov's inequality,
 \]
 where $\dstar_\delta = \{ h - h' : h,h'\in\dstar,\ \|h - h'\|_\infty < \delta\}$.
 
-To bound the expectation above, we would like to use a maximal inequality (Lemma~\ref{lemma:maximalineq}). However, since the empirical process $\widetilde{G}_q$ does not sample i.i.d.\ random variables from $H_q$, we first bound it by an empirical process based on i.i.d.\ random variables. For this, we use Hoeffding's inequality (Proposition~A.1.10 in~\cite{van1996weak}).
+To bound the expectation above, we would like to use a maximal inequality (Lemma~\ref{lemma:maximalineq}). However, since the empirical process $\widetilde{G}_q$ does not sample i.i.d.\ random variables from $H_q$, we first bound it by an empirical process based on i.i.d.\ random variables. For this, we use Hoeffding's inequality (Proposition~A.1.9 in~\cite{van1996weak}).
 
 Note that the function
 \[
@@ -951,7 +951,7 @@ Consider the set
 C_q := \left\{\frac{1}{\sqrt{n_q}}\left(\delta_{Z_{1, q}} - H_q \right),\dots,
 \frac{1}{\sqrt{n_q}}\left(\delta_{Z_{2n_q,q}} - H_q \right) \right\}.
 \]
-Let $U_1,\dots,U_{n_q}$ be drawn from $C_q$ without replacement, and let $V_1,\dots,V_{n_q}$ be drawn from $C_q$ with replacement. Then, by Proposition~A.1.10 in~\cite{van1996weak}, we have
+Let $U_1,\dots,U_{n_q}$ be drawn from $C_q$ without replacement, and let $V_1,\dots,V_{n_q}$ be drawn from $C_q$ with replacement. Then, by Proposition~A.1.9 in~\cite{van1996weak}, we have
 \[
 \E \left\| \sum_{i = 1}^{n_q} U_i\right\|_{\dstar_\delta}
 \leq
