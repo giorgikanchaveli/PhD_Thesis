@@ -25,12 +25,14 @@ Q^1 = \mathrm{DP}(\alpha = 1, P_0 = N(0,1)),
 \end{enumerate}
 where $\mathrm{Beta}(a,b)$ is the Beta distribution with shape parameters $a,b$, $\mathcal{N}(\mu, \sigma^2)$ is the Gaussian distribution with mean $\mu$ and variance $\sigma^2$, $\mathrm{Unif}[0,1]$ is the Uniform distribution on the interval $[0,1]$, and $\mathrm{DP}(\alpha, P_0)$ denotes the Dirichlet Process with concentration $\alpha>0$ and base probability $P_0 \in \probx$. Note that if $P_0$ has full support on $\X$, $\mathrm{DP}(\alpha, P_0)$ has full weak support on $\probx$.
 
-To investigate the behaviour of the Type I error, we simulate the data from $Q^1 = Q^2$ equal to each of the examples above $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the percentage of times it rejects the (correct) $H_0 = Q^1 = Q^2$ for each significance level $\theta$. In each simulation we set $n=m=n_{\text{perm}}= 100$. The results are shown in Figure~\ref{figure:fp}, where we see that both WoW and HIPM recover a Type I error which is approximately equal to the significance level $\theta$, in all simulation settings. We report only one of the four graphs as the remaining ones do not show any differences. Interestingly, the WoW distance appears to control the Type I error even if our theory does not guaranty it, and both behave well on unbounded settings as well.
+To investigate the behaviour of the Type I error, we simulate the data from $Q^1 = Q^2$ equal to each of the examples above $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the percentage of times it rejects the (correct) $H_0 = Q^1 = Q^2$ for each significance level $\theta$. In each simulation we set $n=m=n_{\text{perm}}= 100$. 
+
+The results are shown in Figure~\ref{figure:fp_wow_vs_hipm}, where we see that both WoW and HIPM recover a Type I error which is approximately equal to the significance level $\theta$, in all simulation settings. We report only one of the four graphs as the remaining ones do not show any differences. Interestingly, the WoW distance appears to control the Type I error even if our theory does not guaranty it, and both behave well on unbounded settings as well.
 \begin{figure}[H]
     \centering
       \includegraphics[width = 0.49\linewidth]{chapters/two-sample-testing/figures/wow_vs_hipm/fp_label=1_n=100_m=100_S=1000_n_perm=100.png}
     \caption{False Positive Rates for HIPM and WoW}
-    \label{figure:fp}
+    \label{figure:fp_wow_vs_hipm}
 \end{figure}
 To investigate the power of the test, we simulate the data under the alternative hypothesis $Q^1 \neq Q^2$. For each of the four laws considered above, we associate an alternative law and estimate the power, resulting in the following four cases:
 \begin{align*}
@@ -43,7 +45,7 @@ To investigate the power of the test, we simulate the data under the alternative
 \text{D.} \quad & Q^1 = \mathrm{DP}(\alpha = 1, P_0 = \N(0,1)) \\
                 & Q^2 = \mathrm{DP}(\alpha = 2, P_0 = \N(0,1))
 \end{align*}
-As before, we sample the observations $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the empirical power, that is, 1 minus the percentage of times it rejects the (incorrect) $H_0 = Q^1 = Q^2$ for each significance level $\theta$, setting $n=m=n_{\text{perm}}= 100$. \textcolor{red}{missing interpretation}
+As before, we sample the observations $S= 1000$ times, perform our permutation-based test for both the WoW and the HIPM, and report the empirical power, that is, 1 minus the percentage of times it rejects the (incorrect) $H_0 = Q^1 = Q^2$ for each significance level $\theta$, setting $n=m=n_{\text{perm}}= 100$.
 
 \begin{figure}[H]
     \centering
@@ -70,6 +72,8 @@ As before, we sample the observations $S= 1000$ times, perform our permutation-b
     \caption{Power for WoW and HIPM}
     \label{figure:tp_wow_vs_hipm}
 \end{figure}
+
+The results presented in Figure~\ref{figure:tp_wow_vs_hipm} indicate that HIPM and WoW achieve comparable power in Cases A and B. In Case C, HIPM exhibits slightly higher power than WoW. A more pronounced difference emerges in Case D, where WoW achieves substantially higher power than HIPM. Understanding the conditions under which one method dominates the other remains an open question. One possible direction is to examine the signal-to-noise ratio of the underlying testing problem.
 
 
 \subsection{Empirical comparison with existing methods}\label{subsection:comparison_of_all_methods}
@@ -134,7 +138,7 @@ For each setting we simulate the data $S=1000$ times, perform all tests on the s
     \caption{Rejection rates for WoW, HIPM, Fr\'echet and Energy tests}
     \label{figure:rejections_mean_variance}
 \end{figure}
-\textcolor{red}{missing interpretation}
+As seen in Figure~\ref{figure:rejections_mean_variance}, all testing schemes maintain low Type I error across both settings. When the distributions differ in mean (left plot), the Energy, WoW, and HIPM tests achieve higher power than the Fr\'echet test. In contrast, when the distributions differ in variance (right plot), the Fr\'echet test attains the highest power among all methods. Furthermore, in the variance setting, both HIPM and WoW outperform the Energy test.
 
 
 The final simulation on the synthetic dataset is designed to demonstrate the necessity of distance-based testing. Note that the underlying assumption behind the Fr\'echet test is that the Fr\'echet mean and variance are sufficient to distinguish between two different laws of random probability measures. However, laws of RPMs are not always uniquely characterized by their Fr\'echet means and variances.
@@ -158,12 +162,13 @@ Note that $\lambda = 1$ corresponds to estimating the Type~I error, while other 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.43\textwidth]{chapters/two-sample-testing/figures/all_schemes/counterexample_n=100_m=200_S=1000_bootstrap=false_n_samples=100.png}
-    \caption{}
+    \caption{Rejection rates for WoW, HIPM, Fr\'echet and Energy tests}
     \label{figure:counterexample}
 \end{figure}
 
 As observed in the Figure \ref{figure:counterexample}, since the two distributions induce the same Fr\'echet means and variances, the method proposed in \cite{dubey2019frechet} fails to detect the presence of different laws. In contrast, the HIPM and WoW tests perform slightly better than Energy test in identifying the discrepancy.
 
+To conclude, although the Fr\'echet test can exhibit higher power than the other testing schemes in certain settings, its main limitation is that it fails to detect the difference when the laws of random probability measures are not fully characterized by the Fr\'echet mean and variance. The Energy test, as well as permutation tests based on HIPM or WoW, mitigate this limitation. Moreover, HIPM and WoW may be preferable to the Energy test in practice, since the underlying metric space, in our case, the space of probability measures, may fail to be of strongly negative type, or this property may be difficult to verify.
 
 
 \subsection{Mortality Data}\label{subsection:mortality_data}
@@ -194,48 +199,45 @@ In Figure \ref{figure:quantile_for_mortality_rates}, we present the quantile plo
     \caption{Quantile plots of the age-at-death probability mass functions for the two country groups}
     \label{figure:quantile_for_mortality_rates}
 \end{figure}
-To assess whether there is a difference in mortality proportions between the two groups of countries in each time period, we apply our proposed test separately for males and females. We set the significance level to $\theta = 0.05$ and use $n_{\text{perm}} = 100$ permutations to compute a
+To assess whether there is a difference in mortality proportions between the two groups of countries in each time period, we apply tests using HIPM and WoW separately for males and females. We set the significance level to $\theta = 0.05$ and use $n_{\text{perm}} = 100$ permutations to compute a
 different p-value for each year.
 
 We also compare the p-values obtained from our approach with those derived from the following alternative methods:
 \begin{itemize}
-    \item Averaging: Given $\widehat{P}^1_1,\cdots, \widehat{P}^1_{n_1}$ from group 1 and $\widehat{P}^2_1,\cdots, \widehat{P}^2_{n_2}$ from group 2, we obtain average probability measures inside each group, i.e.
-    \[
-    \overline{P}^1 = \frac{1}{n_1}\sum_{i = 1}^{n_1}\widehat{P}^1_i, \quad 
-    \overline{P}^2 = \frac{1}{n_2}\sum_{i = 1}^{n_2}\widehat{P}^2_i.
-    \]
-    The test statistic is obtained by computing Wasserstein-1 distance between $\overline{P}^1$ and $\overline{P}^2.$ The threshold is obtained via a permutation approach, in which the observed probability measures are permuted across the two groups.
-    \item \textbf{Pooling:} This approach is included to emphasize the importance of preserving the probability-measure structure within each group. Since the goal is to compare mortality proportions across the two groups, one might instead ignore the country-level distributional structure and simply aggregate deaths within each group. This aggregation produces a single probability measure for each group, and the test statistic is then computed as the Wasserstein-1 distance between these two measures. As before, the significance threshold is obtained using a permutation procedure. Because the data for each country consist of death counts by age, we first convert these counts into observations of age at death. Specifically, if there are $k$ deaths at age $a$, we generate $k$ observations equal to $a$. This is done separately for each group. The resulting age-at-death observations are then permuted across the two groups, which allows the permutation procedure to operate directly on individual age-at-death observations rather than on aggregated counts.
+\item Averaging: Given $\widehat{P}^1_1,\cdots, \widehat{P}^1_{n_1}$ from group 1 and $\widehat{P}^2_1,\cdots, \widehat{P}^2_{n_2}$ from group 2, we obtain average probability measures inside each group, i.e.
+\[
+\overline{P}^1 = \frac{1}{n_1}\sum_{i = 1}^{n_1}\widehat{P}^1_i, \quad
+\overline{P}^2 = \frac{1}{n_2}\sum_{i = 1}^{n_2}\widehat{P}^2_i.
+\]
+The test statistic is obtained by computing Wasserstein-1 distance between $\overline{P}^1$ and $\overline{P}^2.$ The threshold is obtained via a permutation approach, in which the observed probability measures are permuted across the two groups.
+\item Pooling: This approach is included to emphasize the importance of preserving the probability-measure structure within each group. Since the goal is to compare mortality proportions across the two groups, one might instead ignore the country-level distributional structure and simply aggregate deaths within each group. This aggregation produces a single probability measure for each group, and the test statistic is then computed as the Wasserstein-1 distance between these two measures. As before, the significance threshold is obtained using a permutation procedure. Because the data for each country consist of death counts by age, we first convert these counts into observations of age at death. Specifically, if there are $k$ deaths at age $a$, we generate $k$ observations equal to $a$. This is done separately for each group. The resulting age-at-death observations are then permuted across the two groups, which allows the permutation procedure to operate directly on individual age-at-death observations rather than on aggregated counts.
 \end{itemize}
-
 Note that the test statistic is identical for both the pooling and averaging approaches; the difference between the two testing schemes lies in the permutation procedure. In particular, the averaging approach preserves the probability measure structure within each group, whereas the pooling approach does not.
 
-Examining the p-values obtained from the proposed method in Figure \ref{figure::p_values_mortality}, we observe that for females, the difference between the groups is statistically significant in 1960. During the following decade, this difference becomes less significant, which may be explained by economic growth. After the 1970s, the disparity in mortality proportions between the groups increases again, potentially reflecting the economic decline in the countries in group $1$. Following the breakup of the Soviet Union, the observed differences may be associated with countries that were unable to integrate well into the Western blocks.
+Examining the p-values obtained from the methods all methods in Figure \ref{figure::p_values_mortality}, we observe that for females, the difference between the groups is statistically significant in 1960. During the following decade, this difference becomes less significant under the methods based on HIPM, WoW and Averaging, which may be explained by economic growth. After the 1970s, the disparity in mortality proportions between the groups increases again, potentially reflecting the economic decline in the countries in group $1$. Following the breakup of the Soviet Union, the observed differences may be associated with countries that were unable to integrate well into the Western blocks.
 
-A similar trend is observed for males; however, the key difference is that during the period from 1960 to 1970, althouth the differences in mortality proportions was decreasing, the p-values did not exceed the $0.05$ threshold.
-\begin{figure}[H]
+A similar trend is observed for males; however, the key difference is that during the period from 1960 to 1970, althouth the differences in mortality proportions was decreasing, this was not statistically significant in all of those years.
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.5\textwidth} % Increased width since they are stacked
         \centering
-        \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/males_pvalues_poolingaveraginghipm.png}
+        \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/pvalues_males.png}
         \caption{Males}
     \end{subfigure}
     \\ % <--- This line break forces the next subfigure down
     \begin{subfigure}{0.5\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/females_pvalues_poolingaveraginghipm.png}
+        \includegraphics[width=\linewidth]{chapters/two-sample-testing/figures/mortality/pvalues_females.png}
         \caption{Females}
     \end{subfigure}
     \caption{P-values for mortality proportions}
     \label{figure::p_values_mortality}
 \end{figure}
 
-Note also that p-values for averaging and HIPM look similar. This is because the average measure in this case is sufficient to detect the difference between two groups.
+Note also that p-values for averaging, HIPM and WoW have similar trend. This is because the average measure in this case is sufficient to detect the difference between two groups.
 
 
-
-
-Note that pooling procedure may fail to control the Type I error in hierarchical sampling settings. Pooling ignores the fact that observations within each country are generated from a latent random probability measure. Under hierarchical sampling, where we observe $n$ sequences of length $m$, each generated from a different latent random probability measure, The empirical distribution obtained by pooling all observations converges to the mean measure of the law of the random probability measure. Hence, the pooled test statistic converges to the Wasserstein distance between the two group-level mean measures. In contrast, the permutation samples behave as if they were drawn directly from this mean measure, with an effective sample size of $nm$. As a result, the permutation threshold converges to zero faster than the observed distance, leading to systematically small p-values. This issue disappears when the latent probability measures are identical.
+We also observe important issue regarding the pooling which is more general for hierarchical sampling.In particular, pooling procedure may fail to control the Type I error in hierarchical sampling settings. This is because, pooling ignores the fact that observations within each country are generated from a latent random probability measure. Under hierarchical sampling, where we observe $n$ sequences of length $m$, each generated from a different latent random probability measure, The empirical distribution obtained by pooling all observations converges to the mean measure of the law of the random probability measure. Hence, the pooled test statistic converges to the Wasserstein distance between the two group-level mean measures. In contrast, the permutation samples behave as if they were drawn directly from this mean measure, with an effective sample size of $nm$. As a result, the permutation threshold converges to zero faster than the observed distance, leading to systematically small p-values. This issue disappears when the latent probability measures are identical.
 
 
 
