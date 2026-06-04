@@ -1,11 +1,11 @@
 \section{Distances Between Laws of Random Measures and RPMs}\label{section:bnp_toolbox_distances}
 
 
-In this section, we overview several ways to define distances on the laws of random probability measures and, more generally, on random measures. The distances on $\probprobx$ that are mainly used for two-sample testing are Wasserstein over Wasserstein (WoW) and the Hierarchical Integral Probability Metric (HIPM). The other distances we consider for random measures are used to study the merging rate of opinions.
+In this section, we describe several ways to define distances on the laws of random probability measures and, more generally, on random measures. The distances on $\probprobx$ that are mainly used for two-sample testing are Wasserstein over Wasserstein (WoW) and the Hierarchical Integral Probability Metric (HIPM). The other distances we consider for random measures are used to study the merging of opinions.
 
 \subsection{Distances on $\probprobx$}\label{subsection:bnp_toolbox_distances_probprobx}
 
-We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$. As we mentioned in Section~\ref{section:motivation_applications_distances_on_rpms}, it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing,nguyen2026optimal} and machine learning \cite{ho2017multilevel, dukler2019wasserstein,alvarezmelis2020geometric,piening2026generalized}, with also recent works studying its geometric structure \cite{pinzi2025nested,pinzi2025totally,beiglbock2025brenier} and the gradient flows it generates \cite{bonet2025flowing}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
+We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$. As we mentioned in Section~\ref{section:motivation_applications_distances_on_rpms}, it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing,nguyen2026optimal} and machine learning \cite{ho2017multilevel, dukler2019wasserstein,alvarezmelis2020geometric,piening2026generalized}, with recent works also studying its geometric structure \cite{pinzi2025nested,pinzi2025totally,beiglbock2025brenier} and the gradient flows it generates \cite{bonet2025flowing}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
 
 Only in this subsection and in the chapter on two-sample testing, we assume that the sample space $\X$ is Polish with bounded diameter. Using the distance function $d_\X$ on $\X$, one can define the Wasserstein distance on $\probx$ by
 \[
@@ -18,17 +18,17 @@ where
 Note that this is the Wasserstein distance of order $1$. Since we do not consider other Wasserstein distances, we denote it simply by $\W$ instead of $\W_1$.
 
 In general, $\W$ is a distance function on the Wasserstein space of order $1$, defined as
-$$
+\[
 \mathcal{P}_1(\X) = \left\{P \in \probx : \int_\X d_\X(x, x_0) P(dx) < \infty, \quad x_0 \in \X \right\}.
-$$
+\]
 Since we assume that $\X$ has bounded diameter, all $P \in \probx$ belong to $\mathcal{P}_1(\X)$. The assumption that $\X$ is Polish and $d_{\X}$ is bounded implies that the metric space $(\probx, \W)$ is also Polish; see Remark 7.1.7 in \cite{luigi2008gradient}. Note also that $(\probx, \W)$ has bounded diameter, since $d_{\X}$ is bounded. Therefore, instead of defining a distance function on $\mathcal{P}_1(\probx)$, we can define a distance function on $\probprobx$ using $\W$ as the ground metric.
 
 \begin{definition}[Wasserstein over Wasserstein]
     \label{definition:wow}
     Given $Q^1, Q^2 \in \probprobx$, the Wasserstein over Wasserstein (WoW) distance between $Q^1$ and $Q^2$ is
-    $$
+    \[
     \WW(Q^1, Q^2) = \inf_{\pi \in \Gamma(Q^1, Q^2)} \int_{\probx \times \probx} \W(P^1, P^2) \, \pi(dP^1, dP^2).
-    $$
+    \]
 \end{definition}
 Here, $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\probx \times \probx$ with marginals $Q^1$ and $Q^2$. Again, Remark 7.1.7 in \cite{luigi2008gradient}, together with the fact that $\W$ has bounded diameter, implies that the metric space $(\probprobx, \WW)$ is Polish with bounded diameter.
 
@@ -47,7 +47,7 @@ Alternatively, the HIPM can be expressed as
 \[
 d_{\F}(Q^1, Q^2) = \sup_{f \in \F} \W(Q^1 \circ \hat{f}^{-1}, Q^2 \circ \hat{f}^{-1}),
 \]
-where $\hat{f}$ denotes the lifting of the function $f$, i.e., $\hat{f}(P) = \int_\X f \, dP$, and $Q^k \circ \hat{f}^{-1}$ is the corresponding push-forward measure.
+where $\hat{f}$ denotes the lifting of the function $f$, i.e., $\hat{f}(P) = \int_\X f \, \mathrm{d}P$, and $Q^k \circ \hat{f}^{-1}$ is the corresponding push-forward measure.
 
 As long as the function class $\F$ is sufficiently rich, this construction defines a valid distance on $\probprobx$. Hereafter, we set $\F = \lipX$ and denote the corresponding metric $d_\F$ by $\dlip$.
 
@@ -94,7 +94,7 @@ By representing both distance functions as Integral Probability Metrics, we see 
 %%%%%%
 \subsection{Distances on $\mbx$}\label{subsection:bnp_toolbox_distances_mbx}
 
-Differently from the previous subsection, we only assume that $\X$ is a Polish space equipped with its Borel $\sigma$-algebra $\mathcal{B}(\X)$. Our motivation for defining a distance between laws of random measures stems from the study of completely random measures. Since we will be working with CRMs taking values in the space of finite measures on $\X$, we begin by introducing a distance on the space $\mbx$.
+Unlike in the previous subsection, we only assume that $\X$ is a Polish space equipped with its Borel $\sigma$-algebra $\mathcal{B}(\X)$. Our motivation for defining a distance between laws of random measures stems from the study of completely random measures. Since we will be working with CRMs taking values in the space of finite measures on $\X$, we begin by introducing a distance on the space $\mbx$.
 
 Recall that the space $\mbx$ is endowed with the Borel $\sigma$-algebra generated by the topology of weak convergence. Analogously to the case of $\probx$, this $\sigma$-algebra coincides with the smallest $\sigma$-algebra that makes all maps of the form
 \[
@@ -146,14 +146,14 @@ Let $\rho^1, \rho^2$ be two positive Borel measures on $(0,\infty)$ with finite 
 \]
 where
 \[
-U_i(s) = \rho^i((s,\infty)),
+U_i(s) = \rho^i((s,\infty))
 \]
 is the tail integral of $\rho^i$.
 \end{definition}
 
 Having introduced distances on measures on $(0,\infty)$ and on the space $\X$, we can now define a discrepancy between L\'evy intensities.
 
-\begin{definition}\label{definition:adapded_extended_wasserstein}
+\begin{definition}\label{definition:adapted_extended_wasserstein}
 Let $\nu^1, \nu^2$ be two L\'evy intensities such that $\M_1(\nu^i)<\infty$, and let
 \[
 \mathrm{d}\nu^i(s,x) = \mathrm{d}\rho_x^i(s)\mathrm{d}P_0^i(x), \qquad i=1,2,
@@ -189,13 +189,13 @@ that is, one of them is a homogeneous CRM. Then the adapted extended Wasserstein
 \[
 \ad(\nu^1, \nu^2)
 =
-\frac{M_1(\nu^1)+M_1(\nu^2)}{2}\, \W(P_0^1, P_0^2)
+\frac{\M_1(\nu^1)+\M_1(\nu^2)}{2}\, \W(P_0^1, P_0^2)
 +
 \E_{X \sim P_0^1}\left[ \wext(\rho_X^1,\rho^2)\right].
 \]
 \end{remark}
 
-We now discuss the distance between Cox CRMs. The motivation stems from the fact that, posterior distributions are random completely random measures, namely Cox CRMs. Since Cox CRMs are characterized by random L\'evy intensities, it is natural to define a distance at the level of their laws by lifting the adapted extended Wasserstein discrepancy.
+We now discuss the distance between Cox CRMs. The motivation stems from the fact that posterior distributions are random completely random measures, namely Cox CRMs. Since Cox CRMs are characterized by random L\'evy intensities, it is natural to define a distance at the level of their laws by lifting the adapted extended Wasserstein discrepancy.
 
 More precisely, let $\tilde{\nu}^1, \tilde{\nu}^2$ be random L\'evy intensities. We define
 \[
@@ -206,7 +206,7 @@ Finally, since in the case of merging rates our goal is to consider CRMs (or Cox
 
 Our main tool for controlling the Wasserstein over bounded Lipschitz distance is provided by Theorem 6 in \cite{catalano2026merging}, which states that, in the case of scaled Cox CRMs $\tilde{\mu}^1, \tilde{\mu}^2$ with random L\'evy intensities $\tilde{\nu}^1, \tilde{\nu}^2$, 
 \[
-\wbl\!\left( \law\left(\tilde{\mu}^1\right), \law\left(\tilde{\mu}^1\right) \right) \leq
+\wbl\!\left( \law\left(\tilde{\mu}^1\right), \law\left(\tilde{\mu}^2\right) \right) \leq
 \wad(\law(\tilde{\nu}^1), \law(\tilde{\nu}^2)).
  \]
 

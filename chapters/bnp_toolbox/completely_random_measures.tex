@@ -2,21 +2,21 @@
 
 Many Bayesian nonparametric models are constructed by first defining a random measure that need not be a probability measure and then transforming it into a probability measure. Completely random measures (CRM) provide a general framework for this construction.
 
-Introduced in \cite{kingman1967completely}, completely random measures can be viewed as measure-valued analogues of L\'evy processes. In this setting, the index set is a $\sigma$-algebra of the underlying probability space, and the stochastic process takes the form of a random measure. Property of independent increments for L\'evy processes is extended to this setting as independence of evaluations of a random measure on disjoint sets. In Bayesian nonparametrics, such random measures are often transformed via normalization into probability measures, which can then be used as priors over distributions. Let us start with the definition of completely random measures.
+Introduced in \cite{kingman1967completely}, completely random measures can be viewed as measure-valued analogues of L\'evy processes. In this setting, the index set is a $\sigma$-algebra of the underlying probability space, and the stochastic process takes the form of a random measure. The property of independent increments for L\'evy processes is extended to this setting as the independence of evaluations of a random measure on disjoint sets. In Bayesian nonparametrics, such random measures are often transformed via normalization into probability measures, which can then be used as priors over distributions. Let us start with the definition of completely random measures.
 
 Although we assume throughout that $\X$ is a Polish space, in \cite{kingman1967completely} the space $\X$ is taken to be a general set whose $\sigma$-algebra contains all singletons. Since the Borel $\sigma$-algebra on a Polish space contains all singletons, this assumption is satisfied in our setting, and we may continue working with $\X$ Polish.
 
-We denote by $\mbx$ the space of finite, and by $\mx$ the space of locally finite measures. We endow $\mbx$ with the topology of weak convergence. Since $\X$ is Polish, the space $\mbx$ is also Polish. We equip $\mbx$ with its Borel $\sigma$-algebra denoted by $\mathcal{B}(\X)$.
+We denote by $\mbx$ the space of finite measures, and by $\mx$ the space of locally finite measures. We endow $\mbx$ with the topology of weak convergence. Since $\X$ is Polish, the space $\mbx$ is also Polish. We equip $\mbx$ with its Borel $\sigma$-algebra denoted by $\mathcal{B}(\mbx)$.
 
 \begin{definition}
-Let $\probspace$ be a probability space. A random measure $\tilde{\mu}$ is a map from $\Omega$ to $\mx$, such that, for all $A \in \mathcal{B}(\X)$, the maps 
+Let $\probspace$ be a probability space. A random measure $\tilde{\mu}$ is a map from $\Omega$ to $\mx$, such that, for all $A \in \mathcal{B}(\X)$, the map
 \[
 \Omega \ni \omega \mapsto \tilde{\mu}(\omega)(A)
 \]
 is measurable.
 \end{definition}
 
-From now on, we will write $\tilde{\mu}(A)$ instead of $\tilde{\mu}(\omega)(A)$
+From now on, we will write $\tilde{\mu}(A)$ instead of $\tilde{\mu}(\omega)(A)$.
 
 \begin{definition}\label{definition:CRM}
 A completely random measure $\tilde{\mu}$ is a random measure such that for all finite collection of mutually disjoint sets $A_1,\dots, A_n \in \mathcal{B}(\X),$ the random variables $\tilde{\mu}(A_1),\dots, \tilde{\mu}(A_n)$ are independent. 
@@ -130,9 +130,9 @@ the random variables $J_i$ and $X_i$ are called jumps and atoms, respectively.
 
 The L\'evy intensity governs the law of the jumps and atoms. By the disintegration theorem, it can be decomposed into a component corresponding to the distribution of atom locations and another component describing the distribution of jump sizes at each location.
 
-In particular, let us denote by $\M_1(\nu)$ the first moment of $\nu$, defined as
+In particular, let us denote by $\M_1(\nu)$ the first moment or mean of $\nu$, defined as
 \[
-\M_1(\nu) := \int_{(0,\infty)\times \X} s \,\mathrm{d}\nu(s,x) < \infty.
+\M_1(\nu) := \int_{(0,\infty)\times \X} s \,\mathrm{d}\nu(s,x).
 \]
 Then, for $\tilde{\mu} \sim \mathrm{CRM}(\nu)$ with finite mean, it follows from Proposition 3 in \cite{catalano2026merging} that
 \[
@@ -140,7 +140,7 @@ Then, for $\tilde{\mu} \sim \mathrm{CRM}(\nu)$ with finite mean, it follows from
 \]
 where $P_0$ is a probability measure on $\X$ and $\rho : \X \times \mathcal{B}((0,\infty)) \to [0,\infty]$ is a transition kernel. Whenever $\rho$ does not depend on $x$, such a CRM is referred to as a homogeneous CRM.
 
-A completely random measure, similarly to a random probability measure as discussed in \ref{section:bnp_toolbox_rpm_and_exchangeability}, can be uniquely identified by its finite-dimensional distributions, that is,
+A completely random measure, similarly to a random probability measure as discussed in Section~\ref{section:bnp_toolbox_rpm_and_exchangeability}, can be uniquely identified by its finite-dimensional distributions, that is,
 \[
 \law\left(\tilde{\mu}(A_1), \dots, \tilde{\mu}(A_k) \right),
 \]
@@ -150,7 +150,7 @@ for a measurable partition $A_1,\dots, A_k$ in $\mathcal{B}(\X)$. By the indepen
 \]
 for $A \in \mathcal{B}(\X)$. Equivalently, they are identified by the law of $\tilde{\mu}(f)$ for measurable $f : \X \to [0, \infty]$. For this reason, Laplace functionals play an important role.
 
-For the CRM $\tilde{\mu}$, we have the characterization that, for all measurable functions $f : \X \to [0, \infty]$, or $f$ integrable w.r.t $\tilde{\mu}$,
+For the CRM $\tilde{\mu}$, we have the characterization that, for all measurable functions $f : \X \to [0, \infty]$, or for $f$ integrable with respect to $\tilde{\mu}$,
 \[
 \E \left[ e ^ {-\int_\X f(x) \mathrm{d}\tilde{\mu}(x)}\right] = \exp \left\{-\int_{\R_+ \times \X}\left( 1 - e^{-sf(x)}\right)\mathrm{d}\nu(s,x) \right\}.
 \]
@@ -161,7 +161,7 @@ Completely random measures can be transformed into random probability measures. 
 \[
 \tilde{\mu} \mapsto \frac{\tilde{\mu}}{\tilde{\mu}(\X)}.
 \]
-As noted in the previous subsection, to guarantee that this transformation is well defined, we need the Lévy intensity to satisfy an integrability condition and $\nu((0,\infty)\times\X) = \infty$. However, for the identification purposes that we will explain below, together with the integrability condition, we will assume a stronger condition, namely that 
+As noted in the previous subsection, to guarantee that this transformation is well defined, we need the Lévy intensity to satisfy an integrability condition and $\nu((0,\infty)\times\X) = \infty$. However, for identifiability purposes to be discussed below, in addition to the integrability condition, we will assume a stronger condition, namely that 
 \[
 \rho_x((0,\infty)) = \infty \quad \text{for $P_0$-almost every } x \in \X,
 \]
@@ -296,7 +296,7 @@ Let $\tilde{\mu}$ be a Cox CRM with random L\'evy intensity $\tilde{\nu} \sim F$
 \]
 where $\tilde{\mu}_{\nu,S}$ denotes the scaled CRM associated with $\nu$.
 \end{definition}
-Statistical interpretation of the above definition is that 
+The statistical interpretation of the above definition is that 
 \[
 \tilde{\mu}_S \mid \tilde{\nu} = \frac{\tilde{\mu}}{\E [\tilde{\mu}(\X)\mid\tilde{\nu}]}.
 \]
@@ -306,11 +306,11 @@ Under additional assumptions on the L\'evy intensities (see Theorem~10 in \cite{
 \quad \Longleftrightarrow \quad
 \tilde{\mu}^1_S \overset{d}{=} \tilde{\mu}^2_S.
 \]
-We denote by $\tilde{\nu}_S$ the random L\'evy intensity associated with the scaled Cox CRM. Let us now discuss the several examples of CRMs.
+We denote by $\tilde{\nu}_S$ the random L\'evy intensity associated with the scaled Cox CRM. Let us now discuss several examples of CRMs.
 
 \subsection{The Gamma Process and the Dirichlet Process}\label{subsection:bnp_toolbox_gamma_dirichlet}
 
-We begin this subsection by describing another derivation of Dirichlet process via completely random measures.
+We begin this subsection by describing another derivation of the Dirichlet process via completely random measures.
 
 \begin{definition}[Gamma CRM]\label{definition:gamma_crm}
 A completely random measure is gamma if its L\'evy intensity is
@@ -326,7 +326,7 @@ The importance of the gamma CRM stems from the fact that its normalization yield
 \]
 where $\tilde{\mu}$ is a gamma CRM. We now show that $\tilde{P}$ is a Dirichlet process with parameters $\alpha$ and $P_0$.
 
-To this end, it is enough to verify (see Definition\ref{definition:dirichlet_process}) that for any measurable partition $A_1,\dots,A_n$ of $\X$,
+To this end, it is enough to verify (see Definition~\ref{definition:dirichlet_process}) that for any measurable partition $A_1,\dots,A_n$ of $\X$,
 \[
 \left( \tilde{P}(A_1),\dots,\tilde{P}(A_n)\right) \sim \mathrm{Dirichlet}\left(\alpha P_0(A_1),\dots,\alpha P_0(A_n) \right).
 \]
