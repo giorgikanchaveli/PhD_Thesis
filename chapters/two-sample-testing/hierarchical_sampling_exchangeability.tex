@@ -27,7 +27,7 @@ In practice, it is rare to observe the probability measures themselves directly,
     where $\widetilde{P}_1, \dots, \widetilde{P}_n \overset{\iid}{\sim} Q$.
 \end{definition}
 
-Throughout this paper, $n$ and $m$ will refer to the number of rows and columns of the hierarchical sample, respectively. We denote the hierarchical sample by $\mathbf{X}_{n,m} = (X_{i,j})$, where boldface letters refer to matrices and non-bold letters refer to their individual elements. With a slight abuse of notation, we will also sometimes denote $\mathbf{X}_{n,m} \sim Q$. Hierarchical samples are what we observe to decide whether two laws of random probability measures are the same. 
+Throughout this chapter, $n$ and $m$ will refer to the number of rows and columns of the hierarchical sample, respectively. We denote the hierarchical sample by $\mathbf{X}_{n,m} = (X_{i,j})$, where boldface letters refer to matrices and non-bold letters refer to their individual elements. With a slight abuse of notation, we will also sometimes denote $\mathbf{X}_{n,m} \sim Q$. Hierarchical samples are what we observe to decide whether two laws of random probability measures are the same. 
 
 Hierarchical samples are not new and appear across several literatures under different names and motivations. In \citet{Baxter2000}, hierarchical samples arise in the context of task-specific data: the latent probability measures correspond to task-specific data-generating distributions, while the law of the random probability measure describes the distribution over tasks. In \citet{Szabo2016}, hierarchical samples are introduced as a two-stage sampled setting and are used to study consistency for distribution regression problems. They also appear in \citet{Haviv2024} in the context of generative modeling over families of distributions, and in \citet{Warren2025}, where samples are used to consistently recover principal curves whose points are probability measures in Wasserstein space. Let us now discuss the limitations of the hierarchical sampling framework.
 
@@ -121,7 +121,7 @@ is higher than some threshold. As the estimators in the distance function are th
     where $\widehat{P}_{i,m} = \frac{1}{m}\sum_{j = 1}^m \delta_{X_{i,j}}$ for all $i = 1, \dots, n$.
 \end{definition}
 
-Note that the law of each $\widehat{P}^k_{i,m}$ is different from $Q^k$ for $k = 1,2$. Since these random probability measures are the main objects of study in this paper, we introduce a specific notation for their laws. 
+Note that the law of each $\widehat{P}^k_{i,m}$ is different from $Q^k$ for $k = 1,2$. Since these random probability measures are the main objects of study in this chapter, we introduce a specific notation for their laws. 
 
 \begin{definition}\label{definition:tau_m}
     Let $Q \in \probprobx$ and $m \geq 1$. We define $\T_m[Q] \in \probprobx$ as the law of $\frac{1}{m} \sum_{i=1}^m \delta_{X_i}$ for $\tilde{P} \sim Q$ and $X_1, \dots, X_m | \tilde{P} \overset{\iid}{\sim} \tilde{P}$.
