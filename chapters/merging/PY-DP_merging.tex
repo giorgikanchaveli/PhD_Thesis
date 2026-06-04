@@ -3,7 +3,7 @@
 
 We now present a result on merging between the Pitman--Yor and Dirichlet processes. We first recall the posterior distribution derived from the Pitman--Yor process. The strategy for establishing the merging rate is to first obtain the scaled version of the posterior distributions from each completely random measure, and then study the adapted Wasserstein discrepancy.
 
-Let $\tilde{\mu}$ be a Cox CRM with random L\'evy intensity $\tilde{\nu}$, as in Definition~\ref{definition:Pitman_Yor_cox_crm}. The random L\'evy intensity has the form
+Let $\tilde{\mu}$ be a Cox CRM with random L\'evy intensity $\tilde{\nu}$, as in Definition~\ref{definition:Pitman_Yor_2}. The random L\'evy intensity has the form
 \[
 \mathrm{d}\tilde{\nu}_\xi(s,x) = \frac{\xi \sigma}{\Gamma(1-\sigma)}\frac{e^{-s}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x),
 \]
@@ -13,11 +13,11 @@ The posterior distribution of $\tilde{\mu}$ under the Bayesian model~\ref{model:
 
 Given observations $x_1,\dots, x_n$ from model~\ref{model:bayesian_model_crm}, the posterior $\mustar$ of $\tilde{\mu}$ is a Cox CRM characterized by
 \[
-\mustar \mid U \overset{d}{=} \tilde{\mu} + \sum_{i = 1}^k J_i^U \delta_{x_i^*},
+\mustar \mid U \overset{d}{=} \tilde{\mu}_U + \sum_{i = 1}^k J_i^U \delta_{x_i^*},
 \]
 where
 \begin{itemize}
-    \item $\tilde{\mu}$ is a generalized Gamma CRM with L\'evy intensity
+    \item $\tilde{\mu}_U$ is a generalized Gamma CRM with L\'evy intensity
     \[
     \mathrm{d}\tilde{\nu}(s,x) = \frac{\sigma}{\Gamma(1 - \sigma)} \frac{e^{-Us}}{s^{1+\sigma}} \mathrm{d}s\,\mathrm{d}P_0(x).
     \]
@@ -75,23 +75,23 @@ The next step is to obtain the scaled version of $\mustar$. By Definition~\ref{d
 
 As discussed in Subsection~\ref{subsection:bnp_toolbox_normalization_identifiability}, if $\nu$ is the L\'evy intensity of a CRM $\tilde{\mu}$, then the L\'evy intensity of its scaled version is
 \[
-\mathrm{d}\nu_S(s,x) = \E\!\left(\tilde{\mu}(\X)\right) \rho_x\!\left( \E\!\left(\tilde{\mu}(\X)\right)s\right)\mathrm{d}P_0(x),
+\mathrm{d}\nu_S(s,x) = \E\!\left[\tilde{\mu}(\X)\right] \rho_x\!\left( \E\!\left[\tilde{\mu}(\X)\right]s\right)\mathrm{d}P_0(x),
 \]
 by Lemma~SM3 in \cite{catalano2026merging}. By applying the same argument to 
 \[
 \mathrm{d}\tilde{\nu}^*(s,x) = \mathrm{d}\rho^1(s)\,\mathrm{d}P^1_0(x) + \mathrm{d}\rho^2(s)\,\mathrm{d}P^2_0(x),
 \] we get
+\begin{align*}
+\mathrm{d}\tilde{\nu}^*_S(s,x) &= \E\!\left[\mustar(\X) \mid U\right] \rho^1_x\!\left(\E\!\left[\mustar(\X) \mid U\right]s\right)\mathrm{d}P^1_0(x) \\
+&\quad + \E\!\left[\mustar(\X) \mid U\right] \rho^2_x\!\left(\E\!\left[\mustar(\X) \mid U\right]s\right)\mathrm{d}P^2_0(x).
+\end{align*}
+We therefore first compute $\E\!\left[\mustar(\X) \mid U\right]$. By Campbell's theorem,
 \[
-\mathrm{d}\tilde{\nu}^*_S(s,x) =  \E\!\left(\mustar(\X) \mid U\right) \rho^1_x\!\left(\E\!\left(\mustar(\X) \mid U\right)s\right)\mathrm{d}P^1_0(x) +
-                   \E\!\left(\mustar(\X) \mid U\right) \rho^2_x\!\left(\E\!\left(\mustar(\X) \mid U\right)s\right)\mathrm{d}P^2_0(x).
-\]
-We therefore first compute $\E\!\left(\mustar(\X) \mid U\right)$. By Campbell's theorem,
-\[
-\E\!\left(\mustar(\X) \mid U\right) = \int_{(0,\infty)\times\X}s\,\mathrm{d}\tilde{\nu}^*(s,x).
+\E\!\left[\mustar(\X) \mid U\right] = \int_{(0,\infty)\times\X}s\,\mathrm{d}\tilde{\nu}^*(s,x).
 \]
 So,
 \begin{align*}
-    \E\!\left(\mustar(\X) \mid U\right) & = \int_{(0,\infty)\times\X}s\frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Us}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x)
+    \E\!\left[\mustar(\X) \mid U\right] & = \int_{(0,\infty)\times\X}s\frac{\sigma}{\Gamma(1-\sigma)}\frac{e^{-Us}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x)
     + \int_{(0,\infty)\times\X}s\frac{e^{-Us}}{s}\,\mathrm{d}s\sum_{i = 1}^k(n_i - \sigma)\,\mathrm{d}\delta_{x_i^*}(x) \\
     & = \frac{\sigma}{\Gamma(1-\sigma)}\int_0^\infty s^{-\sigma} e^{-Us}\,\mathrm{d}s + (n-k\sigma)\int_0^\infty e^{-Us}\,\mathrm{d}s \\
     & = \frac{\sigma}{\Gamma(1-\sigma)} \frac{\Gamma(1-\sigma)}{U^{1-\sigma}} + \frac{n - k\sigma}{U} \\
@@ -162,7 +162,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
 \begin{proposition}\label{proposition:distance_pitmanyor_gamma}
     Let $\tilde{\mu}^1$ be a Pitman--Yor CRM with parameters $(\sigma, \theta, P_0)$ and let $\tilde{\mu}^2$ be a Gamma CRM with parameters $(\alpha, 1, P_0)$. Then
     \[
-    \wad\left( \law\left(\tilde{\nu}^{*,1}_{S}\right),  \law\left(\tilde{\nu}^{*,2}_{S}\right) \right) = \E_U\!\left(\mathcal{A}^U + J_1^U + J_2^U \right),
+    \wad\left( \law\left(\tilde{\nu}^{*,1}_{S}\right),  \law\left(\tilde{\nu}^{*,2}_{S}\right) \right) = \E_U\!\left[\mathcal{A}^U + J_1^U + J_2^U \right],
     \]
     where
     \begin{align*}
@@ -173,13 +173,14 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     where $U$ and $C$ are as defined in Proposition~\ref{proposition:posterior_pitmanyor}.
 \end{proposition}
 \begin{proof}
+\vspace{-\topsep}
     Denote by $\tilde{\nu}^{*,2}_{S}$ the L\'evy intensity of the scaled Gamma posterior; its derivation can be found in the proof of Lemma~12 in \cite{catalano2026merging}, and it has the following form:
     \[
     \mathrm{d}\tilde{\nu}^{*,2}_{S}(s,x) = (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\left( \frac{\alpha}{\alpha + n}\,\mathrm{d}P_0(x) + \frac{1}{\alpha + n}\sum_{i = 1}^n \mathrm{d}\delta_{x_i}(x) \right).
     \]
     Note that the scaled Gamma posterior is no longer a Cox CRM. Since it is homogeneous, Remark~\ref{remark:adapted_extwas_homogeneous_crms} gives
     \begin{align*}
-    \wad\left( \law\left(\tilde{\nu}^{*,1}_{S}\right),  \law\left(\tilde{\nu}^{*,2}_{S}\right) \right) &= \E_{U \sim f_U}\!\left[\ad\!\left(\tilde{\nu}^{*,1}_{S}, \tilde{\nu}^{*,2}_{S}\right)\right] \\
+    \wad\left( \law\left(\tilde{\nu}^{*,1}_{S}\right),  \law\left(\tilde{\nu}^{*,2}_{S}\right) \right) &= \E_{U \sim f_U}\!\ad\!\left(\tilde{\nu}^{*,1}_{S}, \tilde{\nu}^{*,2}_{S}\right) \\
     &= \E_{U \sim f_U}\wtr\!\left(P_0^{*,1}, P_0^{*,2} \right) + \E_{U \sim f_U}\E_{X \sim P_0^{*,1}}\wext\!\left(\rho_X^{*,1} , \rho^{*,2}\right),
     \end{align*}
     where
@@ -418,7 +419,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \]
     we have that
     \[
-    \E \left( \frac{C_n}{\alpha + n} - 1\right) \lesssim \frac{k_n}{n}.
+    \E \left[ \frac{C_n}{\alpha + n} - 1\right] \lesssim \frac{k_n}{n}.
     \]
     We now bound the second term in the maximum.
 
@@ -429,7 +430,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \]
     Therefore,
     \[
-    \E \left(\frac{\alpha + n}{C_n} - 1\right) \lesssim \frac{k_n}{n}.
+    \E \left[\frac{\alpha + n}{C_n} - 1\right] \lesssim \frac{k_n}{n}.
     \]
     \begin{itemize}
         \item Third term: $\mathcal{A}^{U_n}$.
@@ -533,3 +534,4 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \end{align*}
     Since $\lambda_1' \leq \frac{\alpha}{\alpha + n}$, the first term is asymptotically bounded by $\frac{k_n}{n}$. As we have already bounded the second Wasserstein distance, we deduce that $\E \mathcal{A}^U \mathbf{1}_{A_n^c} \lesssim \frac{k_n}{n}.$
 \end{proof}
+To summarize, differently from the caes of generalized gamma CRM vs Gamma CRM, here there is no dependency on discount parameter for merging. What matters is the rate at which the number of unique observations grow with respect to the total number of observations. If they growh with the same rate, then the two posteriors do not merge, otherwise othey merge with the rate $\frac{k_n}{n}.$
