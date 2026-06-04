@@ -5,7 +5,7 @@ In this section, we overview several ways to define distances on the laws of ran
 
 \subsection{Distances on $\probprobx$}\label{subsection:bnp_toolbox_distances_probprobx}
 
-We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$; it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing,nguyen2026optimal} and machine learning \cite{ho2017multilevel, dukler2019wasserstein,alvarezmelis2020geometric,piening2026generalized}, with also recent works studying its geometric structure \cite{pinzi2025nested,pinzi2025totally,beiglbock2025brenier} and the gradient flows it generates \cite{bonet2025flowing}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
+We consider two distance functions on $\probprobx$. The first, referred to as Wasserstein over Wasserstein, is the natural lifting of the Wasserstein distance on $\probx$. As we mentioned in Section~\ref{section:motivation_applications_distances_on_rpms}, it has been widely used in Bayesian nonparametrics \cite{nguyen2016borrowing,nguyen2026optimal} and machine learning \cite{ho2017multilevel, dukler2019wasserstein,alvarezmelis2020geometric,piening2026generalized}, with also recent works studying its geometric structure \cite{pinzi2025nested,pinzi2025totally,beiglbock2025brenier} and the gradient flows it generates \cite{bonet2025flowing}. The second, termed the Hierarchical Integral Probability Metric, is a very recent development defined in \cite{catalano2024hierarchical}. Let us start with the definition of Wasserstein over Wasserstein.
 
 Only in this subsection and in the chapter on two-sample testing, we assume that the sample space $\X$ is Polish with bounded diameter. Using the distance function $d_\X$ on $\X$, one can define the Wasserstein distance on $\probx$ by
 \[
@@ -27,7 +27,7 @@ Since we assume that $\X$ has bounded diameter, all $P \in \probx$ belong to $\m
     \label{definition:wow}
     Given $Q^1, Q^2 \in \probprobx$, the Wasserstein over Wasserstein (WoW) distance between $Q^1$ and $Q^2$ is
     $$
-    \WW(Q^1, Q^2) = \inf_{\pi \in \Gamma(Q^1, Q^2)} \int_{\probx^2} \W(P^1, P^2) \, \pi(dP^1, dP^2).
+    \WW(Q^1, Q^2) = \inf_{\pi \in \Gamma(Q^1, Q^2)} \int_{\probx \times \probx} \W(P^1, P^2) \, \pi(dP^1, dP^2).
     $$
 \end{definition}
 Here, $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\probx \times \probx$ with marginals $Q^1$ and $Q^2$. Again, Remark 7.1.7 in \cite{luigi2008gradient}, together with the fact that $\W$ has bounded diameter, implies that the metric space $(\probprobx, \WW)$ is Polish with bounded diameter.
@@ -114,7 +114,7 @@ Given $\mu^1, \mu^2 \in \mbx$, the bounded Lipschitz distance $\bl$ is defined a
 By lifting the distance $\bl$ to the space of laws of random measures, denoted by $\probmb$, we obtain a distance on $\probmb$.
 
 \begin{definition}
-Given $Q^1, Q^2 \in \probmb$, the distance $\wbl$ between them is defined as
+Given $Q^1, Q^2 \in \probmb$, the distance $\wbl$ is defined as
 \[
 \wbl(Q^1, Q^2) = \min_{\pi \in \Gamma(Q^1, Q^2)} \int_{\mbx \times \mbx} \bl(\mu^1,\mu^2)\,\mathrm{d}\pi(\mu^1,\mu^2),
 \]
@@ -122,7 +122,7 @@ where $\Gamma(Q^1,Q^2)$ denotes the set of probability measures on $\mbx \times 
 \end{definition}
 
 \begin{remark}\label{remark:wbl_is_distance}
-As mentioned in the previous subsection, the Wasserstein distance is, in general, a metric on the space of probability measures with finite first moments. In the present setting, since $\bl$ is bounded by $2$, $\wbl$ is a well-defined distance on $\probmb$.
+As mentioned in the previous subsection, the Wasserstein distance is, in general, a metric on the space of probability measures with finite first moments. In the present setting, since $\bl$ is bounded, $\wbl$ is a well-defined distance on $\probmb$.
 \end{remark}
 
 If $\tilde{\mu}^1$ and $\tilde{\mu}^2$ are random measures with laws $Q^1$ and $Q^2$, respectively, we refer to $\wbl(\tilde{\mu}^1, \tilde{\mu}^2)$ as the distance between the random measures, with the understanding that this denotes the distance between their laws, i.e., $\wbl(Q^1, Q^2)$. For a more detailed overview of the properties of $\wbl$, see \cite{catalano2026merging}.
@@ -146,7 +146,7 @@ Let $\rho^1, \rho^2$ be two positive Borel measures on $(0,\infty)$ with finite 
 \]
 where
 \[
-U_i(s) = \rho^i((s,\infty)), \qquad s>0,
+U_i(s) = \rho^i((s,\infty)),
 \]
 is the tail integral of $\rho^i$.
 \end{definition}
@@ -176,7 +176,7 @@ It is also worth noting that $\ad$ is not a distance. Indeed, the factor
 \frac{\M_1(\nu^1)+\M_1(\nu^2)}{2}
 \]
 makes the triangle inequality fail. Thus, $\ad$ should be regarded as a discrepancy rather than a distance.
-The following remark is stated in \cite{catalano2026merging} (see Remark 2 on page 10). Due to its importance for the computations involved in merging, we restate it here.
+The following remark is stated in \cite{catalano2026merging} (see Remark 2). Due to its importance for the computations involved in merging, we restate it here.
 
 \begin{remark}\label{remark:adapted_extwas_homogeneous_crms}
 Consider two completely random measures with L\'evy intensities $\nu^1, \nu^2$ of the form
