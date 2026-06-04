@@ -3,7 +3,7 @@
 
 We now present a result on merging between the Pitman--Yor and Dirichlet processes. We first recall the posterior distribution derived from the Pitman--Yor process. The strategy for establishing the merging rate is to first obtain the scaled version of the posterior distributions from each completely random measure, and then study the adapted Wasserstein discrepancy.
 
-Let $\tilde{\mu}$ be a Cox CRM with random L\'evy intensity $\tilde{\nu}$, as in Definition~\ref{definition:Pitman_Yor_2}. The random L\'evy intensity has the form
+Let $\tilde{\mu}$ be a Cox CRM with random L\'evy intensity $\tilde{\nu}$, as in Definition~\ref{definition:Pitman_Yor_cox_crm}. The random L\'evy intensity has the form
 \[
 \mathrm{d}\tilde{\nu}_\xi(s,x) = \frac{\xi \sigma}{\Gamma(1-\sigma)}\frac{e^{-s}}{s^{1+\sigma}}\mathrm{d}s\,\mathrm{d}P_0(x),
 \]
@@ -112,7 +112,7 @@ The above expression is not yet in canonical form; we wish to express it as a pr
 
 Note that
 \[
-\mathcal{M}_1\!\left(\tilde{\nu}^*_{S}\right) = \int_{(0, \infty)\times \X}s\,\mathrm{d}\tilde{\nu}^*_{S}(s,x) = 1,
+\M_1\!\left(\tilde{\nu}^*_{S}\right) = \int_{(0, \infty)\times \X}s\,\mathrm{d}\tilde{\nu}^*_{S}(s,x) = 1,
 \]
 since it is the L\'evy intensity of a scaled CRM. The measure $s\,\mathrm{d}\tilde{\nu}^*_{S}$ can therefore be disintegrated as
 \[
@@ -166,7 +166,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \]
     where
     \begin{align*}
-        & \mathcal{A}^U = \wtr\left( \frac{\sigma U^\sigma}{C}P_0 + \frac{1}{C}\sum_{i = 1}^{k_n}(n_i - \sigma)\delta_{x_i^*}, \frac{\alpha}{\alpha + n}P_0 + \frac{1}{\alpha + n}\sum_{i = 1}^n \delta_{x_i}\right), \\
+        & \mathcal{A}^U = \wtr\left( \frac{\sigma U^\sigma}{C}P_0 + \frac{1}{C}\sum_{i = 1}^{k}(n_i - \sigma)\delta_{x_i^*}, \frac{\alpha}{\alpha + n}P_0 + \frac{1}{\alpha + n}\sum_{i = 1}^n \delta_{x_i}\right), \\
         & J_1^U = \frac{\sigma U^\sigma}{C}\wext\left( \frac{C^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\,\mathrm{d}s, (\alpha+n)\frac{e^{-(\alpha+n)s}}{s}\,\mathrm{d}s\right), \\
         & J_2^U = \frac{n - k\sigma}{C}\wext\left( \frac{Ce^{-Cs}}{s}\,\mathrm{d}s, (\alpha + n)\frac{e^{-(\alpha+n)s}}{s}\,\mathrm{d}s\right),
     \end{align*}
@@ -193,13 +193,13 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \end{align*}
     The first term is
     \[
-    \E_{U \sim f_U}\wtr\!\left(\frac{\sigma U^\sigma}{C}P_0 + \frac{1}{C}\sum_{i = 1}^{k_n}(n_i - \sigma) \delta_{x_i^*},
+    \E_{U \sim f_U}\wtr\!\left(\frac{\sigma U^\sigma}{C}P_0 + \frac{1}{C}\sum_{i = 1}^{k}(n_i - \sigma) \delta_{x_i^*},
                          \frac{\alpha}{\alpha + n}P_0 + \frac{1}{\alpha + n}\sum_{i = 1}^n\delta_{x_i}\right) = \E_{U \sim f_U} \mathcal{A}^U.
     \]
     The second term is
     \begin{align*}
         \E_{U \sim f_U}\E_{X \sim P_0^{*,1}}\wext\!\left(\rho_X^{*,1} , \rho^{*,2}\right) & = \E_{U \sim f_U} \frac{\sigma U^\sigma}{C}\E_{X \sim P_0}\wext\!\left(\rho_X^{*,1} , \rho^{*,2} \right)
-        + \E_{U \sim f_U}\frac{1}{C}\sum_{i = 1}^{k_n} (n_i - \sigma)\wext\!\left(\rho_{x_i^*}^{*,1} , \rho^{*,2} \right) \\
+        + \E_{U \sim f_U}\frac{1}{C}\sum_{i = 1}^{k} (n_i - \sigma)\wext\!\left(\rho_{x_i^*}^{*,1} , \rho^{*,2} \right) \\
         & =  \E_{U \sim f_U} \frac{\sigma U^\sigma}{C}\wext\!\left(\frac{C^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\,\mathrm{d}s,
                 (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\right) \\
         & \quad +  \E_{U \sim f_U} \frac{n-k\sigma}{C}\wext\!\left( \frac{Ce^{-Cs}}{s}\,\mathrm{d}s, (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\right) \\
@@ -362,7 +362,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \]
     Since $\frac{n}{C_n}$ converges in probability, so does $\frac{\alpha+n}{C_n}$. By the continuous mapping theorem, the last expression converges in probability to
     \[
-    \int_0^\infty \left| \frac{\Gamma(-\sigma, t)}{\Gamma(1-\sigma)} - \,\Gamma(0,t) \right|\mathrm{d}t>0.
+    \int_0^\infty \left| \frac{\Gamma(-\sigma, t)}{\Gamma(1-\sigma)} - \Gamma(0,t) \right|\mathrm{d}t>0.
     \]
     
 
@@ -464,7 +464,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \]
     It follows that
     \[
-    \E \mathcal{A}^U = \E \mathcal{A}^U\mathbf{1}_{A_n} + \E \mathcal{A}^U\mathbf{1}_{A^c_n}.
+    \E \mathcal{A}^{U_n} = \E \mathcal{A}^{U_n}\mathbf{1}_{A_n} + \E \mathcal{A}^{U_n}\mathbf{1}_{A^c_n}.
     \]
     On $A_n$, we decompose
     \[
@@ -514,7 +514,7 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
         & = \frac{k_n \sigma}{n} \wtr\left( \sum_{i = 1}^{k_n} \frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, \sum_{i = 1}^{k_n}\frac{1}{k_n}\delta_{x_i^*}\right) \\
         & \leq 2 \frac{k_n\sigma}{n}.
     \end{align*}
-    We conclude that $\E \mathcal{A}^U \mathbf{1}_{A_n} \lesssim \frac{k_n}{n}.$
+    We conclude that $\E \mathcal{A}^{U_n} \mathbf{1}_{A_n} \lesssim \frac{k_n}{n}.$
 
     Now suppose we are on $A_n^c$. We decompose
     \[
@@ -532,6 +532,6 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
         \frac{C_n}{n - k_n\sigma}\lambda_1'P_0 + \frac{C_n}{n - k_n\sigma}\frac{n}{\alpha + n}\sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*}\right) \\
         & \leq \lambda_1'\wtr\left( \sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, P_0\right) + \frac{n}{\alpha + n}\wtr \left(\sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n \sigma}\delta_{x_i^*}, \sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*} \right).
     \end{align*}
-    Since $\lambda_1' \leq \frac{\alpha}{\alpha + n}$, the first term is asymptotically bounded by $\frac{k_n}{n}$. As we have already bounded the second Wasserstein distance, we deduce that $\E \mathcal{A}^U \mathbf{1}_{A_n^c} \lesssim \frac{k_n}{n}.$
+    Since $\lambda_1' \leq \frac{\alpha}{\alpha + n}$, the first term is asymptotically bounded by $\frac{k_n}{n}$. As we have already bounded the second Wasserstein distance, we deduce that $\E \mathcal{A}^{U_n} \mathbf{1}_{A_n^c} \lesssim \frac{k_n}{n}.$
 \end{proof}
-To summarize, differently from the caes of generalized gamma CRM vs Gamma CRM, here there is no dependency on discount parameter for merging. What matters is the rate at which the number of unique observations grow with respect to the total number of observations. If they growh with the same rate, then the two posteriors do not merge, otherwise othey merge with the rate $\frac{k_n}{n}.$
+To summarize, unlike in the case of generalized Gamma CRM versus Gamma CRM, there is no dependence on the discount parameter for merging. What matters is the rate at which the number of distinct observations grows relative to the total number of observations. If they grow at the same rate, then the two posteriors do not merge; otherwise they merge at rate $\frac{k_n}{n}.$

@@ -2,9 +2,9 @@
 
 % We then complement them with a new result concerning the merging between the Pitman--Yor process and the Dirichlet process. 
 
-In this section, we summarize known results on merging between two posterior distributions arising from the Bayesian model \ref{model:bayesian_model_crm} when different priors are used. As discussed earlier, we investigate merging independently of the data-generating mechanism. That is, for a fixed sequence of observations, we compare how the corresponding posterior distributions differ under different prior specifications.
+In this section, we summarize known results on merging between two posterior distributions arising from the Bayesian model~\ref{model:bayesian_model_crm} when different priors are used. As discussed earlier, we investigate merging independently of the data-generating mechanism. That is, for a fixed sequence of observations, we compare how the corresponding posterior distributions differ under different prior specifications.
 
-Since we work with distances between random measures, the key step is to quantify the distance between posterior distributions. To this end, we consider two priors given by completely random measures, derive the corresponding posterior distributions, and then compare them. Due to the identifiability issue discussed in Subsection \ref{subsection:bnp_toolbox_normalization_identifiability}, we compute distances between scaled versions of these posterior distributions.
+Since we work with distances between random measures, the key step is to quantify the distance between posterior distributions. To this end, we consider two priors given by completely random measures, derive the corresponding posterior distributions, and then compare them. Due to the identifiability issue discussed in Subsection~\ref{subsection:bnp_toolbox_normalization_identifiability}, we compute distances between scaled versions of these posterior distributions.
 
 We start with the case of merging between two Dirichlet processes. Recall that the Dirichlet process is obtained by normalizing a Gamma CRM. By Theorem 15 in \cite{catalano2026merging}, for two Gamma CRMs $\tilde{\mu}^1$ and $\tilde{\mu}^2$ with parameters $(\alpha_i, 1,  P_0^i)$ for  $i=1,2$ (see Definition~\ref{definition:gamma_crm}), and for any sequence of observations $(x_n)_{n \geq 1}$ in $\X$, it holds that
 \[
@@ -20,15 +20,15 @@ This behavior admits an intuitive explanation. The posterior distribution induce
 
 We now discuss another known result on merging between the Dirichlet process and the generalized Gamma CRM.
 \begin{definition}
-\label{definition:generalizd_gamma_crm}
+\label{definition:generalized_gamma_crm}
 A completely random measure is said to be a generalized Gamma CRM if its L\'evy intensity is given by
 \[
-d\nu(s,x) = \frac{\alpha}{\Gamma(1-\sigma)}\frac{e^{-s}}{s^{1+\sigma}}\,\mathrm{d}s \,\mathrm{d}P_0(x),
+\mathrm{d}\nu(s,x) = \frac{\alpha}{\Gamma(1-\sigma)}\frac{e^{-s}}{s^{1+\sigma}}\,\mathrm{d}s \,\mathrm{d}P_0(x),
 \]
 where $\alpha > 0$ is the total mass parameter, $\sigma \in (0,1)$ is the discount parameter, and $P_0 \in \probx$ is the base probability measure.
 \end{definition}
 
-By Theorem 19 in \cite{catalano2026merging}, let $\tilde{\mu}^1$ be a generalized Gamma CRM with parameters $(\alpha, \sigma, P_0)$ and let $\tilde{\mu}^2$ be a Gamma CRM with parameters $(\alpha, 1, P_0)$. Then,
+By Theorem 19 in \cite{catalano2026merging}, for a generalized Gamma CRM $\tilde{\mu}^1$ with parameters $(\alpha, \sigma, P_0)$ and a Gamma CRM $\tilde{\mu}^2$ with parameters $(\alpha, 1, P_0)$, and for any sequence of observations $(x_n)_{n \geq 1}$ in $\X$, it holds that
 \[
 \wad\big(\law(\tilde{\nu}_S^{1,*}), \law(\tilde{\nu}_S^{2,*})\big) \asymp \max\left\{n^{-\frac{1}{1+\sigma}}, \frac{k_n}{n}\right\},
 \]
