@@ -7,14 +7,14 @@ d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r(n, m, \theta),
 \]
 we are guaranteed that the probability of a Type I error is at most $\theta$. We now discuss how to obtain the threshold function $r(n, m, \theta)$ and its relationship to the Rademacher complexity of the function class defining the distance.
 
-Since both the WoW and the HIPM distances are IPMs (see Section \ref{section:bnp_toolbox_distances}) on the infinite-dimensional space $\probprobx$, our first strategy is to adapt the techniques developed in \cite{sriperumbudur2012empirical} for standard IPMs. These build thresholds through concentration inequalities for empirical processes, by analyzing the Rademacher complexity of the function class generating the IPM. The main difference is that we must account for a hierarchical empirical estimator, rather than a standard one. Moreover, instead of Talagrand's inequality as in \citet[Proposition B.1]{sriperumbudur2012empirical},  we use McDiarmid's inequality, which yields the bound~\eqref{eq:IPM_deviation_one_measure} already established above. The reason is that Talagrand's inequality yields sharper variance-adaptive concentration rates for the empirical process around its mean, but these better rates do not transfer to the threshold itself, which is dominated by the uniform Rademacher complexity of the function class. 
-\begin{theorem}[Threshold for IPM]\label{theorem::radem_threshold_ipm_hierarchical_measures}
+Since both the WoW and the HIPM distances are IPMs (see Section~\ref{section:bnp_toolbox_distances}) on the infinite-dimensional space $\probprobx$, our first strategy is to adapt the techniques developed in \cite{sriperumbudur2012empirical} for standard IPMs. These build thresholds through concentration inequalities for empirical processes, by analyzing the Rademacher complexity of the function class generating the IPM. The main difference is that we must account for a hierarchical empirical estimator, rather than a standard one. Moreover, instead of Talagrand's inequality as in \citet[Proposition B.1]{sriperumbudur2012empirical}, we use McDiarmid's inequality, which yields the bound~\eqref{eq:IPM_deviation_one_measure} already established above. The reason is that Talagrand's inequality yields sharper variance-adaptive concentration rates for the empirical process around its mean, but these better rates do not transfer to the threshold itself, which is dominated by the uniform Rademacher complexity of the function class.
+\begin{theorem}[Threshold for IPM]\label{theorem:radem_threshold_ipm_hierarchical_measures}
 Let $\G$ and $\mathcal{H}$ be classes of functions generating IPMs on $\probx$ and $\probprobx$, uniformly bounded by $M_\G$ and $M_\mathcal{H}$, respectively. Assume also that functions in $\mathcal{H}$ are 1-Lipschitz with respect to $\mathcal{I}_\G$. Define for any $n, m \geq 1$ and $\theta \in (0,1)$:
 \[
 r(n, m, \theta) = 4 \mathcal{R}_n(\mathcal{H}) + 4 \mathcal{R}_m(\G) + 2 M_\G \sqrt{\frac{\log \frac{2}{\theta}}{2n}} +
 2 M_\mathcal{H} \sqrt{\frac{2 \log \frac{4}{\theta}}{n}}.
 \]
-Then for any $\theta \in (0,1)$,
+Then for any $\theta \in (0,1)$ $n,m\geq 1$,
 \[
 \mathbb{P}\left( \left| \mathcal{I}_{\mathcal{H}}(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) - \mathcal{I}_{\mathcal{H}}(Q^1,Q^2) \right| > r(n,m,\theta)\right) \leq \theta.
 \]
@@ -52,7 +52,6 @@ For $k =1,2$, we have
 & = \frac{1}{n}\sum_{i = 1}^n \mathcal{I}_{\G}(\widehat{P}^k_{i,m},\widetilde{P}^k_i).
 \end{align*}
 We use Hoeffding's inequality to bound $\frac{1}{n}\sum_{i = 1}^n \mathcal{I}_{\G}(\widehat{P}^k_{i,m},\widetilde{P}^k_i)$. The reason for preferring Hoeffding's inequality over a union bound is that in the latter case, one would need to impose stronger conditions on the relative growth rates of $n$ and $m$ to guarantee that the threshold converges to $0$ as $n,m \to \infty$.
-
 Note that the random variables $\frac{1}{n}\mathcal{I}_{\G}(\widehat{P}^k_{1,m},\widetilde{P}^k_1), \dots, \frac{1}{n}\mathcal{I}_{\G}(\widehat{P}^k_{n,m},\widetilde{P}^k_n)$ are independent and take values in $\left[ 0, \frac{M_\G}{n}\right]$. Applying Hoeffding's inequality, we find that for all $t > 0$,
 \[
 \mathbb{P}\left(\frac{1}{n}\sum_{i = 1}^n \mathcal{I}_{\G}(\widehat{P}^k_{i,m},\widetilde{P}^k_i) > \E \frac{1}{n}\sum_{i = 1}^n \mathcal{I}_{\G}(\widehat{P}^k_{i,m},\widetilde{P}^k_i) + t \right) \leq \exp\!\left(-\frac{2nt^2}{M_\G^2}\right).
@@ -99,30 +98,30 @@ Since $\widehat{Q}^k_n$ are empirical measures of i.i.d.\ random variables drawn
 \end{proof}
 
 
-Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures} can be specialized to both the WoW and HIPM distances. Indeed, for the WoW distance we set $\mathcal{H} = \mathrm{Lip}_1^*\!\left(\probx, \R\right)$ and $\G = \lipXstar$. On the other hand, for the HIPM we set $\mathcal{H} = \dstar$ (see Definition~\ref{definition:dstar}), with $\G = \lipXstar$. In both cases, in addition to the Rademacher complexity terms, the threshold contains a term arising from McDiarmid's inequality that vanishes at the parametric rate $n^{-1/2}$ and is typically dominated by the Rademacher complexity terms. The two distances differ in the first term $\mathcal{R}_n(\mathcal{H})$, which highlights the benefit of using a smaller function class $\mathcal{H}$, such as the one used in the HIPM. 
+Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures} can be specialized to both the WoW and HIPM distances. Indeed, for the WoW distance we set $\mathcal{H} = \mathrm{Lip}_1^*\!\left(\probx, \R\right)$ and $\G = \lipXstar$. On the other hand, for the HIPM we set $\mathcal{H} = \dstar$ (see~\eqref{definition:dstar} in Appendix~\ref{appendix:reductionD}), with $\G = \lipXstar$. In both cases, in addition to the Rademacher complexity terms, the threshold contains a term arising from McDiarmid's inequality that vanishes at the parametric rate $n^{-1/2}$ and is typically dominated by the Rademacher complexity terms. The two distances differ in the first term $\mathcal{R}_n(\mathcal{H})$, which highlights the benefit of using a smaller function class $\mathcal{H}$, such as the one used in the HIPM. 
 
 \begin{remark}
-Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures} admits an alternative proof in the cases of the HIPM and WoW. Indeed, consider the class of functions $\mathcal{H}\subset \mathrm{Lip}_1^*\!\left(\probx,\R\right)$ and decompose the gap
+Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures} admits an alternative proof in the cases of the HIPM and WoW. Indeed, consider the class of functions $\mathcal{H}\subset \mathrm{Lip}_1^*\!\left(\probx,\R\right)$ and decompose the gap
 \begin{align*}
 \left| \mathcal{I}_{\mathcal{H}}\left(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m} \right) -
 \mathcal{I}_{\mathcal{H}}\left(Q^1, Q^2 \right)\right| & \leq
 \left| \mathcal{I}_{\mathcal{H}}\left(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m} \right) -
-\mathcal{I}_{\mathcal{H}}\left(\T_m[Q]^1, \T_m[Q]^2 \right)\right|\\
-& + \left| \mathcal{I}_{\mathcal{H}}\left(\T_m[Q]^1, \T_m[Q]^2 \right) -
+\mathcal{I}_{\mathcal{H}}\left(\T_m[Q^1], \T_m[Q^2] \right)\right|\\
+& + \left| \mathcal{I}_{\mathcal{H}}\left(\T_m[Q^1], \T_m[Q^2] \right) -
 \mathcal{I}_{\mathcal{H}}\left(Q^1, Q^2 \right) \right|.
 \end{align*}
-For the first term, we apply Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures}. For the second term, note that for $k = 1,2$,
+For the first term, we apply Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures}. For the second term, note that for $k = 1,2$,
 \[
-\mathcal{I}_{\mathcal{H}}\left(\T_m[Q]^k, Q^k \right) \leq \WW\left(\T_m[Q]^k, Q^k\right).
+\mathcal{I}_{\mathcal{H}}\left(\T_m[Q^k], Q^k \right) \leq \WW\left(\T_m[Q^k], Q^k\right).
 \]
-This is bounded uniformly in $Q$ by $2\,\mathcal{R}_m(\lipXstar)$. Indeed, let $\widetilde{P} \sim Q^k$ and $X_1, \ldots, X_m \overset{\iid}{\sim} \widetilde{P}$. Using the coupling between $\widetilde{P}$ and $m^{-1}\sum_{j=1}^m \delta_{X_j}$, we get
+This is bounded uniformly in $Q$ by $2\,\mathcal{R}_m(\lipXstar)$. Indeed, let $\widetilde{P} \sim Q^k$ and $X_1, \ldots, X_m \overset{\iid}{\sim} \widetilde{P}$. Using the coupling between $\widetilde{P}$ and $m^{-1}\sum_{i=1}^m \delta_{X_i}$, we get
 \begin{equation*}
-\WW(\T_m[Q]^k,Q^k) \leq \E \W \left(\widetilde{P}, \frac{1}{m} \sum_{i=1}^m \delta_{X_i} \right).
+\WW(\T_m[Q^k],Q^k) \leq \E \W \left(\widetilde{P}, \frac{1}{m} \sum_{i=1}^m \delta_{X_i} \right).
 \end{equation*}
 Then, the result follows from~\eqref{equation:wow_is_ipm} and bound~\eqref{eq:IPM_R}, which is uniform in $\widetilde{P}$.
 \end{remark}
 
-For the particular case when $\X$ is a compact subset of $\R^d$, the threshold takes the following form. For the WoW, using the bound~\eqref{equation:rademacher_wow} on the Rademacher complexity and the standard bound on the Rademacher complexity of centered 1-Lipschitz functions from $\X$ to $\R$, we get that for fixed $\theta \in (0,1)$,
+For the particular case when $\X$ is a compact subset of $\R^d$, the threshold takes the following form. For the WoW, using the bound~\eqref{equation:rademacher_wow} on the Rademacher complexity and the standard bound on the Rademacher complexity of centered 1-Lipschitz functions from $\X$ to $\R$, we get that there exists $N \geq 1$ such that for all $n \geq N$ and fixed $\theta \in (0,1)$,
 \begin{equation}\label{equation:wow_threshold}
 r_d(n, m, \theta) = 
 \begin{cases}
@@ -142,10 +141,10 @@ r_d(n, m, \theta) =
 \end{equation}
 
 \begin{remark}
-If $\X = [a,b]$, the exact form of the threshold function in Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures} can be derived, since the bound for the Rademacher complexity is known in closed form. In this case, we obtain a finite-sample guarantee for the Type I error. Note that for the WoW distance, even if the exact threshold were known, the finite-sample guarantee would hold only for $n \geq N$ for some integer $N \geq 1$.
+If $\X = [a,b]$, the exact form of the threshold function in Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures} can be derived, since the bound for the Rademacher complexity is known in closed form. In this case, we obtain a finite-sample guarantee for the Type I error. Note that for the WoW distance, even if the exact threshold were known, the finite-sample guarantee would hold only for $n \geq N$ for some integer $N \geq 1$.
 \end{remark}
 
-A consequence of Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures} is a testing scheme that, given a significance level $\theta$, rejects the null hypothesis whenever the observed distance between the hierarchical estimators exceeds the threshold. In addition to controlling the Type I error, the theorems below also ensure consistency. Intuitively, under $H_1$, the observed distance $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$, whether $d$ is the WoW or the HIPM distance, will be close to $d(Q^1, Q^2)$. Hence, as long as the threshold $r(n, m, \theta)$ converges to $0$ as $n, m \to \infty$, we will eventually have $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r(n, m, \theta)$. The theorems below formalize this intuition. Note that in the limits below, $n$ and $m$ tend to infinity independently.
+A consequence of Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures} is a testing scheme that, given a significance level $\theta$, rejects the null hypothesis whenever the observed distance between the hierarchical estimators exceeds the threshold. In addition to controlling the Type I error, the theorems below also ensure consistency. Intuitively, under $H_1$, the observed distance $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$, whether $d$ is the WoW or the HIPM distance, will be close to $d(Q^1, Q^2)$. Hence, as long as the threshold $r(n, m, \theta)$ converges to $0$ as $n, m \to \infty$, we will eventually have $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r(n, m, \theta)$. The theorems below formalize this intuition. Note that in the limits below, $n$ and $m$ tend to infinity independently.
 
 \begin{theorem}[Consistency for HIPM]
 \label{theorem:radem_consistency_hipm}
@@ -158,29 +157,32 @@ Let $\X$ be a compact subset of $\R^d$, and let $Q^1, Q^2 \in \probprobx$. Let $
 \end{itemize}
 \end{theorem}
 \begin{proof}
-The first point follows directly from Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures}, because \(\dlip(Q^1, Q^2) = 0\) under the assumption that \(Q^1 = Q^2.\)
+The first point follows directly from Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures}, because \(\dlip(Q^1, Q^2) = 0\) under the assumption that \(Q^1 = Q^2.\)
 
-For the second point, fix \(\delta > 0\) and choose \(\theta\) such that \(1 - \theta > \delta.\) Then, by Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures}, for all \(n \geq 1\) and \(m \geq 1\),
+For the second point, fix \(\delta > 0\) and choose \(\theta' \in (0, \theta)\) such that \(1 - \theta' > \delta\). Note that since the threshold function from Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures} is a decreasing function of \(\theta\), we have \(r_d(n,m,\theta') \geq r_d(n,m,\theta)\) for all \(n, m \geq 1\). By Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures}, for all \(n \geq 1\) and \(m \geq 1\),
 \begin{align*}
-\mathbb{P}\left( \left|\dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) - \dlip(Q^1, Q^2) \right| < r_d(n, m, \theta) \right) \geq 1 - \theta > \delta.
+\mathbb{P}\left( \left|\dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) - \dlip(Q^1, Q^2) \right| < r_d(n, m, \theta') \right) \geq 1 - \theta' > \delta.
 \end{align*}
 We also have that 
 \begin{align*}
-\mathbb{P}\Big(\big|\dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) & - \dlip(Q^1, Q^2) \big| < r_d(n, m, \theta) \Big) \\
-&\leq \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \dlip(Q^1, Q^2) - r_d(n, m, \theta)\right).
+\mathbb{P}\Big(\big|\dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) & - \dlip(Q^1, Q^2) \big| < r_d(n, m, \theta') \Big) \\
+&\leq \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \dlip(Q^1, Q^2) - r_d(n, m, \theta')\right).
 \end{align*}
-Note that for a fixed \(\theta\), the threshold function \(r_d(n, m, \theta) \to 0\) as \(n, m \to \infty\), which implies that there exist \(n_0, m_0\) such that for all \(n \geq n_0\) and \(m \geq m_0\),
+Note that for a fixed \(\theta'\), the threshold function \(r_d(n, m, \theta') \to 0\) as \(n, m \to \infty\), which implies that there exist \(n_0, m_0\) such that for all \(n \geq n_0\) and \(m \geq m_0\),
 \[
 r_d(n, m, \theta) < \frac{\dlip(Q^1, Q^2)}{2}. 
 \]
 This inequality implies that 
 \[
-\dlip(Q^1, Q^2) - r_d(n, m, \theta) > r_d(n, m, \theta).
+\dlip(Q^1, Q^2) - r_d(n, m, \theta') > r_d(n, m, \theta').
 \]
 Therefore, we have that for every \(n \geq n_0\) and \(m \geq m_0\), 
-\[
-\mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta) \right) \geq \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \dlip(Q^1, Q^2) - r_d(n, m, \theta) \right) > \delta.
-\]
+\begin{align*}
+\mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta) \right) & 
+\geq \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta') \right)\\
+& \geq \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \dlip(Q^1, Q^2) - r_d(n, m, \theta) \right) \\
+& > \delta.
+\end{align*}
 \end{proof}
 
 \begin{theorem}[Consistency for WoW]
@@ -194,35 +196,37 @@ Let $\X$ be a compact subset of $\R^d$, and let $Q^1, Q^2 \in \probprobx$. Let $
 \end{itemize}
 \end{theorem}
 \begin{proof}
-The first point follows directly from Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures}, because \(\WW(Q^1, Q^2) = 0\) under the assumption that \(Q^1 = Q^2.\)
+The first point follows directly from Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures}, because \(\WW(Q^1, Q^2) = 0\) under the assumption that \(Q^1 = Q^2.\)
 
-For the second point, fix \(\delta > 0\) and choose \(\theta\) such that \(1 - \theta > \delta.\) Then, by Theorem~\ref{theorem::radem_threshold_ipm_hierarchical_measures}, there exists \(N \geq 1\) such that for all \(n \geq N\) and \(m \geq 1\),
+For the second point, fix \(\delta > 0\) and choose \(\theta' \in (0, \theta)\) such that \(1 - \theta' > \delta\). Note that since the threshold function from Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures} is a decreasing function of \(\theta\), we have \(r_d(n,m,\theta') \geq r_d(n,m,\theta)\) for all \(n, m \geq 1\). By Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures}, there exists \(N' \geq 1\) such that for all \(n \geq N'\) and \(m \geq 1\),
 \begin{align*}
-\mathbb{P}\left( \left|\WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) - \WW(Q^1, Q^2) \right| < r_d(n, m, \theta) \right) \geq 1 - \theta > \delta.
+\mathbb{P}\left( \left|\WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) - \WW(Q^1, Q^2) \right| < r_d(n, m, \theta') \right) \geq 1 - \theta' > \delta.
 \end{align*}
-We also have that 
+We also have that
 \begin{align*}
-\mathbb{P}\Big(\big|\WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) &- \WW(Q^1, Q^2) \big| < r_d(n, m, \theta) \Big) \\
-& \leq \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \WW(Q^1, Q^2) - r_d(n, m, \theta) \right).
+\mathbb{P}\Big(\big|\WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) &- \WW(Q^1, Q^2) \big| < r_d(n, m, \theta') \Big) \\
+& \leq \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \WW(Q^1, Q^2) - r_d(n, m, \theta') \right).
 \end{align*}
-Note that for a fixed \(\theta\), the threshold function \(r_d(n, m, \theta) \to 0\) as \(n, m \to \infty\), which implies that there exist \(n_0, m_0\) such that for all \(n \geq n_0\) and \(m \geq m_0\),
+Note that for a fixed \(\theta'\), the threshold function \(r_d(n, m, \theta') \to 0\) as \(n, m \to \infty\), which implies that there exist \(n_0, m_0 \geq 1\) such that for all \(n \geq n_0\) and \(m \geq m_0\),
 \[
-r_d(n, m, \theta) < \frac{\WW(Q^1, Q^2)}{2}. 
+r_d(n, m, \theta) < \frac{\WW(Q^1, Q^2)}{2}.
 \]
-This inequality implies that 
+This inequality implies that
 \[
-\WW(Q^1, Q^2) - r_d(n, m, \theta) > r_d(n, m, \theta).
+\WW(Q^1, Q^2) - r_d(n, m, \theta') > r_d(n, m, \theta').
 \]
-Therefore, we have that for every \(n \geq \max\{n_0, N\}\) and \(m \geq m_0\), 
-\[
-\mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta) \right) \geq \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \WW(Q^1, Q^2) - r_d(n, m, \theta) \right) > \delta.
-\]
+Therefore, for every \(n \geq \max\{n_0, N'\}\) and \(m \geq m_0\),
+\begin{align*}
+\mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta) \right) &\geq \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta') \right)\\
+&\geq \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \WW(Q^1, Q^2) - r_d(n, m, \theta) \right) \\
+&> \delta.
+\end{align*}
 \end{proof}
 While theoretically appealing, Theorems~\ref{theorem:radem_consistency_hipm} and~\ref{theorem:radem_consistency_wow} have practical limitations. Achieving high power requires the threshold to decay to zero at a sufficiently fast rate. However, the logarithmic terms present in the threshold for the WoW distance result in a threshold function that converges to zero at a suboptimal rate. Furthermore, although using the HIPM provides a parametric rate, the magnitude of the constant in the threshold often makes the testing scheme impractical for finite samples.
 
 These limitations are demonstrated by our numerical simulations. We restrict our simulations to the HIPM, as the threshold associated with the WoW distance is even more conservative than that of the HIPM. 
 
-Suppose that we have two different laws of RPMs, $Q^1, Q^2 \in \probprobx$. For a fixed significance level $\theta \in (0,1)$, to achieve low Type II error the theoretical threshold must be smaller than the observed distance. To demonstrate that the observed distance is far smaller than the theoretical threshold, we compare it against the empirical threshold, defined as the $(1-\theta)$-quantile of the random variable $\dlip(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2)$. Figure~\ref{fig:radem_threshold_plots} shows how the theoretical and empirical thresholds differ for a fixed $\theta$ as $n$ and $m$ increase.
+Suppose that we have two different laws of random probability measures, $Q^1, Q^2 \in \probprobx$. For a fixed significance level $\theta \in (0,1)$, to achieve low Type II error the theoretical threshold must be smaller than the observed distance. To demonstrate that the observed distance is far smaller than the theoretical threshold, we compare it against the empirical threshold, defined as the $(1-\theta)$-quantile of the random variable $\dlip(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2)$. Figure~\ref{fig:radem_threshold_plots} shows how the theoretical and empirical thresholds differ for a fixed $\theta$ as $n$ and $m$ increase.
 
 Fix $\theta = 0.05$ and consider two Dirichlet processes $Q^1 = \mathrm{DP}(1.0, P_0)$ and $Q^2 = \mathrm{DP}(1.5, P_1)$, where $P_0 = \mathrm{Uniform}[0,1]$ and $P_1 = \mathrm{Beta}(2,2)$.
 
