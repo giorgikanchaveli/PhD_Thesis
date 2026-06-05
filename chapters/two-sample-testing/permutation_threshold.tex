@@ -15,7 +15,7 @@ To implement the permutation test, we first form the pooled collection of random
 \[
 \left\{ \widehat{P}_{1,m},\cdots, \widehat{P}_{2n,m}  \right\} :=\left\{ \widehat{P}^1_{1,m}, \dots, \widehat{P}^1_{n,m}, \widehat{P}^2_{1,m}, \dots, \widehat{P}^2_{n,m} \right\} .
 \]
-A random permutation of this collection is induced by a vector $R = (R_1, \dots, R_{2n})$ sampled uniformly from the set of all permutations of $\{1, \dots, 2n\}$. For notational brevity, we omit the explicit dependence of $R$ on $n$ and $m$.
+A random permutation of this collection is determined by a random vector $R = (R_1, \dots, R_{2n})$ drawn uniformly from all permutations of $\{1, \dots, 2n\}$. For notational brevity, we omit the explicit dependence of $R$ on $n$.
 
 We then define the permuted hierarchical estimators as
 \begin{equation}\label{definition:permuted_hierarchical_estimators}
@@ -23,9 +23,9 @@ We then define the permuted hierarchical estimators as
 \end{equation}
 Finally, we compute the distance $d(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}).$
 
-Repeating this process, randomly permuting the pooled sample and recomputing the distance, yields the approximate samples of the distance between the hierarchical estimators of $Q^1$ and $Q^2$. Then, for a given significance level $\theta \in (0,1),$ we set the testing threshold equal to the empirical $(1-\theta)$-quantile of these values.
+Repeating this process yields approximate samples from the null distribution of $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$. Then, for a given significance level $\theta \in (0,1),$ we set the testing threshold equal to the empirical $(1-\theta)$-quantile of these values.
 
-In practice, since we work with the hierarchical samples $\mathbf{X}_{n,m}, \mathbf{Y}_{n,m}$, permutation is implemented by shuffling rows across the two matrices. The resulting procedure is summarized in Algorithm~\ref{algorithm::permutation_approach}.
+In practice, since we work with the hierarchical samples $\mathbf{X}_{n,m}$ and $\mathbf{Y}_{n,m}$, permutation is implemented by shuffling rows across the two matrices. The resulting procedure is summarized in Algorithm~\ref{algorithm::permutation_approach}.
 
 \begin{center}
 \begin{minipage}{0.85\textwidth} % Adjust 0.85 to make it narrower or wider
@@ -36,21 +36,21 @@ In practice, since we work with the hierarchical samples $\mathbf{X}_{n,m}, \mat
 \Require Hierarchical samples $\mathbf{X}_{n,m},\mathbf{Y}_{n,m}$; significance level $\theta \in (0,1)$; number of permutations $n_\text{perm}$
 \Ensure Decision: $1$ = reject $H_0$, $0$ = do not reject $H_0$
 
-\State $T_{\mathrm{obs}} \gets d(\mathbf{X}_{n,m},\mathbf{Y}_{n,m})$ \Comment{Observed test statistic}
+\State $d_{\mathrm{obs}} \gets d(\mathbf{X}_{n,m},\mathbf{Y}_{n,m})$ \Comment{Observed test statistic}
 \State $\mathcal{Z} \gets \text{vcat}(\mathbf{X}_{n,m},\mathbf{Y}_{n,m})$ \Comment{Pool the $2n$ rows}
 \For{$i=1,\ldots,n_\text{perm}$}
     \State $R \gets \text{permute}(\{1,\ldots,2n\})$
-    \State $T_i \gets d(\mathcal{Z}_{R_{1:n}}, \mathcal{Z}_{R_{n+1:2n}})$ 
+    \State $d_i \gets d(\mathcal{Z}_{R_{1:n}}, \mathcal{Z}_{R_{n+1:2n}})$
 \EndFor
 
-\State $r_\theta \gets \widehat{q}_{1-\theta}(T_1,\ldots,T_{n_\text{perm}})$ \Comment{Empirical $(1-\theta)$-quantile}
-\State \Return $\mathbf{1}\{T_{\mathrm{obs}} > r_\theta\}$
+\State $r_\theta \gets \widehat{q}_{1-\theta}(d_1,\ldots,d_{n_\text{perm}})$ \Comment{Empirical $(1-\theta)$-quantile}
+\State \Return $\mathbf{1}\{d_{\mathrm{obs}} > r_\theta\}$
 \end{algorithmic}
 \end{algorithm}
 \end{minipage}
 \end{center}
 
-The theoretical properties of the proposed procedure are studied by analyzing the asymptotic distributions of the observed test statistic and the corresponding threshold under the null and alternative hypotheses. To this end, we appropriately rescale the observed distance and define the test statistic
+We study the theoretical properties of the proposed procedure for the distance $\dlip$ by analyzing the asymptotic distributions of the observed test statistic and the corresponding threshold under the null and alternative hypotheses. To this end, we appropriately rescale the observed $\dlip$ distance and define the test statistic
 \[
 T_{n,m} = \sqrt{\frac{n}{2}}\dlip\left( \widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m} \right).
 \]
@@ -60,12 +60,12 @@ r(n,m,\theta) = \inf \left\{ t \in \R : \mathbb{P}\left(\widetilde{T}_{n,m} > t 
 \end{equation}
 where 
 \[
-\widetilde{T}_{n,m} = \sqrt{\frac{n}{2}} \, d(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}).
+\widetilde{T}_{n,m} = \sqrt{\frac{n}{2}} \, \dlip(\widetilde{Q}^1_{n,m}, \widetilde{Q}^2_{n,m}).
 \]
 Note that this scaling is introduced solely for theoretical analysis and is not required for the practical implementation of the algorithm.
 
-For the distance $\dlip$ in dimension $1$, we are able to establish theoretical guarantees for the permutation test described above. The reason is that the class of measurable functions $\dstar$ used to express the distance as an IPM in this case is a Donsker class. This implies that we can control the asymptotic behavior of both the test statistic and the permutation threshold towards norms of Brownian bridges.
-The permutation test can be implemented for both metrics and in any dimension, but the asymptotic guarantees are only available for the HIPM metric in dimension $1$. 
+For the distance $\dlip$ in dimension $1$, we are able to establish theoretical guarantees for the permutation test described above. The reason is that the class of measurable functions $\dstar$ used to express the distance as an IPM in this case is a Donsker class. This implies that the asymptotic distributions of both the test statistic and the permutation threshold can be expressed in terms of norms of Brownian bridges.
+The permutation test can be implemented for both metrics, but the asymptotic guarantees are only available for the HIPM metric in dimension $1$. The reason is that the function class generating WoW as an IPM, namely $\mathrm{Lip}_1(\probx, \R, \W)$, is not a Donsker class in general, so the CLT-based argument used for $\dlip$ does not extend to that setting. We emphasize, however, that this does not imply that the consistency result fails for WoW; it only means that the current proof technique does not apply.
 \begin{theorem}[Consistency of permutation approach]
 \label{theorem:perm_consistency_dlip}
 Given $\X = [a,b]$ and $Q^1, Q^2 \in \probprobx$. Let $\theta$ denote the significance level and $r(n,m, \theta)$ be the threshold from the permutation approach. Then
