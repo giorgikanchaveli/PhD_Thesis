@@ -341,23 +341,20 @@ Recall that
 \[
 T_{n_q, m_q}
 = \sup_{h \in \dstar} \left|
-\frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h)\right)
-- \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h)\right)
+\frac{1}{\sqrt{2}}\sqrt{n_q}\left(\widehat{Q}^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h)\right)
+- \frac{1}{\sqrt{2}}\sqrt{n_q}\left(\widehat{Q}^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h)\right)
 \right|.
 \]
-Let $Q = Q^1$. We decompose the proof into four steps: we first show
-\begin{enumerate}[]
+Let $Q = Q^1$. We decompose the proof into four steps:
+\begin{enumerate}
   \item Empirical processes converge uniformly:
     \[
-    \lim_{n \to \infty}\sqrt{n}\left(Q_{n,m}(h) - \T_{m}[Q](h)\right) = G_{\T_{m}[Q]}\quad \text{uniformly over } m\geq 1.
+    \lim_{n \to \infty}\sqrt{n}\left(\widehat{Q}_{n,m}(h) - \T_{m}[Q](h)\right) = G_{\T_{m}[Q]}\quad \text{uniformly over } m\geq 1.
     \]
   \item $\lim_{m \to \infty} G_{\T_{m}[Q]} = G_{Q}$
-  \item $\lim_{q\to\infty} \sqrt{n_q}\left( Q_{n_q,m_q}(h) - \T_{m_q}[Q](h)\right) = G_{Q}$
+  \item $\lim_{q\to\infty} \sqrt{n_q}\left( \widehat{Q}_{n_q,m_q}(h) - \T_{m_q}[Q](h)\right) = G_{Q}$
+  \item $\lim_{q \to \infty} T_{n_q, m_q} = \left\| G_{Q^1} \right\|_{\dstar}$
 \end{enumerate}
-and finally we show 
-\begin{itemize}
-    \item [4.] $\lim_{q \to \infty} T_{n_q, m_q} = \left\| G_{Q^1} \right\|_{\dstar}$
-\end{itemize}
 \textbf{Step 1.}
 
 Let $G_{n,m} = \sqrt{n}(\widehat{Q}_{n,m} - \T_m[Q])$ for $n, m \geq 1$. To show that the function class $\dstar$ is uniformly Donsker over the laws $\T_m[Q]$ for all $m = 1,2,\dots$, we use Theorem~\ref{theorem::uniform_donsker}.
@@ -396,7 +393,7 @@ where $\{G_{\T_m[Q]}\}_{m\ge1}$ is a family of tight Gaussian processes and the 
 
 \textbf{Step 2.}
 
-To show the convergence of Gaussian processes, we apply Theorem~\ref{theorem::weak_conv_stochproc}. We equip $\dstar$ with the supremum norm $\|\cdot\|_\infty$. Since the covering number of $\dstar$ is finite (see Lemma~\ref{lemma::covnumbdstar}), $(\dstar,\|\cdot\|_\infty)$ is totally bounded. It therefore suffices to verify convergence of finite-dimensional distributions and asymptotic equicontinuity.
+To show the convergence of Gaussian processes, we apply Theorem~\ref{theorem::weak_conv_stochproc}. We equip $\dstar$ with the supremum norm $\|\cdot\|_\infty$. By Lemma~\ref{lemma::covnumbdstar}, $(\dstar,\|\cdot\|_\infty)$ is totally bounded. It therefore suffices to verify convergence of finite-dimensional distributions and asymptotic equicontinuity.
 
 Fix $h_1,\dots,h_N \in \dstar$ for some integer $N\geq 1$. For each $m$,
 \[
@@ -473,8 +470,8 @@ which converges to $0$ by Steps~1 and~2 as $q \to \infty$.
 Recall that
 \[
 T_{n_q,m_q}
-= \sup_{h \in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)
-- \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right)\right|.
+= \sup_{h \in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q}\left(\widehat{Q}^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)
+- \frac{1}{\sqrt{2}}\sqrt{n_q} \left(\widehat{Q}^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right)\right|.
 \]
 The term inside the absolute value converges weakly in the space $\ellstar$ to the difference of Gaussian processes
 \[
@@ -491,10 +488,10 @@ T_{n_q,m_q} \overset{w}{\to} \|G_{Q^1}\|_{\dstar}
 We now address the case $Q^1 \neq Q^2$. We decompose the test statistic as:
 \begin{align*}
 T_{n_q,m_q}
-&= \sup_{h \in \dstar}\left| \sqrt{\frac{n_q}{2}} \left(Q^1_{n_q,m_q}(h) - Q^2_{n_q,m_q}(h) \right)\right| \\
+&= \sup_{h \in \dstar}\left| \sqrt{\frac{n_q}{2}} \left(\widehat{Q}^1_{n_q,m_q}(h) - \widehat{Q}^2_{n_q,m_q}(h) \right)\right| \\
 &= \sup_{h \in \dstar} \Bigg|
-\frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)
-- \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right) \\
+\frac{1}{\sqrt{2}}\sqrt{n_q}\left(\widehat{Q}^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)
+- \frac{1}{\sqrt{2}}\sqrt{n_q} \left(\widehat{Q}^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right) \\
 & \qquad\qquad
 + \frac{1}{\sqrt{2}}\sqrt{n_q} \left(\T_{m_q}[Q^1](h) - \T_{m_q}[Q^2](h) \right)
 \Bigg|.
@@ -502,8 +499,8 @@ T_{n_q,m_q}
 
 Let $T_{n_q,m_q} = \|a - b + c\|_{\dstar}$, where for $h \in \dstar$,
 \begin{align*}
-a(h) &= \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right),\\
-b(h) &= \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right),\\
+a(h) &= \frac{1}{\sqrt{2}}\sqrt{n_q}\left(\widehat{Q}^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right),\\
+b(h) &= \frac{1}{\sqrt{2}}\sqrt{n_q}\left(\widehat{Q}^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right),\\
 c(h) &= \frac{1}{\sqrt{2}}\sqrt{n_q} \left(\T_{m_q}[Q^1](h) - \T_{m_q}[Q^2](h) \right).
 \end{align*}
 Since
@@ -523,23 +520,23 @@ Thus,
 \begin{align*}
 T_{n_q,m_q}
 &\geq \sup_{h \in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q} \left(\T_{m_q}[Q^1](h) - \T_{m_q}[Q^2](h) \right)\right| \\
-&\quad - \sup_{h\in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)\right| \\
-&\quad - \sup_{h\in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q} \left(Q^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right)\right|.
+&\quad - \sup_{h\in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q}\left(\widehat{Q}^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)\right| \\
+&\quad - \sup_{h\in \dstar} \left| \frac{1}{\sqrt{2}}\sqrt{n_q} \left(\widehat{Q}^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right)\right|.
 \end{align*}
 
 In the first part of the proof, we showed that
 \begin{align*}
-\sup_{h \in \dstar}\left|\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)\right|
+\sup_{h \in \dstar}\left|\sqrt{n_q}\left(\widehat{Q}^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)\right|
 &\overset{w}{\to} \| G_{Q^1}\|_{\dstar}, \\
-\sup_{h \in \dstar}\left|\sqrt{n_q}\left(Q^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right)\right|
+\sup_{h \in \dstar}\left|\sqrt{n_q}\left(\widehat{Q}^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right)\right|
 &\overset{w}{\to} \| G_{Q^2}\|_{\dstar},
 \end{align*}
 where $G_{Q^1}$ and $G_{Q^2}$ are tight Gaussian processes. By Lemma~\ref{lemma::tightness_under_continuity}, the random variables $\| G_{Q^1} \|_{\dstar}$ and $\| G_{Q^2} \|_{\dstar}$ are almost surely bounded.
 
 For brevity, define
 \begin{align*}
-A_q &= \sup_{h\in \dstar} \left|\sqrt{n_q}\left(Q^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)\right|\\
-B_q &= \sup_{h\in \dstar} \left|\sqrt{n_q}\left(Q^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right)\right|\\
+A_q &= \sup_{h\in \dstar} \left|\sqrt{n_q}\left(\widehat{Q}^1_{n_q,m_q}(h) - \T_{m_q}[Q^1](h) \right)\right|\\
+B_q &= \sup_{h\in \dstar} \left|\sqrt{n_q}\left(\widehat{Q}^2_{n_q,m_q}(h) - \T_{m_q}[Q^2](h) \right)\right|\\
 C_q &= \sup_{h\in \dstar} \left| \sqrt{n_q} \left(\T_{m_q}[Q^1](h) - \T_{m_q}[Q^2](h) \right)\right|.
 \end{align*}
 Note that $C_q = \sqrt{n_q} \dlip\left(\T_{m_q}[Q^1],\T_{m_q}[Q^2]\right) \to \infty.$ Indeed, by the triangle inequality,
@@ -589,14 +586,14 @@ Now, let $S_1 = \left\{A_q < c' \right\}$ and $S_2 = \left\{B_q < c' \right\}$ a
 
 
 \end{proof}
-We now study the asymptotic behaviour of the threshold under the permutation approach. As in the case of the test statistic, to derive the asymptotic distribution of the threshold, we first analyse the asymptotic distribution of the underlying empirical process. Before stating the result, let us set up some notation.
+We now study the asymptotic behavior of the threshold under the permutation approach. As in the case of the test statistic, to derive the asymptotic distribution of the threshold, we first analyze the asymptotic distribution of the underlying empirical process. Before stating the result, let us set up some notation.
 
 Recall the definition of the permuted hierarchical estimators $\widetilde{Q}^1_{n,m}$ and $\widetilde{Q}^2_{n,m}$~\eqref{definition:permuted_hierarchical_estimators}. We also define
 \[
 H_{n,m} = \frac{1}{2}\widehat{Q}^1_{n,m} + \frac{1}{2}\widehat{Q}^2_{n,m}, \quad  
 H = \frac{1}{2}Q^1 + \frac{1}{2}Q^2.
 \]
-Note that given the hierarchical samples $\mathbf{X}_{n,m}, Y_{n,m}$,
+Note that given the hierarchical samples $\mathbf{X}_{n,m}, \mathbf{Y}_{n,m}$,
 \[
 \frac{1}{2}\widetilde{Q}^1_{n,m} + \frac{1}{2}\widetilde{Q}^2_{n,m} = \frac{1}{2}\widehat{Q}^1_{n,m} + \frac{1}{2}\widehat{Q}^2_{n,m}.
 \]
@@ -632,7 +629,7 @@ Z_q = \left(Z_{1, q},\dots,Z_{2n_q,q}\right)
 \]
 and by $R_q = \left(R_{1,q},\dots,R_{2n_q,q}\right)$, a random vector taking values uniformly over the set of all permutations of $\{1,\dots,2n_q\}$. We also denote
 \[
-Q^1_q = Q^1_{n_q,m_q}, \qquad Q^2_q = Q^2_{n_q,m_q},\qquad 
+\widehat{Q}^1_q = \widehat{Q}^1_{n_q,m_q}, \qquad \widehat{Q}^2_q = \widehat{Q}^2_{n_q,m_q},\qquad 
 \widetilde{Q}^1_q = \widetilde{Q}^1_{n_q,m_q},
 \qquad
 \widetilde{Q}^2_q = \widetilde{Q}^2_{n_q,m_q}.
@@ -1380,10 +1377,10 @@ Note that for $P^1, P^2 \in \mathcal{P}_\N$,
 \[
 \W_2^2 (P^1, P^2) = (\mu_1 - \mu_2)^2 + (\sigma_1 - \sigma_2)^2,
 \]
-where $\mu_1, \mu_2$ and $\sigma_1^2, \sigma_2^2$ are the means and variances of $P^1$ and $P^2$, respectively. In this setting, Fr\'{e}chet mean and variance for the law of a random probability measure $Q \in \mathcal{P}(\mathcal{P}_\N)$ can be computed from the following lemma:
+where $\mu_1, \mu_2$ and $\sigma_1^2, \sigma_2^2$ are the means and variances of $P^1$ and $P^2$, respectively. In this setting, the Fr\'{e}chet mean and variance for the law of a random probability measure $Q \in \mathcal{P}(\mathcal{P}_\N)$ can be computed from the following lemma:
 
 \begin{lemma}\label{lemma::frechet_mean_variance}
-Let $Q \in \mathcal{P}(\mathcal{P}_\N)$ where $\mathcal{P}_\N$ is as $\ref{equation:class_of_normals}$. Let $\widetilde{P} \sim Q$, and define the random mean and variance as
+Let $Q \in \mathcal{P}(\mathcal{P}_\N)$ where $\mathcal{P}_\N$ is as in~\eqref{equation:class_of_normals}. Let $\widetilde{P} \sim Q$, and define the random mean and variance as
 \[
 \widetilde{\mu} = \int_\R x \widetilde{P}(dx), \quad \widetilde{\sigma}^2 = \int_\R x^2 \widetilde{P}(dx) - \left(\int_\R x \widetilde{P}(dx)\right)^2.
 \]
@@ -1391,7 +1388,7 @@ Then,
 \[
 \mu_F = \N(\E[\widetilde{\mu}], (\E [\widetilde{\sigma}])^2), \quad  V_F = \var(\widetilde{\mu}) + \var(\widetilde{\sigma})
 \]
-are Fr\'{e}chet mean and variance respectively. 
+are the Fr\'{e}chet mean and variance, respectively.
 \end{lemma}
 \begin{proof}
 It is a well-known fact that if $P, P' \in \mathcal{P}_2(\R)$, then 
@@ -1445,7 +1442,7 @@ are the Fr\'{e}chet mean and variance, respectively. Furthermore, since $\W_1$ a
 \end{remark}
 
 \begin{remark}\label{remark:frechet_mean_variance_mixture_of_laws}
-Using Lemma \ref{lemma::frechet_mean_variance}, we can also compute the Fr\'{e}chet mean and variance for a mixture of the laws of RPMs. Specifically, let $Q^1$ and $Q^2$ be in $\mathcal{P}(\mathcal{P}_\N)$ with same Fr\'echet means and variances.Then, the Fr\'{e}chet mean and variance for the mixture $\lambda Q^1 + (1-\lambda)Q^2$ coincide with those of $Q^1$ and $Q^2$. This follows from the following fact: 
+Using Lemma~\ref{lemma::frechet_mean_variance}, we can also compute the Fr\'{e}chet mean and variance for a mixture of the laws of RPMs. Specifically, let $Q^1$ and $Q^2$ be in $\mathcal{P}(\mathcal{P}_\N)$ with the same Fr\'echet means and variances. Then, the Fr\'{e}chet mean and variance for the mixture $\lambda Q^1 + (1-\lambda)Q^2$ coincide with those of $Q^1$ and $Q^2$. This follows from the following fact: 
 
 Let $P^1,P^2 \in \mathcal{P}(\R)$ and $Y_1 \sim P^1$, $Y_2 \sim P^2$ be independent random variables. Then for every $\lambda \in (0,1)$ and $Z \sim \lambda P^1 + (1-\lambda) P^2$
 \begin{align*}
