@@ -221,7 +221,10 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
 
     From now on, we attach the subscript $n$ to $k$, $U$, and $C$, writing $k_n$, $U_n$, and $C_n$. Recall that $U_n$ has density function $f_U(u) = \frac{\sigma}{\Gamma\left(k_n+\frac{\theta}{\sigma}\right)} u^{\theta + k_n\sigma - 1}e^{-u^\sigma}\mathbf{1}_{(0,\infty)}(u)$. By the change of variables $y = u^\sigma$, the random variable $U_n^\sigma \sim \mathrm{Gamma}\left(k_n + \frac{\theta}{\sigma}, 1\right)$.
 
-    In view of Proposition~\ref{proposition:distance_pitmanyor_gamma}, we study the behaviour of each term in $\E_U\left(J_1^{U_n} + J_2^{U_n} + \mathcal{A}^{U_n}\right)$.
+    In view of Proposition~\ref{proposition:distance_pitmanyor_gamma}, we study the behaviour of each term in 
+    \[
+    \E_U\left(J_1^{U_n} + J_2^{U_n} + \mathcal{A}^{U_n}\right).
+    \]
     \begin{itemize}
         \item First term: $\E_{U_n} J_1^{U_n}$.
     \end{itemize}
@@ -528,9 +531,10 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \begin{align*}
         \wtr \Bigg( \frac{ \sigma U_n^\sigma}{C_n}P_0 & + \frac{n - k_n\sigma}{C_n}\sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, \\
         & \quad \frac{ \sigma U_n^\sigma}{C_n}P_0 + \frac{n - k_n\sigma}{C_n}\left( \frac{C_n}{n - k_n\sigma}\lambda_1'P_0 + \frac{C_n}{n-k_n\sigma}\frac{n}{\alpha + n}\sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*}\right) \Bigg) \\
-        & = \frac{n - k_n\sigma}{C_n}\wtr \left( \sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, 
-        \frac{C_n}{n - k_n\sigma}\lambda_1'P_0 + \frac{C_n}{n - k_n\sigma}\frac{n}{\alpha + n}\sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*}\right) \\
-        & \leq \lambda_1'\wtr\left( \sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, P_0\right) + \frac{n}{\alpha + n}\wtr \left(\sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n \sigma}\delta_{x_i^*}, \sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*} \right).
+        & = \frac{n - k_n\sigma}{C_n}\wtr \Bigg( \sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*},\\
+        & \quad \frac{C_n}{n - k_n\sigma}\lambda_1'P_0 + \frac{C_n}{n - k_n\sigma}\frac{n}{\alpha + n}\sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*}\Bigg) \\
+        & \leq \lambda_1'\wtr\left( \sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n\sigma}\delta_{x_i^*}, P_0\right)\\ 
+        &\quad + \frac{n}{\alpha + n}\wtr \left(\sum_{i = 1}^{k_n}\frac{n_i - \sigma}{n - k_n \sigma}\delta_{x_i^*}, \sum_{i = 1}^{k_n}\frac{n_i}{n}\delta_{x_i^*} \right).
     \end{align*}
     Since $\lambda_1' \leq \frac{\alpha}{\alpha + n}$, the first term is asymptotically bounded by $\frac{k_n}{n}$. As we have already bounded the second Wasserstein distance, we deduce that $\E \mathcal{A}^{U_n} \mathbf{1}_{A_n^c} \lesssim \frac{k_n}{n}.$
 \end{proof}

@@ -281,7 +281,8 @@ G_{n,m,Q}(h) = \sqrt{n} \left( \widehat{Q}_{n,m}(h) - \T_m[Q](h)\right), \quad h
 \]
 For brevity, we denote $G_{n,m,Q}$ by $G_{n,m}$. To show that it takes values in $\ellstar$, note that
 \begin{align*}
-\sup_{h \in \dstar} \left|G_{n,m}(h)\right| = \sqrt{n} \sup_{h \in \dstar} \left| \widehat{Q}_{n,m}(h) - \T_m[Q](h)\right| & \leq  \sqrt{n} \sup_{h \in \dstar} \widehat{Q}_{n,m}(|h|) + \sqrt{n} \sup_{h \in \dstar} \T_m[Q](|h|) \\
+\sup_{h \in \dstar} \left|G_{n,m}(h)\right|  & = \sqrt{n} \sup_{h \in \dstar} \left| \widehat{Q}_{n,m}(h) - \T_m[Q](h)\right| \\
+& \leq  \sqrt{n} \sup_{h \in \dstar} \widehat{Q}_{n,m}(|h|) + \sqrt{n} \sup_{h \in \dstar} \T_m[Q](|h|) \\
 & \leq 2K\sqrt{n},
 \end{align*}
 since $\dstar$ is uniformly bounded by $K.$
@@ -461,8 +462,8 @@ Consider the sequences $(n_q)_{q\geq 1}$ and $(m_q)_{q\geq 1}$ defined above. Th
 \bl\left( \law\left(G_{n_q,m_q}\right), \law\left(G_{Q} \right)\right)
 & \leq \bl\left( \law\left(G_{n_q,m_q}\right), \law\left(G_{\T_{m_q}[Q]} \right)\right) 
  + \bl\left( \law\left(G_{\T_{m_q}[Q]}\right), \law\left(G_{Q^{1}} \right)\right) \\
-& \leq \sup_{m \geq 1} \bl\left( \law\left(G_{n_q,m}\right), \law\left(G_{\T_m[Q]} \right)\right) 
-+ \bl\left( \law\left(G_{\T_{m_q}[Q]}\right), \law\left(G_{Q^{1}} \right)\right),
+& \leq \sup_{m \geq 1} \bl\left( \law\left(G_{n_q,m}\right), \law\left(G_{\T_m[Q]} \right)\right) \\
+& + \bl\left( \law\left(G_{\T_{m_q}[Q]}\right), \law\left(G_{Q^{1}} \right)\right),
 \end{align*}
 which converges to $0$ by Steps~1 and~2 as $q \to \infty$.
 
@@ -666,10 +667,10 @@ Define, for $q \geq 1$,
 S_q = \sum_{i = 1}^{2n_q} a_{R_{i,q},q} b_{i,q},
 \]
 where
-\[
-a_q = \left(h\left(Z_{1, q}\right),\dots,h\left(Z_{2n_q,q}\right)\right)
-= \left(h\left(\widehat{P}^1_{1,m_q}\right),\dots, h\left(\widehat{P}^1_{n_q,m_q}\right), h\left(\widehat{P}^2_{1,m_q}\right),\dots, h\left(\widehat{P}^2_{n_q,m_q}\right)\right),
-\]
+\begin{align*}
+a_q & = \left(h\left(Z_{1, q}\right),\dots,h\left(Z_{2n_q,q}\right)\right)\\
+& = \left(h\left(\widehat{P}^1_{1,m_q}\right),\dots, h\left(\widehat{P}^1_{n_q,m_q}\right), h\left(\widehat{P}^2_{1,m_q}\right),\dots, h\left(\widehat{P}^2_{n_q,m_q}\right)\right),
+\end{align*}
 and $b_q = \left(b_{1,q},\dots, b_{2n_q,q} \right)$, where
 \[
 b_{i,q} =
