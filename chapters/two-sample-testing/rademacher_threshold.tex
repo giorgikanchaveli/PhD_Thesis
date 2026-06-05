@@ -7,7 +7,7 @@ d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r(n, m, \theta),
 \]
 we are guaranteed that the probability of a Type I error is at most $\theta$. We now discuss how to obtain the threshold function $r(n, m, \theta)$ and its relationship to the Rademacher complexity of the function class defining the distance.
 
-Since both the WoW and the HIPM distances are IPMs (see Section~\ref{section:bnp_toolbox_distances}) on the infinite-dimensional space $\probprobx$, our first strategy is to adapt the techniques developed in \cite{sriperumbudur2012empirical} for standard IPMs. These build thresholds through concentration inequalities for empirical processes, by analyzing the Rademacher complexity of the function class generating the IPM. The main difference is that we must account for a hierarchical empirical estimator, rather than a standard one. Moreover, instead of Talagrand's inequality as in \citet[Proposition B.1]{sriperumbudur2012empirical}, we use McDiarmid's inequality, which yields the bound~\eqref{eq:IPM_deviation_one_measure} already established above. The reason is that Talagrand's inequality yields sharper variance-adaptive concentration rates for the empirical process around its mean, but these better rates do not transfer to the threshold itself, which is dominated by the uniform Rademacher complexity of the function class.
+Since both the WoW and the HIPM distances are IPMs (see Subsection~\ref{subsection:bnp_toolbox_distances_probprobx}) on the infinite-dimensional space $\probprobx$, our first strategy is to adapt the techniques developed in \cite{sriperumbudur2012empirical} for standard IPMs. These build thresholds through concentration inequalities for empirical processes, by analyzing the Rademacher complexity of the function class generating the IPM. The main difference is that we must account for a hierarchical empirical estimator, rather than a standard one. Moreover, instead of Talagrand's inequality as in \citet[Proposition B.1]{sriperumbudur2012empirical}, we use McDiarmid's inequality, which yields the bound~\eqref{eq:IPM_deviation_one_measure} already established above. The reason is that Talagrand's inequality yields sharper variance-adaptive concentration rates for the empirical process around its mean, but these better rates do not transfer to the threshold itself, which is dominated by the uniform Rademacher complexity of the function class.
 \begin{theorem}[Threshold for IPM]\label{theorem:radem_threshold_ipm_hierarchical_measures}
 Let $\G$ and $\mathcal{H}$ be classes of functions generating IPMs on $\probx$ and $\probprobx$, uniformly bounded by $M_\G$ and $M_\mathcal{H}$, respectively. Assume also that functions in $\mathcal{H}$ are 1-Lipschitz with respect to $\mathcal{I}_\G$. Define for any $n, m \geq 1$ and $\theta \in (0,1)$:
 \[
@@ -110,7 +110,7 @@ Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures} admits an altern
 & + \left| \mathcal{I}_{\mathcal{H}}\left(\T_m[Q^1], \T_m[Q^2] \right) -
 \mathcal{I}_{\mathcal{H}}\left(Q^1, Q^2 \right) \right|.
 \end{align*}
-For the first term, we apply Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures}. For the second term, note that for $k = 1,2$,
+For the first term, we apply~\eqref{eq:IPM_deviation_two_measures}. For the second term, note that for $k = 1,2$,
 \[
 \mathcal{I}_{\mathcal{H}}\left(\T_m[Q^k], Q^k \right) \leq \WW\left(\T_m[Q^k], Q^k\right).
 \]

@@ -46,7 +46,7 @@ Note that both $k$ and $U$ implicitly depend on $n$ and are thus sequences; howe
 
 Since $\mustar \mid U$ is a sum of CRMs, we compute its L\'evy intensity.
 
-By iteratively applying Lemma~SM4 in \cite{catalano2026merging}, for a general CRM $\tilde{\mu}$ with L\'evy intensity $\nu$, independent and infinitely divisible random variables $J_1,\dots, J_k$ with L\'evy measures $\pi_i,$ and fixed atoms $y_1,\dots, y_k,$ the L\'evy intensity of $\tilde{\mu} + \sum_{i = 1}^k J_i \delta_{y_i}$ is
+By iteratively applying Lemma~SM4 in the Supplementary Material~\cite{catalano2026merging}, for a general CRM $\tilde{\mu}$ with L\'evy intensity $\nu$, independent and infinitely divisible random variables $J_1,\dots, J_k$ with L\'evy measures $\pi_i,$ and fixed atoms $y_1,\dots, y_k,$ the L\'evy intensity of $\tilde{\mu} + \sum_{i = 1}^k J_i \delta_{y_i}$ is
 \[
 \mathrm{d}\nu(s,x) + \sum_{i = 1}^k \mathrm{d}\left( \pi_i \otimes \delta_{y_i} \right)(s,x),
 \]
@@ -71,13 +71,13 @@ Then,
 \[
 \mathrm{d}\tilde{\nu}^*(s,x) = \mathrm{d}\rho^1(s)\,\mathrm{d}P_0(x) + \mathrm{d}\rho^2(s)\sum_{i = 1}^k (n_i - \sigma)\,\mathrm{d}\delta_{x_i^*}(x).
 \]
-The next step is to obtain the scaled version of $\mustar$. By Definition~\ref{definition:scaled_cox_crm}, we obtain the scaled version of the latent CRM for fixed $U$.
+The next step is to obtain the scaled version of $\mustar$.  Definition~\ref{definition:scaled_cox_crm}, we obtain the scaled version of the latent CRM for fixed $U$.
 
 As discussed in Subsection~\ref{subsection:bnp_toolbox_normalization_identifiability}, if $\nu$ is the L\'evy intensity of a CRM $\tilde{\mu}$, then the L\'evy intensity of its scaled version is
 \[
 \mathrm{d}\nu_S(s,x) = \E\!\left[\tilde{\mu}(\X)\right] \rho_x\!\left( \E\!\left[\tilde{\mu}(\X)\right]s\right)\mathrm{d}P_0(x),
 \]
-by Lemma~SM3 in \cite{catalano2026merging}. By applying the same argument to 
+by Lemma~SM3 in the Supplementary Material~\cite{catalano2026merging}. By applying the same argument to 
 \[
 \mathrm{d}\tilde{\nu}^*(s,x) = \mathrm{d}\rho^1(s)\,\mathrm{d}P^1_0(x) + \mathrm{d}\rho^2(s)\,\mathrm{d}P^2_0(x),
 \] we get
@@ -198,8 +198,8 @@ We are now ready to study the merging between the Pitman--Yor and Dirichlet proc
     \]
     The second term is
     \begin{align*}
-        \E_{U \sim f_U}\E_{X \sim P_0^{*,1}}\wext\!\left(\rho_X^{*,1} , \rho^{*,2}\right) & = \E_{U \sim f_U} \frac{\sigma U^\sigma}{C}\E_{X \sim P_0}\wext\!\left(\rho_X^{*,1} , \rho^{*,2} \right)
-        + \E_{U \sim f_U}\frac{1}{C}\sum_{i = 1}^{k} (n_i - \sigma)\wext\!\left(\rho_{x_i^*}^{*,1} , \rho^{*,2} \right) \\
+        \E_{U \sim f_U}\E_{X \sim P_0^{*,1}}\wext\!\left(\rho_X^{*,1} , \rho^{*,2}\right) & = \E_{U \sim f_U} \frac{\sigma U^\sigma}{C}\E_{X \sim P_0}\wext\!\left(\rho_X^{*,1} , \rho^{*,2} \right)\\ 
+        & +\E_{U \sim f_U}\frac{1}{C}\sum_{i = 1}^{k} (n_i - \sigma)\wext\!\left(\rho_{x_i^*}^{*,1} , \rho^{*,2} \right) \\
         & =  \E_{U \sim f_U} \frac{\sigma U^\sigma}{C}\wext\!\left(\frac{C^{1-\sigma}}{\Gamma(1-\sigma)}\frac{e^{-Cs}}{s^{1+\sigma}}\,\mathrm{d}s,
                 (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\right) \\
         & \quad +  \E_{U \sim f_U} \frac{n-k\sigma}{C}\wext\!\left( \frac{Ce^{-Cs}}{s}\,\mathrm{d}s, (\alpha + n)\frac{e^{-(\alpha + n)s}}{s}\,\mathrm{d}s\right) \\
