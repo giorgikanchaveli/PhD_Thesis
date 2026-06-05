@@ -1,15 +1,15 @@
-\section{Distances Between Laws of Random Probabilities}\label{section:two_sample_distances}
+\section{Distances and Rademacher Complexity}\label{section:two_sample_distances}
 
-In this chapter, we work with two distance functions on $\probprobx$ based on optimal transport: the Wasserstein over Wasserstein distance (WoW; see Definition~\ref{definition:wow}) and the Hierarchical Integral Probability Metric (HIPM; see Definition~\ref{definition:hipm}). For their topological properties and their relation to the Integral Probability Metric (IPM; see Definition~\ref{definition:ipm}), we refer the reader to Section~\ref{section:bnp_toolbox_distances}. In this section, we discuss the sample complexity, the rate at which the estimation error of the empirical estimator decays with sample size, of these distances and its relevance to the threshold function developed in Section~\ref{section:rademacher_complexity}.
+In this chapter, we work with two distance functions on $\probprobx$ based on optimal transport: the Wasserstein over Wasserstein distance (WoW; see Definition~\ref{definition:wow}) and the Hierarchical Integral Probability Metric (HIPM; see Definition~\ref{definition:hipm}). For their topological properties and their relation to the Integral Probability Metric (IPM; see Definition~\ref{definition:ipm}), we refer the reader to Section~\ref{section:bnp_toolbox_distances}. In this section, we discuss the sample complexity of these distances, that is, the rate at which the estimation error of the empirical estimator decays with sample size, and its relevance to the threshold function developed in Section~\ref{section:rademacher_complexity}.
 
-Let $\mathbb{Y}$ be a general Polish space and $\mathcal{H}$ be a class of measurable and bounded functions from $\mathbb{Y}$ to $\R$.
+Let $\Y$ be a general Polish space and $\mathcal{H}$ be a class of measurable and bounded functions from $\Y$ to $\R$.
 
-Associated to a class of functions $\mathcal{H}$, we define its Rademacher complexity
+Given a class of functions $\mathcal{H}$, we define its Rademacher complexity
 \begin{equation}
 \label{equation:rademacher_complexity}
 \mathcal{R}_n(\mathcal{H}) = \sup_P \E \bigg( \sup_{h \in \mathcal{H}} \bigg| \frac{1}{n} \sum_{j=1}^n \epsilon_j h(Y_j) \bigg| \bigg),
 \end{equation}
-where the supremum is taken over all probability measures $P$ on $\Y$ with $Y_1, \ldots, Y_n \overset{\iid}{\sim} P$, and $\epsilon_1, \ldots, \epsilon_n$ are i.i.d.\ Rademacher random variables independent of the $Y_i$'s. For any probability distribution $P$ on $\Y$, letting $Y_1, \ldots, Y_n \overset{\iid}{\sim} P$ and $\hat{P}_n = \frac{1}{n} \sum_{i=1}^n \delta_{Y_i}$ denote the empirical estimator, we can control the random variable $\mathcal{I}_{\mathcal{H}}(P,\hat{P}_n)$. Referring, for instance, to the proof of Theorem 4.10 in \cite{wainwright2019high}, we have the following bias bound:
+where the supremum is taken over all probability measures $P$ on $\Y$ with $Y_1, \ldots, Y_n \overset{\iid}{\sim} P$, and $\epsilon_1, \ldots, \epsilon_n$ are i.i.d.\ Rademacher random variables independent of the $Y_i$'s. For any probability distribution $P$ on $\Y$, letting $Y_1, \ldots, Y_n \overset{\iid}{\sim} P$ and $\hat{P}_n = \frac{1}{n} \sum_{i=1}^n \delta_{Y_i}$ denote the empirical estimator, we can control the random variable $\mathcal{I}_{\mathcal{H}}(P,\hat{P}_n)$. Following, for instance, the proof of Theorem 4.10 in \cite{wainwright2019high}, we have the following bias bound:
 \begin{equation}
 \label{eq:IPM_R}
 \E \, \mathcal{I}_{\mathcal{H}}(P,\hat{P}_n) \leq 2 \, \mathcal{R}_n(\mathcal{H}^*),
@@ -36,29 +36,29 @@ Applying~\eqref{eq:IPM_deviation_one_measure} to each term with parameter $\thet
 \]
 Applying the bias bound~\eqref{eq:IPM_R} and summing yields~\eqref{eq:IPM_deviation_two_measures}.
 
-As concentration inequalities are generic for the integral probability metric, and the distance functions we consider are special cases of it, we will show in Section~\ref{section:rademacher_complexity} that such inequalities can be obtained for those cases. 
+Since concentration inequalities hold for any integral probability metric, and the distance functions we consider are special cases of it, we will show in Section~\ref{section:rademacher_complexity} that such inequalities can be obtained in our setting. 
 
 Since the growth of the threshold is primarily governed by the Rademacher complexity of the function class, we now recall the known bounds on the Rademacher complexity for the WoW and HIPM.
 
 
-The work \cite{catalano2024hierarchical} upper bounded the Rademacher complexity of the class $\mathrm{Lip}_1^*(\probx,\R)$. Namely there exists $C>0$ such that for $n$ large enough,
+The work \cite{catalano2024hierarchical} establishes an upper bound on the Rademacher complexity of the class $\mathrm{Lip}_1^*(\probx,\R)$. Namely, there exists $C>0$ such that, for $n$ large enough,
 \begin{equation}
 \label{equation:rademacher_wow}
 \mathcal{R}_n(\mathrm{Lip}_1^*(\probx, \R)) \le C \frac{\log \log (n)}{\log(n)},
 \end{equation}
-which immediately entails a quantitative convergence result of empirical estimators in $\WW$ distance via~\eqref{eq:IPM_R}. Though it is unclear if this bound is tight, the work \cite{catalano2024hierarchical} also provided a lower bound.
-Specifically, consider $\X$ to be a bounded subset of $\R^d$ and $\widetilde{P}_1, \dots, \widetilde{P}_m \overset{\iid}{\sim} Q$. Then \citet[Theorem 4.1]{catalano2024hierarchical} shows that for $Q = \mathrm{DP}(\alpha,P_0)$ a Dirichlet process with absolutely continuous base measure $P_0$ and $\alpha > 0$, for every $\gamma>0$ there exists $c_\gamma>0$ such that, for $n$ large enough,
+which immediately entails a quantitative convergence result for empirical estimators in $\WW$ distance via~\eqref{eq:IPM_R}. Though it is unclear whether this bound is tight, the work \cite{catalano2024hierarchical} also provides a lower bound.
+Specifically, let $\X$ be a bounded subset of $\R^d$ and $\widetilde{P}_1, \dots, \widetilde{P}_m \overset{\iid}{\sim} Q$. Then \citet[Theorem 4.1]{catalano2024hierarchical} shows that for $Q = \mathrm{DP}(\alpha,P_0)$, a Dirichlet process with absolutely continuous base measure $P_0$ and $\alpha > 0$, for every $\gamma>0$ there exists $c_\gamma>0$ such that, for $n$ large enough,
 \[
 \E \WW \bigg(\frac{1}{n} \sum_{i=1}^n \delta_{\widetilde{P}_i}, Q \bigg) \ge c_{\gamma} n^{-\gamma}.
 \]
 That is, the convergence rate of the WoW is slower than any polynomial rate in $n$.
 
-In addition, the work of \cite{catalano2024hierarchical} provided the bounds for Rademacher complexity associated to the HIPM. In Appendix~\ref{appendix:reductionD}, we show that the HIPM is obtained as a special case of an integral probability metric with the function class
+In addition, the work \cite{catalano2024hierarchical} provides bounds on the Rademacher complexity associated with the HIPM. In Appendix~\ref{appendix:reductionD}, we show that the HIPM is obtained as a special case of an integral probability metric with the function class
 \[
 \dstar = \{h:\probx\to \R: h(P) = g(P(f)), \ g\in \lipKzero, f\in \F^* \},
 \]
 where $K = \operatorname{diam}(\X)$.
-Then, \citet[Theorem 4.3]{catalano2024hierarchical} shows that for the HIPM there exists a constant $C_d>0$  such that
+Then, \citet[Theorem 4.3]{catalano2024hierarchical} shows that for the HIPM there exist constants $C_1, C_2$, and, for $d > 2$, $C_d > 0$ such that
 \begin{equation}
 \label{eq:rademacher_hipm}
  \mathcal{R}_n(\dstar) \le 
@@ -68,9 +68,9 @@ C_2 n^{-1/2} \log(n) & \text{if } d = 2, \\
 C_d n^{-1/d} & \text{if } d > 2.
 \end{cases}
 \end{equation}
-By~\eqref{eq:IPM_R}, it follows that the sample complexity of the HIPM is polynomial in $n$ and is unaffected by the infinite dimensionality of $\probx$. Similar results can be extended to the hierarchical empirical estimator $\widehat{Q}_{n,m}$ defined in Definition~\ref{definition:hier_emp_estimator}, see \citet[Theorem 4.4]{catalano2024hierarchical}.
+By~\eqref{eq:IPM_R}, it follows that the sample complexity of the HIPM is polynomial in $n$ and is unaffected by the infinite dimensionality of $\probx$. These results extend to the hierarchical empirical estimator $\widehat{Q}_{n,m}$ defined in Definition~\ref{definition:hier_emp_estimator}; see \citet[Theorem 4.4]{catalano2024hierarchical}.
 
-Having the distance function on $\probprobx$, the hypothesis testing problem we consider has the following form. Let $d$ denote either the WoW or the HIPM distance, and let $Q^1, Q^2 \in \probprobx$. We test the null hypothesis
+With a distance function on $\probprobx$ in hand, the hypothesis testing problem takes the following form. Let $d$ denote either the WoW or the HIPM distance, and let $Q^1, Q^2 \in \probprobx$. We test the null hypothesis
 \[
 H_0 : d(Q^1, Q^2) = 0
 \]
