@@ -89,8 +89,9 @@ This characterization generalizes to a general metric space. In the space $(\pro
 \label{definition:Frechet_mean}
 Let $Q \in \probprobx$. The Fr\'{e}chet mean is the probability measure $\mu_{F} \in \probxtwo$ defined as
 \[
-\mu_{F} = \argmin_{P \in \probxtwo} \E_{\widetilde{P}\sim Q} \left[\W^2_2(P, \widetilde{P})\right].
+\mu_{F} = \argmin_{P \in \probxtwo} \E_{\widetilde{P}\sim Q} \left[\W^2_2(P, \widetilde{P})\right],
 \]
+where $\probxtwo$ denotes the space of probability measures on $\X$ with finite second moments.
 \end{definition}
 Accordingly, we describe the dispersion around that point, which is referred to as the Fr\'echet variance.
 \begin{definition}[Fr\'echet Variance]
@@ -118,7 +119,7 @@ for $i = 1,2$, where $\mathcal{N}_T (\cdot, \cdot, a,b)$ denotes the truncated n
 \]
 \item The difference between two distributions is dictated by changing the variance parameter of the random mean, reproducing the setting of Figure~1 in \cite{dubey2019frechet}, where $Q^i$ are as in \eqref{equation:tnormal_normal_model} with $\mu_{01} = \mu_{02} = 0$, $a = -10$, $b = 10$ and
 \[
-\sigma_{01} = 0.2, \qquad \sigma_{02} = 0.2\tau, \qquad  \tau \in [0, 3].
+\sigma_{01} = 0.2, \qquad \sigma_{02} = 0.2\tau, \qquad  \tau \in [0, 2.5].
 \]
 \end{enumerate}
 A low type I error is reflected by a low rejection rate under $H_0$, corresponding respectively to $\delta = 0$ and  $\tau = 1$. High power is reflected by a steep increase in the rejection curve away from $H_0$.
@@ -214,7 +215,7 @@ Note that the test statistic is identical for both the pooling and averaging app
 
 Examining the p-values from all methods in Figure~\ref{figure::p_values_mortality}, we observe that for females, the difference between the groups is statistically significant in 1960. During the following decade, this difference becomes less significant under the methods based on HIPM, WoW, and Averaging, which may be explained by economic growth. After the 1970s, the disparity in mortality proportions between the groups increases again, potentially reflecting the economic decline in the countries of Group~1. Following the breakup of the Soviet Union, the observed differences may be associated with countries that were unable to integrate well into the Western bloc.
 
-A similar trend is observed for males; however, the key difference is that during the period from 1960 to 1970, although the differences in mortality proportions were decreasing, this was not statistically significant in all of those years.
+A similar trend is observed for males; however, the key difference is that during the period from 1960 to 1970, although the differences in mortality proportions were decreasing, this was statistically significant in some of those years.
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.5\textwidth} % Increased width since they are stacked

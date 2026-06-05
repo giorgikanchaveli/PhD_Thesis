@@ -2,7 +2,7 @@
 
 In this chapter, we work with two distance functions on $\probprobx$ based on optimal transport: the Wasserstein over Wasserstein distance (WoW; see Definition~\ref{definition:wow}) and the Hierarchical Integral Probability Metric (HIPM; see Definition~\ref{definition:hipm}). For their topological properties and their relation to the Integral Probability Metric (IPM; see Definition~\ref{definition:ipm}), we refer the reader to Section~\ref{section:bnp_toolbox_distances}. In this section, we discuss the sample complexity of these distances, that is, the rate at which the estimation error of the empirical estimator decays with sample size, and its relevance to the threshold function developed in Section~\ref{section:rademacher_complexity}.
 
-Let $\Y$ be a general Polish space and $\mathcal{H}$ be a class of measurable and bounded functions from $\Y$ to $\R$.
+Let $\Y$ be a general Polish space and $\mathcal{H}$ be a class of measurable and bounded functions from $\Y$ to $\R$. Let also $\mathcal{I}_{\mathcal{H}}$ denote the Integral Probability Metric associated to class $\mathcal{H}$ (see Definition~\ref{definition:ipm}).
 
 Given a class of functions $\mathcal{H}$, we define its Rademacher complexity
 \begin{equation}
@@ -30,11 +30,11 @@ Indeed, by the triangle inequality for IPMs,
 \[
 |\mathcal{I}_{\mathcal{H}}(\hat{P}^1_n,\hat{P}^2_n) - \mathcal{I}_{\mathcal{H}}(P^1,P^2)| \leq \mathcal{I}_{\mathcal{H}}(P^1,\hat{P}^1_n) + \mathcal{I}_{\mathcal{H}}(P^2,\hat{P}^2_n).
 \]
-Applying~\eqref{eq:IPM_deviation_one_measure} to each term with parameter $\theta/2$ and combining via a union bound, both hold simultaneously with probability $1-\theta$:
+Applying~\eqref{eq:IPM_deviation_one_measure} to each term with parameter $\theta/2$ and combining via a union bound, with probability $1-\theta$:
 \[
-\mathcal{I}_{\mathcal{H}}(P^i,\hat{P}^i_n) \leq \E\,\mathcal{I}_{\mathcal{H}}(P^i,\hat{P}^i_n) + M\sqrt{\frac{2}{n}\log\frac{4}{\theta}}, \quad i = 1, 2.
+\mathcal{I}_{\mathcal{H}}(P^i,\hat{P}^i_n) \leq \E\,\mathcal{I}_{\mathcal{H}}(P^i,\hat{P}^i_n) + M\sqrt{\frac{2}{n}\log\frac{4}{\theta}},
 \]
-Applying the bias bound~\eqref{eq:IPM_R} and summing yields~\eqref{eq:IPM_deviation_two_measures}.
+for $i = 1,2.$ Applying the bias bound~\eqref{eq:IPM_R} and summing yields~\eqref{eq:IPM_deviation_two_measures}.
 
 Since concentration inequalities hold for any integral probability metric, and the distance functions we consider are special cases of it, we will show in Section~\ref{section:rademacher_complexity} that such inequalities can be obtained in our setting. 
 

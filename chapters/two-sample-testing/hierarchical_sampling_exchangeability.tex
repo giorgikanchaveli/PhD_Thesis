@@ -29,7 +29,7 @@ In practice, it is rare to observe the probability measures themselves directly,
 
 Throughout this chapter, $n$ and $m$ will refer to the number of rows and columns of the hierarchical sample, respectively. We denote the hierarchical sample by $\mathbf{X}_{n,m} = (X_{i,j})$, where boldface letters refer to matrices and non-bold letters refer to their individual elements. With a slight abuse of notation, we will also sometimes denote $\mathbf{X}_{n,m} \sim Q$. Hierarchical samples are what we observe to decide whether two laws of random probability measures are the same. 
 
-Hierarchical samples are not new and appear across several literatures under different names and motivations. In \citet{Baxter2000}, hierarchical samples arise in the context of task-specific data: the latent probability measures correspond to task-specific data-generating distributions, while the law of the random probability measure describes the distribution over tasks. In \citet{Szabo2016}, hierarchical samples are introduced as a two-stage sampled setting and are used to study consistency for distribution regression problems. They also appear in \citet{Haviv2024} in the context of generative modeling over families of distributions, and in \citet{Warren2025}, where samples are used to consistently recover principal curves whose points are probability measures in Wasserstein space. Let us now discuss the limitations of the hierarchical sampling framework.
+Hierarchical samples are not new and appear across several literatures under different names and motivations. In \citet{Baxter2000}, hierarchical samples arise in the context of task-specific data: the latent probability measures correspond to task-specific data-generating distributions, while the law of the random probability measure describes the distribution over tasks. In \citet{Szabo2016}, hierarchical samples are introduced as a two-stage sampled setting and are used to study consistency for distribution regression problems. They also appear in \citet{Haviv2024} in the context of generative modeling over families of distributions, and in \citet{Warren2025}, where samples are used to consistently recover principal curves whose points are probability measures in Wasserstein space. Let us now discuss the limitations of the hierarchical sampling framework in the context of the two-sample testing problem.
 
 Let $Q^1, Q^2 \in \probprobx$. Suppose that we observe two hierarchical samples $\mathbf{X}_{n,m} \sim Q^1$ and $\mathbf{Y}_{n,m} \sim Q^2$. Note that the $n$ sequences of length $m$ from the first hierarchical sample are i.i.d. draws from the following law on $\X^m$: for $i = 1, \dots, n$,
 $$
@@ -55,7 +55,6 @@ In this case, no testing procedure can achieve a low Type II error, which is the
 Q^1 = Q^2 \quad \text{if and only if} \quad P^{1,(m)} = P^{2,(m)}.
 \]
 This is indeed the case for any $Q^1, Q^2 \in \probprobx$, provided $m$ is sufficiently large, as established by the following proposition.
-
 \begin{proposition}\label{fd_laws_separate_laws_of_rpms}
 Let $Q^1, Q^2 \in \probprobx$. Then there exists $m_0 \geq 1$ such that for all $m \geq m_0$,
 \[
@@ -105,13 +104,13 @@ d\left( \frac{1}{n}\sum_{i=1}^n \delta_{\widetilde{P}^1_i}, \frac{1}{n}\sum_{i=1
 \]
 exceeds some threshold. However, recall that we do not observe $\widetilde{P}^1_i$ and $\widetilde{P}^2_i$. Nevertheless, we can estimate them from the observations that they generated; that is, we estimate each of them using the corresponding sequences $X_{i,1}, \dots, X_{i,m}$ and $Y_{i,1}, \dots, Y_{i,m}$ as
 \[
-\widehat{P}^1_{i,m} = \frac{1}{m}\sum_{j=1}^m \delta_{X_{i,j}}, \quad \widehat{P}^2_{i,m} = \frac{1}{m}\sum_{j=1}^m \delta_{Y_{i,j}}, \quad i = 1, \dots, n.
+\widehat{P}^1_{i,m} = \frac{1}{m}\sum_{j=1}^m \delta_{X_{i,j}}, \quad \widehat{P}^2_{i,m} = \frac{1}{m}\sum_{j=1}^m \delta_{Y_{i,j}}, 
 \]
-Thus, the idea of the test is to reject $H_0$ if 
+for $i \in \{1,\cdots, n \}.$ Thus, the idea of the test is to reject $H_0$ if 
 \[
 d\left( \frac{1}{n}\sum_{i=1}^n \delta_{\widehat{P}^1_{i,m}}, \frac{1}{n}\sum_{i=1}^n \delta_{\widehat{P}^2_{i,m}}\right)
 \]
-exceeds some threshold. As the estimators in the distance function are the fundamental objects of this chapter, we introduce specific notation for them. 
+exceeds some threshold. As the estimators in the distance function are the fundamental objects of this chapter, we give specific names and notation for them.
 \begin{definition}[Hierarchical empirical estimator]
     \label{definition:hier_emp_estimator}
     Given $Q \in \probprobx$, and a hierarchical sample $\mathbf{X}_{n,m}$, the hierarchical empirical estimator of $Q$ is defined as 

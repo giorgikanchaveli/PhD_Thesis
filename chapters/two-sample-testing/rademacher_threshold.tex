@@ -150,8 +150,8 @@ A consequence of Theorem~\ref{theorem:radem_threshold_ipm_hierarchical_measures}
 \label{theorem:radem_consistency_hipm}
 Let $\X$ be a compact subset of $\R^d$, and let $Q^1, Q^2 \in \probprobx$. Let $\theta$ denote the significance level, and let $r_d(n, m, \theta)$ be the threshold function~\eqref{equation:hipm_threshold}. Then:
 \begin{itemize}
-    \item Type I error: If $Q^1 = Q^2$, then  
-    $$\mathbb{P}\left( \dlip(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2) > r_d(n,m, \theta) \right) \leq \theta \quad \text{for all } n, m \geq 1.$$
+    \item Type I error: If $Q^1 = Q^2$, then for all $n, m \geq 1$,
+    $$\mathbb{P}\left( \dlip(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2) > r_d(n,m, \theta) \right) \leq \theta.$$
     \item Consistency: If $Q^1 \neq Q^2$, then  
     $$\lim_{n,m\to \infty}\mathbb{P}\left( \dlip(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2) > r_d(n,m, \theta) \right) = 1.$$
 \end{itemize}
@@ -180,8 +180,8 @@ Therefore, we have that for every \(n \geq n_0\) and \(m \geq m_0\),
 \begin{align*}
 \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta) \right) & 
 \geq \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta') \right)\\
-& \geq \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \dlip(Q^1, Q^2) - r_d(n, m, \theta) \right) \\
-& > \delta.
+& \geq \mathbb{P}\left( \dlip(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \dlip(Q^1, Q^2) - r_d(n, m, \theta') \right) \\
+& > 1- \theta' > \delta.
 \end{align*}
 \end{proof}
 
@@ -189,8 +189,8 @@ Therefore, we have that for every \(n \geq n_0\) and \(m \geq m_0\),
 \label{theorem:radem_consistency_wow}
 Let $\X$ be a compact subset of $\R^d$, and let $Q^1, Q^2 \in \probprobx$. Let $\theta$ denote the significance level, and let $r_d(n, m, \theta)$ be the threshold function~\eqref{equation:wow_threshold}. Then, there exists $N \geq 1$ such that:
 \begin{itemize}
-    \item Type I error: If $Q^1 = Q^2$, then  
-    $$\mathbb{P}\left( \WW(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2) > r_d(n,m, \theta) \right) \leq \theta \quad \text{for all } n \geq N, m \geq 1.$$
+    \item Type I error: If $Q^1 = Q^2$, then for all $n \geq N, m \geq 1,$
+    $$\mathbb{P}\left( \WW(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2) > r_d(n,m, \theta) \right) \leq \theta.$$
     \item Consistency: If $Q^1 \neq Q^2$, then  
     $$\lim_{n,m\to \infty}\mathbb{P}\left( \WW(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2) > r_d(n,m, \theta) \right) = 1.$$
 \end{itemize}
@@ -218,15 +218,15 @@ This inequality implies that
 Therefore, for every \(n \geq \max\{n_0, N'\}\) and \(m \geq m_0\),
 \begin{align*}
 \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta) \right) &\geq \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > r_d(n, m, \theta') \right)\\
-&\geq \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \WW(Q^1, Q^2) - r_d(n, m, \theta) \right) \\
-&> \delta.
+&\geq \mathbb{P}\left( \WW(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m}) > \WW(Q^1, Q^2) - r_d(n, m, \theta') \right) \\
+&> 1- \theta' > \delta.
 \end{align*}
 \end{proof}
 While theoretically appealing, Theorems~\ref{theorem:radem_consistency_hipm} and~\ref{theorem:radem_consistency_wow} have practical limitations. Achieving high power requires the threshold to decay to zero at a sufficiently fast rate. However, the logarithmic terms present in the threshold for the WoW distance result in a threshold function that converges to zero at a suboptimal rate. Furthermore, although using the HIPM provides a parametric rate, the magnitude of the constant in the threshold often makes the testing scheme impractical for finite samples.
 
 These limitations are demonstrated by our numerical simulations. We restrict our simulations to the HIPM, as the threshold associated with the WoW distance is even more conservative than that of the HIPM. 
 
-Suppose that we have two different laws of random probability measures, $Q^1, Q^2 \in \probprobx$. For a fixed significance level $\theta \in (0,1)$, to achieve low Type II error the theoretical threshold must be smaller than the observed distance. To demonstrate that the observed distance is far smaller than the theoretical threshold, we compare it against the empirical threshold, defined as the $(1-\theta)$-quantile of the random variable $\dlip(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2)$. Figure~\ref{fig:radem_threshold_plots} shows how the theoretical and empirical thresholds differ for a fixed $\theta$ as $n$ and $m$ increase.
+Suppose that we have two different laws of random probability measures, $Q^1, Q^2 \in \probprobx$. For a fixed significance level $\theta \in (0,1)$, to achieve high power the theoretical threshold must be smaller than the observed distance. To demonstrate that the observed distance is far smaller than the theoretical threshold, we compare it against the empirical threshold, defined as the $(1-\theta)$-quantile of the random variable $\dlip(\widehat{Q}_{n,m}^1, \widehat{Q}_{n,m}^2)$. Figure~\ref{fig:radem_threshold_plots} shows how the theoretical and empirical thresholds differ for a fixed $\theta$ as $n$ and $m$ increase.
 
 Fix $\theta = 0.05$ and consider two Dirichlet processes $Q^1 = \mathrm{DP}(1.0, P_0)$ and $Q^2 = \mathrm{DP}(1.5, P_1)$, where $P_0 = \mathrm{Uniform}[0,1]$ and $P_1 = \mathrm{Beta}(2,2)$.
 
