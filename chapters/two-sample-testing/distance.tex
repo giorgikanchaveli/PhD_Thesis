@@ -1,6 +1,6 @@
 \section{Distances and Rademacher Complexity}\label{section:two_sample_distances}
 
-In this chapter, we work with two distance functions on $\probprobx$ based on optimal transport: the Wasserstein over Wasserstein distance (WoW; see Definition~\ref{definition:wow}) and the Hierarchical Integral Probability Metric (HIPM; see Definition~\ref{definition:hipm}). For their topological properties and their relation to the Integral Probability Metric (IPM; see Definition~\ref{definition:ipm}), we refer the reader to Section~\ref{section:bnp_toolbox_distances}. In this section, we discuss the sample complexity of these distances, that is, the rate at which the estimation error of the empirical estimator decays with sample size, and its relevance to the threshold function developed in Section~\ref{section:rademacher_complexity}.
+In this chapter, we work with two distance functions on $\probprobx$ based on optimal transport: the Wasserstein over Wasserstein distance (WoW; see Definition~\ref{definition:wow}) and the Hierarchical Integral Probability Metric (HIPM; see Definition~\ref{definition:hipm}). For their topological properties and their relation to the Integral Probability Metric (IPM; see Definition~\ref{definition:ipm}), we refer the reader to Subsection~\ref{subsection:bnp_toolbox_distances_probprobx}. In this section, we discuss the sample complexity of these distances, that is, the rate at which the estimation error of the empirical estimator decays with sample size, and its relevance to the threshold function developed in Section~\ref{section:rademacher_complexity}.
 
 Let $\Y$ be a general Polish space and $\mathcal{H}$ be a class of measurable and bounded functions from $\Y$ to $\R$. Let also $\mathcal{I}_{\mathcal{H}}$ denote the Integral Probability Metric associated to class $\mathcal{H}$ (see Definition~\ref{definition:ipm}).
 
@@ -84,7 +84,7 @@ The test is based on independent samples
 \qquad
 \widehat{P}^2_{1,m}, \dots, \widehat{P}^2_{n,m} \overset{\iid}{\sim} \T_m[Q^2].
 \]
-The testing scheme we develop will reject $H_0$ if the distance between the hierarchical estimators exceeds some threshold. In the following sections, we discuss methods for determining this threshold.
+The testing scheme we develop will reject $H_0$ if the distance between the hierarchical empirical estimators exceeds some threshold. In the following sections, we discuss methods for determining this threshold.
 
 
 

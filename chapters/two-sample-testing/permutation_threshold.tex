@@ -9,7 +9,7 @@ Recall that, given $Q^1,Q^2\in \probprobx$, we observe hierarchical samples $\ma
 \]
 Using these samples, we compute the distance $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$, where $d$ can be either WoW or HIPM. Our goal is to estimate the quantile function of the random variable $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$ assuming that $Q^1 = Q^2,$ and use it as a testing threshold. Ideally, such a quantile could be estimated empirically from multiple independent realizations of this random variable. In practice, however, only a single realization is available.
 
-We circumvent this limitation by noting that under the null hypothesis $Q^1 = Q^2$, all random probability measures $\widehat{P}^k_{i,m}$ share the same distribution. Consequently, if we randomly shuffle these objects and recompute the distance, the resulting value constitutes another realization from the distribution of $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$. By repeating this process, we can obtain several samples of the distance between hierarchical estimators. Although these samples are not independent, this dependence is typically negligible in practice when $n$ is sufficiently large.
+We circumvent this limitation by noting that under the null hypothesis $Q^1 = Q^2$, all random probability measures $\widehat{P}^k_{i,m}$ share the same distribution. Consequently, if we randomly shuffle these objects and recompute the distance, the resulting value constitutes another realization from the distribution of $d(\widehat{Q}^1_{n,m}, \widehat{Q}^2_{n,m})$. By repeating this process, we can obtain several samples of the distance between hierarchical empirical estimators. Although these samples are not independent, this dependence is typically negligible in practice when $n$ is sufficiently large.
 
 To implement the permutation test, we first form the pooled collection of random probability measures
 \[
@@ -17,7 +17,7 @@ To implement the permutation test, we first form the pooled collection of random
 \]
 A random permutation of this collection is determined by a random vector $R = (R_1, \dots, R_{2n})$ drawn uniformly from all permutations of $\{1, \dots, 2n\}$. For notational brevity, we omit the explicit dependence of $R$ on $n$.
 
-We then define the permuted hierarchical estimators as
+We then define the permuted hierarchical empirical estimators as
 \begin{equation}\label{definition:permuted_hierarchical_estimators}
 \widetilde{Q}^1_{n,m} = \frac{1}{n} \sum_{i = 1}^n \delta_{\widehat{P}_{R_i,m}} \quad \text{and} \quad \widetilde{Q}^2_{n,m} = \frac{1}{n} \sum_{i = n+1}^{2n} \delta_{\widehat{P}_{R_i,m}}.
 \end{equation}
