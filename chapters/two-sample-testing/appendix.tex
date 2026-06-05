@@ -855,10 +855,9 @@ Note that, by Theorem~29.4 in~\cite{billingsley1995probability}, the above conve
 \[
 \sum_{i = 1}^k t_i\widetilde{G}_q\left(h_i\right)
 \overset{w}{\to}
-\sum_{i = 1}^k \sqrt{\frac{1}{2}}\,t_i G_H\left(h_i\right)
-\quad \text{for all } t_1,\dots,t_k \in \R.
+\sum_{i = 1}^k \sqrt{\frac{1}{2}}\,t_i G_H\left(h_i\right),
 \]
-Therefore, it suffices to prove the latter.
+for $t_1,\dots,t_k \in \R.$ Therefore, it suffices to prove the latter.
 
 Observe that
 \[
@@ -1140,7 +1139,7 @@ By de Finetti’s theorem,
 \[
 \frac{1}{m}\sum_{j = 1}^m \delta_{X_j}
 \overset{w}{\to} \widetilde{P}
-\quad \text{almost surely},
+\quad \text{a.s.},
 \]
 where $\widetilde{P} \sim Q$. Since almost sure convergence implies weak convergence, we obtain
 \[
@@ -1229,9 +1228,9 @@ r(n,\theta) \overset{p}{\to} r(\theta) < \infty
 \]
 for every $\theta \in (0,1)$, where $r(\theta) \in \R$. Then,
 \[
-\lim_{n \to \infty} \mathbb{P}\!\left(T_n > r(n,\theta)\right) = 1
-\quad \text{for all } \theta \in (0,1).
+\lim_{n \to \infty} \mathbb{P}\!\left(T_n > r(n,\theta)\right) = 1,
 \]
+for all $\theta \in (0,1)$.
 \end{lemma}
 \begin{proof}
 Fix $\epsilon > 0$ and $\delta \in (0,1)$. Since $T_n \overset{p}{\to} \infty$ and $r(n,\theta) \overset{p}{\to} r(\theta)$, there exists $N \geq 1$ such that for all $n \geq N$,
@@ -1277,24 +1276,23 @@ Let $\{h_1, \dots, h_N\}$ be an $\epsilon/2$-cover of $\mathcal{H}$ with respect
 l_i = h_i - \frac{\epsilon}{2},
 \qquad
 u_i = h_i + \frac{\epsilon}{2},
-\quad \text{for } i = 1, \dots, N.
 \]
-Then $\|u_i - l_i\|_{\mathrm{L}_2(P)} = \epsilon$ for each $i$.
+for $i = 1, \dots, N$. Then $\|u_i - l_i\|_{\mathrm{L}_2(P)} = \epsilon$ for each $i$.
 Moreover, for every $h \in \mathcal{H}$, there exists an index $i$ such that
 $\|h - h_i\|_\infty \leq \epsilon/2$, which implies
 \[
-h_i(y) - \frac{\epsilon}{2} \leq h(y) \leq h_i(y) + \frac{\epsilon}{2}
-\quad \text{for all } y \in \Y.
+h_i(y) - \frac{\epsilon}{2} \leq h(y) \leq h_i(y) + \frac{\epsilon}{2},
 \]
-Thus, $h \in [l_i, u_i]$, and the collection $\{[l_i, u_i]\}_{i=1}^N$
+for all $y \in \Y$. Thus, $h \in [l_i, u_i]$, and the collection $\{[l_i, u_i]\}_{i=1}^N$
 forms a family of $\epsilon$-brackets that covers $\mathcal{H}$.
 \end{proof}
 
 \begin{lemma}\label{lemma::covnumbdstar}
     Let $\X \subset \R^d$ be a set with bounded diameter. Then there exists a constant $C_d \in \R$ such that
     \[
-    \log \N\left(\epsilon, \dstar, \|\cdot\|_\infty\right) \leq C_d \frac{1}{\epsilon^d} \quad \text{for all } \epsilon > 0.
+    \log \N\left(\epsilon, \dstar, \|\cdot\|_\infty\right) \leq C_d \frac{1}{\epsilon^d},
     \]
+    for all $\epsilon > 0$.
 \end{lemma}
 \begin{proof}
 Let $K = \mathrm{diam}(\X)$. As shown on page 17 of \cite{catalano2024hierarchical}, we have
